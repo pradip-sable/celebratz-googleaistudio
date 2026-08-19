@@ -1,0 +1,6 @@
+{
+  "name": "Celebratz",
+  "description": "Event venue and vendor discovery and comparison marketplace for Pune, India.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

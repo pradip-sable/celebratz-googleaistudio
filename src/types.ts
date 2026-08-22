@@ -108,6 +108,11 @@ export type CategoryAttributes =
   | MusicDjAttributes 
   | PanditPriestAttributes;
 
+export interface CustomAttribute {
+  label: string;
+  value: string;
+}
+
 export interface Listing {
   id: string;
   vendorId: string;
@@ -135,6 +140,7 @@ export interface Listing {
     features: string[];
   }[];
   categoryAttributes: Record<string, any>;
+  customAttributes?: CustomAttribute[];
   coverImage: string;
   galleryImages: string[];
   description: string;

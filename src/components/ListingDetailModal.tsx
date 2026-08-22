@@ -26,7 +26,8 @@ import {
   ChevronRight,
   Navigation,
   ExternalLink,
-  Compass
+  Compass,
+  Tag
 } from 'lucide-react';
 import { Listing, CalendarStatus } from '../types';
 import { useApp } from '../context/AppContext';
@@ -184,9 +185,15 @@ export const ListingDetailModal: React.FC = () => {
               <h1 className="font-serif font-extrabold text-2xl sm:text-3xl text-stone-900 leading-snug">
                 {listing.title}
               </h1>
-              <p className="text-xs text-stone-600 font-medium">
-                Managed by <span className="text-stone-900 font-bold">{listing.vendorName}</span> &bull; Verified Pune Vendor
-              </p>
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                <p className="text-xs text-stone-600 font-medium">
+                  Managed by <span className="text-stone-900 font-bold">{listing.vendorName}</span> &bull; Verified Pune Vendor
+                </p>
+                <span className="inline-flex items-center gap-1 text-[11px] text-teal-900 bg-teal-50 px-2 py-0.5 rounded-md border border-teal-200 font-medium">
+                  <Clock className="w-3 h-3 text-teal-700" />
+                  <span>Response time: Usually within 2 hours</span>
+                </span>
+              </div>
             </div>
 
             {/* Price Box */}
@@ -391,6 +398,28 @@ export const ListingDetailModal: React.FC = () => {
             </p>
           </div>
 
+          {/* 4.1 Custom Highlights / Vendor Custom Attributes */}
+          {listing.customAttributes && listing.customAttributes.length > 0 && (
+            <div className="space-y-3">
+              <h3 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
+                <Tag className="w-4 h-4 text-teal-800" />
+                Special Features & Vendor Highlights
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                {listing.customAttributes.map((attr, idx) => (
+                  <div key={idx} className="p-3.5 bg-teal-50/50 rounded-xl border border-teal-200/80 space-y-1">
+                    <div className="text-[10px] font-bold text-teal-900 uppercase tracking-wider">
+                      {attr.label}
+                    </div>
+                    <div className="font-semibold text-xs sm:text-sm text-stone-900">
+                      {attr.value}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* 5. Pricing Packages (if defined) */}
           {listing.pricingPackages && listing.pricingPackages.length > 0 && (
             <div className="space-y-3">
@@ -569,20 +598,27 @@ export const ListingDetailModal: React.FC = () => {
               ))}
 
               {calendarDays.map(({ dayNum, status, dateStr }) => {
-                let statusClasses = 'bg-emerald-50 text-emerald-900 border-emerald-200 hover:bg-emerald-100';
-                if (status === 'tentative') statusClasses = 'bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100';
-                if (status === 'booked') statusClasses = 'bg-rose-50 text-rose-900 border-rose-200 hover:bg-rose-100 opacity-60';
+                let statusClasses = 'bg-emerald-50/90 text-emerald-950 border-emerald-300 hover:bg-emerald-100 shadow-2xs';
+                let dotColor = 'bg-emerald-600';
+
+                if (status === 'tentative') {
+                  statusClasses = 'bg-amber-100/90 text-amber-950 border-amber-400 hover:bg-amber-200 ring-1 ring-amber-400/50 shadow-xs';
+                  dotColor = 'bg-amber-500 ring-2 ring-amber-300';
+                } else if (status === 'booked') {
+                  statusClasses = 'bg-rose-100 text-rose-950 border-rose-400 hover:bg-rose-200 ring-1 ring-rose-400/50 shadow-xs';
+                  dotColor = 'bg-rose-600 ring-2 ring-rose-300';
+                }
 
                 return (
                   <div
                     key={dateStr}
                     title={`${dateStr}: ${status.toUpperCase()}`}
-                    className={`p-2 rounded-lg border font-semibold text-xs flex flex-col items-center justify-center transition-all ${statusClasses}`}
+                    className={`p-2 sm:p-2.5 rounded-xl sm:rounded-2xl border font-bold text-xs flex flex-col items-center justify-center gap-1 sm:gap-1.5 min-h-[48px] sm:min-h-[54px] transition-all select-none ${statusClasses}`}
                   >
-                    <span>{dayNum}</span>
-                    <span className={`w-1.5 h-1.5 rounded-full mt-0.5 ${
-                      status === 'available' ? 'bg-emerald-500' : status === 'tentative' ? 'bg-amber-500' : 'bg-rose-500'
-                    }`} />
+                    <span className="font-serif font-extrabold text-xs sm:text-base leading-none">{dayNum}</span>
+                    
+                    {/* Solid Status Dot Indicator */}
+                    <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full ${dotColor} shrink-0 transition-transform`} />
                   </div>
                 );
               })}

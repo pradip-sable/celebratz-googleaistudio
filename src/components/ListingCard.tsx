@@ -120,7 +120,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
             </p>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-1.5 mt-3">
+            <div className="flex flex-wrap items-center gap-1.5 mt-3">
               {listing.eventTypes.slice(0, 3).map(et => (
                 <span key={et} className="text-[10px] px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-medium">
                   {et}
@@ -132,6 +132,12 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
                   Up to {listing.categoryAttributes.capacityMax} guests
                 </span>
               )}
+            </div>
+
+            {/* Response Time Badge */}
+            <div className="mt-2.5 inline-flex items-center gap-1.5 text-[11px] text-teal-900 bg-teal-50/90 px-2.5 py-0.5 rounded-full border border-teal-200/70 font-medium">
+              <Clock className="w-3 h-3 text-teal-700 shrink-0" />
+              <span>Response time: Usually within 2 hours</span>
             </div>
           </div>
 
@@ -223,6 +229,12 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
           <h4 className="font-bold text-xs sm:text-sm text-stone-900 line-clamp-1 group-hover:text-teal-950">
             {listing.title}
           </h4>
+          
+          {/* Subtle Response Time Badge */}
+          <div className="mt-1.5 inline-flex items-center gap-1 text-[10px] text-teal-900 bg-teal-50/90 px-2 py-0.5 rounded-md border border-teal-200/60 font-medium">
+            <Clock className="w-2.5 h-2.5 text-teal-700 shrink-0" />
+            <span>Responds within 2 hrs</span>
+          </div>
         </div>
 
         <div className="pt-2 border-t border-stone-100 flex items-center justify-between">
@@ -363,6 +375,12 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
                 🔥 Vedic Vivah & Rituals
               </span>
             )}
+          </div>
+
+          {/* Subtle Response Time Badge */}
+          <div className="mt-3 inline-flex items-center gap-1.5 text-[11px] text-teal-900 bg-teal-50/90 px-2.5 py-0.5 rounded-full border border-teal-200/70 font-medium">
+            <Clock className="w-3 h-3 text-teal-700 shrink-0" />
+            <span>Response time: Usually within 2 hours</span>
           </div>
         </div>
 

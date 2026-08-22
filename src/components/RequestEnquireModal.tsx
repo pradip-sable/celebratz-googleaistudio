@@ -98,6 +98,7 @@ export const RequestEnquireModal: React.FC = () => {
     const fullPhone = `+91 ${phonePrimary.slice(0, 5)} ${phonePrimary.slice(5)}`;
 
     const res = createEnquiry({
+      kind: requestType === 'request_to_book' ? 'booking_request' : 'enquiry',
       listingId: listing.id,
       listingTitle: listing.title,
       listingCategory: listing.category,
@@ -130,22 +131,33 @@ export const RequestEnquireModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/70 backdrop-blur-xs animate-in fade-in overflow-y-auto">
-      <div className="bg-white rounded-3xl max-w-xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-stone-200 overflow-hidden relative">
+    <div 
+      id="request-enquiry-dialog-overlay"
+      role="dialog" 
+      aria-modal="true" 
+      aria-labelledby="enquiry-modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/70 backdrop-blur-xs animate-in fade-in overflow-y-auto"
+    >
+      <div 
+        id="request-enquiry-dialog"
+        className="bg-white rounded-3xl max-w-xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-stone-200 overflow-hidden relative"
+      >
         {/* Modal Header */}
         <div className="px-6 py-4 border-b border-stone-200 flex items-center justify-between bg-stone-50/80 sticky top-0 z-10">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 block">
               Direct Vendor Connect &bull; Pune
             </span>
-            <h3 className="font-serif font-bold text-lg text-stone-900 leading-tight">
+            <h3 id="enquiry-modal-title" className="font-serif font-bold text-lg text-stone-900 leading-tight">
               {requestType === 'request_to_book' ? 'Request to Book / Venue Visit' : 'Send General Enquiry'}
             </h3>
           </div>
 
           <button
+            id="close-enquiry-modal-button"
             onClick={handleClose}
-            className="text-stone-400 hover:text-stone-700 p-1 rounded-lg"
+            aria-label="Close dialog"
+            className="text-stone-400 hover:text-stone-700 p-1 rounded-lg cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -169,24 +181,26 @@ export const RequestEnquireModal: React.FC = () => {
 
             <div className="pt-4 flex flex-col sm:flex-row gap-2 justify-center">
               <button
+                id="view-my-requests-button"
                 onClick={() => {
                   handleClose();
                   setActiveRoute('customer-dashboard');
                 }}
-                className="px-5 py-2.5 bg-teal-900 text-white rounded-xl text-xs font-bold shadow-md hover:bg-teal-950 transition-colors"
+                className="px-5 py-2.5 bg-teal-900 text-white rounded-xl text-xs font-bold shadow-md hover:bg-teal-950 transition-colors cursor-pointer"
               >
                 Go to My Requests
               </button>
               <button
+                id="keep-browsing-button"
                 onClick={handleClose}
-                className="px-5 py-2.5 bg-stone-100 text-stone-700 rounded-xl text-xs font-semibold hover:bg-stone-200 transition-colors"
+                className="px-5 py-2.5 bg-stone-100 text-stone-700 rounded-xl text-xs font-semibold hover:bg-stone-200 transition-colors cursor-pointer"
               >
                 Keep Browsing
               </button>
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="overflow-y-auto p-5 sm:p-6 space-y-5 flex-1 text-left">
+          <form id="enquiry-form" onSubmit={handleSubmit} className="overflow-y-auto p-5 sm:p-6 space-y-5 flex-1 text-left">
             {/* Vendor Mini Card Summary */}
             <div className="flex items-center gap-3 p-3 rounded-2xl bg-amber-50/50 border border-amber-200/80">
               <img
@@ -202,11 +216,14 @@ export const RequestEnquireModal: React.FC = () => {
             </div>
 
             {/* Request Mode Toggle */}
-            <div className="grid grid-cols-2 p-1 bg-stone-100 rounded-xl text-xs font-semibold">
+            <div role="tablist" aria-label="Enquiry kind" className="grid grid-cols-2 p-1 bg-stone-100 rounded-xl text-xs font-semibold">
               <button
                 type="button"
+                role="tab"
+                id="request-to-book-tab"
+                aria-selected={requestType === 'request_to_book'}
                 onClick={() => setRequestType('request_to_book')}
-                className={`py-2 rounded-lg transition-all ${
+                className={`py-2 rounded-lg transition-all cursor-pointer ${
                   requestType === 'request_to_book' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
@@ -214,8 +231,11 @@ export const RequestEnquireModal: React.FC = () => {
               </button>
               <button
                 type="button"
+                role="tab"
+                id="general-enquiry-tab"
+                aria-selected={requestType === 'general_enquiry'}
                 onClick={() => setRequestType('general_enquiry')}
-                className={`py-2 rounded-lg transition-all ${
+                className={`py-2 rounded-lg transition-all cursor-pointer ${
                   requestType === 'general_enquiry' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
@@ -226,10 +246,11 @@ export const RequestEnquireModal: React.FC = () => {
             {/* 1. Event Type & Event Date */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                <label htmlFor="enquiry-event-type" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
                   Celebration Type *
                 </label>
                 <select
+                  id="enquiry-event-type"
                   value={eventType}
                   onChange={(e) => setEventType(e.target.value as EventType)}
                   className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium focus:border-teal-700 outline-hidden"
@@ -241,10 +262,11 @@ export const RequestEnquireModal: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                <label htmlFor="enquiry-event-date" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
                   Event Date *
                 </label>
                 <input
+                  id="enquiry-event-date"
                   type="date"
                   required
                   value={eventDate}
@@ -258,10 +280,11 @@ export const RequestEnquireModal: React.FC = () => {
             {/* 2. Guest Count & Preferred Visit Slot (for venues) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                <label htmlFor="enquiry-guest-count" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
                   Estimated Guests (Optional)
                 </label>
                 <input
+                  id="enquiry-guest-count"
                   type="number"
                   placeholder="e.g. 500"
                   value={guestCount}
@@ -271,10 +294,11 @@ export const RequestEnquireModal: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                <label htmlFor="enquiry-visit-time" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
                   Preferred Visit / Call Slot
                 </label>
                 <input
+                  id="enquiry-visit-time"
                   type="text"
                   placeholder="e.g. Sunday 4 PM or Evening Call"
                   value={preferredVisitTime}
@@ -287,12 +311,13 @@ export const RequestEnquireModal: React.FC = () => {
             {/* 3. Name & Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                <label htmlFor="enquiry-customer-name" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
                   Your Full Name *
                 </label>
                 <div className="flex items-center bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 focus-within:border-teal-700">
                   <UserIcon className="w-4 h-4 text-stone-400 mr-2" />
                   <input
+                    id="enquiry-customer-name"
                     type="text"
                     required
                     placeholder="Priya Sharma"
@@ -304,12 +329,13 @@ export const RequestEnquireModal: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                <label htmlFor="enquiry-customer-email" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
                   Email Address *
                 </label>
                 <div className="flex items-center bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 focus-within:border-teal-700">
                   <Mail className="w-4 h-4 text-stone-400 mr-2" />
                   <input
+                    id="enquiry-customer-email"
                     type="email"
                     required
                     placeholder="priya@example.com"
@@ -336,12 +362,13 @@ export const RequestEnquireModal: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {/* Input 1 */}
                 <div>
-                  <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">
+                  <label htmlFor="enquiry-phone-primary" className="block text-[10px] font-bold text-stone-600 uppercase mb-1">
                     Mobile Number (+91) *
                   </label>
                   <div className="flex items-center bg-white border border-stone-300 rounded-xl px-3 py-2 focus-within:border-teal-700">
                     <span className="text-xs font-bold text-stone-500 mr-1.5">+91</span>
                     <input
+                      id="enquiry-phone-primary"
                       type="tel"
                       required
                       placeholder="9823045678"
@@ -354,7 +381,7 @@ export const RequestEnquireModal: React.FC = () => {
 
                 {/* Input 2 (Re-enter) */}
                 <div>
-                  <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">
+                  <label htmlFor="enquiry-phone-confirm" className="block text-[10px] font-bold text-stone-600 uppercase mb-1">
                     Re-Enter Number to Confirm *
                   </label>
                   <div className={`flex items-center bg-white border rounded-xl px-3 py-2 transition-colors ${
@@ -366,6 +393,7 @@ export const RequestEnquireModal: React.FC = () => {
                   }`}>
                     <span className="text-xs font-bold text-stone-500 mr-1.5">+91</span>
                     <input
+                      id="enquiry-phone-confirm"
                       type="tel"
                       required
                       placeholder="Type again..."
@@ -388,10 +416,11 @@ export const RequestEnquireModal: React.FC = () => {
 
             {/* 5. Message Note */}
             <div>
-              <label className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+              <label htmlFor="enquiry-message" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
                 Custom Requirements or Message (Optional)
               </label>
               <textarea
+                id="enquiry-message"
                 rows={2}
                 placeholder="e.g. Inquiring about stage decoration options and outside catering permission..."
                 value={message}
@@ -402,8 +431,9 @@ export const RequestEnquireModal: React.FC = () => {
 
             {/* 6. MANDATORY EXPLICIT CONSENT CLAUSE */}
             <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 space-y-2">
-              <label className="flex items-start gap-2.5 cursor-pointer">
+              <label htmlFor="enquiry-consent-checkbox" className="flex items-start gap-2.5 cursor-pointer">
                 <input
+                  id="enquiry-consent-checkbox"
                   type="checkbox"
                   required
                   checked={consentGiven}
@@ -427,6 +457,7 @@ export const RequestEnquireModal: React.FC = () => {
             {/* Submit Button */}
             <div className="pt-2">
               <button
+                id="submit-enquiry-button"
                 type="submit"
                 className="w-full py-3.5 rounded-xl text-xs sm:text-sm font-bold bg-teal-900 hover:bg-teal-950 text-amber-50 shadow-md transition-all flex items-center justify-center gap-2 active:scale-98 cursor-pointer"
               >

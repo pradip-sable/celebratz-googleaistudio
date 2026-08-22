@@ -1,1 +1,119 @@
 @import "tailwindcss";
+
+@layer base {
+  :root, [data-theme="teal_gold"] {
+    --primary: #134e4a; /* Deep Teal / Pine */
+    --primary-hover: #0f766e;
+    --primary-foreground: #f0fdfa;
+    --secondary: #92400e; /* Royal Amber / Gold */
+    --secondary-hover: #78350f;
+    --secondary-foreground: #fffbeb;
+    --accent: #d97706; /* Festive Gold Accent */
+    --accent-hover: #b45309;
+    --accent-foreground: #ffffff;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
+    --teal: #0f766e;
+    --teal-dark: #134e4a;
+    --teal-light: #ccfbf1;
+    --teal-foreground: #134e4a;
+    --gold: #d97706;
+    --gold-dark: #92400e;
+    --gold-light: #fef3c7;
+    --gold-foreground: #78350f;
+    --blush: #fdf2f8;
+    --blush-foreground: #9d174d;
+    --cream: #fffbeb;
+    --cream-foreground: #78350f;
+    --rose: #e11d48;
+    --rose-foreground: #ffffff;
+    --background: #fafaf9;
+    --foreground: #1c1917;
+    --card: #ffffff;
+    --card-foreground: #1c1917;
+    --border: #e7e5e4;
+    --input: #e7e5e4;
+    --ring: #0f766e;
+    --radius: 1rem;
+  }
+
+  [data-theme="rose_ruby"] {
+    --primary: #881337; /* Rose Ruby */
+    --primary-hover: #9f1239;
+    --primary-foreground: #fff1f2;
+    --secondary: #b45309; /* Warm Gold */
+    --secondary-hover: #92400e;
+    --secondary-foreground: #fffbeb;
+    --accent: #e11d48;
+    --accent-hover: #be123c;
+    --accent-foreground: #ffffff;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
+    --teal: #9f1239;
+    --teal-dark: #881337;
+    --teal-light: #ffe4e6;
+    --teal-foreground: #881337;
+    --gold: #d97706;
+    --gold-dark: #b45309;
+    --gold-light: #fef3c7;
+    --gold-foreground: #78350f;
+    --blush: #ffe4e6;
+    --blush-foreground: #881337;
+    --cream: #fff7ed;
+    --cream-foreground: #7c2d12;
+    --rose: #be123c;
+    --rose-foreground: #ffffff;
+    --background: #fffafa;
+    --foreground: #1c1917;
+    --card: #ffffff;
+    --card-foreground: #1c1917;
+    --border: #fecdd3;
+    --input: #fecdd3;
+    --ring: #e11d48;
+  }
+
+  [data-theme="emerald_champagne"] {
+    --primary: #064e3b; /* Deep Emerald */
+    --primary-hover: #047857;
+    --primary-foreground: #ecfdf5;
+    --secondary: #d97706; /* Champagne Gold */
+    --secondary-hover: #b45309;
+    --secondary-foreground: #ffffff;
+    --accent: #059669;
+    --accent-hover: #047857;
+    --accent-foreground: #ffffff;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
+    --teal: #047857;
+    --teal-dark: #064e3b;
+    --teal-light: #d1fae5;
+    --teal-foreground: #064e3b;
+    --gold: #b45309;
+    --gold-dark: #78350f;
+    --gold-light: #fef3c7;
+    --gold-foreground: #78350f;
+    --blush: #f0fdf4;
+    --blush-foreground: #064e3b;
+    --cream: #fefce8;
+    --cream-foreground: #713f12;
+    --rose: #059669;
+    --rose-foreground: #ffffff;
+    --background: #f8fafc;
+    --foreground: #0f172a;
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #059669;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}

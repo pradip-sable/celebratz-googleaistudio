@@ -155,6 +155,7 @@ export interface Listing {
 
 export interface Enquiry {
   id: string;
+  kind?: 'booking_request' | 'enquiry';
   listingId: string;
   listingTitle: string;
   listingCategory: CategoryId;
@@ -167,7 +168,7 @@ export interface Enquiry {
   customerName: string;
   customerEmail: string;
   customerPhone: string;
-  requestType: 'request_to_book' | 'general_enquiry';
+  requestType?: 'request_to_book' | 'general_enquiry';
   eventType: EventType;
   eventDate: string;
   guestCount?: number;

@@ -551,6 +551,7 @@ export const INITIAL_LISTINGS: Listing[] = [
 export const INITIAL_ENQUIRIES: Enquiry[] = [
   {
     id: 'enq_101',
+    kind: 'booking_request',
     listingId: 'list_venue_1',
     listingTitle: 'The Royal Palace & Lawns',
     listingCategory: 'venues',
@@ -575,6 +576,7 @@ export const INITIAL_ENQUIRIES: Enquiry[] = [
   },
   {
     id: 'enq_102',
+    kind: 'enquiry',
     listingId: 'list_photo_1',
     listingTitle: 'Utsav Moments Wedding Cinema & Photography',
     listingCategory: 'photography',

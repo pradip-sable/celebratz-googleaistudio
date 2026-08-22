@@ -31,7 +31,7 @@ import {
 } from 'lucide-react';
 import { Listing, CalendarStatus } from '../types';
 import { useApp } from '../context/AppContext';
-import { formatIndianCurrency, getDaysAgoText, getThemeClasses } from '../utils/theme';
+import { formatIndianCurrency, getDaysAgoText } from '../utils/theme';
 import { CATEGORIES } from '../data/categories';
 import { getGoogleMapsSearchUrl, getGoogleMapsDirectionsUrl, openGoogleMaps } from '../utils/mapUtils';
 
@@ -56,7 +56,6 @@ export const ListingDetailModal: React.FC = () => {
   const listing = getListingById(selectedListingId);
   if (!listing) return null;
 
-  const theme = getThemeClasses(designPrefs.palette);
   const isSaved = isInWishlist(listing.id);
   const isCompared = comparisonList.includes(listing.id);
   const categoryMeta = CATEGORIES.find(c => c.id === listing.category);
@@ -698,9 +697,9 @@ export const ListingDetailModal: React.FC = () => {
 
             <button
               onClick={handleOpenEnquiry}
-              className="flex-1 sm:flex-none px-6 py-3 rounded-xl text-xs sm:text-sm font-bold bg-teal-900 hover:bg-teal-950 text-amber-50 shadow-md transition-all flex items-center justify-center gap-2 active:scale-95"
+              className="flex-1 sm:flex-none px-6 py-3 rounded-xl text-xs sm:text-sm font-bold bg-primary hover:bg-primary-hover text-primary-foreground shadow-md transition-all flex items-center justify-center gap-2 active:scale-95 cursor-pointer"
             >
-              <CalendarIcon className="w-4 h-4 text-amber-300" />
+              <CalendarIcon className="w-4 h-4 text-accent" />
               <span>Request to Book / Visit</span>
             </button>
           </div>

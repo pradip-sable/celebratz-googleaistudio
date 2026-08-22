@@ -55,7 +55,11 @@ const MainAppContent: React.FC = () => {
   const activeCategoryMeta = CATEGORIES.find(c => c.id === filters.category);
 
   return (
-    <div className="min-h-screen flex flex-col bg-stone-100 text-stone-900 font-sans selection:bg-teal-900 selection:text-amber-200">
+    <div 
+      id="app-root" 
+      data-theme={designPrefs?.palette || 'teal_gold'} 
+      className="min-h-screen flex flex-col bg-stone-100 text-stone-900 font-sans selection:bg-teal-900 selection:text-amber-200"
+    >
       {/* Sticky Top Navbar */}
       <Navbar />
 

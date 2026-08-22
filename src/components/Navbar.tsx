@@ -15,7 +15,6 @@ import {
   X
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { getThemeClasses } from '../utils/theme';
 import { PUNE_LOCALITIES } from '../data/categories';
 
 export const Navbar: React.FC = () => {
@@ -36,7 +35,6 @@ export const Navbar: React.FC = () => {
     unreadCount
   } = useApp();
 
-  const theme = getThemeClasses(designPrefs.palette);
   const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -239,7 +237,7 @@ export const Navbar: React.FC = () => {
           {currentUser.role === 'customer' && (
             <button
               onClick={() => setActiveRoute('customer-dashboard')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold ${theme.buttonPrimary} transition-all`}
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary-hover shadow-sm transition-all cursor-pointer"
             >
               <UserIcon className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">My Requests</span>

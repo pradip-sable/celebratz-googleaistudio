@@ -17,7 +17,6 @@ import {
 import { useApp } from '../context/AppContext';
 import { CATEGORIES, PUNE_LOCALITIES, EVENT_TYPES } from '../data/categories';
 import { CategoryId, PuneLocality, EventType } from '../types';
-import { getThemeClasses } from '../utils/theme';
 
 const getCategoryIcon = (iconName: string) => {
   switch (iconName) {
@@ -41,8 +40,6 @@ export const HomeHero: React.FC = () => {
     setIsCitySelectorOpen,
     listings 
   } = useApp();
-
-  const theme = getThemeClasses(designPrefs.palette);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();

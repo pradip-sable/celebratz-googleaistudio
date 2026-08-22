@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { Listing } from '../types';
 import { useApp } from '../context/AppContext';
-import { formatIndianCurrency, getDaysAgoText, getThemeClasses } from '../utils/theme';
+import { formatIndianCurrency, getDaysAgoText } from '../utils/theme';
 import { CATEGORIES } from '../data/categories';
 import { getGoogleMapsDirectionsUrl } from '../utils/mapUtils';
 
@@ -36,7 +36,6 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
     setIsEnquiryModalOpen 
   } = useApp();
 
-  const theme = getThemeClasses(designPrefs.palette);
   const isSaved = isInWishlist(listing.id);
   const isCompared = comparisonList.includes(listing.id);
   const categoryMeta = CATEGORIES.find(c => c.id === listing.category);
@@ -179,7 +178,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
 
               <button
                 onClick={handleDirectEnquire}
-                className="px-4 py-1.5 rounded-lg text-xs font-bold bg-teal-900 hover:bg-teal-950 text-amber-50 shadow-xs transition-all"
+                className="px-4 py-1.5 rounded-lg text-xs font-bold bg-primary hover:bg-primary-hover text-primary-foreground shadow-xs transition-all cursor-pointer"
               >
                 Enquire / Book
               </button>
@@ -418,7 +417,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
 
             <button
               onClick={handleDirectEnquire}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-teal-900 hover:bg-teal-950 text-amber-50 shadow-xs transition-all flex items-center gap-1"
+              className="px-3.5 py-2 rounded-xl text-xs font-bold bg-primary hover:bg-primary-hover text-primary-foreground shadow-xs transition-all flex items-center gap-1 cursor-pointer"
             >
               <span>Enquire</span>
               <ArrowRight className="w-3 h-3" />

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Home, Search, CalendarCheck, Heart, User, Store, ShieldCheck } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { getThemeClasses } from '../utils/theme';
 
 export const MobileBottomNav: React.FC = () => {
   const { 
@@ -13,7 +12,6 @@ export const MobileBottomNav: React.FC = () => {
     designPrefs 
   } = useApp();
 
-  const theme = getThemeClasses(designPrefs.palette);
   const myPendingRequests = enquiries.filter(e => e.customerId === currentUser.id).length;
 
   return (
@@ -24,11 +22,11 @@ export const MobileBottomNav: React.FC = () => {
           onClick={() => setActiveRoute('home')}
           className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
             activeRoute === 'home' 
-              ? 'text-teal-950 font-bold' 
+              ? 'text-primary font-bold' 
               : 'text-stone-500 hover:text-stone-900'
           }`}
         >
-          <Home className={`w-5 h-5 ${activeRoute === 'home' ? 'stroke-[2.5] text-amber-600' : ''}`} />
+          <Home className={`w-5 h-5 ${activeRoute === 'home' ? 'stroke-[2.5] text-accent' : ''}`} />
           <span className="text-[10px] mt-0.5">Home</span>
         </button>
 
@@ -37,11 +35,11 @@ export const MobileBottomNav: React.FC = () => {
           onClick={() => setActiveRoute('search')}
           className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
             activeRoute === 'search' 
-              ? 'text-teal-950 font-bold' 
+              ? 'text-primary font-bold' 
               : 'text-stone-500 hover:text-stone-900'
           }`}
         >
-          <Search className={`w-5 h-5 ${activeRoute === 'search' ? 'stroke-[2.5] text-amber-600' : ''}`} />
+          <Search className={`w-5 h-5 ${activeRoute === 'search' ? 'stroke-[2.5] text-accent' : ''}`} />
           <span className="text-[10px] mt-0.5">Search</span>
         </button>
 
@@ -54,16 +52,16 @@ export const MobileBottomNav: React.FC = () => {
           }}
           className={`relative flex flex-col items-center justify-center w-16 py-1 rounded-lg transition-colors ${
             activeRoute === 'customer-dashboard' || activeRoute === 'vendor-dashboard' || activeRoute === 'admin-panel'
-              ? 'text-teal-950 font-bold' 
+              ? 'text-primary font-bold' 
               : 'text-stone-500 hover:text-stone-900'
           }`}
         >
           {currentUser.role === 'vendor' ? (
-            <Store className={`w-5 h-5 ${activeRoute === 'vendor-dashboard' ? 'stroke-[2.5] text-amber-600' : ''}`} />
+            <Store className={`w-5 h-5 ${activeRoute === 'vendor-dashboard' ? 'stroke-[2.5] text-accent' : ''}`} />
           ) : currentUser.role === 'admin' ? (
-            <ShieldCheck className={`w-5 h-5 ${activeRoute === 'admin-panel' ? 'stroke-[2.5] text-rose-600' : ''}`} />
+            <ShieldCheck className={`w-5 h-5 ${activeRoute === 'admin-panel' ? 'stroke-[2.5] text-rose' : ''}`} />
           ) : (
-            <CalendarCheck className={`w-5 h-5 ${activeRoute === 'customer-dashboard' ? 'stroke-[2.5] text-amber-600' : ''}`} />
+            <CalendarCheck className={`w-5 h-5 ${activeRoute === 'customer-dashboard' ? 'stroke-[2.5] text-accent' : ''}`} />
           )}
           
           <span className="text-[10px] mt-0.5">
@@ -71,7 +69,7 @@ export const MobileBottomNav: React.FC = () => {
           </span>
 
           {myPendingRequests > 0 && currentUser.role === 'customer' && (
-            <span className="absolute top-0.5 right-3 w-4 h-4 bg-amber-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+            <span className="absolute top-0.5 right-3 w-4 h-4 bg-accent text-accent-foreground text-[9px] font-bold rounded-full flex items-center justify-center">
               {myPendingRequests}
             </span>
           )}
@@ -82,10 +80,10 @@ export const MobileBottomNav: React.FC = () => {
           onClick={() => setActiveRoute('customer-dashboard')}
           className="relative flex flex-col items-center justify-center w-14 py-1 rounded-lg text-stone-500 hover:text-stone-900 transition-colors"
         >
-          <Heart className="w-5 h-5 text-rose-500" />
+          <Heart className="w-5 h-5 text-rose" />
           <span className="text-[10px] mt-0.5">Wishlist</span>
           {wishlist.length > 0 && (
-            <span className="absolute top-0.5 right-2 w-4 h-4 bg-rose-600 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+            <span className="absolute top-0.5 right-2 w-4 h-4 bg-rose text-white text-[9px] font-bold rounded-full flex items-center justify-center">
               {wishlist.length}
             </span>
           )}
@@ -96,7 +94,7 @@ export const MobileBottomNav: React.FC = () => {
           onClick={() => setActiveRoute('customer-dashboard')}
           className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
             activeRoute === 'customer-dashboard' 
-              ? 'text-teal-950 font-bold' 
+              ? 'text-primary font-bold' 
               : 'text-stone-500 hover:text-stone-900'
           }`}
         >

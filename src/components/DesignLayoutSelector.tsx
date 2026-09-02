@@ -2,6 +2,7 @@ import React from 'react';
 import { Palette, Check, LayoutGrid, List, Layers, Sparkles, X } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { DesignPalette, CardLayoutMode, HeroStyle } from '../types';
+import { useModalScrollLock } from '../hooks/useModalScrollLock';
 
 export const DesignLayoutSelector: React.FC = () => {
   const { 
@@ -10,6 +11,8 @@ export const DesignLayoutSelector: React.FC = () => {
     designPrefs, 
     updateDesignPrefs 
   } = useApp();
+
+  useModalScrollLock(isDesignSelectorOpen, () => setIsDesignSelectorOpen(false));
 
   if (!isDesignSelectorOpen) return null;
 

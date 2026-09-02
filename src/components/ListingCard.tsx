@@ -89,17 +89,24 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
             <div className="flex items-start justify-between gap-2">
               <div>
                 <div className="flex items-center gap-1.5 text-xs text-stone-500 font-medium mb-0.5">
-                  <a
-                    href={getGoogleMapsDirectionsUrl(listing)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1 hover:text-teal-900 transition-colors group/loc"
-                    title="Open in Google Maps"
-                  >
-                    <MapPin className="w-3.5 h-3.5 text-teal-800 shrink-0 group-hover/loc:text-rose-600" />
-                    <span className="group-hover/loc:underline">{listing.locality}, Pune</span>
-                  </a>
+                  {listing.googleMapsUrl && listing.googleMapsUrl.trim().length > 0 ? (
+                    <a
+                      href={getGoogleMapsDirectionsUrl(listing)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 hover:text-teal-900 transition-colors group/loc cursor-pointer"
+                      title="Open in Google Maps"
+                    >
+                      <MapPin className="w-3.5 h-3.5 text-teal-800 shrink-0 group-hover/loc:text-rose-600" />
+                      <span className="group-hover/loc:underline">{listing.locality}, Pune</span>
+                    </a>
+                  ) : (
+                    <div className="inline-flex items-center gap-1 text-stone-500">
+                      <MapPin className="w-3.5 h-3.5 text-teal-800 shrink-0" />
+                      <span>{listing.locality}, Pune</span>
+                    </div>
+                  )}
                 </div>
                 <h3 className="font-serif font-bold text-base sm:text-lg text-stone-900 group-hover:text-teal-950">
                   {listing.title}
@@ -298,17 +305,24 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
 
         {/* Bottom Locality & Staleness info over image */}
         <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs">
-          <a
-            href={getGoogleMapsDirectionsUrl(listing)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="flex items-center gap-1 drop-shadow-sm font-medium hover:text-amber-300 transition-colors group/pin"
-            title="Open in Google Maps"
-          >
-            <MapPin className="w-3.5 h-3.5 text-amber-400 group-hover/pin:scale-110 transition-transform" />
-            <span className="group-hover/pin:underline">{listing.locality}, Pune</span>
-          </a>
+          {listing.googleMapsUrl && listing.googleMapsUrl.trim().length > 0 ? (
+            <a
+              href={getGoogleMapsDirectionsUrl(listing)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-1 drop-shadow-sm font-medium hover:text-amber-300 transition-colors group/pin cursor-pointer"
+              title="Open in Google Maps"
+            >
+              <MapPin className="w-3.5 h-3.5 text-amber-400 group-hover/pin:scale-110 transition-transform" />
+              <span className="group-hover/pin:underline">{listing.locality}, Pune</span>
+            </a>
+          ) : (
+            <div className="flex items-center gap-1 drop-shadow-sm font-medium text-stone-200">
+              <MapPin className="w-3.5 h-3.5 text-amber-400" />
+              <span>{listing.locality}, Pune</span>
+            </div>
+          )}
 
           <div className={`px-2 py-0.5 rounded-md text-[10px] font-semibold backdrop-blur-xs ${
             isStale ? 'bg-amber-950/80 text-amber-200 border border-amber-500/40' : 'bg-black/50 text-stone-200'

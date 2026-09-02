@@ -12,19 +12,32 @@ import {
   MapPin, 
   ChevronDown,
   Menu,
-  X
+  X,
+  LogIn,
+  LogOut,
+  UserPlus,
+  Sparkles,
+  ListOrdered,
+  Layers
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { PUNE_LOCALITIES } from '../data/categories';
+import { PUNE_LOCALITIES, CATEGORIES } from '../data/categories';
+import { BrandName } from './BrandName';
 
 export const Navbar: React.FC = () => {
   const { 
     currentUser, 
     switchUserRole, 
+    openAuthModal,
+    logout,
     wishlist, 
     comparisonList, 
     activeRoute, 
     setActiveRoute,
+    customerTab,
+    navigateToCustomerTab,
+    vendorTab,
+    navigateToVendorTab,
     setIsDesignSelectorOpen,
     isCitySelectorOpen,
     setIsCitySelectorOpen,
@@ -32,11 +45,26 @@ export const Navbar: React.FC = () => {
     designPrefs,
     filters,
     setFilters,
+    parsedSearchQuery,
     unreadCount
   } = useApp();
 
   const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const searchBoxRef = React.useRef<HTMLDivElement>(null);
+
+  // Close search popover when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (searchBoxRef.current && !searchBoxRef.current.contains(e.target as Node)) {
+        setIsSearchFocused(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-xs">
@@ -65,69 +93,128 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center gap-2 ml-auto">
           <button
             onClick={() => setIsDesignSelectorOpen(true)}
-            className="flex items-center gap-1.5 text-xs bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 px-2 py-0.5 rounded border border-amber-500/30 transition-colors"
+            className="flex items-center gap-1.5 text-xs bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 px-2 py-0.5 rounded border border-amber-500/30 transition-colors cursor-pointer"
             title="Choose Design Theme & Card Layout"
           >
             <Palette className="w-3 h-3" />
             <span className="hidden md:inline">Design Layouts</span>
           </button>
 
+          {/* User Account / Auth Dropdown */}
           <div className="relative">
             <button
               onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
-              className="flex items-center gap-1.5 text-xs bg-stone-800 hover:bg-stone-700 text-stone-200 px-2 py-0.5 rounded transition-colors"
+              className="flex items-center gap-1.5 text-xs bg-stone-800 hover:bg-stone-700 text-stone-200 px-2.5 py-1 rounded-md transition-colors cursor-pointer border border-stone-700"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="capitalize font-medium">Role: {currentUser.role}</span>
+              <div className="w-4 h-4 rounded-full bg-teal-800 text-amber-300 font-bold flex items-center justify-center text-[10px]">
+                {currentUser.fullName.charAt(0)}
+              </div>
+              <span className="font-semibold text-white max-w-[100px] sm:max-w-none truncate">
+                {currentUser.fullName}
+              </span>
+              <span className="text-[10px] uppercase font-bold text-amber-400/90 hidden sm:inline">
+                ({currentUser.role})
+              </span>
               <ChevronDown className="w-3 h-3 text-stone-400" />
             </button>
 
             {isRoleDropdownOpen && (
-              <div className="absolute right-0 mt-1 w-52 bg-white rounded-lg shadow-xl border border-stone-200 py-1 z-50 text-stone-800 text-xs">
-                <div className="px-3 py-1.5 font-semibold text-stone-500 border-b border-stone-100 uppercase tracking-wider text-[10px]">
-                  Switch Role Persona
+              <div className="absolute right-0 mt-1.5 w-60 bg-white rounded-2xl shadow-2xl border border-stone-200 py-1.5 z-50 text-stone-800 text-xs animate-fade-in divide-y divide-stone-100">
+                {/* User Header */}
+                <div className="px-3.5 py-2.5 bg-stone-50">
+                  <p className="font-serif font-bold text-stone-900 truncate">{currentUser.fullName}</p>
+                  <p className="text-[11px] text-stone-500 truncate">{currentUser.email}</p>
+                  {currentUser.phoneNumber && (
+                    <p className="text-[10px] text-stone-500">{currentUser.phoneNumber}</p>
+                  )}
                 </div>
-                <button
-                  onClick={() => {
-                    switchUserRole('customer');
-                    setIsRoleDropdownOpen(false);
-                  }}
-                  className={`w-full text-left px-3 py-2 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'customer' ? 'bg-amber-50 font-semibold text-teal-950' : ''}`}
-                >
-                  <div className="flex items-center gap-2">
-                    <UserIcon className="w-3.5 h-3.5 text-teal-700" />
-                    <span>Customer (Priya)</span>
+
+                {/* Primary Auth Actions */}
+                <div className="py-1">
+                  <button
+                    onClick={() => {
+                      openAuthModal('login');
+                      setIsRoleDropdownOpen(false);
+                    }}
+                    className="w-full text-left px-3.5 py-2 flex items-center gap-2 hover:bg-teal-50 text-teal-950 font-semibold cursor-pointer"
+                  >
+                    <LogIn className="w-3.5 h-3.5 text-teal-800" />
+                    <span>Sign In (Google / Mobile / Email)</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      openAuthModal('signup');
+                      setIsRoleDropdownOpen(false);
+                    }}
+                    className="w-full text-left px-3.5 py-2 flex items-center gap-2 hover:bg-amber-50 text-amber-900 font-semibold cursor-pointer"
+                  >
+                    <UserPlus className="w-3.5 h-3.5 text-amber-700" />
+                    <span>Create New Account</span>
+                  </button>
+                </div>
+
+                {/* Demo Switch Personas */}
+                <div className="py-1">
+                  <div className="px-3.5 py-1 font-semibold text-stone-500 uppercase tracking-wider text-[10px]">
+                    Quick Switch Demo Persona
                   </div>
-                  {currentUser.role === 'customer' && <span className="text-teal-700 text-xs">Active</span>}
-                </button>
-                <button
-                  onClick={() => {
-                    switchUserRole('vendor');
-                    setIsRoleDropdownOpen(false);
-                    setActiveRoute('vendor-dashboard');
-                  }}
-                  className={`w-full text-left px-3 py-2 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'vendor' ? 'bg-amber-50 font-semibold text-teal-950' : ''}`}
-                >
-                  <div className="flex items-center gap-2">
-                    <Store className="w-3.5 h-3.5 text-amber-600" />
-                    <span>Vendor (Rajesh Patil)</span>
-                  </div>
-                  {currentUser.role === 'vendor' && <span className="text-amber-700 text-xs">Active</span>}
-                </button>
-                <button
-                  onClick={() => {
-                    switchUserRole('admin');
-                    setIsRoleDropdownOpen(false);
-                    setActiveRoute('admin-panel');
-                  }}
-                  className={`w-full text-left px-3 py-2 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'admin' ? 'bg-amber-50 font-semibold text-teal-950' : ''}`}
-                >
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-3.5 h-3.5 text-rose-700" />
-                    <span>Admin (Pradip Sable)</span>
-                  </div>
-                  {currentUser.role === 'admin' && <span className="text-rose-700 text-xs">Active</span>}
-                </button>
+                  <button
+                    onClick={() => {
+                      switchUserRole('customer');
+                      setIsRoleDropdownOpen(false);
+                    }}
+                    className={`w-full text-left px-3.5 py-1.5 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'customer' ? 'bg-amber-50 font-semibold text-teal-950' : ''}`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <UserIcon className="w-3.5 h-3.5 text-teal-700" />
+                      <span>Customer (Priya Sharma)</span>
+                    </div>
+                    {currentUser.role === 'customer' && <span className="text-teal-700 text-xs font-bold">&bull; Active</span>}
+                  </button>
+                  <button
+                    onClick={() => {
+                      switchUserRole('vendor');
+                      setIsRoleDropdownOpen(false);
+                      setActiveRoute('vendor-dashboard');
+                    }}
+                    className={`w-full text-left px-3.5 py-1.5 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'vendor' ? 'bg-amber-50 font-semibold text-teal-950' : ''}`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <Store className="w-3.5 h-3.5 text-amber-600" />
+                      <span>Vendor (Rajesh Patil)</span>
+                    </div>
+                    {currentUser.role === 'vendor' && <span className="text-amber-700 text-xs font-bold">&bull; Active</span>}
+                  </button>
+                  <button
+                    onClick={() => {
+                      switchUserRole('admin');
+                      setIsRoleDropdownOpen(false);
+                      setActiveRoute('admin-panel');
+                    }}
+                    className={`w-full text-left px-3.5 py-1.5 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'admin' ? 'bg-amber-50 font-semibold text-teal-950' : ''}`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="w-3.5 h-3.5 text-rose-700" />
+                      <span>Admin (Pradip Sable)</span>
+                    </div>
+                    {currentUser.role === 'admin' && <span className="text-rose-700 text-xs font-bold">&bull; Active</span>}
+                  </button>
+                </div>
+
+                {/* Sign out */}
+                <div className="py-1">
+                  <button
+                    onClick={() => {
+                      logout();
+                      setIsRoleDropdownOpen(false);
+                    }}
+                    className="w-full text-left px-3.5 py-2 flex items-center gap-2 text-rose-700 hover:bg-rose-50 font-medium cursor-pointer"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                    <span>Sign Out</span>
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -136,59 +223,168 @@ export const Navbar: React.FC = () => {
 
       {/* Main Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-        {/* Brand Logo */}
-        <div 
-          onClick={() => setActiveRoute('home')}
-          className="flex items-center gap-2.5 cursor-pointer select-none group"
-        >
-          <div className="w-9 h-9 rounded-xl bg-teal-950 flex items-center justify-center text-amber-300 font-bold text-lg shadow-sm border border-amber-400/30 group-hover:scale-105 transition-transform">
-            C
-          </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-xl text-teal-950 tracking-tight font-serif">Celebratz</span>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsCitySelectorOpen(true);
-                }}
-                className="text-[10px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300/80 flex items-center gap-0.5 transition-colors cursor-pointer"
-                title="Change city"
-              >
-                <span>{activeCity?.name || 'Pune'}</span>
-                <ChevronDown className="w-2.5 h-2.5 opacity-70" />
-              </button>
+        {/* Brand & City Selection */}
+        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          {/* Brand Logo & Name */}
+          <div 
+            onClick={() => setActiveRoute('home')}
+            className="flex items-center gap-2.5 cursor-pointer select-none group"
+            id="navbar-brand"
+          >
+            <div className="w-9 h-9 rounded-xl bg-[#141C48] flex items-center justify-center text-white font-black text-lg shadow-sm border border-[#141C48]/20 group-hover:scale-105 transition-transform shrink-0" style={{ fontFamily: "'Agrandir Grand', 'Agrandir', sans-serif" }}>
+              <span className="lowercase text-white">c</span>
+              <span className="text-[#FF6565] -ml-0.5 text-xs font-black">&bull;</span>
             </div>
-            <p className="text-[10px] text-stone-500 hidden sm:block">Venues & Services Discovery</p>
+            <BrandName size="2xl" weight="black" showTagline={true} taglineText="A Celebration Marketplace" />
           </div>
+
+          {/* Divider */}
+          <div className="h-5 w-px bg-stone-300 shrink-0" />
+
+          {/* City Selection next to Brand */}
+          <button
+            onClick={() => setIsCitySelectorOpen(true)}
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-stone-100/90 hover:bg-amber-50/80 text-stone-800 hover:text-teal-950 border border-stone-200/90 hover:border-amber-300 transition-all cursor-pointer text-xs font-semibold shadow-2xs group"
+            title="Change City"
+          >
+            <MapPin className="w-3.5 h-3.5 text-amber-600 group-hover:scale-110 transition-transform shrink-0" />
+            <span className="font-bold text-xs text-stone-900 tracking-tight">{activeCity?.name || 'Pune'}</span>
+            <span className="text-[9px] uppercase px-1 py-0.2 rounded bg-emerald-100 text-emerald-800 font-extrabold border border-emerald-300/60 hidden xl:inline">
+              Live
+            </span>
+            <ChevronDown className="w-3 h-3 text-stone-400 group-hover:text-stone-700 transition-colors shrink-0" />
+          </button>
         </div>
 
-        {/* Quick Search / Locality pill on Desktop */}
-        <div className="hidden md:flex items-center flex-1 max-w-md mx-4">
-          <div className="w-full flex items-center bg-stone-100/90 rounded-full border border-stone-300/80 px-3 py-1.5 text-sm hover:border-stone-400 focus-within:border-teal-700 focus-within:bg-white transition-all shadow-inner">
+        {/* Quick Search / Locality pill on Desktop with Smart Keyword & Locality Autocomplete */}
+        <div ref={searchBoxRef} className="relative hidden md:flex items-center flex-1 max-w-lg mx-4">
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault();
+              setIsSearchFocused(false);
+              if (activeRoute !== 'search') setActiveRoute('search');
+            }}
+            className="w-full flex items-center bg-stone-100/90 rounded-full border border-stone-300/80 px-3.5 py-2 text-sm hover:border-stone-400 focus-within:border-teal-700 focus-within:bg-white focus-within:ring-2 focus-within:ring-teal-700/20 transition-all shadow-inner"
+          >
             <Search className="w-4 h-4 text-stone-400 mr-2 shrink-0" />
             <input
               type="text"
-              placeholder="Search Baner lawns, Kalyani Nagar photo, catering..."
+              placeholder={`Search "${activeCity?.id === 'pune' ? 'Wedding venue in Baner' : 'Venues in ' + (activeCity?.name || 'Pune')}", catering, DJ...`}
               value={filters.searchQuery}
               onChange={(e) => {
                 setFilters(prev => ({ ...prev, searchQuery: e.target.value }));
                 if (activeRoute !== 'search') setActiveRoute('search');
               }}
               onFocus={() => {
+                setIsSearchFocused(true);
                 if (activeRoute !== 'search') setActiveRoute('search');
               }}
-              className="bg-transparent border-none outline-none text-stone-800 placeholder-stone-400 text-xs sm:text-sm w-full"
+              className="bg-transparent border-none outline-none text-stone-800 placeholder-stone-400 text-xs sm:text-sm w-full font-medium"
             />
             {filters.searchQuery && (
               <button 
-                onClick={() => setFilters(prev => ({ ...prev, searchQuery: '' }))}
-                className="text-stone-400 hover:text-stone-600 p-0.5"
+                type="button"
+                onClick={() => {
+                  setFilters(prev => ({ ...prev, searchQuery: '' }));
+                }}
+                className="text-stone-400 hover:text-stone-600 p-0.5 ml-1 cursor-pointer"
+                title="Clear search"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
             )}
-          </div>
+          </form>
+
+          {/* Smart Search Suggestions & Intent Dropdown */}
+          {isSearchFocused && (
+            <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-stone-200 p-3 z-50 space-y-3">
+              {/* Intent Preview if typed */}
+              {filters.searchQuery.trim() && parsedSearchQuery?.isParsed && (
+                <div className="p-2.5 bg-amber-50 rounded-xl border border-amber-200/80 text-xs space-y-1">
+                  <span className="text-[10px] uppercase font-bold text-amber-800 tracking-wider flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-amber-600" />
+                    Recognized Search Intent
+                  </span>
+                  <div className="flex flex-wrap gap-1.5 pt-0.5">
+                    {parsedSearchQuery.detectedLocality && (
+                      <span className="px-2 py-0.5 rounded-md bg-teal-900 text-teal-100 font-bold text-[11px] flex items-center gap-1">
+                        <MapPin className="w-2.5 h-2.5 text-amber-300" />
+                        Locality: {parsedSearchQuery.detectedLocality}
+                      </span>
+                    )}
+                    {parsedSearchQuery.detectedCategory && (
+                      <span className="px-2 py-0.5 rounded-md bg-stone-900 text-amber-300 font-bold text-[11px]">
+                        🏢 Category: {CATEGORIES.find(c => c.id === parsedSearchQuery.detectedCategory)?.name || parsedSearchQuery.detectedCategory}
+                      </span>
+                    )}
+                    {parsedSearchQuery.detectedEventType && (
+                      <span className="px-2 py-0.5 rounded-md bg-rose-900 text-rose-100 font-bold text-[11px]">
+                        💍 Celebration: {parsedSearchQuery.detectedEventType}
+                      </span>
+                    )}
+                    {parsedSearchQuery.keywords.length > 0 && (
+                      <span className="px-2 py-0.5 rounded-md bg-stone-200 text-stone-800 text-[11px]">
+                        Keywords: {parsedSearchQuery.keywords.join(', ')}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Popular Example Searches */}
+              <div>
+                <span className="text-[10px] uppercase font-bold text-stone-400 tracking-wider block mb-1.5">
+                  Popular Searches in {activeCity?.name || 'Pune'}
+                </span>
+                <div className="flex flex-wrap gap-1.5 text-xs">
+                  {[
+                    'Wedding venue in Baner',
+                    'Banquet hall in Kothrud',
+                    'Wedding photographer in Kalyani Nagar',
+                    'Pure veg catering in Hadapsar',
+                    'Mandap decoration in Sinhagad Road',
+                    'DJ in Baner'
+                  ].map((phrase) => (
+                    <button
+                      key={phrase}
+                      type="button"
+                      onClick={() => {
+                        setFilters(prev => ({ ...prev, searchQuery: phrase }));
+                        setIsSearchFocused(false);
+                        if (activeRoute !== 'search') setActiveRoute('search');
+                      }}
+                      className="px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-teal-50 hover:text-teal-900 hover:border-teal-300 border border-stone-200 text-stone-700 text-left transition-colors cursor-pointer"
+                    >
+                      🔍 {phrase}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quick Locality Pills */}
+              <div>
+                <span className="text-[10px] uppercase font-bold text-stone-400 tracking-wider block mb-1.5">
+                  Filter by Locality in {activeCity?.name || 'Pune'}
+                </span>
+                <div className="flex flex-wrap gap-1 text-[11px]">
+                  {(activeCity?.localities?.slice(0, 8) || PUNE_LOCALITIES.slice(0, 8)).map(loc => (
+                    <button
+                      key={loc}
+                      type="button"
+                      onClick={() => {
+                        setFilters(prev => ({ ...prev, searchQuery: `${loc} venues` }));
+                        setIsSearchFocused(false);
+                        if (activeRoute !== 'search') setActiveRoute('search');
+                      }}
+                      className="px-2 py-0.5 rounded-md bg-stone-100 hover:bg-amber-100 text-stone-700 hover:text-amber-900 border border-stone-200 transition-colors cursor-pointer"
+                    >
+                      📍 {loc}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Desktop Navigation Links */}
@@ -198,6 +394,17 @@ export const Navbar: React.FC = () => {
             className={`hover:text-teal-900 transition-colors ${activeRoute === 'search' ? 'text-teal-900 font-semibold border-b-2 border-amber-500 pb-0.5' : ''}`}
           >
             Explore Vendors
+          </button>
+
+          <button 
+            onClick={() => setActiveRoute('packages')} 
+            className={`flex items-center gap-1.5 hover:text-teal-900 transition-colors ${activeRoute === 'packages' ? 'text-teal-900 font-bold border-b-2 border-amber-500 pb-0.5' : ''}`}
+          >
+            <Layers className="w-4 h-4 text-amber-600" />
+            <span>Packages</span>
+            <span className="px-1.5 py-0.2 rounded-full text-[9px] font-extrabold bg-amber-400 text-stone-950">
+              Bundles
+            </span>
           </button>
           
           <button 
@@ -213,41 +420,69 @@ export const Navbar: React.FC = () => {
             )}
           </button>
 
-          <button 
-            onClick={() => setActiveRoute('customer-dashboard')} 
-            className={`flex items-center gap-1 hover:text-teal-900 transition-colors ${activeRoute === 'customer-dashboard' ? 'text-teal-900 font-semibold' : ''}`}
-          >
-            <Heart className="w-4 h-4 text-rose-600" />
-            <span>Wishlist ({wishlist.length})</span>
-          </button>
+          {currentUser.role === 'vendor' ? (
+            <button 
+              onClick={() => navigateToVendorTab('listings')} 
+              className={`flex items-center gap-1.5 hover:text-teal-900 transition-colors ${activeRoute === 'vendor-dashboard' && vendorTab === 'listings' ? 'text-teal-900 font-bold border-b-2 border-amber-500 pb-0.5' : ''}`}
+            >
+              <Store className="w-4 h-4 text-amber-600" />
+              <span>Listings</span>
+            </button>
+          ) : (
+            <button 
+              onClick={() => navigateToCustomerTab('wishlist')} 
+              className={`flex items-center gap-1 hover:text-teal-900 transition-colors ${activeRoute === 'customer-dashboard' && customerTab === 'wishlist' ? 'text-teal-900 font-bold' : ''}`}
+            >
+              <Heart className={`w-4 h-4 ${activeRoute === 'customer-dashboard' && customerTab === 'wishlist' ? 'fill-rose-600 text-rose-600' : 'text-rose-600'}`} />
+              <span>Wishlist ({wishlist.length})</span>
+            </button>
+          )}
         </nav>
 
         {/* Action Controls & Role Portals */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           {/* Quick Design Switcher Button */}
           <button
             onClick={() => setIsDesignSelectorOpen(true)}
-            className="p-2 text-stone-600 hover:text-teal-950 hover:bg-stone-100 rounded-full transition-colors"
+            className="p-2 text-stone-600 hover:text-teal-950 hover:bg-stone-100 rounded-full transition-colors cursor-pointer"
             title="Design & Layout Selection"
           >
             <Palette className="w-5 h-5 text-amber-700" />
           </button>
 
+          {/* Quick Sign In Button */}
+          <button
+            onClick={() => openAuthModal('login')}
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 transition-all cursor-pointer shadow-xs"
+            title="Sign in with Google, Mobile or Email"
+          >
+            <LogIn className="w-3.5 h-3.5 text-teal-800" />
+            <span>Sign In</span>
+          </button>
+
           {/* Role-Specific Portal Button */}
           {currentUser.role === 'customer' && (
             <button
-              onClick={() => setActiveRoute('customer-dashboard')}
-              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary-hover shadow-sm transition-all cursor-pointer"
+              onClick={() => navigateToCustomerTab('profile')}
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold shadow-sm transition-all cursor-pointer ${
+                activeRoute === 'customer-dashboard' && customerTab === 'profile'
+                  ? 'bg-primary text-primary-foreground ring-2 ring-accent'
+                  : 'bg-primary text-primary-foreground hover:bg-primary-hover'
+              }`}
             >
               <UserIcon className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">My Requests</span>
+              <span className="hidden sm:inline">My Profile</span>
             </button>
           )}
 
           {currentUser.role === 'vendor' && (
             <button
-              onClick={() => setActiveRoute('vendor-dashboard')}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-600 text-white hover:bg-amber-700 shadow-sm transition-all"
+              onClick={() => navigateToVendorTab('overview')}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold shadow-sm transition-all cursor-pointer ${
+                activeRoute === 'vendor-dashboard'
+                  ? 'bg-amber-700 text-white ring-2 ring-amber-400'
+                  : 'bg-amber-600 text-white hover:bg-amber-700'
+              }`}
             >
               <Store className="w-3.5 h-3.5" />
               <span>Vendor Studio</span>
@@ -257,7 +492,7 @@ export const Navbar: React.FC = () => {
           {currentUser.role === 'admin' && (
             <button
               onClick={() => setActiveRoute('admin-panel')}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-rose-900 text-white hover:bg-rose-950 shadow-sm transition-all"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-rose-900 text-white hover:bg-rose-950 shadow-sm transition-all cursor-pointer"
             >
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Admin Console</span>
@@ -267,7 +502,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile Menu Hamburger */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-stone-700 hover:bg-stone-100 rounded-lg"
+            className="lg:hidden p-2 text-stone-700 hover:bg-stone-100 rounded-lg cursor-pointer"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -277,6 +512,28 @@ export const Navbar: React.FC = () => {
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-5 space-y-3">
+          {/* Mobile Auth Banner */}
+          <div className="p-3 bg-gradient-to-r from-teal-950 to-amber-950 rounded-2xl text-white flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-full bg-amber-400 text-teal-950 font-bold flex items-center justify-center text-sm font-serif">
+                {currentUser.fullName.charAt(0)}
+              </div>
+              <div>
+                <p className="text-xs font-bold text-amber-200">{currentUser.fullName}</p>
+                <p className="text-[10px] text-stone-300 capitalize">{currentUser.role} Account</p>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                openAuthModal('login');
+                setIsMobileMenuOpen(false);
+              }}
+              className="px-3 py-1.5 bg-amber-400 hover:bg-amber-300 text-teal-950 rounded-xl text-xs font-bold shadow-xs cursor-pointer"
+            >
+              Sign In
+            </button>
+          </div>
+
           <div className="flex items-center bg-stone-100 rounded-lg p-2">
             <Search className="w-4 h-4 text-stone-400 mr-2" />
             <input
@@ -315,11 +572,47 @@ export const Navbar: React.FC = () => {
                 </span>
               )}
             </button>
+            {currentUser.role === 'vendor' ? (
+              <>
+                <button
+                  onClick={() => { navigateToVendorTab('listings'); setIsMobileMenuOpen(false); }}
+                  className="p-2.5 rounded-lg text-left bg-stone-50 hover:bg-stone-100 text-stone-800 flex items-center justify-between"
+                >
+                  <span>🏪 My Listings</span>
+                </button>
+                <button
+                  onClick={() => { navigateToVendorTab('leads'); setIsMobileMenuOpen(false); }}
+                  className="p-2.5 rounded-lg text-left bg-stone-50 hover:bg-stone-100 text-stone-800 flex items-center justify-between"
+                >
+                  <span>📥 Customer Enquiries</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => { navigateToCustomerTab('profile'); setIsMobileMenuOpen(false); }}
+                  className="p-2.5 rounded-lg text-left bg-stone-50 hover:bg-stone-100 text-stone-800 flex items-center justify-between"
+                >
+                  <span>👤 My Profile</span>
+                </button>
+                <button
+                  onClick={() => { navigateToCustomerTab('wishlist'); setIsMobileMenuOpen(false); }}
+                  className="p-2.5 rounded-lg text-left bg-stone-50 hover:bg-stone-100 text-stone-800 flex items-center justify-between"
+                >
+                  <span>❤️ Saved Wishlist</span>
+                  {wishlist.length > 0 && (
+                    <span className="bg-rose-600 text-white rounded-full px-1.5 py-0.2 text-[10px]">
+                      {wishlist.length}
+                    </span>
+                  )}
+                </button>
+              </>
+            )}
             <button
-              onClick={() => { setActiveRoute('customer-dashboard'); setIsMobileMenuOpen(false); }}
-              className="p-2.5 rounded-lg text-left bg-stone-50 hover:bg-stone-100 text-stone-800"
+              onClick={() => { openAuthModal('signup'); setIsMobileMenuOpen(false); }}
+              className="p-2.5 rounded-lg text-left bg-amber-50 hover:bg-amber-100 text-amber-950 font-bold border border-amber-200"
             >
-              ❤️ Wishlist & Requests
+              ✨ Register Vendor
             </button>
           </div>
 

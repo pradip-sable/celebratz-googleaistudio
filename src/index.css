@@ -1,4 +1,28 @@
 @import "tailwindcss";
+@import url('https://fonts.cdnfonts.com/css/agrandir');
+
+@font-face {
+  font-family: 'Agrandir Grand';
+  src: local('Agrandir Grand'), 
+       local('Agrandir Grand Heavy'), 
+       local('Agrandir-Grand'), 
+       local('Agrandir-GrandHeavy'), 
+       local('Agrandir Heavy'), 
+       local('Agrandir-Heavy'), 
+       local('Agrandir-Black'), 
+       local('Agrandir Black'), 
+       local('Agrandir Bold'), 
+       local('Agrandir'), 
+       url('https://fonts.cdnfonts.com/s/122717/agrandir-heavy.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-brand {
+  font-family: 'Agrandir Grand', 'Agrandir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.03em;
+}
 
 @theme {
   --color-primary: var(--primary);

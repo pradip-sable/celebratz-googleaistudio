@@ -72,8 +72,13 @@ export const PUNE_LOCALITIES: PuneLocality[] = [
 
 export const EVENT_TYPES: EventType[] = [
   'Wedding',
+  'Reception',
   'Birthday',
   'Engagement',
   'Naming Ceremony',
   'Corporate'
 ];
+
+export const getCategoryById = (id: string): CategorySpec | undefined => {
+  return CATEGORIES.find(c => c.id === id);
+};

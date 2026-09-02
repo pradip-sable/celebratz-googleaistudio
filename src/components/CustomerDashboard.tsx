@@ -12,7 +12,12 @@ import {
   MapPin, 
   Sparkles, 
   MessageSquare,
-  AlertCircle
+  AlertCircle,
+  ChevronRight,
+  ShieldCheck,
+  Store,
+  Package,
+  Tag
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { ListingCard } from './ListingCard';
@@ -22,16 +27,22 @@ export const CustomerDashboard: React.FC = () => {
   const { 
     currentUser, 
     setCurrentUser, 
+    switchUserRole,
+    openAuthModal,
+    logout,
     enquiries, 
     listings, 
     wishlist, 
     reviews, 
     addReview, 
     setSelectedListingId,
-    setActiveRoute 
+    setActiveRoute,
+    customerTab,
+    setCustomerTab
   } = useApp();
 
-  const [activeTab, setActiveTab] = useState<'requests' | 'wishlist' | 'reviews' | 'profile'>('requests');
+  const activeTab = customerTab;
+  const setActiveTab = setCustomerTab;
 
   // Review Form state
   const [reviewingEnquiryId, setReviewingEnquiryId] = useState<string | null>(null);
@@ -43,6 +54,9 @@ export const CustomerDashboard: React.FC = () => {
   const myEnquiries = enquiries.filter(e => e.customerId === currentUser.id);
   const myWishlistListings = listings.filter(l => wishlist.includes(l.id));
   const myReviews = reviews.filter(r => r.customerId === currentUser.id);
+
+  const pendingCount = myEnquiries.filter(e => e.vendorStatus === 'pending').length;
+  const acceptedCount = myEnquiries.filter(e => e.vendorStatus === 'accepted').length;
 
   const todayStr = new Date().toISOString().split('T')[0];
 
@@ -177,10 +191,16 @@ export const CustomerDashboard: React.FC = () => {
                         <div>
                           <div className="flex items-center gap-2">
                             <h3 
-                              onClick={() => setSelectedListingId(enquiry.listingId)}
+                              onClick={() => {
+                                if (enquiry.listingId) {
+                                  setSelectedListingId(enquiry.listingId);
+                                } else if (enquiry.comboPackageId || enquiry.package_id) {
+                                  setActiveRoute('packages');
+                                }
+                              }}
                               className="font-serif font-bold text-base text-stone-900 hover:text-teal-900 cursor-pointer"
                             >
-                              {enquiry.listingTitle}
+                              {enquiry.comboPackageTitle || enquiry.listingTitle}
                             </h3>
                           </div>
                           <p className="text-xs text-stone-500">
@@ -212,6 +232,33 @@ export const CustomerDashboard: React.FC = () => {
                         )}
                       </div>
                     </div>
+
+                    {/* Attached Package / Combo Card for Customer */}
+                    {(enquiry.comboPackageTitle || enquiry.selectedPackageName) && (
+                      <div className="p-3 bg-amber-50/70 border border-amber-200 rounded-xl flex items-center justify-between gap-2 text-xs">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span className="w-6 h-6 rounded-md bg-teal-900 text-amber-300 flex items-center justify-center font-bold text-xs shrink-0">
+                            {enquiry.comboPackageTitle ? '🌟' : '🎁'}
+                          </span>
+                          <div className="min-w-0">
+                            <span className="text-[10px] font-bold uppercase text-stone-500 block">
+                              {enquiry.comboPackageTitle ? 'Requested Combo Bundle' : 'Requested Package Tier'}
+                            </span>
+                            <span className="font-serif font-bold text-stone-900 truncate block">
+                              {enquiry.comboPackageTitle || enquiry.selectedPackageName}
+                            </span>
+                          </div>
+                        </div>
+                        {enquiry.selectedPackagePrice && (
+                          <div className="text-right shrink-0 bg-white px-2.5 py-1 rounded-lg border border-amber-200">
+                            <span className="text-[9px] uppercase font-bold text-stone-400 block">Tier Price</span>
+                            <span className="font-serif font-extrabold text-teal-950">
+                              {formatIndianCurrency(enquiry.selectedPackagePrice)}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    )}
 
                     {/* Customer Message & Vendor Response note */}
                     <div className="bg-stone-50 rounded-xl p-3.5 border border-stone-200 text-xs space-y-2">
@@ -372,48 +419,186 @@ export const CustomerDashboard: React.FC = () => {
 
       {/* 4. PROFILE TAB */}
       {activeTab === 'profile' && (
-        <div className="bg-white rounded-3xl border border-stone-200 p-6 max-w-xl space-y-4">
-          <h2 className="font-serif font-bold text-xl text-stone-900">Account Preferences</h2>
-          
-          <div className="space-y-3">
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
-                Full Name
-              </label>
-              <input
-                type="text"
-                value={currentUser.fullName}
-                onChange={(e) => setCurrentUser({ ...currentUser, fullName: e.target.value })}
-                className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden"
-              />
-            </div>
+        <div className="space-y-6 max-w-3xl">
+          {/* Quick Hub Navigation Cards */}
+          <div>
+            <h2 className="font-serif font-bold text-xl text-stone-900 mb-3">My Activity & Shortcuts</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Card 1: My Requests */}
+              <button
+                type="button"
+                onClick={() => setCustomerTab('requests')}
+                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-teal-900/40 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-900 flex items-center justify-center border border-teal-200">
+                    <CalendarCheck className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-teal-900 transition-colors">
+                      My Requests
+                    </h3>
+                    <p className="text-xs text-stone-500">
+                      {myEnquiries.length} booking enquiries &bull; {pendingCount} pending
+                    </p>
+                  </div>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-teal-900 group-hover:text-white flex items-center justify-center transition-colors text-stone-600">
+                  <ChevronRight className="w-4 h-4" />
+                </div>
+              </button>
 
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
-                Email Address
-              </label>
-              <input
-                type="email"
-                disabled
-                value={currentUser.email}
-                className="w-full bg-stone-100 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-500 font-medium outline-hidden cursor-not-allowed"
-              />
-            </div>
+              {/* Card 2: My Wishlist */}
+              <button
+                type="button"
+                onClick={() => setCustomerTab('wishlist')}
+                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-rose-300 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-200">
+                    <Heart className="w-6 h-6 fill-rose-500 text-rose-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-rose-700 transition-colors">
+                      My Wishlist
+                    </h3>
+                    <p className="text-xs text-stone-500">
+                      {myWishlistListings.length} saved venues & vendors
+                    </p>
+                  </div>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-rose-600 group-hover:text-white flex items-center justify-center transition-colors text-stone-600">
+                  <ChevronRight className="w-4 h-4" />
+                </div>
+              </button>
 
-            <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
-                Primary Phone Number (+91)
-              </label>
-              <input
-                type="text"
-                value={currentUser.phoneNumber || ''}
-                onChange={(e) => setCurrentUser({ ...currentUser, phoneNumber: e.target.value })}
-                placeholder="+91 98230 45678"
-                className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden"
-              />
-              <p className="text-[10px] text-stone-500 mt-1">
-                Note: In Phase 1 launch, double-entry verification is used. Real SMS OTP via DLT registration will be wired in Phase 2.
-              </p>
+              {/* Card 3: My Reviews */}
+              <button
+                type="button"
+                onClick={() => setCustomerTab('reviews')}
+                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-amber-400 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-200">
+                    <Star className="w-6 h-6 fill-amber-400 text-amber-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-amber-800 transition-colors">
+                      My Reviews
+                    </h3>
+                    <p className="text-xs text-stone-500">
+                      {myReviews.length} reviews published
+                    </p>
+                  </div>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-amber-600 group-hover:text-white flex items-center justify-center transition-colors text-stone-600">
+                  <ChevronRight className="w-4 h-4" />
+                </div>
+              </button>
+
+              {/* Card 4: Explore Pune Vendors */}
+              <button
+                type="button"
+                onClick={() => setActiveRoute('search')}
+                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-stone-400 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className="w-12 h-12 rounded-2xl bg-stone-100 text-stone-700 flex items-center justify-center border border-stone-200">
+                    <Sparkles className="w-6 h-6 text-amber-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-stone-950 transition-colors">
+                      Explore Vendors
+                    </h3>
+                    <p className="text-xs text-stone-500">
+                      Search Pune venues, caterers & decorators
+                    </p>
+                  </div>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-stone-800 group-hover:text-white flex items-center justify-center transition-colors text-stone-600">
+                  <ChevronRight className="w-4 h-4" />
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* Account Details Form */}
+          <div className="bg-white rounded-3xl border border-stone-200 p-6 space-y-4">
+            <h2 className="font-serif font-bold text-xl text-stone-900">Personal Information</h2>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  value={currentUser.fullName}
+                  onChange={(e) => setCurrentUser({ ...currentUser, fullName: e.target.value })}
+                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white transition-colors"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    disabled
+                    value={currentUser.email}
+                    className="w-full bg-stone-100 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-500 font-medium outline-hidden cursor-not-allowed"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                    Primary Phone Number (+91)
+                  </label>
+                  <input
+                    type="text"
+                    value={currentUser.phoneNumber || ''}
+                    onChange={(e) => setCurrentUser({ ...currentUser, phoneNumber: e.target.value })}
+                    placeholder="+91 98230 45678"
+                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div className="p-3 bg-amber-50 rounded-2xl border border-amber-200/80 flex items-start gap-2.5 text-xs text-amber-900">
+                <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                <span>
+                  <strong>Phone Verification Active</strong>: Your phone number is shared only with vendors whose listings you request, ensuring transparent communication for date holds and quotes.
+                </span>
+              </div>
+
+              <div className="pt-3 border-t border-stone-200 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => openAuthModal('login')}
+                    className="px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs transition-colors cursor-pointer border border-stone-300"
+                  >
+                    Switch Account / Sign In
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => openAuthModal('signup')}
+                    className="px-4 py-2 bg-teal-50 hover:bg-teal-100 text-teal-900 font-bold rounded-xl text-xs transition-colors cursor-pointer border border-teal-200"
+                  >
+                    Create Another Account
+                  </button>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold rounded-xl text-xs transition-colors cursor-pointer border border-rose-200"
+                >
+                  Sign Out
+                </button>
+              </div>
             </div>
           </div>
         </div>

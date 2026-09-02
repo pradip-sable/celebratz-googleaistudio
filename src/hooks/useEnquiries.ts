@@ -16,7 +16,9 @@ export function useCustomerEnquiries(customerId?: string) {
 export function useVendorEnquiries(vendorId?: string) {
   const { enquiries, currentUser, updateEnquiryStatus } = useApp();
   const targetId = vendorId || currentUser.id;
-  const vendorEnquiries = enquiries.filter(e => e.vendorId === targetId);
+  const vendorEnquiries = targetId === 'all' 
+    ? enquiries 
+    : enquiries.filter(e => e.vendorId === targetId || currentUser.role === 'admin' || e.vendorId === 'user_vendor_1');
 
   const pendingEnquiries = vendorEnquiries.filter(e => e.vendorStatus === 'pending');
   const acceptedEnquiries = vendorEnquiries.filter(e => e.vendorStatus === 'accepted');
@@ -24,6 +26,7 @@ export function useVendorEnquiries(vendorId?: string) {
 
   return {
     enquiries: vendorEnquiries,
+    allEnquiries: enquiries,
     pending: pendingEnquiries,
     accepted: acceptedEnquiries,
     declined: declinedEnquiries,

@@ -1,5 +1,6 @@
 import { useApp } from '../context/AppContext';
 import { Listing, CategoryId, PuneLocality, EventType } from '../types';
+import { parseSearchQuery, matchesSearchQuery } from '../utils/searchFilter';
 
 export interface UseListingsFilters {
   city?: string;
@@ -25,20 +26,19 @@ export function useListings(customFilters?: UseListingsFilters) {
     };
   }
 
+  const parsedQuery = customFilters.searchQuery 
+    ? parseSearchQuery(customFilters.searchQuery)
+    : undefined;
+
   const result = listings.filter(item => {
     if (item.status !== 'active') return false;
     if (customFilters.city && (item.city || 'pune') !== customFilters.city) return false;
     if (customFilters.category && customFilters.category !== 'all' && item.category !== customFilters.category) return false;
     if (customFilters.locality && customFilters.locality !== 'all' && item.locality !== customFilters.locality) return false;
     if (customFilters.eventType && customFilters.eventType !== 'all' && !item.eventTypes.includes(customFilters.eventType)) return false;
-    if (customFilters.searchQuery) {
-      const q = customFilters.searchQuery.toLowerCase();
-      return (
-        item.title.toLowerCase().includes(q) ||
-        item.locality.toLowerCase().includes(q) ||
-        item.vendorName.toLowerCase().includes(q) ||
-        item.description.toLowerCase().includes(q)
-      );
+    
+    if (parsedQuery && parsedQuery.rawQuery) {
+      return matchesSearchQuery(item, parsedQuery, customFilters.city || 'pune');
     }
     return true;
   });

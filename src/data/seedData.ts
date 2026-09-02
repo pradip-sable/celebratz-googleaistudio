@@ -51,6 +51,7 @@ export const INITIAL_LISTINGS: Listing[] = [
     eventTypes: ['Wedding', 'Engagement', 'Corporate', 'Birthday'],
     locality: 'Baner',
     address: 'Survey 48/2, Mumbai-Bangalore Highway, Near Pashan Exit, Baner, Pune 411045',
+    websiteUrl: 'https://theroyalpalacebaner.com',
     googleMapsUrl: 'https://maps.google.com/?q=The+Royal+Palace+Baner+Pune',
     coordinates: { lat: 18.5590, lng: 73.7868 },
     startingPrice: 150000,
@@ -58,16 +59,20 @@ export const INITIAL_LISTINGS: Listing[] = [
     pricingNote: 'Includes AC Grand Hall + 25,000 sq ft Lush Lawn + 4 AC Bridal Suites',
     pricingPackages: [
       {
+        id: 'pkg_rp_1',
         name: 'Standard Day Lawn + Hall',
         price: 150000,
         description: 'Complete access from 7 AM to 11 PM',
-        features: ['Up to 1200 Guests', 'AC Banquet Hall (400 pax)', 'Open Lawn (800 pax)', '200 Car Parking', '4 AC Green Rooms', 'Backup Generator']
+        features: ['Up to 1200 Guests', 'AC Banquet Hall (400 pax)', 'Open Lawn (800 pax)', '200 Car Parking', '4 AC Green Rooms', 'Backup Generator'],
+        status: 'active'
       },
       {
+        id: 'pkg_rp_2',
         name: 'Full Weekend Wedding Package',
         price: 275000,
         description: '2-day access for Sangeet + Wedding + Reception',
-        features: ['Full Lawn + Banquet', '6 AC Rooms for Family', 'Bridal Suite with Dressing Lights', 'Valet Parking Team', 'Lawn Stage Setup Base']
+        features: ['Full Lawn + Banquet', '6 AC Rooms for Family', 'Bridal Suite with Dressing Lights', 'Valet Parking Team', 'Lawn Stage Setup Base'],
+        status: 'active'
       }
     ],
     categoryAttributes: {
@@ -118,6 +123,7 @@ export const INITIAL_LISTINGS: Listing[] = [
     eventTypes: ['Engagement', 'Birthday', 'Corporate', 'Wedding'],
     locality: 'Koregaon Park',
     address: 'Lane 7, Near North Main Road, Koregaon Park, Pune 411001',
+    websiteUrl: 'https://koregaonheritageclub.com',
     googleMapsUrl: 'https://maps.google.com/?q=Lane+7+Koregaon+Park+Pune',
     coordinates: { lat: 18.5362, lng: 73.8940 },
     startingPrice: 95000,
@@ -125,10 +131,12 @@ export const INITIAL_LISTINGS: Listing[] = [
     pricingNote: 'Boutique greenery venue with heritage canopy & poolside dining',
     pricingPackages: [
       {
+        id: 'pkg_khc_1',
         name: 'Boutique Lawn & Deck',
         price: 95000,
         description: 'Ideal for 200 to 450 guests intimate celebrations',
-        features: ['Poolside Cabanas', 'Boutique Lawn with Banyan Tree Canopy', 'Sound Limiter compliant till 10 PM', '80 Car Parking Space']
+        features: ['Poolside Cabanas', 'Boutique Lawn with Banyan Tree Canopy', 'Sound Limiter compliant till 10 PM', '80 Car Parking Space'],
+        status: 'active'
       }
     ],
     categoryAttributes: {
@@ -171,6 +179,7 @@ export const INITIAL_LISTINGS: Listing[] = [
     eventTypes: ['Wedding', 'Engagement', 'Naming Ceremony', 'Birthday'],
     locality: 'Kothrud',
     address: 'Near Karve Statue, Paud Road, Kothrud, Pune 411038',
+    websiteUrl: 'https://siddhivinayaksanskrutik.org',
     googleMapsUrl: 'https://maps.google.com/?q=Siddhivinayak+Sanskrutik+Bhavan+Kothrud+Pune',
     coordinates: { lat: 18.5074, lng: 73.8077 },
     startingPrice: 45000,
@@ -206,6 +215,108 @@ export const INITIAL_LISTINGS: Listing[] = [
     createdAt: '2026-06-01T09:00:00Z'
   },
 
+  // 3B. VENUE: Baner Pavilion Grand Lawns & AC Banquet (Second Baner venue for multi-result testing)
+  {
+    id: 'list_venue_baner_2',
+    vendorId: 'user_vendor_1',
+    vendorName: 'Baner Pavilion Hospitality Group',
+    vendorPhone: '+91 98223 99881',
+    vendorEmail: 'events@banerpavilion.com',
+    title: 'Baner Pavilion Grand Lawns & AC Banquet',
+    category: 'venues',
+    eventTypes: ['Wedding', 'Reception', 'Engagement', 'Corporate'],
+    locality: 'Baner',
+    address: 'Near Balewadi High Street Link Road, Baner, Pune 411045',
+    websiteUrl: 'https://banerpavilion.com',
+    googleMapsUrl: 'https://maps.google.com/?q=Baner+High+Street+Pune',
+    coordinates: { lat: 18.5635, lng: 73.7780 },
+    startingPrice: 120000,
+    pricingUnit: 'per_day',
+    pricingNote: 'Contemporary AC banquet hall + 18,000 sq ft amphitheater open lawn',
+    pricingPackages: [
+      {
+        id: 'pkg_bp_1',
+        name: 'Grand Wedding & Reception Day Package',
+        price: 120000,
+        description: 'Complete 16-hour rental with AC ballroom & lawn stage',
+        features: ['Up to 900 Guests', 'AC Banquet Hall (350 pax)', 'Open Lawn (600 pax)', '150 Car Parking', '3 AC Bridal Suites', 'Sound Limiter till 10 PM'],
+        status: 'active'
+      }
+    ],
+    categoryAttributes: {
+      capacityMin: 200,
+      capacityMax: 900,
+      venueType: 'Banquet Hall',
+      indoorOutdoor: 'Both Indoor & Lawn',
+      parkingCapacity: 150,
+      cateringPolicy: 'Both allowed',
+      hasAC: true,
+      roomCount: 4
+    },
+    coverImage: 'https://images.unsplash.com/photo-1545232979-8bf68ee9b1af?w=1000&auto=format&fit=crop&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1545232979-8bf68ee9b1af?w=1000&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1000&auto=format&fit=crop&q=80'
+    ],
+    description: 'Situated near the vibrant Baner high street, Baner Pavilion features an air-conditioned pillarless hall connected to an landscaped lawn with illuminated stone gazebos and modern dressing rooms for bride and groom.',
+    status: 'active',
+    isFeatured: true,
+    avgRating: 4.9,
+    reviewCount: 31,
+    calendarLastUpdatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+    calendar: {
+      [getOffsetDate(2)]: 'available',
+      [getOffsetDate(6)]: 'booked',
+      [getOffsetDate(14)]: 'available'
+    },
+    createdAt: '2026-06-15T09:00:00Z'
+  },
+
+  // 3C. VENUE: Viman Nagar Skyview Ballroom
+  {
+    id: 'list_venue_viman_1',
+    vendorId: 'user_vendor_2',
+    vendorName: 'Skyview Celebrations Viman Nagar',
+    vendorPhone: '+91 97654 11223',
+    vendorEmail: 'bookings@skyviewviman.com',
+    title: 'Skyview Grand Ballroom & Rooftop Lounge',
+    category: 'venues',
+    eventTypes: ['Wedding', 'Engagement', 'Birthday', 'Corporate'],
+    locality: 'Viman Nagar',
+    address: 'Near Phoenix Market City, Viman Nagar, Pune 411014',
+    websiteUrl: 'https://skyviewballroompune.com',
+    googleMapsUrl: 'https://maps.google.com/?q=Viman+Nagar+Pune',
+    coordinates: { lat: 18.5679, lng: 73.9143 },
+    startingPrice: 110000,
+    pricingUnit: 'per_day',
+    pricingNote: 'Air-conditioned luxury ballroom + open starry sky terrace deck',
+    categoryAttributes: {
+      capacityMin: 150,
+      capacityMax: 600,
+      venueType: 'Hotel Ballroom',
+      indoorOutdoor: 'Both Indoor & Lawn',
+      parkingCapacity: 120,
+      cateringPolicy: 'In-house only',
+      hasAC: true,
+      roomCount: 5
+    },
+    coverImage: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1000&auto=format&fit=crop&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1000&auto=format&fit=crop&q=80'
+    ],
+    description: 'A stylish 5-star standard celebration space in East Pune, ideal for destination weddings, cocktail evenings, and ring ceremonies with valet parking and gourmet catering.',
+    status: 'active',
+    isFeatured: false,
+    avgRating: 4.7,
+    reviewCount: 24,
+    calendarLastUpdatedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
+    calendar: {
+      [getOffsetDate(3)]: 'available',
+      [getOffsetDate(9)]: 'booked'
+    },
+    createdAt: '2026-06-20T10:00:00Z'
+  },
+
   // 4. PHOTOGRAPHY: Utsav Moments Kalyani Nagar
   {
     id: 'list_photo_1',
@@ -218,21 +329,26 @@ export const INITIAL_LISTINGS: Listing[] = [
     eventTypes: ['Wedding', 'Engagement', 'Birthday', 'Naming Ceremony'],
     locality: 'Kalyani Nagar',
     address: 'East Avenue, Kalyani Nagar, Pune 411006',
+    websiteUrl: 'https://utsavmoments.in',
     startingPrice: 40000,
     pricingUnit: 'per_day',
     pricingNote: '2 Candid Photographers + 1 Cinematographer + 4K Teaser Video',
     pricingPackages: [
       {
+        id: 'pkg_um_1',
         name: 'Full Day Wedding Cinema Package',
         price: 55000,
         description: 'Complete coverage from morning rituals to reception',
-        features: ['2 Candid Photographers', '1 Traditional Photographer', '1 4K Drone Specialist', '350 Retouched Photos', '3-5 Min Teaser Video + 30 Min Film', 'Deluxe Hardbound Photobook (40 sheets)']
+        features: ['2 Candid Photographers', '1 Traditional Photographer', '1 4K Drone Specialist', '350 Retouched Photos', '3-5 Min Teaser Video + 30 Min Film', 'Deluxe Hardbound Photobook (40 sheets)'],
+        status: 'active'
       },
       {
+        id: 'pkg_um_2',
         name: 'Single Event Candid + Teaser',
         price: 40000,
         description: 'Ideal for Engagements, Sangeet or Naming Ceremonies',
-        features: ['1 Candid Photographer', '1 Cinematographer', '150 Edited Photos', '2-Min Reel / Teaser']
+        features: ['1 Candid Photographer', '1 Cinematographer', '150 Edited Photos', '2-Min Reel / Teaser'],
+        status: 'active'
       }
     ],
     categoryAttributes: {
@@ -276,21 +392,26 @@ export const INITIAL_LISTINGS: Listing[] = [
     eventTypes: ['Wedding', 'Engagement', 'Naming Ceremony', 'Corporate'],
     locality: 'Hadapsar',
     address: 'Magarpatta Road, Hadapsar, Pune 411028',
+    websiteUrl: 'https://maharajacatererspune.com',
     startingPrice: 650,
     pricingUnit: 'per_plate',
     pricingNote: 'Pure Veg & Jain Grand Thali buffet with live chaat, jalebi & kulfi stations',
     pricingPackages: [
       {
+        id: 'pkg_mc_1',
         name: 'Shahi Maharashtrian & North Indian Buffet',
         price: 650,
         description: 'Pure Veg feast with 4 Starters + 3 Sabzis + 2 Sweets + Live Chaat',
-        features: ['Puran Poli / Shrikhand', 'Paneer Butter Masala & Bharli Vangi', 'Live Dahi Puri & Sev Puri', 'Basundi & Jalebi Rabdi Counter', 'Mineral Water & Mocktails']
+        features: ['Puran Poli / Shrikhand', 'Paneer Butter Masala & Bharli Vangi', 'Live Dahi Puri & Sev Puri', 'Basundi & Jalebi Rabdi Counter', 'Mineral Water & Mocktails'],
+        status: 'active'
       },
       {
+        id: 'pkg_mc_2',
         name: 'Royal Premium Veg & Jain Extravaganza',
         price: 850,
         description: 'Multi-cuisine grand spread with live woodfire pizza & pasta',
-        features: ['5 Starters (including Tandoori Broccoli & Crispy Corn)', 'Live Pasta & Wood-fired Pizza Counter', 'Avadhi Dum Biryani & Dal Makhani', 'Exotic Fruit Display & Cold Stone Ice Creams']
+        features: ['5 Starters (including Tandoori Broccoli & Crispy Corn)', 'Live Pasta & Wood-fired Pizza Counter', 'Avadhi Dum Biryani & Dal Makhani', 'Exotic Fruit Display & Cold Stone Ice Creams'],
+        status: 'active'
       }
     ],
     categoryAttributes: {
@@ -331,6 +452,7 @@ export const INITIAL_LISTINGS: Listing[] = [
     eventTypes: ['Corporate', 'Wedding', 'Birthday'],
     locality: 'Wakad',
     address: 'Dutta Mandir Road, Wakad, Pune 411057',
+    websiteUrl: 'https://spicesymphonycaterers.in',
     startingPrice: 850,
     pricingUnit: 'per_plate',
     pricingNote: 'Premium Veg & Non-Veg BBQ grills, Biryanis and Asian Dim Sum counters',
@@ -370,21 +492,26 @@ export const INITIAL_LISTINGS: Listing[] = [
     eventTypes: ['Wedding', 'Engagement', 'Naming Ceremony', 'Birthday'],
     locality: 'Sinhagad Road',
     address: 'Near Anand Nagar, Sinhagad Road, Pune 411051',
+    websiteUrl: 'https://auramandapdecor.in',
     startingPrice: 35000,
     pricingUnit: 'per_event',
     pricingNote: 'Custom fresh flower mandap + LED truss + Entrance Floral Archway',
     pricingPackages: [
       {
+        id: 'pkg_aura_1',
         name: 'Vedic Royal Floral Mandap',
         price: 45000,
         description: 'Exotic marigold, rose & tuberose dome with brass bells',
-        features: ['4-Pillar Floral Mandap', 'Grand 20ft Entrance Tunnel', 'Stage Backdrop with Fairy Light Net', 'Carpet Flooring & 2 Bride/Groom Chairs']
+        features: ['4-Pillar Floral Mandap', 'Grand 20ft Entrance Tunnel', 'Stage Backdrop with Fairy Light Net', 'Carpet Flooring & 2 Bride/Groom Chairs'],
+        status: 'active'
       },
       {
+        id: 'pkg_aura_2',
         name: 'Pastel Boho Engagement Theme',
         price: 35000,
         description: 'Pampas grass, baby’s breath & customized neon name board',
-        features: ['Geometric Arch Backdrop', 'Pampas & Hydrangea Floral Clusters', 'Custom Neon Signboard', 'Warm Edison Lighting setup']
+        features: ['Geometric Arch Backdrop', 'Pampas & Hydrangea Floral Clusters', 'Custom Neon Signboard', 'Warm Edison Lighting setup'],
+        status: 'active'
       }
     ],
     categoryAttributes: {
@@ -424,21 +551,26 @@ export const INITIAL_LISTINGS: Listing[] = [
     eventTypes: ['Birthday', 'Engagement', 'Wedding', 'Corporate'],
     locality: 'Baner',
     address: 'High Street, Baner, Pune 411045',
+    websiteUrl: 'https://punebeatslive.com',
     startingPrice: 22000,
     pricingUnit: 'per_event',
     pricingNote: '5000W RCF Sound + Intelligent Moving Head Lights + 4 Hours DJ Set',
     pricingPackages: [
       {
+        id: 'pkg_pb_1',
         name: 'Club Sound & Sangeet DJ Setup',
         price: 22000,
         description: 'Complete 4-hour performance for Sangeet or Birthday',
-        features: ['5000W RCF Sound Setup', 'DJ Console + 2 Wireless Shure Mics', '4 Moving Heads + Laser Show', 'Smoke Machine & CO2 Jet Blast']
+        features: ['5000W RCF Sound Setup', 'DJ Console + 2 Wireless Shure Mics', '4 Moving Heads + Laser Show', 'Smoke Machine & CO2 Jet Blast'],
+        status: 'active'
       },
       {
+        id: 'pkg_pb_2',
         name: 'Wedding Grand Combo with Live Puneri Dhol Tasha',
         price: 38000,
         description: 'DJ Night + 8-Member Traditional Dhol Tasha Baarat Entry',
-        features: ['Full DJ & Lighting setup', '8-member Dhol Tasha troop for Baraat', 'Tasha Solo + Traditional Nashik Dhol beats']
+        features: ['Full DJ & Lighting setup', '8-member Dhol Tasha troop for Baraat', 'Tasha Solo + Traditional Nashik Dhol beats'],
+        status: 'active'
       }
     ],
     categoryAttributes: {
@@ -479,6 +611,7 @@ export const INITIAL_LISTINGS: Listing[] = [
     eventTypes: ['Wedding', 'Engagement', 'Naming Ceremony'],
     locality: 'Kothrud',
     address: 'Near Vedbhavan, Kothrud, Pune 411038',
+    websiteUrl: 'https://acharyavidyadharvedic.in',
     startingPrice: 7500,
     pricingUnit: 'per_event',
     pricingNote: 'Vedic Vivah Vidhi / Gruha Pravesh with complete explanations in Marathi or Hindi',
@@ -486,7 +619,7 @@ export const INITIAL_LISTINGS: Listing[] = [
       ceremoniesSupported: ['Vedic Vivah (Wedding)', 'Simantonnayan / Dohale Jevan', 'Barshe (Naming Ceremony)', 'Gruhapravesh & Vastu Shanti', 'Satyanarayan Pooja'],
       languages: ['Marathi', 'Hindi', 'Sanskrit', 'English'],
       ritualsIncluded: ['Kanyadaan', 'Saptapadi with Mantra Explanations', 'Laja Homa', 'Mangalashtak Recitation'],
-      samagriIncluded: false, // Provides complete checked PDF checklist in advance
+      samagriIncluded: false,
       yearsExperience: 22
     },
     coverImage: 'https://images.unsplash.com/photo-1609137144822-0a4ec998394e?w=1000&auto=format&fit=crop&q=80',
@@ -508,7 +641,125 @@ export const INITIAL_LISTINGS: Listing[] = [
     createdAt: '2026-06-02T12:00:00Z'
   },
 
-  // 10. PENDING APPROVAL LISTING (For Admin queue testing)
+  // 10. SISTER LISTING: The Royal Shahi Caterers (Owned by Rajesh Patil / The Royal Palace)
+  {
+    id: 'list_cater_royal',
+    vendorId: 'user_vendor_1',
+    vendorName: 'The Royal Palace & Lawns',
+    vendorPhone: '+91 98811 22334',
+    vendorEmail: 'rajesh@royalpalacebaner.com',
+    title: 'The Royal Shahi Caterers & Live Feast Counters',
+    category: 'catering',
+    eventTypes: ['Wedding', 'Engagement', 'Corporate', 'Birthday'],
+    locality: 'Baner',
+    address: 'Survey 48/2, Mumbai-Bangalore Highway, Baner, Pune 411045',
+    websiteUrl: 'https://theroyalpalacebaner.com/catering',
+    startingPrice: 700,
+    pricingUnit: 'per_plate',
+    pricingNote: 'Grand royal Maharashtrian & Awadhi feast with live jalebi, chaat & mocktails',
+    pricingPackages: [
+      {
+        id: 'pkg_rc_1',
+        name: 'Royal Marathi Shahi Thali Buffet',
+        price: 700,
+        description: 'Authentic pure veg feast with 4 starters, 3 sabzis, 2 sweets & chaat counter',
+        features: ['Fresh Puran Poli & Basundi Rabdi', 'Paneer Pasanda & Bharli Vangi', 'Live Dahi Puri Counter', 'Full Mineral Water & Uniformed Waitstaff'],
+        status: 'active'
+      },
+      {
+        id: 'pkg_rc_2',
+        name: 'Grand Vivah Multi-Cuisine Extravaganza',
+        price: 900,
+        description: 'Pan-Indian feast with live woodfired pizza, pasta & ice cream teppanyaki',
+        features: ['6 Starters + 4 Main Courses', 'Live Italian & Chaat Station', 'Dessert Island with Hot Gulab Jamun & Kulfi', 'Separate Jain & Swaminarayan Counters'],
+        status: 'active'
+      }
+    ],
+    categoryAttributes: {
+      cuisines: ['Maharashtrian', 'North Indian', 'Chaat & Live Counters', 'Dessert & Mocktail Bar'],
+      vegType: 'Pure Veg',
+      minGuestCount: 150,
+      perPlateVegPrice: 700,
+      liveCountersAvailable: true
+    },
+    coverImage: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=1000&auto=format&fit=crop&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1555244162-803834f70033?w=1000&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1000&auto=format&fit=crop&q=80'
+    ],
+    description: 'The Royal in-house kitchen brings 15 years of gourmet excellence directly into your event with certified hygienic chefs and live cooking artistry.',
+    status: 'active',
+    isFeatured: true,
+    avgRating: 4.9,
+    reviewCount: 38,
+    calendarLastUpdatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    calendar: {
+      [getOffsetDate(2)]: 'booked',
+      [getOffsetDate(10)]: 'available'
+    },
+    createdAt: '2026-06-15T10:00:00Z'
+  },
+
+  // 11. SISTER LISTING: The Royal Peshwai & Floral Decor (Owned by Rajesh Patil / The Royal Palace)
+  {
+    id: 'list_decor_royal',
+    vendorId: 'user_vendor_1',
+    vendorName: 'The Royal Palace & Lawns',
+    vendorPhone: '+91 98811 22334',
+    vendorEmail: 'rajesh@royalpalacebaner.com',
+    title: 'The Royal Peshwai & Exotic Floral Mandap Decor',
+    category: 'decoration',
+    eventTypes: ['Wedding', 'Engagement', 'Reception'],
+    locality: 'Baner',
+    address: 'Survey 48/2, Baner, Pune 411045',
+    websiteUrl: 'https://theroyalpalacebaner.com/decor',
+    startingPrice: 45000,
+    pricingUnit: 'per_event',
+    pricingNote: 'Custom Vedic floral mandap, grand entrance tunnel & complete LED ambient lighting',
+    pricingPackages: [
+      {
+        id: 'pkg_rd_1',
+        name: 'Royal Peshwai Vedic Mandap',
+        price: 45000,
+        description: 'Authentic 4-pillar brass bell mandap with fresh Talegaon marigolds and orchids',
+        features: ['4-Pillar Grand Vedic Mandap', '25ft Floral Entrance Archway', 'Full LED Truss & Wash Lighting', 'Bridal Walkway Carpet & Floral Pillars'],
+        status: 'active'
+      },
+      {
+        id: 'pkg_rd_2',
+        name: 'Luxury Crystal & Pastel Floral Dream',
+        price: 75000,
+        description: 'Imported baby breath, hydrangeas, crystal chandeliers & customized neon backdrop',
+        features: ['Giant 30ft Stage Crystal Backdrop', 'Exotic Pastel Floral Structures', 'Intelligent Moving Head Lighting', 'Photo Booth with Personalized Neon Board'],
+        status: 'active'
+      }
+    ],
+    categoryAttributes: {
+      decorStyles: ['Traditional Vedic Mandap', 'Royal Peshwai / Maratha', 'Floral Luxury & Exotic Blooms'],
+      includesLighting: true,
+      mandapCustomization: true,
+      setupTimeHours: 6
+    },
+    coverImage: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1000&auto=format&fit=crop&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1000&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1519741497674-611481863552?w=1000&auto=format&fit=crop&q=80'
+    ],
+    description: 'Our in-house floral artisans transform the Royal Palace lawn and banquet hall into ethereal celebrations with fresh daily flower deliveries.',
+    status: 'active',
+    isFeatured: true,
+    avgRating: 4.8,
+    reviewCount: 29,
+    calendarLastUpdatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    calendar: {
+      [getOffsetDate(2)]: 'booked',
+      [getOffsetDate(6)]: 'booked',
+      [getOffsetDate(10)]: 'available'
+    },
+    createdAt: '2026-06-15T11:00:00Z'
+  },
+
+  // 12. PENDING APPROVAL LISTING (For Admin queue testing)
   {
     id: 'list_pending_1',
     vendorId: 'user_vendor_1',
@@ -545,6 +796,125 @@ export const INITIAL_LISTINGS: Listing[] = [
     calendarLastUpdatedAt: new Date().toISOString(),
     calendar: {},
     createdAt: new Date().toISOString()
+  }
+];
+
+export const INITIAL_COMBO_PACKAGES: import('../types').ComboPackage[] = [
+  {
+    id: 'combo_royal_vivah_1',
+    vendorId: 'user_vendor_1',
+    vendorName: 'The Royal Palace & Lawns',
+    vendorPhone: '+91 98811 22334',
+    vendorEmail: 'rajesh@royalpalacebaner.com',
+    title: 'Royal Vivah Grand All-in-One Marriage Combo',
+    description: 'Complete hassle-free wedding package combining West Pune’s iconic Royal Lawns, authentic Peshwai fresh floral mandap decor, and 500-plate royal Marathi buffet feast from a single verified vendor.',
+    includedListingIds: ['list_venue_1', 'list_decor_royal', 'list_cater_royal'],
+    includedServices: [
+      {
+        listingId: 'list_venue_1',
+        listingTitle: 'The Royal Palace & Lawns',
+        category: 'venues',
+        originalPrice: 150000,
+        serviceInclusions: [
+          'Full AC Banquet Hall + 25,000 sq ft Lush Lawn for 24 hours',
+          '4 Deluxe AC Bridal & Family Green Rooms',
+          '200-Car Dedicated Valet Parking Team & Backup Generator'
+        ]
+      },
+      {
+        listingId: 'list_decor_royal',
+        listingTitle: 'The Royal Peshwai & Floral Mandap Decor',
+        category: 'decoration',
+        originalPrice: 45000,
+        serviceInclusions: [
+          '4-Pillar Vedic Mandap with Fresh Talegaon Marigolds & Brass Bells',
+          'Grand 25ft Entrance Tunnel Archway with Fairy Lights',
+          'Full Ambient LED Truss & Spotlight Illumination'
+        ]
+      },
+      {
+        listingId: 'list_cater_royal',
+        listingTitle: 'The Royal Shahi Caterers & Live Feast',
+        category: 'catering',
+        originalPrice: 350000,
+        serviceInclusions: [
+          '500 Plates Pure Veg Royal Buffet Feast',
+          'Live Hot Jalebi Rabdi & Pune Chaat Counters',
+          'Uniformed Royal Service Staff, Cutlery & Welcome Drinks'
+        ]
+      }
+    ],
+    totalOriginalPrice: 545000,
+    comboPrice: 465000,
+    savingsAmount: 80000,
+    savingsPercentage: 15,
+    badge: '🌟 Best Value Wedding Combo (Save ₹80,000)',
+    eventTypes: ['Wedding', 'Reception', 'Engagement'],
+    minGuestCapacity: 300,
+    maxGuestCapacity: 1200,
+    coverImage: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1000&auto=format&fit=crop&q=80',
+    features: [
+      'Single Point of Contact — Zero vendor coordination headaches',
+      'Dedicated On-Site Event Operations Manager throughout the day',
+      'Free 4 AC Bridal Dressing Rooms with makeup mirror lighting',
+      'Complimentary Welcome Fresh Coconut Water & Mocktails bar',
+      'Guaranteed 100% DG Power Backup & Valet Chauffeurs'
+    ],
+    status: 'active',
+    city: 'pune',
+    locality: 'Baner',
+    createdAt: '2026-06-25T10:00:00Z'
+  },
+  {
+    id: 'combo_engagement_deluxe_1',
+    vendorId: 'user_vendor_1',
+    vendorName: 'The Royal Palace & Lawns',
+    vendorPhone: '+91 98811 22334',
+    vendorEmail: 'rajesh@royalpalacebaner.com',
+    title: 'Royal Sakharpuda (Engagement & Sangeet) Combo',
+    description: 'Perfect celebration package for engagements, sakharpuda and sangeet parties with banquet hall access, pastel floral backdrop, and 200-plate royal spread.',
+    includedListingIds: ['list_venue_1', 'list_decor_royal', 'list_cater_royal'],
+    includedServices: [
+      {
+        listingId: 'list_venue_1',
+        listingTitle: 'The Royal Palace & Lawns',
+        category: 'venues',
+        originalPrice: 100000,
+        serviceInclusions: ['AC Banquet Hall for 8 Hours', '2 AC Bridal Suites', 'Ample Parking']
+      },
+      {
+        listingId: 'list_decor_royal',
+        listingTitle: 'The Royal Peshwai & Floral Mandap Decor',
+        category: 'decoration',
+        originalPrice: 35000,
+        serviceInclusions: ['Pastel Arch Backdrop with Neon Ring Sign', 'Stage Lighting & Ring Ceremony Pedestal']
+      },
+      {
+        listingId: 'list_cater_royal',
+        listingTitle: 'The Royal Shahi Caterers',
+        category: 'catering',
+        originalPrice: 140000,
+        serviceInclusions: ['200 Plates Gourmet Buffet with Live Chaat Station', 'Dessert Counter']
+      }
+    ],
+    totalOriginalPrice: 275000,
+    comboPrice: 235000,
+    savingsAmount: 40000,
+    savingsPercentage: 15,
+    badge: '💍 Sakharpuda Special Combo',
+    eventTypes: ['Engagement', 'Birthday', 'Naming Ceremony'],
+    minGuestCapacity: 100,
+    maxGuestCapacity: 350,
+    coverImage: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1000&auto=format&fit=crop&q=80',
+    features: [
+      'Zero coordination stress with 1 trusted vendor team',
+      'Personalized neon couple name board included',
+      'DJ Sound console & wireless microphones included for ring ceremony'
+    ],
+    status: 'active',
+    city: 'pune',
+    locality: 'Baner',
+    createdAt: '2026-06-28T14:00:00Z'
   }
 ];
 

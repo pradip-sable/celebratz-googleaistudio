@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { CITIES, CityConfig } from '../data/cities';
+import { useModalScrollLock } from '../hooks/useModalScrollLock';
 
 export const CitySelectorModal: React.FC = () => {
   const { 
@@ -23,6 +24,8 @@ export const CitySelectorModal: React.FC = () => {
     activeCity,
     currentUser
   } = useApp();
+
+  useModalScrollLock(isCitySelectorOpen, () => setIsCitySelectorOpen(false));
 
   const [searchQuery, setSearchQuery] = useState('');
   const [waitlistEmail, setWaitlistEmail] = useState(currentUser?.email || '');

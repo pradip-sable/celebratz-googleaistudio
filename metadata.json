@@ -1,6 +1,6 @@
 {
   "name": "Celebratz",
-  "description": "Event venue and vendor discovery and comparison marketplace for Pune, India.",
+  "description": "Discover, compare, and book verified event venues, wedding banquet halls, photographers, caterers, decorators, DJs, and pandits across Pune.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

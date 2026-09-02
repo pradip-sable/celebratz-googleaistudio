@@ -19,6 +19,8 @@ export interface LocationIdentifiable {
  * Builds a search / place view URL in Google Maps
  */
 export function getGoogleMapsSearchUrl(item: LocationIdentifiable): string {
+  if (!item) return 'https://www.google.com/maps';
+
   if (item.googleMapsUrl && item.googleMapsUrl.trim().length > 0) {
     return item.googleMapsUrl.trim();
   }
@@ -42,6 +44,8 @@ export function getGoogleMapsSearchUrl(item: LocationIdentifiable): string {
  * Builds a navigation / directions URL in Google Maps
  */
 export function getGoogleMapsDirectionsUrl(item: LocationIdentifiable): string {
+  if (!item) return 'https://www.google.com/maps';
+
   if (item.coordinates && item.coordinates.lat && item.coordinates.lng) {
     return `https://www.google.com/maps/dir/?api=1&destination=${item.coordinates.lat},${item.coordinates.lng}`;
   }

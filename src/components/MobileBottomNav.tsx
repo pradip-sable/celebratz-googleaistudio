@@ -1,11 +1,15 @@
 import React from 'react';
-import { Home, Search, CalendarCheck, Heart, User, Store, ShieldCheck } from 'lucide-react';
+import { Home, Search, CalendarCheck, Heart, User, Store, ShieldCheck, Layers } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 export const MobileBottomNav: React.FC = () => {
   const { 
     activeRoute, 
     setActiveRoute, 
+    customerTab,
+    navigateToCustomerTab,
+    vendorTab,
+    navigateToVendorTab,
     wishlist, 
     enquiries, 
     currentUser, 
@@ -13,6 +17,18 @@ export const MobileBottomNav: React.FC = () => {
   } = useApp();
 
   const myPendingRequests = enquiries.filter(e => e.customerId === currentUser.id).length;
+  const vendorPendingLeads = enquiries.filter(e => (e.vendorId === currentUser.id || currentUser.role === 'admin' || e.vendorId === 'user_vendor_1') && e.vendorStatus === 'pending').length;
+
+  const isRequestsActive = 
+    (currentUser.role === 'vendor' && activeRoute === 'vendor-dashboard' && vendorTab === 'leads') ||
+    (currentUser.role === 'admin' && activeRoute === 'admin-panel') ||
+    (currentUser.role === 'customer' && activeRoute === 'customer-dashboard' && customerTab === 'requests');
+
+  const isWishlistActive = activeRoute === 'customer-dashboard' && customerTab === 'wishlist';
+  const isVendorListingsActive = currentUser.role === 'vendor' && activeRoute === 'vendor-dashboard' && vendorTab === 'listings';
+  const isProfileActive = 
+    (currentUser.role === 'customer' && activeRoute === 'customer-dashboard' && customerTab === 'profile') ||
+    (currentUser.role === 'vendor' && activeRoute === 'vendor-dashboard' && vendorTab === 'overview');
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-stone-200 py-1.5 px-2 md:hidden shadow-lg">
@@ -43,29 +59,29 @@ export const MobileBottomNav: React.FC = () => {
           <span className="text-[10px] mt-0.5">Search</span>
         </button>
 
-        {/* 3. My Bookings / Enquiries */}
+        {/* 3. My Bookings / Enquiries / Leads */}
         <button
           onClick={() => {
-            if (currentUser.role === 'vendor') setActiveRoute('vendor-dashboard');
+            if (currentUser.role === 'vendor') navigateToVendorTab('leads');
             else if (currentUser.role === 'admin') setActiveRoute('admin-panel');
-            else setActiveRoute('customer-dashboard');
+            else navigateToCustomerTab('requests');
           }}
           className={`relative flex flex-col items-center justify-center w-16 py-1 rounded-lg transition-colors ${
-            activeRoute === 'customer-dashboard' || activeRoute === 'vendor-dashboard' || activeRoute === 'admin-panel'
+            isRequestsActive
               ? 'text-primary font-bold' 
               : 'text-stone-500 hover:text-stone-900'
           }`}
         >
           {currentUser.role === 'vendor' ? (
-            <Store className={`w-5 h-5 ${activeRoute === 'vendor-dashboard' ? 'stroke-[2.5] text-accent' : ''}`} />
+            <CalendarCheck className={`w-5 h-5 ${isRequestsActive ? 'stroke-[2.5] text-accent' : ''}`} />
           ) : currentUser.role === 'admin' ? (
             <ShieldCheck className={`w-5 h-5 ${activeRoute === 'admin-panel' ? 'stroke-[2.5] text-rose' : ''}`} />
           ) : (
-            <CalendarCheck className={`w-5 h-5 ${activeRoute === 'customer-dashboard' ? 'stroke-[2.5] text-accent' : ''}`} />
+            <CalendarCheck className={`w-5 h-5 ${isRequestsActive ? 'stroke-[2.5] text-accent' : ''}`} />
           )}
           
           <span className="text-[10px] mt-0.5">
-            {currentUser.role === 'vendor' ? 'Leads' : currentUser.role === 'admin' ? 'Admin' : 'Requests'}
+            {currentUser.role === 'vendor' ? 'Enquiries' : currentUser.role === 'admin' ? 'Admin' : 'Requests'}
           </span>
 
           {myPendingRequests > 0 && currentUser.role === 'customer' && (
@@ -73,33 +89,66 @@ export const MobileBottomNav: React.FC = () => {
               {myPendingRequests}
             </span>
           )}
-        </button>
 
-        {/* 4. Wishlist */}
-        <button
-          onClick={() => setActiveRoute('customer-dashboard')}
-          className="relative flex flex-col items-center justify-center w-14 py-1 rounded-lg text-stone-500 hover:text-stone-900 transition-colors"
-        >
-          <Heart className="w-5 h-5 text-rose" />
-          <span className="text-[10px] mt-0.5">Wishlist</span>
-          {wishlist.length > 0 && (
-            <span className="absolute top-0.5 right-2 w-4 h-4 bg-rose text-white text-[9px] font-bold rounded-full flex items-center justify-center">
-              {wishlist.length}
+          {vendorPendingLeads > 0 && currentUser.role === 'vendor' && (
+            <span className="absolute top-0.5 right-3 w-4 h-4 bg-amber-500 text-stone-950 text-[9px] font-bold rounded-full flex items-center justify-center">
+              {vendorPendingLeads}
             </span>
           )}
         </button>
 
-        {/* 5. Profile */}
+        {/* 4. Tab 4: Listings for Vendor / Wishlist for Customer */}
+        {currentUser.role === 'vendor' ? (
+          <button
+            onClick={() => navigateToVendorTab('listings')}
+            className={`relative flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
+              isVendorListingsActive
+                ? 'text-amber-700 font-bold'
+                : 'text-stone-500 hover:text-stone-900'
+            }`}
+          >
+            <Store className={`w-5 h-5 ${isVendorListingsActive ? 'stroke-[2.5] text-amber-600' : 'text-amber-600'}`} />
+            <span className="text-[10px] mt-0.5">Listings</span>
+          </button>
+        ) : (
+          <button
+            onClick={() => navigateToCustomerTab('wishlist')}
+            className={`relative flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
+              isWishlistActive
+                ? 'text-rose-600 font-bold'
+                : 'text-stone-500 hover:text-stone-900'
+            }`}
+          >
+            <Heart className={`w-5 h-5 ${isWishlistActive ? 'stroke-[2.5] fill-rose-600 text-rose-600' : 'text-rose-500'}`} />
+            <span className="text-[10px] mt-0.5">Wishlist</span>
+            {wishlist.length > 0 && (
+              <span className="absolute top-0.5 right-2 w-4 h-4 bg-rose text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                {wishlist.length}
+              </span>
+            )}
+          </button>
+        )}
+
+        {/* 5. Profile / Overview */}
         <button
-          onClick={() => setActiveRoute('customer-dashboard')}
+          onClick={() => {
+            if (currentUser.role === 'vendor') navigateToVendorTab('overview');
+            else navigateToCustomerTab('profile');
+          }}
           className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
-            activeRoute === 'customer-dashboard' 
+            isProfileActive 
               ? 'text-primary font-bold' 
               : 'text-stone-500 hover:text-stone-900'
           }`}
         >
-          <User className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5">Profile</span>
+          {currentUser.role === 'vendor' ? (
+            <User className={`w-5 h-5 ${isProfileActive ? 'stroke-[2.5] text-accent' : ''}`} />
+          ) : (
+            <User className={`w-5 h-5 ${isProfileActive ? 'stroke-[2.5] text-accent' : ''}`} />
+          )}
+          <span className="text-[10px] mt-0.5">
+            {currentUser.role === 'vendor' ? 'Overview' : 'Profile'}
+          </span>
         </button>
       </div>
     </nav>

@@ -56,11 +56,6 @@ export const HomeHero: React.FC = () => {
     setActiveRoute('search');
   };
 
-  const handleLocalityPillClick = (locality: string) => {
-    setFilters(prev => ({ ...prev, locality }));
-    setActiveRoute('search');
-  };
-
   return (
     <div className="space-y-12">
       {/* Hero Header Section */}
@@ -96,10 +91,10 @@ export const HomeHero: React.FC = () => {
           {/* Prominent Multi-Segment Search Bar */}
           <form 
             onSubmit={handleSearchSubmit}
-            className="mt-8 bg-white/98 rounded-2xl sm:rounded-full p-2.5 sm:p-2 shadow-2xl border border-amber-200/60 max-w-3xl mx-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-2 text-stone-800 text-left"
+            className="mt-8 bg-white/98 rounded-3xl lg:rounded-full p-3 sm:p-4 lg:p-2 shadow-2xl border border-amber-200/60 max-w-5xl mx-auto flex flex-col lg:flex-row items-stretch lg:items-center gap-2 text-stone-800 text-left"
           >
-            {/* 1. Locality Selector */}
-            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 sm:border-r border-stone-200">
+            {/* 1. Location Selector */}
+            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-stone-200">
               <MapPin className="w-4 h-4 text-teal-800 shrink-0" />
               <div className="w-full">
                 <label className="block text-[10px] uppercase font-bold tracking-wider text-stone-600">
@@ -119,7 +114,7 @@ export const HomeHero: React.FC = () => {
             </div>
 
             {/* 2. Event Type Selector */}
-            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 sm:border-r border-stone-200">
+            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-stone-200">
               <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
               <div className="w-full">
                 <label className="block text-[10px] uppercase font-bold tracking-wider text-stone-600">
@@ -138,8 +133,28 @@ export const HomeHero: React.FC = () => {
               </div>
             </div>
 
-            {/* 3. Event Date Picker */}
-            <div className="flex-1 flex items-center gap-2 px-3 py-1.5">
+            {/* 3. Service Category Selector */}
+            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-stone-200">
+              <Building2 className="w-4 h-4 text-teal-800 shrink-0" />
+              <div className="w-full">
+                <label className="block text-[10px] uppercase font-bold tracking-wider text-stone-600">
+                  Service Category
+                </label>
+                <select
+                  value={filters.category}
+                  onChange={(e) => setFilters(prev => ({ ...prev, category: e.target.value as any }))}
+                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-stone-900 outline-hidden cursor-pointer"
+                >
+                  <option value="all">All Services</option>
+                  {CATEGORIES.map(cat => (
+                    <option key={cat.id} value={cat.id}>{cat.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* 4. Event Date Picker */}
+            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-stone-200">
               <CalendarIcon className="w-4 h-4 text-rose-600 shrink-0" />
               <div className="w-full">
                 <label className="block text-[10px] uppercase font-bold tracking-wider text-stone-600">
@@ -154,29 +169,45 @@ export const HomeHero: React.FC = () => {
               </div>
             </div>
 
+            {/* 5. Optional Guest Count Filter */}
+            <div className="flex-1 flex items-center gap-2 px-3 py-1.5">
+              <Users className="w-4 h-4 text-emerald-700 shrink-0" />
+              <div className="w-full">
+                <div className="flex items-center justify-between">
+                  <label className="block text-[10px] uppercase font-bold tracking-wider text-stone-600">
+                    Guests (Optional)
+                  </label>
+                  {filters.guestCount && filters.guestCount > 0 ? (
+                    <button
+                      type="button"
+                      onClick={() => setFilters(prev => ({ ...prev, guestCount: 0 }))}
+                      className="text-[10px] text-stone-400 hover:text-stone-700 font-bold"
+                    >
+                      Clear
+                    </button>
+                  ) : null}
+                </div>
+                <input
+                  type="number"
+                  min="0"
+                  step="25"
+                  placeholder="e.g. 250"
+                  value={filters.guestCount ? filters.guestCount : ''}
+                  onChange={(e) => setFilters(prev => ({ ...prev, guestCount: e.target.value ? Math.max(0, Number(e.target.value)) : 0 }))}
+                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-stone-900 placeholder:text-stone-400 outline-hidden"
+                />
+              </div>
+            </div>
+
             {/* Search Action Button */}
             <button
               type="submit"
-              className="bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-6 py-3 rounded-xl sm:rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 shrink-0 cursor-pointer"
+              className="bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-6 py-3.5 rounded-2xl lg:rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 shrink-0 cursor-pointer"
             >
               <Search className="w-4 h-4 text-stone-950 stroke-[2.5]" />
               <span>Search</span>
             </button>
           </form>
-
-          {/* Quick Locality Chips */}
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-1.5 text-xs text-stone-300">
-            <span className="text-stone-400 font-medium">Popular {activeCity?.name || 'Pune'} Areas:</span>
-            {(activeCity?.popularHubs || ['Baner', 'Koregaon Park', 'Kothrud', 'Wakad']).map(loc => (
-              <button
-                key={loc}
-                onClick={() => handleLocalityPillClick(loc)}
-                className="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-stone-200 transition-colors text-[11px] cursor-pointer"
-              >
-                {loc}
-              </button>
-            ))}
-          </div>
         </div>
       </section>
 

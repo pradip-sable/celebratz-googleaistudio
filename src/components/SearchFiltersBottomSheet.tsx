@@ -1,8 +1,9 @@
 import React from 'react';
-import { X, SlidersHorizontal, RotateCcw, Check, Sparkles, MapPin } from 'lucide-react';
+import { X, SlidersHorizontal, RotateCcw, Check, Sparkles, MapPin, Users } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { CATEGORIES, PUNE_LOCALITIES, EVENT_TYPES } from '../data/categories';
 import { formatIndianCurrency } from '../utils/theme';
+import { useModalScrollLock } from '../hooks/useModalScrollLock';
 
 export const SearchFiltersBottomSheet: React.FC = () => {
   const { 
@@ -15,6 +16,8 @@ export const SearchFiltersBottomSheet: React.FC = () => {
     setIsFiltersBottomSheetOpen,
     filteredListings 
   } = useApp();
+
+  useModalScrollLock(isFiltersBottomSheetOpen, () => setIsFiltersBottomSheetOpen(false));
 
   if (!isFiltersBottomSheetOpen) return null;
 
@@ -67,41 +70,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
             </button>
           </div>
 
-          {/* 1. Category */}
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
-              Service Category
-            </label>
-            <div className="grid grid-cols-2 gap-1.5">
-              <button
-                type="button"
-                onClick={() => setFilters(prev => ({ ...prev, category: 'all' }))}
-                className={`px-3 py-2 rounded-xl text-xs font-semibold text-left transition-all ${
-                  filters.category === 'all'
-                    ? 'bg-teal-900 text-white'
-                    : 'bg-stone-100 hover:bg-stone-200 text-stone-800'
-                }`}
-              >
-                ✨ All Categories
-              </button>
-              {CATEGORIES.map(c => (
-                <button
-                  key={c.id}
-                  type="button"
-                  onClick={() => setFilters(prev => ({ ...prev, category: c.id }))}
-                  className={`px-3 py-2 rounded-xl text-xs font-semibold text-left transition-all ${
-                    filters.category === c.id
-                      ? 'bg-teal-900 text-white'
-                      : 'bg-stone-100 hover:bg-stone-200 text-stone-800'
-                  }`}
-                >
-                  {c.name}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* 2. Locality */}
+          {/* 1. Locality / Area */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
               {activeCity?.name || 'Pune'} Locality / Area
@@ -118,7 +87,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
             </select>
           </div>
 
-          {/* 3. Event Type */}
+          {/* 2. Event Type */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
               Event Type
@@ -152,6 +121,40 @@ export const SearchFiltersBottomSheet: React.FC = () => {
             </div>
           </div>
 
+          {/* 3. Service Category */}
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
+              Service Category
+            </label>
+            <div className="grid grid-cols-2 gap-1.5">
+              <button
+                type="button"
+                onClick={() => setFilters(prev => ({ ...prev, category: 'all' }))}
+                className={`px-3 py-2 rounded-xl text-xs font-semibold text-left transition-all ${
+                  filters.category === 'all'
+                    ? 'bg-teal-900 text-white'
+                    : 'bg-stone-100 hover:bg-stone-200 text-stone-800'
+                }`}
+              >
+                ✨ All Categories
+              </button>
+              {CATEGORIES.map(c => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => setFilters(prev => ({ ...prev, category: c.id }))}
+                  className={`px-3 py-2 rounded-xl text-xs font-semibold text-left transition-all ${
+                    filters.category === c.id
+                      ? 'bg-teal-900 text-white'
+                      : 'bg-stone-100 hover:bg-stone-200 text-stone-800'
+                  }`}
+                >
+                  {c.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* 4. Event Date */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
@@ -165,7 +168,77 @@ export const SearchFiltersBottomSheet: React.FC = () => {
             />
           </div>
 
-          {/* 5. Budget Cap Slider */}
+          {/* 5. Guest Count (Optional) */}
+          <div className="p-3.5 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-teal-800" />
+                <label className="text-xs font-bold uppercase tracking-wider text-stone-700">
+                  Guest Count / Expected Pax
+                </label>
+              </div>
+              {filters.guestCount && filters.guestCount > 0 ? (
+                <button
+                  type="button"
+                  onClick={() => setFilters(prev => ({ ...prev, guestCount: 0 }))}
+                  className="text-xs text-amber-800 hover:underline font-bold"
+                >
+                  Clear ({filters.guestCount})
+                </button>
+              ) : (
+                <span className="text-[10px] text-stone-400 font-medium">Optional</span>
+              )}
+            </div>
+
+            <p className="text-[11px] text-stone-500 leading-tight">
+              Filters <strong className="text-stone-700">Venues</strong> with adequate hall/lawn capacity and <strong className="text-stone-700">Catering</strong> packages matching your minimum guest scale.
+            </p>
+
+            {/* Quick Guest Count Preset Buttons */}
+            <div className="flex flex-wrap gap-1.5">
+              {[
+                { label: 'Any Pax', val: 0 },
+                { label: '50+', val: 50 },
+                { label: '100+', val: 100 },
+                { label: '250+', val: 250 },
+                { label: '500+', val: 500 },
+                { label: '1,000+', val: 1000 },
+                { label: '1,500+', val: 1500 }
+              ].map(preset => {
+                const isSelected = (filters.guestCount || 0) === preset.val;
+                return (
+                  <button
+                    key={preset.val}
+                    type="button"
+                    onClick={() => setFilters(prev => ({ ...prev, guestCount: preset.val }))}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      isSelected
+                        ? 'bg-teal-900 text-white shadow-xs'
+                        : 'bg-white hover:bg-stone-200 border border-stone-200 text-stone-800'
+                    }`}
+                  >
+                    {preset.label}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Custom Input */}
+            <div className="flex items-center gap-2 pt-1">
+              <span className="text-xs text-stone-600 font-medium whitespace-nowrap">Custom Count:</span>
+              <input
+                type="number"
+                min="0"
+                step="25"
+                placeholder="e.g. 350"
+                value={filters.guestCount ? filters.guestCount : ''}
+                onChange={(e) => setFilters(prev => ({ ...prev, guestCount: e.target.value ? Math.max(0, Number(e.target.value)) : 0 }))}
+                className="w-full bg-white border border-stone-300 rounded-xl px-3 py-1.5 text-xs text-stone-900 font-semibold focus:border-teal-700 outline-hidden"
+              />
+            </div>
+          </div>
+
+          {/* 6. Budget Cap Slider */}
           <div>
             <div className="flex justify-between items-center mb-1.5">
               <label className="text-xs font-bold uppercase tracking-wider text-stone-600">
@@ -192,7 +265,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
             </div>
           </div>
 
-          {/* 6. Venue & Catering Specific Toggles */}
+          {/* 7. Venue & Catering Specific Toggles */}
           <div className="space-y-2 pt-2 border-t border-stone-200">
             <label className="text-xs font-bold uppercase tracking-wider text-stone-600 block mb-1">
               Specialized Preferences

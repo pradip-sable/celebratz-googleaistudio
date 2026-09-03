@@ -2915,8 +2915,9 @@ export const VendorDashboard: React.FC = () => {
                 </div>
               </div>
 
-              {/* 🏷️ PACKAGE TIERS SECTION (OPTIONAL: 0 = Flat, 2+ = Tiered, Never exactly 1) */}
-              <div className="p-5 bg-stone-50 rounded-2xl border border-stone-200 space-y-4">
+              {/* 🏷️ PACKAGE TIERS SECTION (Only shown when editing an existing listing with tiers; removed from new listing create option) */}
+              {editingListingId && formListingTiers.length > 0 && (
+                <div className="p-5 bg-stone-50 rounded-2xl border border-stone-200 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <div className="flex items-center gap-2">
@@ -3103,7 +3104,8 @@ export const VendorDashboard: React.FC = () => {
                     </div>
                   </div>
                 )}
-              </div>
+                </div>
+              )}
 
               {/* 📸 UNIFIED PHOTO UPLOAD SECTION (MULTIPLE PHOTOS + SELECTABLE COVER PHOTO) */}
               <div className="p-5 bg-amber-50/40 rounded-2xl border border-amber-200/80 space-y-4">

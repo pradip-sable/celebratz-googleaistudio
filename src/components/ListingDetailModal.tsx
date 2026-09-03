@@ -70,19 +70,11 @@ export const ListingDetailModal: React.FC = () => {
   const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
 
-  if (!selectedListingId) return null;
-  const listing = getListingById(selectedListingId);
-  if (!listing) return null;
-
-  const isSaved = isInWishlist(listing.id);
-  const isCompared = comparisonList.includes(listing.id);
-  const categoryMeta = CATEGORIES.find(c => c.id === listing.category);
-  const { text: daysAgoText, isStale } = getDaysAgoText(listing.calendarLastUpdatedAt);
-  const reviews = getListingReviews(listing.id);
-  const availableCombos = getComboPackagesForListing(listing.id);
+  const listing = selectedListingId ? getListingById(selectedListingId) : undefined;
 
   // Derive active package tiers (2+ required to be tiered, else flat pricing)
   const activeTiers = React.useMemo(() => {
+    if (!listing) return [];
     if (listing.listing_tiers && listing.listing_tiers.length >= 2) {
       return listing.listing_tiers.filter(t => t.is_active !== false && t.status !== 'rejected');
     }
@@ -104,6 +96,15 @@ export const ListingDetailModal: React.FC = () => {
     }
     return [];
   }, [listing]);
+
+  if (!selectedListingId || !listing) return null;
+
+  const isSaved = isInWishlist(listing.id);
+  const isCompared = comparisonList.includes(listing.id);
+  const categoryMeta = CATEGORIES.find(c => c.id === listing.category);
+  const { text: daysAgoText, isStale } = getDaysAgoText(listing.calendarLastUpdatedAt);
+  const reviews = getListingReviews(listing.id);
+  const availableCombos = getComboPackagesForListing(listing.id);
 
   const hasTiers = activeTiers.length >= 2;
   const effectivePrice = getEffectivePrice(listing);

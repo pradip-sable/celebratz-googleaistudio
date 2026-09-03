@@ -17,8 +17,7 @@ import {
   LogOut,
   UserPlus,
   Sparkles,
-  ListOrdered,
-  Layers
+  ListOrdered
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { PUNE_LOCALITIES, CATEGORIES } from '../data/categories';
@@ -394,17 +393,6 @@ export const Navbar: React.FC = () => {
             className={`hover:text-teal-900 transition-colors ${activeRoute === 'search' ? 'text-teal-900 font-semibold border-b-2 border-amber-500 pb-0.5' : ''}`}
           >
             Explore Vendors
-          </button>
-
-          <button 
-            onClick={() => setActiveRoute('packages')} 
-            className={`flex items-center gap-1.5 hover:text-teal-900 transition-colors ${activeRoute === 'packages' ? 'text-teal-900 font-bold border-b-2 border-amber-500 pb-0.5' : ''}`}
-          >
-            <Layers className="w-4 h-4 text-amber-600" />
-            <span>Packages</span>
-            <span className="px-1.5 py-0.2 rounded-full text-[9px] font-extrabold bg-amber-400 text-stone-950">
-              Bundles
-            </span>
           </button>
           
           <button 

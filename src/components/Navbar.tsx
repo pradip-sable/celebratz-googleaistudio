@@ -7,7 +7,6 @@ import {
   User as UserIcon, 
   ShieldCheck, 
   Store, 
-  Palette, 
   Bell, 
   MapPin, 
   ChevronDown,
@@ -37,11 +36,9 @@ export const Navbar: React.FC = () => {
     navigateToCustomerTab,
     vendorTab,
     navigateToVendorTab,
-    setIsDesignSelectorOpen,
     isCitySelectorOpen,
     setIsCitySelectorOpen,
     activeCity,
-    designPrefs,
     filters,
     setFilters,
     parsedSearchQuery,
@@ -90,15 +87,6 @@ export const Navbar: React.FC = () => {
 
         {/* Interactive Persona / Role Switcher for seamless testing */}
         <div className="flex items-center gap-2 ml-auto">
-          <button
-            onClick={() => setIsDesignSelectorOpen(true)}
-            className="flex items-center gap-1.5 text-xs bg-accent/20 text-accent hover:bg-accent/30 px-2 py-0.5 rounded border border-accent/30 transition-colors cursor-pointer"
-            title="Choose Design Theme & Card Layout"
-          >
-            <Palette className="w-3 h-3" />
-            <span className="hidden md:inline">Design Layouts</span>
-          </button>
-
           {/* User Account / Auth Dropdown */}
           <div className="relative">
             <button
@@ -429,15 +417,6 @@ export const Navbar: React.FC = () => {
 
         {/* Action Controls & Role Portals */}
         <div className="flex items-center gap-2.5">
-          {/* Quick Design Switcher Button */}
-          <button
-            onClick={() => setIsDesignSelectorOpen(true)}
-            className="p-2 text-stone-600 hover:text-primary hover:bg-stone-100 rounded-full transition-colors cursor-pointer"
-            title="Design & Layout Selection"
-          >
-            <Palette className="w-5 h-5 text-accent" />
-          </button>
-
           {/* Quick Sign In Button */}
           <button
             onClick={() => openAuthModal('login')}
@@ -616,12 +595,6 @@ export const Navbar: React.FC = () => {
               className="hover:underline"
             >
               Support (celebratzapp@gmail.com)
-            </button>
-            <button 
-              onClick={() => { setIsDesignSelectorOpen(true); setIsMobileMenuOpen(false); }}
-              className="text-accent font-semibold"
-            >
-              🎨 Theme & Layout
             </button>
           </div>
         </div>

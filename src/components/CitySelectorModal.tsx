@@ -70,9 +70,9 @@ export const CitySelectorModal: React.FC = () => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-4 bg-stone-900 text-amber-50 flex items-center justify-between border-b border-stone-800">
+        <div className="px-6 py-4 bg-stone-900 text-white flex items-center justify-between border-b border-stone-800">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-amber-400/20 border border-amber-400/40 text-amber-300 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-accent/20 border border-accent/40 text-accent flex items-center justify-center">
               <MapPin className="w-4 h-4" />
             </div>
             <div>
@@ -80,7 +80,7 @@ export const CitySelectorModal: React.FC = () => {
                 Select Your Celebration City
               </h3>
               <p className="text-[11px] text-stone-400">
-                Currently live in <strong className="text-amber-300">Pune</strong> & expanding across India
+                Currently live in <strong className="text-accent">Pune</strong> & expanding across India
               </p>
             </div>
           </div>
@@ -101,7 +101,7 @@ export const CitySelectorModal: React.FC = () => {
               placeholder="Search by city (e.g. Pune, Mumbai, Bengaluru, Jaipur) or area..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 bg-white border border-stone-200 rounded-xl text-xs sm:text-sm text-stone-800 font-medium placeholder:text-stone-400 focus:outline-hidden focus:border-teal-700"
+              className="w-full pl-9 pr-4 py-2.5 bg-white border border-stone-200 rounded-xl text-xs sm:text-sm text-stone-800 font-medium placeholder:text-stone-400 focus:outline-hidden focus:border-primary"
             />
             {searchQuery && (
               <button 
@@ -179,8 +179,8 @@ export const CitySelectorModal: React.FC = () => {
           {/* Upcoming Cities (Future Indian Expansion) */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-amber-800 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <span className="text-xs font-bold uppercase tracking-wider text-accent flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-accent" />
                 Upcoming Indian Cities (Expansion Roadmap)
               </span>
               <span className="text-[11px] text-stone-500">Pre-register your venue or get notified</span>
@@ -194,8 +194,8 @@ export const CitySelectorModal: React.FC = () => {
                     key={city.id}
                     className={`p-3.5 rounded-2xl border transition-all flex flex-col justify-between gap-2.5 ${
                       isSelected
-                        ? 'border-amber-500 bg-amber-50/60 ring-2 ring-amber-500/20'
-                        : 'border-stone-200 bg-white hover:border-amber-300'
+                        ? 'border-accent bg-accent-subtle/60 ring-2 ring-accent/20'
+                        : 'border-stone-200 bg-white hover:border-accent'
                     }`}
                   >
                     <div>
@@ -220,7 +220,7 @@ export const CitySelectorModal: React.FC = () => {
                     <div className="pt-2 border-t border-stone-100 flex items-center justify-between gap-2">
                       <button
                         onClick={() => setSelectedUpcomingCity(city)}
-                        className="text-[11px] text-amber-800 hover:text-amber-950 font-bold flex items-center gap-1"
+                        className="text-[11px] text-accent hover:text-stone-900 font-bold flex items-center gap-1"
                       >
                         <span>Notify me at launch</span>
                         <ArrowRight className="w-3 h-3" />
@@ -241,11 +241,11 @@ export const CitySelectorModal: React.FC = () => {
 
           {/* Waitlist Drawer / Modal Section */}
           {selectedUpcomingCity && (
-            <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl space-y-3 animate-fadeIn">
+            <div className="p-4 bg-accent-subtle/50 border border-accent/30 rounded-2xl space-y-3 animate-fadeIn">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-amber-700" />
-                  <span className="font-bold text-xs text-amber-950">
+                  <Sparkles className="w-4 h-4 text-accent" />
+                  <span className="font-bold text-xs text-stone-900">
                     Get Early Access for {selectedUpcomingCity.name} ({selectedUpcomingCity.state})
                   </span>
                 </div>
@@ -257,7 +257,7 @@ export const CitySelectorModal: React.FC = () => {
                 </button>
               </div>
 
-              <p className="text-xs text-amber-900 leading-relaxed">
+              <p className="text-xs text-stone-700 leading-relaxed">
                 We are actively onboarding verified banquet halls, caterers, decorators, and photographers in {selectedUpcomingCity.name}. Enter your email to receive early host discounts and direct booking links on launch day.
               </p>
 
@@ -274,11 +274,11 @@ export const CitySelectorModal: React.FC = () => {
                     placeholder="Enter your email address..."
                     value={waitlistEmail}
                     onChange={(e) => setWaitlistEmail(e.target.value)}
-                    className="flex-1 px-3 py-2 bg-white border border-amber-300 rounded-xl text-xs text-stone-900 placeholder:text-stone-400 focus:outline-hidden focus:border-amber-600"
+                    className="flex-1 px-3 py-2 bg-white border border-stone-300 rounded-xl text-xs text-stone-900 placeholder:text-stone-400 focus:outline-hidden focus:border-primary"
                   />
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-amber-800 hover:bg-amber-900 text-amber-50 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-xs transition-colors shrink-0 cursor-pointer"
+                    className="px-4 py-2 bg-primary hover:bg-primary-dark text-primary-foreground rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-xs transition-colors shrink-0 cursor-pointer"
                   >
                     <Send className="w-3.5 h-3.5" />
                     <span>Join {selectedUpcomingCity.name} Waitlist</span>
@@ -289,10 +289,10 @@ export const CitySelectorModal: React.FC = () => {
           )}
 
           {/* India-Wide Vendor Onboarding Card */}
-          <div className="p-4 rounded-2xl bg-stone-900 text-amber-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="p-4 rounded-2xl bg-stone-900 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-amber-300" />
+                <Building2 className="w-4 h-4 text-accent" />
                 <span className="font-serif font-bold text-sm text-white">
                   Are you a Vendor or Banquet Owner in Mumbai, Bengaluru, or Delhi?
                 </span>
@@ -306,7 +306,7 @@ export const CitySelectorModal: React.FC = () => {
                 setIsCitySelectorOpen(false);
                 switchCity('pune');
               }}
-              className="px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-stone-950 text-xs font-bold shrink-0 transition-colors cursor-pointer"
+              className="px-3.5 py-2 rounded-xl bg-accent hover:bg-accent/90 text-accent-foreground text-xs font-bold shrink-0 transition-colors cursor-pointer"
             >
               Continue in Pune (Live)
             </button>

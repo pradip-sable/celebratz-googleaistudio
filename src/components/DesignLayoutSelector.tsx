@@ -42,19 +42,19 @@ export const DesignLayoutSelector: React.FC = () => {
       id: 'spacious_cards',
       name: 'Spacious Photo Cards',
       description: 'Generous photography with prominent pricing badges and spec tags (Recommended).',
-      icon: <Layers className="w-5 h-5 text-teal-800" />
+      icon: <Layers className="w-5 h-5 text-primary" />
     },
     {
       id: 'compact_bento',
       name: 'Compact Bento Grid',
       description: 'Higher density multi-column layout for comparing many vendors quickly.',
-      icon: <LayoutGrid className="w-5 h-5 text-amber-700" />
+      icon: <LayoutGrid className="w-5 h-5 text-accent" />
     },
     {
       id: 'detailed_list',
       name: 'Detailed List View',
       description: 'Horizontal rows showing calendar staleness, pricing units, and direct enquiry buttons.',
-      icon: <List className="w-5 h-5 text-rose-800" />
+      icon: <List className="w-5 h-5 text-secondary" />
     }
   ];
 
@@ -82,7 +82,7 @@ export const DesignLayoutSelector: React.FC = () => {
         {/* Modal Header */}
         <div className="px-6 py-4 border-b border-stone-100 flex items-center justify-between sticky top-0 bg-white z-10">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-amber-100 text-amber-800">
+            <div className="p-2 rounded-xl bg-gold-light text-gold-dark">
               <Palette className="w-5 h-5" />
             </div>
             <div>
@@ -102,7 +102,7 @@ export const DesignLayoutSelector: React.FC = () => {
           {/* 1. Theme Palette Selection */}
           <div>
             <h4 className="text-xs uppercase tracking-wider font-bold text-stone-500 mb-3 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <Sparkles className="w-3.5 h-3.5 text-accent" />
               1. Visual Theme & Color Palette
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -114,12 +114,12 @@ export const DesignLayoutSelector: React.FC = () => {
                     onClick={() => updateDesignPrefs({ palette: p.id })}
                     className={`p-3.5 rounded-xl border text-left transition-all relative ${
                       isSelected
-                        ? 'border-amber-600 bg-amber-50/40 ring-2 ring-amber-600/30 shadow-xs'
+                        ? 'border-accent bg-accent-subtle/40 ring-2 ring-accent/30 shadow-xs'
                         : 'border-stone-200 hover:border-stone-300 bg-stone-50/50'
                     }`}
                   >
                     {isSelected && (
-                      <span className="absolute top-2.5 right-2.5 w-4 h-4 bg-amber-600 text-white rounded-full flex items-center justify-center text-[10px]">
+                      <span className="absolute top-2.5 right-2.5 w-4 h-4 bg-accent text-white rounded-full flex items-center justify-center text-[10px]">
                         <Check className="w-3 h-3 stroke-[3]" />
                       </span>
                     )}
@@ -143,7 +143,7 @@ export const DesignLayoutSelector: React.FC = () => {
           {/* 2. Card Layout Mode */}
           <div>
             <h4 className="text-xs uppercase tracking-wider font-bold text-stone-500 mb-3 flex items-center gap-1.5">
-              <LayoutGrid className="w-3.5 h-3.5 text-teal-800" />
+              <LayoutGrid className="w-3.5 h-3.5 text-primary" />
               2. Vendor Card Presentation Mode
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -155,12 +155,12 @@ export const DesignLayoutSelector: React.FC = () => {
                     onClick={() => updateDesignPrefs({ cardLayout: layout.id })}
                     className={`p-3.5 rounded-xl border text-left transition-all relative ${
                       isSelected
-                        ? 'border-teal-800 bg-teal-50/40 ring-2 ring-teal-800/30 shadow-xs'
+                        ? 'border-primary bg-primary-subtle ring-2 ring-primary/30 shadow-xs'
                         : 'border-stone-200 hover:border-stone-300 bg-stone-50/50'
                     }`}
                   >
                     {isSelected && (
-                      <span className="absolute top-2.5 right-2.5 w-4 h-4 bg-teal-800 text-white rounded-full flex items-center justify-center text-[10px]">
+                      <span className="absolute top-2.5 right-2.5 w-4 h-4 bg-primary text-white rounded-full flex items-center justify-center text-[10px]">
                         <Check className="w-3 h-3 stroke-[3]" />
                       </span>
                     )}
@@ -178,7 +178,7 @@ export const DesignLayoutSelector: React.FC = () => {
           {/* 3. Hero Header Style */}
           <div>
             <h4 className="text-xs uppercase tracking-wider font-bold text-stone-500 mb-3 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-rose-700" />
+              <Sparkles className="w-3.5 h-3.5 text-accent" />
               3. Home Hero Experience
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -190,12 +190,12 @@ export const DesignLayoutSelector: React.FC = () => {
                     onClick={() => updateDesignPrefs({ heroStyle: h.id })}
                     className={`p-3.5 rounded-xl border text-left transition-all relative ${
                       isSelected
-                        ? 'border-amber-600 bg-amber-50/40 ring-2 ring-amber-600/30 shadow-xs'
+                        ? 'border-accent bg-accent-subtle/40 ring-2 ring-accent/30 shadow-xs'
                         : 'border-stone-200 hover:border-stone-300 bg-stone-50/50'
                     }`}
                   >
                     {isSelected && (
-                      <span className="absolute top-2.5 right-2.5 w-4 h-4 bg-amber-600 text-white rounded-full flex items-center justify-center text-[10px]">
+                      <span className="absolute top-2.5 right-2.5 w-4 h-4 bg-accent text-white rounded-full flex items-center justify-center text-[10px]">
                         <Check className="w-3 h-3 stroke-[3]" />
                       </span>
                     )}

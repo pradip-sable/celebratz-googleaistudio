@@ -72,10 +72,10 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsCitySelectorOpen(true)}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-300 hover:text-amber-200 bg-stone-800 hover:bg-stone-700/80 px-2 py-0.5 rounded-md border border-amber-500/30 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:opacity-90 bg-stone-800 hover:bg-stone-700/80 px-2 py-0.5 rounded-md border border-accent/30 transition-colors cursor-pointer"
             title="Switch city or view upcoming Indian cities"
           >
-            <MapPin className="w-3 h-3 text-amber-400 shrink-0" />
+            <MapPin className="w-3 h-3 text-accent shrink-0" />
             <span>{activeCity?.name || 'Pune'}</span>
             <span className="text-[9px] px-1 py-0.2 rounded bg-emerald-900/80 text-emerald-300 font-bold border border-emerald-500/40">
               Live
@@ -92,7 +92,7 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center gap-2 ml-auto">
           <button
             onClick={() => setIsDesignSelectorOpen(true)}
-            className="flex items-center gap-1.5 text-xs bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 px-2 py-0.5 rounded border border-amber-500/30 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 text-xs bg-accent/20 text-accent hover:bg-accent/30 px-2 py-0.5 rounded border border-accent/30 transition-colors cursor-pointer"
             title="Choose Design Theme & Card Layout"
           >
             <Palette className="w-3 h-3" />
@@ -105,13 +105,13 @@ export const Navbar: React.FC = () => {
               onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
               className="flex items-center gap-1.5 text-xs bg-stone-800 hover:bg-stone-700 text-stone-200 px-2.5 py-1 rounded-md transition-colors cursor-pointer border border-stone-700"
             >
-              <div className="w-4 h-4 rounded-full bg-teal-800 text-amber-300 font-bold flex items-center justify-center text-[10px]">
+              <div className="w-4 h-4 rounded-full bg-primary text-accent font-bold flex items-center justify-center text-[10px]">
                 {currentUser.fullName.charAt(0)}
               </div>
               <span className="font-semibold text-white max-w-[100px] sm:max-w-none truncate">
                 {currentUser.fullName}
               </span>
-              <span className="text-[10px] uppercase font-bold text-amber-400/90 hidden sm:inline">
+              <span className="text-[10px] uppercase font-bold text-accent hidden sm:inline">
                 ({currentUser.role})
               </span>
               <ChevronDown className="w-3 h-3 text-stone-400" />
@@ -135,9 +135,9 @@ export const Navbar: React.FC = () => {
                       openAuthModal('login');
                       setIsRoleDropdownOpen(false);
                     }}
-                    className="w-full text-left px-3.5 py-2 flex items-center gap-2 hover:bg-teal-50 text-teal-950 font-semibold cursor-pointer"
+                    className="w-full text-left px-3.5 py-2 flex items-center gap-2 hover:bg-primary-subtle text-primary font-semibold cursor-pointer"
                   >
-                    <LogIn className="w-3.5 h-3.5 text-teal-800" />
+                    <LogIn className="w-3.5 h-3.5 text-primary" />
                     <span>Sign In (Google / Mobile / Email)</span>
                   </button>
 
@@ -146,9 +146,9 @@ export const Navbar: React.FC = () => {
                       openAuthModal('signup');
                       setIsRoleDropdownOpen(false);
                     }}
-                    className="w-full text-left px-3.5 py-2 flex items-center gap-2 hover:bg-amber-50 text-amber-900 font-semibold cursor-pointer"
+                    className="w-full text-left px-3.5 py-2 flex items-center gap-2 hover:bg-accent-subtle text-accent-dark font-semibold cursor-pointer"
                   >
-                    <UserPlus className="w-3.5 h-3.5 text-amber-700" />
+                    <UserPlus className="w-3.5 h-3.5 text-accent" />
                     <span>Create New Account</span>
                   </button>
                 </div>
@@ -163,13 +163,13 @@ export const Navbar: React.FC = () => {
                       switchUserRole('customer');
                       setIsRoleDropdownOpen(false);
                     }}
-                    className={`w-full text-left px-3.5 py-1.5 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'customer' ? 'bg-amber-50 font-semibold text-teal-950' : ''}`}
+                    className={`w-full text-left px-3.5 py-1.5 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'customer' ? 'bg-accent-subtle font-semibold text-primary' : ''}`}
                   >
                     <div className="flex items-center gap-2">
-                      <UserIcon className="w-3.5 h-3.5 text-teal-700" />
+                      <UserIcon className="w-3.5 h-3.5 text-primary" />
                       <span>Customer (Priya Sharma)</span>
                     </div>
-                    {currentUser.role === 'customer' && <span className="text-teal-700 text-xs font-bold">&bull; Active</span>}
+                    {currentUser.role === 'customer' && <span className="text-primary text-xs font-bold">&bull; Active</span>}
                   </button>
                   <button
                     onClick={() => {
@@ -177,13 +177,13 @@ export const Navbar: React.FC = () => {
                       setIsRoleDropdownOpen(false);
                       setActiveRoute('vendor-dashboard');
                     }}
-                    className={`w-full text-left px-3.5 py-1.5 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'vendor' ? 'bg-amber-50 font-semibold text-teal-950' : ''}`}
+                    className={`w-full text-left px-3.5 py-1.5 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'vendor' ? 'bg-accent-subtle font-semibold text-primary' : ''}`}
                   >
                     <div className="flex items-center gap-2">
-                      <Store className="w-3.5 h-3.5 text-amber-600" />
+                      <Store className="w-3.5 h-3.5 text-accent" />
                       <span>Vendor (Rajesh Patil)</span>
                     </div>
-                    {currentUser.role === 'vendor' && <span className="text-amber-700 text-xs font-bold">&bull; Active</span>}
+                    {currentUser.role === 'vendor' && <span className="text-accent text-xs font-bold">&bull; Active</span>}
                   </button>
                   <button
                     onClick={() => {
@@ -191,13 +191,13 @@ export const Navbar: React.FC = () => {
                       setIsRoleDropdownOpen(false);
                       setActiveRoute('admin-panel');
                     }}
-                    className={`w-full text-left px-3.5 py-1.5 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'admin' ? 'bg-amber-50 font-semibold text-teal-950' : ''}`}
+                    className={`w-full text-left px-3.5 py-1.5 flex items-center justify-between hover:bg-stone-50 ${currentUser.role === 'admin' ? 'bg-accent-subtle font-semibold text-primary' : ''}`}
                   >
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-3.5 h-3.5 text-rose-700" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-destructive" />
                       <span>Admin (Pradip Sable)</span>
                     </div>
-                    {currentUser.role === 'admin' && <span className="text-rose-700 text-xs font-bold">&bull; Active</span>}
+                    {currentUser.role === 'admin' && <span className="text-destructive text-xs font-bold">&bull; Active</span>}
                   </button>
                 </div>
 
@@ -208,7 +208,7 @@ export const Navbar: React.FC = () => {
                       logout();
                       setIsRoleDropdownOpen(false);
                     }}
-                    className="w-full text-left px-3.5 py-2 flex items-center gap-2 text-rose-700 hover:bg-rose-50 font-medium cursor-pointer"
+                    className="w-full text-left px-3.5 py-2 flex items-center gap-2 text-destructive hover:bg-destructive/10 font-medium cursor-pointer"
                   >
                     <LogOut className="w-3.5 h-3.5" />
                     <span>Sign Out</span>
@@ -243,10 +243,10 @@ export const Navbar: React.FC = () => {
           {/* City Selection next to Brand */}
           <button
             onClick={() => setIsCitySelectorOpen(true)}
-            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-stone-100/90 hover:bg-amber-50/80 text-stone-800 hover:text-teal-950 border border-stone-200/90 hover:border-amber-300 transition-all cursor-pointer text-xs font-semibold shadow-2xs group"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-stone-100/90 hover:bg-accent-subtle/80 text-stone-800 hover:text-primary border border-stone-200/90 hover:border-accent/50 transition-all cursor-pointer text-xs font-semibold shadow-2xs group"
             title="Change City"
           >
-            <MapPin className="w-3.5 h-3.5 text-amber-600 group-hover:scale-110 transition-transform shrink-0" />
+            <MapPin className="w-3.5 h-3.5 text-accent group-hover:scale-110 transition-transform shrink-0" />
             <span className="font-bold text-xs text-stone-900 tracking-tight">{activeCity?.name || 'Pune'}</span>
             <span className="text-[9px] uppercase px-1 py-0.2 rounded bg-emerald-100 text-emerald-800 font-extrabold border border-emerald-300/60 hidden xl:inline">
               Live
@@ -263,7 +263,7 @@ export const Navbar: React.FC = () => {
               setIsSearchFocused(false);
               if (activeRoute !== 'search') setActiveRoute('search');
             }}
-            className="w-full flex items-center bg-stone-100/90 rounded-full border border-stone-300/80 px-3.5 py-2 text-sm hover:border-stone-400 focus-within:border-teal-700 focus-within:bg-white focus-within:ring-2 focus-within:ring-teal-700/20 transition-all shadow-inner"
+            className="w-full flex items-center bg-stone-100/90 rounded-full border border-stone-300/80 px-3.5 py-2 text-sm hover:border-stone-400 focus-within:border-primary focus-within:bg-white focus-within:ring-2 focus-within:ring-primary/20 transition-all shadow-inner"
           >
             <Search className="w-4 h-4 text-stone-400 mr-2 shrink-0" />
             <input
@@ -299,25 +299,25 @@ export const Navbar: React.FC = () => {
             <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-stone-200 p-3 z-50 space-y-3">
               {/* Intent Preview if typed */}
               {filters.searchQuery.trim() && parsedSearchQuery?.isParsed && (
-                <div className="p-2.5 bg-amber-50 rounded-xl border border-amber-200/80 text-xs space-y-1">
-                  <span className="text-[10px] uppercase font-bold text-amber-800 tracking-wider flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-amber-600" />
+                <div className="p-2.5 bg-accent-subtle rounded-xl border border-accent/40 text-xs space-y-1">
+                  <span className="text-[10px] uppercase font-bold text-accent-dark tracking-wider flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-accent" />
                     Recognized Search Intent
                   </span>
                   <div className="flex flex-wrap gap-1.5 pt-0.5">
                     {parsedSearchQuery.detectedLocality && (
-                      <span className="px-2 py-0.5 rounded-md bg-teal-900 text-teal-100 font-bold text-[11px] flex items-center gap-1">
-                        <MapPin className="w-2.5 h-2.5 text-amber-300" />
+                      <span className="px-2 py-0.5 rounded-md bg-primary text-primary-foreground font-bold text-[11px] flex items-center gap-1">
+                        <MapPin className="w-2.5 h-2.5 text-accent" />
                         Locality: {parsedSearchQuery.detectedLocality}
                       </span>
                     )}
                     {parsedSearchQuery.detectedCategory && (
-                      <span className="px-2 py-0.5 rounded-md bg-stone-900 text-amber-300 font-bold text-[11px]">
+                      <span className="px-2 py-0.5 rounded-md bg-stone-900 text-accent font-bold text-[11px]">
                         🏢 Category: {CATEGORIES.find(c => c.id === parsedSearchQuery.detectedCategory)?.name || parsedSearchQuery.detectedCategory}
                       </span>
                     )}
                     {parsedSearchQuery.detectedEventType && (
-                      <span className="px-2 py-0.5 rounded-md bg-rose-900 text-rose-100 font-bold text-[11px]">
+                      <span className="px-2 py-0.5 rounded-md bg-destructive text-white font-bold text-[11px]">
                         💍 Celebration: {parsedSearchQuery.detectedEventType}
                       </span>
                     )}
@@ -352,7 +352,7 @@ export const Navbar: React.FC = () => {
                         setIsSearchFocused(false);
                         if (activeRoute !== 'search') setActiveRoute('search');
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-teal-50 hover:text-teal-900 hover:border-teal-300 border border-stone-200 text-stone-700 text-left transition-colors cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-primary-subtle hover:text-primary hover:border-primary/40 border border-stone-200 text-stone-700 text-left transition-colors cursor-pointer"
                     >
                       🔍 {phrase}
                     </button>
@@ -375,7 +375,7 @@ export const Navbar: React.FC = () => {
                         setIsSearchFocused(false);
                         if (activeRoute !== 'search') setActiveRoute('search');
                       }}
-                      className="px-2 py-0.5 rounded-md bg-stone-100 hover:bg-amber-100 text-stone-700 hover:text-amber-900 border border-stone-200 transition-colors cursor-pointer"
+                      className="px-2 py-0.5 rounded-md bg-stone-100 hover:bg-accent-subtle text-stone-700 hover:text-accent-dark border border-stone-200 transition-colors cursor-pointer"
                     >
                       📍 {loc}
                     </button>
@@ -390,19 +390,19 @@ export const Navbar: React.FC = () => {
         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-stone-700">
           <button 
             onClick={() => setActiveRoute('search')} 
-            className={`hover:text-teal-900 transition-colors ${activeRoute === 'search' ? 'text-teal-900 font-semibold border-b-2 border-amber-500 pb-0.5' : ''}`}
+            className={`hover:text-primary transition-colors ${activeRoute === 'search' ? 'text-primary font-semibold border-b-2 border-accent pb-0.5' : ''}`}
           >
             Explore Vendors
           </button>
           
           <button 
             onClick={() => setActiveRoute('compare')} 
-            className={`flex items-center gap-1 hover:text-teal-900 transition-colors ${activeRoute === 'compare' ? 'text-teal-900 font-semibold' : ''}`}
+            className={`flex items-center gap-1 hover:text-primary transition-colors ${activeRoute === 'compare' ? 'text-primary font-semibold' : ''}`}
           >
             <Scale className="w-4 h-4" />
             <span>Compare</span>
             {comparisonList.length > 0 && (
-              <span className="bg-amber-500 text-white text-[11px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+              <span className="bg-accent text-accent-foreground text-[11px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
                 {comparisonList.length}
               </span>
             )}
@@ -411,15 +411,15 @@ export const Navbar: React.FC = () => {
           {currentUser.role === 'vendor' ? (
             <button 
               onClick={() => navigateToVendorTab('listings')} 
-              className={`flex items-center gap-1.5 hover:text-teal-900 transition-colors ${activeRoute === 'vendor-dashboard' && vendorTab === 'listings' ? 'text-teal-900 font-bold border-b-2 border-amber-500 pb-0.5' : ''}`}
+              className={`flex items-center gap-1.5 hover:text-primary transition-colors ${activeRoute === 'vendor-dashboard' && vendorTab === 'listings' ? 'text-primary font-bold border-b-2 border-accent pb-0.5' : ''}`}
             >
-              <Store className="w-4 h-4 text-amber-600" />
+              <Store className="w-4 h-4 text-accent" />
               <span>Listings</span>
             </button>
           ) : (
             <button 
               onClick={() => navigateToCustomerTab('wishlist')} 
-              className={`flex items-center gap-1 hover:text-teal-900 transition-colors ${activeRoute === 'customer-dashboard' && customerTab === 'wishlist' ? 'text-teal-900 font-bold' : ''}`}
+              className={`flex items-center gap-1 hover:text-primary transition-colors ${activeRoute === 'customer-dashboard' && customerTab === 'wishlist' ? 'text-primary font-bold' : ''}`}
             >
               <Heart className={`w-4 h-4 ${activeRoute === 'customer-dashboard' && customerTab === 'wishlist' ? 'fill-rose-600 text-rose-600' : 'text-rose-600'}`} />
               <span>Wishlist ({wishlist.length})</span>
@@ -432,10 +432,10 @@ export const Navbar: React.FC = () => {
           {/* Quick Design Switcher Button */}
           <button
             onClick={() => setIsDesignSelectorOpen(true)}
-            className="p-2 text-stone-600 hover:text-teal-950 hover:bg-stone-100 rounded-full transition-colors cursor-pointer"
+            className="p-2 text-stone-600 hover:text-primary hover:bg-stone-100 rounded-full transition-colors cursor-pointer"
             title="Design & Layout Selection"
           >
-            <Palette className="w-5 h-5 text-amber-700" />
+            <Palette className="w-5 h-5 text-accent" />
           </button>
 
           {/* Quick Sign In Button */}
@@ -444,7 +444,7 @@ export const Navbar: React.FC = () => {
             className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 transition-all cursor-pointer shadow-xs"
             title="Sign in with Google, Mobile or Email"
           >
-            <LogIn className="w-3.5 h-3.5 text-teal-800" />
+            <LogIn className="w-3.5 h-3.5 text-primary" />
             <span>Sign In</span>
           </button>
 
@@ -468,8 +468,8 @@ export const Navbar: React.FC = () => {
               onClick={() => navigateToVendorTab('overview')}
               className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold shadow-sm transition-all cursor-pointer ${
                 activeRoute === 'vendor-dashboard'
-                  ? 'bg-amber-700 text-white ring-2 ring-amber-400'
-                  : 'bg-amber-600 text-white hover:bg-amber-700'
+                  ? 'bg-accent-dark text-white ring-2 ring-accent'
+                  : 'bg-accent text-accent-foreground hover:bg-accent-dark'
               }`}
             >
               <Store className="w-3.5 h-3.5" />
@@ -480,7 +480,7 @@ export const Navbar: React.FC = () => {
           {currentUser.role === 'admin' && (
             <button
               onClick={() => setActiveRoute('admin-panel')}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-rose-900 text-white hover:bg-rose-950 shadow-sm transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-destructive text-white hover:opacity-90 shadow-sm transition-all cursor-pointer"
             >
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Admin Console</span>
@@ -501,13 +501,13 @@ export const Navbar: React.FC = () => {
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-5 space-y-3">
           {/* Mobile Auth Banner */}
-          <div className="p-3 bg-gradient-to-r from-teal-950 to-amber-950 rounded-2xl text-white flex items-center justify-between">
+          <div className="p-3 bg-primary rounded-2xl text-white flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-amber-400 text-teal-950 font-bold flex items-center justify-center text-sm font-serif">
+              <div className="w-9 h-9 rounded-full bg-accent text-primary font-bold flex items-center justify-center text-sm font-serif">
                 {currentUser.fullName.charAt(0)}
               </div>
               <div>
-                <p className="text-xs font-bold text-amber-200">{currentUser.fullName}</p>
+                <p className="text-xs font-bold text-accent">{currentUser.fullName}</p>
                 <p className="text-[10px] text-stone-300 capitalize">{currentUser.role} Account</p>
               </div>
             </div>
@@ -516,7 +516,7 @@ export const Navbar: React.FC = () => {
                 openAuthModal('login');
                 setIsMobileMenuOpen(false);
               }}
-              className="px-3 py-1.5 bg-amber-400 hover:bg-amber-300 text-teal-950 rounded-xl text-xs font-bold shadow-xs cursor-pointer"
+              className="px-3 py-1.5 bg-accent hover:opacity-90 text-primary rounded-xl text-xs font-bold shadow-xs cursor-pointer"
             >
               Sign In
             </button>
@@ -555,7 +555,7 @@ export const Navbar: React.FC = () => {
             >
               <span>⚖️ Compare</span>
               {comparisonList.length > 0 && (
-                <span className="bg-amber-500 text-white rounded-full px-1.5 py-0.2 text-[10px]">
+                <span className="bg-accent text-accent-foreground rounded-full px-1.5 py-0.2 text-[10px]">
                   {comparisonList.length}
                 </span>
               )}
@@ -598,7 +598,7 @@ export const Navbar: React.FC = () => {
             )}
             <button
               onClick={() => { openAuthModal('signup'); setIsMobileMenuOpen(false); }}
-              className="p-2.5 rounded-lg text-left bg-amber-50 hover:bg-amber-100 text-amber-950 font-bold border border-amber-200"
+              className="p-2.5 rounded-lg text-left bg-accent-subtle hover:bg-accent-subtle/80 text-accent-dark font-bold border border-accent/40"
             >
               ✨ Register Vendor
             </button>
@@ -619,7 +619,7 @@ export const Navbar: React.FC = () => {
             </button>
             <button 
               onClick={() => { setIsDesignSelectorOpen(true); setIsMobileMenuOpen(false); }}
-              className="text-amber-700 font-semibold"
+              className="text-accent font-semibold"
             >
               🎨 Theme & Layout
             </button>

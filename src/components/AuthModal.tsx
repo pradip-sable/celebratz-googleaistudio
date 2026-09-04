@@ -248,7 +248,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
   const content = (
     <div className={`bg-white rounded-3xl border border-stone-200 shadow-2xl overflow-hidden ${asPage ? 'max-w-2xl mx-auto my-6' : 'w-full max-w-xl max-h-[92vh] flex flex-col'}`}>
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-teal-950 via-teal-900 to-amber-950 p-6 text-white relative">
+      <div className="bg-gradient-to-r from-primary-dark via-primary to-accent-dark p-6 text-white relative">
         {!asPage && (
           <button
             onClick={closeAuthModal}
@@ -266,12 +266,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
             </div>
             <BrandName size="xl" weight="black" />
           </div>
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/30 uppercase tracking-widest font-semibold">
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/20 text-accent-light border border-accent/30 uppercase tracking-widest font-semibold">
             {activeCity?.name || 'Pune'}
           </span>
         </div>
 
-        <h1 className="font-serif font-bold text-2xl text-amber-100">
+        <h1 className="font-serif font-bold text-2xl text-accent-light">
           {mode === 'login' && 'Sign in to your account'}
           {mode === 'signup' && 'Create your Celebratz account'}
           {mode === 'forgot_password' && 'Reset your password'}
@@ -287,8 +287,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
       <div className="p-6 overflow-y-auto space-y-5">
         {/* Error / Success Banners */}
         {errorMessage && (
-          <div className="p-3.5 bg-rose-50 border border-rose-200 text-rose-800 rounded-2xl flex items-start gap-2.5 text-xs font-semibold">
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+          <div className="p-3.5 bg-destructive/10 border border-destructive/20 text-destructive rounded-2xl flex items-start gap-2.5 text-xs font-semibold">
+            <AlertCircle className="w-4 h-4 text-destructive shrink-0 mt-0.5" />
             <span>{errorMessage}</span>
           </div>
         )}
@@ -339,7 +339,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                   loginMethod === 'email' ? 'bg-white text-stone-900 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
-                <Mail className="w-4 h-4 text-teal-800" />
+                <Mail className="w-4 h-4 text-primary" />
                 <span>Email</span>
               </button>
             </div>
@@ -364,7 +364,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                   {!isCustomGoogle ? (
                     <div className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-stone-200 text-left">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-teal-900 text-amber-300 font-bold flex items-center justify-center text-xs">
+                        <div className="w-8 h-8 rounded-full bg-primary text-accent font-bold flex items-center justify-center text-xs">
                           PS
                         </div>
                         <div>
@@ -375,7 +375,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                       <button
                         type="button"
                         onClick={() => setIsCustomGoogle(true)}
-                        className="text-[10px] text-teal-800 hover:underline font-semibold"
+                        className="text-[10px] text-primary hover:underline font-semibold"
                       >
                         Change
                       </button>
@@ -388,7 +388,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                         value={googleEmail}
                         onChange={(e) => setGoogleEmail(e.target.value)}
                         placeholder="you@gmail.com"
-                        className="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden focus:border-teal-900"
+                        className="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden focus:border-primary"
                       />
                     </div>
                   )}
@@ -435,7 +435,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                         onChange={(e) => setPhoneNumber(e.target.value)}
                         placeholder="98230 45678"
                         maxLength={12}
-                        className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white"
+                        className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white"
                       />
                     </div>
                   </div>
@@ -447,7 +447,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                     <button
                       type="button"
                       onClick={() => setMobileAuthType('otp')}
-                      className={`text-xs font-semibold ${mobileAuthType === 'otp' ? 'text-teal-950 underline' : 'text-stone-500'}`}
+                      className={`text-xs font-semibold ${mobileAuthType === 'otp' ? 'text-primary underline' : 'text-stone-500'}`}
                     >
                       Login via OTP
                     </button>
@@ -455,7 +455,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                     <button
                       type="button"
                       onClick={() => setMobileAuthType('password')}
-                      className={`text-xs font-semibold ${mobileAuthType === 'password' ? 'text-teal-950 underline' : 'text-stone-500'}`}
+                      className={`text-xs font-semibold ${mobileAuthType === 'password' ? 'text-primary underline' : 'text-stone-500'}`}
                     >
                       Use Password
                     </button>
@@ -473,7 +473,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                             onClick={() => {
                               setOtpValue(['1', '2', '3', '4', '5', '6']);
                             }}
-                            className="text-[10px] text-amber-700 hover:text-amber-900 font-bold bg-amber-50 px-2 py-0.5 rounded border border-amber-200"
+                            className="text-[10px] text-accent hover:text-accent-dark font-bold bg-accent-subtle px-2 py-0.5 rounded border border-accent/30"
                           >
                             Auto-fill (123456)
                           </button>
@@ -487,7 +487,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                               maxLength={1}
                               value={digit}
                               onChange={(e) => handleOtpChange(idx, e.target.value)}
-                              className="w-10 h-11 text-center font-bold text-base bg-stone-50 border border-stone-300 rounded-xl focus:border-teal-900 focus:bg-white outline-hidden"
+                              className="w-10 h-11 text-center font-bold text-base bg-stone-50 border border-stone-300 rounded-xl focus:border-primary focus:bg-white outline-hidden"
                             />
                           ))}
                         </div>
@@ -499,7 +499,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                             <button
                               type="button"
                               onClick={handleSendOtp}
-                              className="text-teal-900 font-bold hover:underline"
+                              className="text-primary font-bold hover:underline"
                             >
                               Resend OTP
                             </button>
@@ -523,7 +523,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white"
+                        className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white"
                       />
                       <button
                         type="button"
@@ -539,7 +539,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3 bg-teal-900 hover:bg-teal-950 text-white rounded-xl text-xs font-bold shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  className="w-full py-3 bg-primary hover:bg-primary-dark text-primary-foreground rounded-xl text-xs font-bold shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
                 >
                   {isLoading ? (
                     <RefreshCw className="w-4 h-4 animate-spin" />
@@ -567,7 +567,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="priya.sharma@example.com"
-                      className="w-full bg-stone-50 border border-stone-300 rounded-xl py-2.5 pl-9 pr-3 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white"
+                      className="w-full bg-stone-50 border border-stone-300 rounded-xl py-2.5 pl-9 pr-3 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white"
                     />
                   </div>
                 </div>
@@ -580,7 +580,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                     <button
                       type="button"
                       onClick={() => setMode('forgot_password')}
-                      className="text-[11px] text-teal-800 hover:underline font-semibold"
+                      className="text-[11px] text-primary hover:underline font-semibold"
                     >
                       Forgot password?
                     </button>
@@ -592,7 +592,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full bg-stone-50 border border-stone-300 rounded-xl py-2.5 pl-9 pr-9 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white"
+                      className="w-full bg-stone-50 border border-stone-300 rounded-xl py-2.5 pl-9 pr-9 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white"
                     />
                     <button
                       type="button"
@@ -610,7 +610,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                       type="checkbox"
                       checked={rememberMe}
                       onChange={(e) => setRememberMe(e.target.checked)}
-                      className="rounded text-teal-900 focus:ring-teal-900"
+                      className="rounded text-primary focus:ring-primary"
                     />
                     <span>Remember me on this browser</span>
                   </label>
@@ -619,7 +619,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3 bg-teal-900 hover:bg-teal-950 text-white rounded-xl text-xs font-bold shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  className="w-full py-3 bg-primary hover:bg-primary-dark text-primary-foreground rounded-xl text-xs font-bold shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
                 >
                   {isLoading ? (
                     <RefreshCw className="w-4 h-4 animate-spin" />
@@ -646,10 +646,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                     closeAuthModal();
                     if (asPage) setActiveRoute('customer-dashboard');
                   }}
-                  className="p-2 rounded-xl bg-stone-50 hover:bg-teal-50 border border-stone-200 text-left transition-colors cursor-pointer group"
+                  className="p-2 rounded-xl bg-stone-50 hover:bg-primary-subtle border border-stone-200 text-left transition-colors cursor-pointer group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-teal-950 group-hover:text-teal-900">
-                    <UserIcon className="w-3.5 h-3.5 text-teal-700" />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-primary group-hover:text-primary-dark">
+                    <UserIcon className="w-3.5 h-3.5 text-primary" />
                     <span>Customer</span>
                   </div>
                   <p className="text-[10px] text-stone-500 truncate">Priya Sharma</p>
@@ -662,10 +662,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                     closeAuthModal();
                     if (asPage) setActiveRoute('vendor-dashboard');
                   }}
-                  className="p-2 rounded-xl bg-stone-50 hover:bg-amber-50 border border-stone-200 text-left transition-colors cursor-pointer group"
+                  className="p-2 rounded-xl bg-stone-50 hover:bg-accent-subtle border border-stone-200 text-left transition-colors cursor-pointer group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-stone-900 group-hover:text-amber-800">
-                    <Store className="w-3.5 h-3.5 text-amber-600" />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-stone-900 group-hover:text-accent-dark">
+                    <Store className="w-3.5 h-3.5 text-accent" />
                     <span>Vendor</span>
                   </div>
                   <p className="text-[10px] text-stone-500 truncate">Rajesh Patil</p>
@@ -678,10 +678,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                     closeAuthModal();
                     if (asPage) setActiveRoute('admin-panel');
                   }}
-                  className="p-2 rounded-xl bg-stone-50 hover:bg-rose-50 border border-stone-200 text-left transition-colors cursor-pointer group"
+                  className="p-2 rounded-xl bg-stone-50 hover:bg-destructive/10 border border-stone-200 text-left transition-colors cursor-pointer group"
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-stone-900 group-hover:text-rose-900">
-                    <ShieldCheck className="w-3.5 h-3.5 text-rose-700" />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-stone-900 group-hover:text-destructive">
+                    <ShieldCheck className="w-3.5 h-3.5 text-destructive" />
                     <span>Admin</span>
                   </div>
                   <p className="text-[10px] text-stone-500 truncate">Pradip Sable</p>
@@ -705,12 +705,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                   onClick={() => setSignupRole('customer')}
                   className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
                     signupRole === 'customer'
-                      ? 'border-teal-900 bg-teal-50/70 shadow-xs ring-1 ring-teal-900'
+                      ? 'border-primary bg-primary-subtle/70 shadow-xs ring-1 ring-primary'
                       : 'border-stone-200 hover:border-stone-300 bg-stone-50'
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-1">
-                    <UserIcon className={`w-4 h-4 ${signupRole === 'customer' ? 'text-teal-900' : 'text-stone-500'}`} />
+                    <UserIcon className={`w-4 h-4 ${signupRole === 'customer' ? 'text-primary' : 'text-stone-500'}`} />
                     <span className="font-serif font-bold text-xs text-stone-900">Event Host / Planner</span>
                   </div>
                   <p className="text-[11px] text-stone-500">I want to discover venues & book vendors</p>
@@ -721,12 +721,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                   onClick={() => setSignupRole('vendor')}
                   className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
                     signupRole === 'vendor'
-                      ? 'border-amber-600 bg-amber-50/70 shadow-xs ring-1 ring-amber-600'
+                      ? 'border-accent bg-accent-subtle/70 shadow-xs ring-1 ring-accent'
                       : 'border-stone-200 hover:border-stone-300 bg-stone-50'
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-1">
-                    <Store className={`w-4 h-4 ${signupRole === 'vendor' ? 'text-amber-700' : 'text-stone-500'}`} />
+                    <Store className={`w-4 h-4 ${signupRole === 'vendor' ? 'text-accent' : 'text-stone-500'}`} />
                     <span className="font-serif font-bold text-xs text-stone-900">Pune Vendor / Venue</span>
                   </div>
                   <p className="text-[11px] text-stone-500">I want to list my business & receive leads</p>
@@ -736,9 +736,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
 
             {/* Vendor Specific Inputs */}
             {signupRole === 'vendor' && (
-              <div className="p-3.5 bg-amber-50/80 rounded-2xl border border-amber-200/80 space-y-3">
+              <div className="p-3.5 bg-accent-subtle/80 rounded-2xl border border-accent/40 space-y-3">
                 <div>
-                  <label className="block text-[11px] font-bold text-amber-950 uppercase tracking-wider mb-1">
+                  <label className="block text-[11px] font-bold text-accent-dark uppercase tracking-wider mb-1">
                     Business / Brand Name *
                   </label>
                   <input
@@ -747,19 +747,19 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                     value={businessName}
                     onChange={(e) => setBusinessName(e.target.value)}
                     placeholder="e.g. Royal Heritage Banquets, LensCraft Studio"
-                    className="w-full bg-white border border-amber-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden focus:border-amber-600"
+                    className="w-full bg-white border border-accent/40 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden focus:border-accent"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-bold text-amber-950 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-bold text-accent-dark uppercase tracking-wider mb-1">
                       Primary Service
                     </label>
                     <select
                       value={selectedCategory}
                       onChange={(e) => setSelectedCategory(e.target.value as CategoryId)}
-                      className="w-full bg-white border border-amber-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden focus:border-amber-600"
+                      className="w-full bg-white border border-accent/40 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden focus:border-accent"
                     >
                       {CATEGORIES.map(cat => (
                         <option key={cat.id} value={cat.id}>{cat.name}</option>
@@ -768,13 +768,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-amber-950 uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-bold text-accent-dark uppercase tracking-wider mb-1">
                       Pune Locality
                     </label>
                     <select
                       value={selectedLocality}
                       onChange={(e) => setSelectedLocality(e.target.value)}
-                      className="w-full bg-white border border-amber-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden focus:border-amber-600"
+                      className="w-full bg-white border border-accent/40 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden focus:border-accent"
                     >
                       {PUNE_LOCALITIES.map(loc => (
                         <option key={loc} value={loc}>{loc}</option>
@@ -796,7 +796,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="e.g. Priya Sharma"
-                className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white"
+                className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white"
               />
             </div>
 
@@ -811,7 +811,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                   value={signupEmail}
                   onChange={(e) => setSignupEmail(e.target.value)}
                   placeholder="priya@example.com"
-                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white"
+                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white"
                 />
               </div>
 
@@ -824,7 +824,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                   value={signupPhone}
                   onChange={(e) => setSignupPhone(e.target.value)}
                   placeholder="+91 98230 45678"
-                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white"
+                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white"
                 />
               </div>
             </div>
@@ -839,7 +839,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                   value={signupPassword}
                   onChange={(e) => setSignupPassword(e.target.value)}
                   placeholder="Minimum 6 characters"
-                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white"
+                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white"
                 />
                 <button
                   type="button"
@@ -857,14 +857,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                 id="agree-terms"
                 checked={agreeTerms}
                 onChange={(e) => setAgreeTerms(e.target.checked)}
-                className="mt-0.5 rounded text-teal-900 focus:ring-teal-900"
+                className="mt-0.5 rounded text-primary focus:ring-primary"
               />
               <label htmlFor="agree-terms" className="cursor-pointer">
                 I agree to the{' '}
                 <button 
                   type="button" 
                   onClick={() => { closeAuthModal(); setActiveRoute('terms'); }}
-                  className="text-teal-900 font-bold hover:underline"
+                  className="text-primary font-bold hover:underline"
                 >
                   Terms of Service
                 </button>{' '}
@@ -872,7 +872,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                 <button 
                   type="button" 
                   onClick={() => { closeAuthModal(); setActiveRoute('privacy'); }}
-                  className="text-teal-900 font-bold hover:underline"
+                  className="text-primary font-bold hover:underline"
                 >
                   Privacy Policy
                 </button>.
@@ -882,7 +882,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 bg-teal-900 hover:bg-teal-950 text-white rounded-xl text-xs font-bold shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
+              className="w-full py-3 bg-primary hover:bg-primary-dark text-primary-foreground rounded-xl text-xs font-bold shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
               {isLoading ? (
                 <RefreshCw className="w-4 h-4 animate-spin" />
@@ -910,7 +910,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                 <input
                   type="text"
                   placeholder="priya.sharma@example.com or 9823045678"
-                  className="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden focus:border-teal-900"
+                  className="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden focus:border-primary"
                 />
               </div>
               <button
@@ -919,7 +919,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
                   setSuccessMessage('Password reset instructions sent to your email / SMS!');
                   setTimeout(() => setMode('login'), 2000);
                 }}
-                className="w-full py-2.5 bg-teal-900 hover:bg-teal-950 text-white font-bold rounded-xl text-xs shadow-xs"
+                className="w-full py-2.5 bg-primary hover:bg-primary-dark text-primary-foreground font-bold rounded-xl text-xs shadow-xs"
               >
                 Send Recovery Instructions
               </button>
@@ -929,7 +929,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
               <button
                 type="button"
                 onClick={() => setMode('login')}
-                className="text-xs font-bold text-stone-700 hover:text-teal-900 hover:underline"
+                className="text-xs font-bold text-stone-700 hover:text-primary hover:underline"
               >
                 &larr; Back to Sign In
               </button>
@@ -945,7 +945,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
               <button
                 type="button"
                 onClick={() => { setMode('signup'); setErrorMessage(null); setSuccessMessage(null); }}
-                className="font-bold text-teal-900 hover:underline cursor-pointer"
+                className="font-bold text-primary hover:underline cursor-pointer"
               >
                 Sign up free
               </button>
@@ -956,7 +956,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ asPage = false }) => {
               <button
                 type="button"
                 onClick={() => { setMode('login'); setErrorMessage(null); setSuccessMessage(null); }}
-                className="font-bold text-teal-900 hover:underline cursor-pointer"
+                className="font-bold text-primary hover:underline cursor-pointer"
               >
                 Sign in here
               </button>

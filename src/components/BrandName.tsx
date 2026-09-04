@@ -119,7 +119,7 @@ export const BrandName: React.FC<BrandNameProps> = ({
 
         {badge && (
           <span
-            className="ml-1.5 text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300 align-middle"
+            className="ml-1.5 text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase tracking-wider bg-gold-light text-gold-dark border border-gold align-middle"
             style={{ fontFamily: 'system-ui, sans-serif' }}
           >
             {badge}

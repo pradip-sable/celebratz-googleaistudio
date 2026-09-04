@@ -91,7 +91,7 @@ export const MobileBottomNav: React.FC = () => {
           )}
 
           {vendorPendingLeads > 0 && currentUser.role === 'vendor' && (
-            <span className="absolute top-0.5 right-3 w-4 h-4 bg-amber-500 text-stone-950 text-[9px] font-bold rounded-full flex items-center justify-center">
+            <span className="absolute top-0.5 right-3 w-4 h-4 bg-accent text-accent-foreground text-[9px] font-bold rounded-full flex items-center justify-center">
               {vendorPendingLeads}
             </span>
           )}
@@ -103,11 +103,11 @@ export const MobileBottomNav: React.FC = () => {
             onClick={() => navigateToVendorTab('listings')}
             className={`relative flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
               isVendorListingsActive
-                ? 'text-amber-700 font-bold'
+                ? 'text-secondary font-bold'
                 : 'text-stone-500 hover:text-stone-900'
             }`}
           >
-            <Store className={`w-5 h-5 ${isVendorListingsActive ? 'stroke-[2.5] text-amber-600' : 'text-amber-600'}`} />
+            <Store className={`w-5 h-5 ${isVendorListingsActive ? 'stroke-[2.5] text-accent' : 'text-accent'}`} />
             <span className="text-[10px] mt-0.5">Listings</span>
           </button>
         ) : (
@@ -115,14 +115,14 @@ export const MobileBottomNav: React.FC = () => {
             onClick={() => navigateToCustomerTab('wishlist')}
             className={`relative flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
               isWishlistActive
-                ? 'text-rose-600 font-bold'
+                ? 'text-rose font-bold'
                 : 'text-stone-500 hover:text-stone-900'
             }`}
           >
-            <Heart className={`w-5 h-5 ${isWishlistActive ? 'stroke-[2.5] fill-rose-600 text-rose-600' : 'text-rose-500'}`} />
+            <Heart className={`w-5 h-5 ${isWishlistActive ? 'stroke-[2.5] fill-rose text-rose' : 'text-rose'}`} />
             <span className="text-[10px] mt-0.5">Wishlist</span>
             {wishlist.length > 0 && (
-              <span className="absolute top-0.5 right-2 w-4 h-4 bg-rose text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+              <span className="absolute top-0.5 right-2 w-4 h-4 bg-rose text-rose-foreground text-[9px] font-bold rounded-full flex items-center justify-center">
                 {wishlist.length}
               </span>
             )}

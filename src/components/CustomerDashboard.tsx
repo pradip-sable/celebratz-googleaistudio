@@ -93,13 +93,13 @@ export const CustomerDashboard: React.FC = () => {
           <img
             src={currentUser.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'}
             alt=""
-            className="w-16 h-16 rounded-2xl object-cover border-2 border-amber-300"
+            className="w-16 h-16 rounded-2xl object-cover border-2 border-accent"
             referrerPolicy="no-referrer"
           />
           <div>
             <div className="flex items-center gap-2">
               <h1 className="font-serif font-bold text-xl sm:text-2xl text-stone-900">{currentUser.fullName}</h1>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-teal-50 text-teal-900 border border-teal-200">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary-subtle text-primary border border-border-subtle">
                 Customer
               </span>
             </div>
@@ -112,7 +112,7 @@ export const CustomerDashboard: React.FC = () => {
           <button
             onClick={() => setActiveTab('requests')}
             className={`px-4 py-2 rounded-xl transition-all ${
-              activeTab === 'requests' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+              activeTab === 'requests' ? 'bg-white text-primary shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
             }`}
           >
             My Requests ({myEnquiries.length})
@@ -120,7 +120,7 @@ export const CustomerDashboard: React.FC = () => {
           <button
             onClick={() => setActiveTab('wishlist')}
             className={`px-4 py-2 rounded-xl transition-all ${
-              activeTab === 'wishlist' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+              activeTab === 'wishlist' ? 'bg-white text-primary shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
             }`}
           >
             Wishlist ({myWishlistListings.length})
@@ -128,7 +128,7 @@ export const CustomerDashboard: React.FC = () => {
           <button
             onClick={() => setActiveTab('reviews')}
             className={`px-4 py-2 rounded-xl transition-all ${
-              activeTab === 'reviews' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+              activeTab === 'reviews' ? 'bg-white text-primary shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
             }`}
           >
             My Reviews ({myReviews.length})
@@ -136,7 +136,7 @@ export const CustomerDashboard: React.FC = () => {
           <button
             onClick={() => setActiveTab('profile')}
             className={`px-4 py-2 rounded-xl transition-all ${
-              activeTab === 'profile' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+              activeTab === 'profile' ? 'bg-white text-primary shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
             }`}
           >
             Profile
@@ -151,7 +151,7 @@ export const CustomerDashboard: React.FC = () => {
             <h2 className="font-serif font-bold text-xl text-stone-900">Celebration Enquiries & Booking Requests</h2>
             <button
               onClick={() => setActiveRoute('search')}
-              className="text-xs font-bold text-teal-900 hover:underline"
+              className="text-xs font-bold text-primary hover:underline"
             >
               + Find another vendor
             </button>
@@ -166,7 +166,7 @@ export const CustomerDashboard: React.FC = () => {
               </p>
               <button
                 onClick={() => setActiveRoute('search')}
-                className="px-4 py-2 bg-teal-900 text-white rounded-xl text-xs font-bold"
+                className="px-4 py-2 bg-primary hover:bg-primary-dark text-primary-foreground rounded-xl text-xs font-bold"
               >
                 Browse Pune Vendors
               </button>
@@ -198,7 +198,7 @@ export const CustomerDashboard: React.FC = () => {
                                   setActiveRoute('packages');
                                 }
                               }}
-                              className="font-serif font-bold text-base text-stone-900 hover:text-teal-900 cursor-pointer"
+                              className="font-serif font-bold text-base text-stone-900 hover:text-primary cursor-pointer"
                             >
                               {enquiry.comboPackageTitle || enquiry.listingTitle}
                             </h3>
@@ -213,7 +213,7 @@ export const CustomerDashboard: React.FC = () => {
                       {/* Status Badge */}
                       <div>
                         {enquiry.vendorStatus === 'pending' && (
-                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-300">
+                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-gold-light/50 text-gold-dark border border-gold">
                             <Clock className="w-3.5 h-3.5" />
                             Pending Vendor Review
                           </span>
@@ -235,9 +235,9 @@ export const CustomerDashboard: React.FC = () => {
 
                     {/* Attached Package / Combo Card for Customer */}
                     {(enquiry.comboPackageTitle || enquiry.selectedPackageName) && (
-                      <div className="p-3 bg-amber-50/70 border border-amber-200 rounded-xl flex items-center justify-between gap-2 text-xs">
+                      <div className="p-3 bg-accent-subtle/50 border border-accent/30 rounded-xl flex items-center justify-between gap-2 text-xs">
                         <div className="flex items-center gap-2 min-w-0">
-                          <span className="w-6 h-6 rounded-md bg-teal-900 text-amber-300 flex items-center justify-center font-bold text-xs shrink-0">
+                          <span className="w-6 h-6 rounded-md bg-primary text-accent flex items-center justify-center font-bold text-xs shrink-0">
                             {enquiry.comboPackageTitle ? '🌟' : '🎁'}
                           </span>
                           <div className="min-w-0">
@@ -250,9 +250,9 @@ export const CustomerDashboard: React.FC = () => {
                           </div>
                         </div>
                         {enquiry.selectedPackagePrice && (
-                          <div className="text-right shrink-0 bg-white px-2.5 py-1 rounded-lg border border-amber-200">
+                          <div className="text-right shrink-0 bg-white px-2.5 py-1 rounded-lg border border-border">
                             <span className="text-[9px] uppercase font-bold text-stone-400 block">Tier Price</span>
-                            <span className="font-serif font-extrabold text-teal-950">
+                            <span className="font-serif font-extrabold text-primary">
                               {formatIndianCurrency(enquiry.selectedPackagePrice)}
                             </span>
                           </div>
@@ -272,7 +272,7 @@ export const CustomerDashboard: React.FC = () => {
                       </div>
 
                       {enquiry.vendorResponseNote && (
-                        <div className="pt-2 border-t border-stone-200/80 text-teal-950 font-medium">
+                        <div className="pt-2 border-t border-stone-200/80 text-primary font-medium">
                           <span className="font-bold text-stone-900">Vendor Reply:</span> "{enquiry.vendorResponseNote}"
                         </div>
                       )}
@@ -280,9 +280,9 @@ export const CustomerDashboard: React.FC = () => {
 
                     {/* Post-Event Review Trigger (if accepted and date has passed) */}
                     {isAccepted && isEventPast && !hasReviewed && (
-                      <div className="p-4 bg-amber-50/70 border border-amber-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+                      <div className="p-4 bg-accent-subtle/50 border border-accent/30 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3">
                         <div className="flex items-center gap-2.5">
-                          <Sparkles className="w-5 h-5 text-amber-600 shrink-0" />
+                          <Sparkles className="w-5 h-5 text-accent shrink-0" />
                           <div>
                             <span className="font-bold text-xs text-stone-900">Your event date has passed!</span>
                             <p className="text-[11px] text-stone-600">How was your celebration with {enquiry.vendorName}? Leave a verified review.</p>
@@ -290,7 +290,7 @@ export const CustomerDashboard: React.FC = () => {
                         </div>
                         <button
                           onClick={() => setReviewingEnquiryId(enquiry.id)}
-                          className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-bold shadow-xs transition-colors shrink-0"
+                          className="px-4 py-2 bg-accent hover:bg-accent/90 text-accent-foreground rounded-xl text-xs font-bold shadow-xs transition-colors shrink-0"
                         >
                           Write Review
                         </button>
@@ -299,7 +299,7 @@ export const CustomerDashboard: React.FC = () => {
 
                     {/* Review Form Dialog inline */}
                     {reviewingEnquiryId === enquiry.id && (
-                      <div className="p-5 bg-white rounded-2xl border-2 border-amber-300 space-y-3 animate-in fade-in">
+                      <div className="p-5 bg-white rounded-2xl border-2 border-accent space-y-3 animate-in fade-in">
                         <div className="flex justify-between items-center">
                           <h4 className="font-bold text-sm text-stone-900">Review {enquiry.listingTitle}</h4>
                           <button onClick={() => setReviewingEnquiryId(null)} className="text-stone-400">
@@ -314,7 +314,7 @@ export const CustomerDashboard: React.FC = () => {
                           </div>
                         ) : (
                           <div className="space-y-3">
-                            <div className="flex items-center gap-1 text-amber-500">
+                            <div className="flex items-center gap-1 text-accent">
                               <span className="text-xs font-semibold text-stone-700 mr-2">Rating:</span>
                               {[1, 2, 3, 4, 5].map(star => (
                                 <button
@@ -323,7 +323,7 @@ export const CustomerDashboard: React.FC = () => {
                                   onClick={() => setReviewRating(star)}
                                   className="p-1 hover:scale-110 transition-transform"
                                 >
-                                  <Star className={`w-5 h-5 ${star <= reviewRating ? 'fill-amber-500 text-amber-500' : 'text-stone-300'}`} />
+                                  <Star className={`w-5 h-5 ${star <= reviewRating ? 'fill-accent text-accent' : 'text-stone-300'}`} />
                                 </button>
                               ))}
                             </div>
@@ -346,7 +346,7 @@ export const CustomerDashboard: React.FC = () => {
 
                             <button
                               onClick={() => handleReviewSubmit(enquiry)}
-                              className="px-5 py-2.5 bg-teal-900 text-white font-bold text-xs rounded-xl shadow-xs"
+                              className="px-5 py-2.5 bg-primary hover:bg-primary-dark text-primary-foreground font-bold text-xs rounded-xl shadow-xs"
                             >
                               Submit Verified Review
                             </button>
@@ -401,9 +401,9 @@ export const CustomerDashboard: React.FC = () => {
               {myReviews.map(r => (
                 <div key={r.id} className="bg-white rounded-2xl border border-stone-200 p-5 space-y-2">
                   <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-1 text-amber-500">
+                    <div className="flex items-center gap-1 text-accent">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className={`w-4 h-4 ${i < r.rating ? 'fill-amber-500' : 'text-stone-300'}`} />
+                        <Star key={i} className={`w-4 h-4 ${i < r.rating ? 'fill-accent' : 'text-stone-300'}`} />
                       ))}
                     </div>
                     <span className="text-[10px] text-stone-500">Submitted on {r.eventDate}</span>
@@ -428,14 +428,14 @@ export const CustomerDashboard: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setCustomerTab('requests')}
-                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-teal-900/40 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-primary/40 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-900 flex items-center justify-center border border-teal-200">
+                  <div className="w-12 h-12 rounded-2xl bg-primary-subtle text-primary flex items-center justify-center border border-border-subtle">
                     <CalendarCheck className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-teal-900 transition-colors">
+                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-primary transition-colors">
                       My Requests
                     </h3>
                     <p className="text-xs text-stone-500">
@@ -443,7 +443,7 @@ export const CustomerDashboard: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-teal-900 group-hover:text-white flex items-center justify-center transition-colors text-stone-600">
+                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-primary group-hover:text-primary-foreground flex items-center justify-center transition-colors text-stone-600">
                   <ChevronRight className="w-4 h-4" />
                 </div>
               </button>
@@ -476,14 +476,14 @@ export const CustomerDashboard: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setCustomerTab('reviews')}
-                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-amber-400 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-accent hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-200">
-                    <Star className="w-6 h-6 fill-amber-400 text-amber-500" />
+                  <div className="w-12 h-12 rounded-2xl bg-accent-subtle text-accent flex items-center justify-center border border-accent/30">
+                    <Star className="w-6 h-6 fill-accent text-accent" />
                   </div>
                   <div>
-                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-amber-800 transition-colors">
+                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-accent transition-colors">
                       My Reviews
                     </h3>
                     <p className="text-xs text-stone-500">
@@ -491,7 +491,7 @@ export const CustomerDashboard: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-amber-600 group-hover:text-white flex items-center justify-center transition-colors text-stone-600">
+                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-accent group-hover:text-accent-foreground flex items-center justify-center transition-colors text-stone-600">
                   <ChevronRight className="w-4 h-4" />
                 </div>
               </button>
@@ -504,7 +504,7 @@ export const CustomerDashboard: React.FC = () => {
               >
                 <div className="flex items-center gap-3.5">
                   <div className="w-12 h-12 rounded-2xl bg-stone-100 text-stone-700 flex items-center justify-center border border-stone-200">
-                    <Sparkles className="w-6 h-6 text-amber-600" />
+                    <Sparkles className="w-6 h-6 text-accent" />
                   </div>
                   <div>
                     <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-stone-950 transition-colors">
@@ -535,7 +535,7 @@ export const CustomerDashboard: React.FC = () => {
                   type="text"
                   value={currentUser.fullName}
                   onChange={(e) => setCurrentUser({ ...currentUser, fullName: e.target.value })}
-                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white transition-colors"
+                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white transition-colors"
                 />
               </div>
 
@@ -561,13 +561,13 @@ export const CustomerDashboard: React.FC = () => {
                     value={currentUser.phoneNumber || ''}
                     onChange={(e) => setCurrentUser({ ...currentUser, phoneNumber: e.target.value })}
                     placeholder="+91 98230 45678"
-                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-teal-900 focus:bg-white transition-colors"
+                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white transition-colors"
                   />
                 </div>
               </div>
 
-              <div className="p-3 bg-amber-50 rounded-2xl border border-amber-200/80 flex items-start gap-2.5 text-xs text-amber-900">
-                <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+              <div className="p-3 bg-gold-light/40 rounded-2xl border border-gold flex items-start gap-2.5 text-xs text-gold-dark">
+                <ShieldCheck className="w-4 h-4 text-gold-dark shrink-0 mt-0.5" />
                 <span>
                   <strong>Phone Verification Active</strong>: Your phone number is shared only with vendors whose listings you request, ensuring transparent communication for date holds and quotes.
                 </span>
@@ -585,7 +585,7 @@ export const CustomerDashboard: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => openAuthModal('signup')}
-                    className="px-4 py-2 bg-teal-50 hover:bg-teal-100 text-teal-900 font-bold rounded-xl text-xs transition-colors cursor-pointer border border-teal-200"
+                    className="px-4 py-2 bg-primary-subtle hover:bg-primary-subtle/80 text-primary font-bold rounded-xl text-xs transition-colors cursor-pointer border border-border-subtle"
                   >
                     Create Another Account
                   </button>

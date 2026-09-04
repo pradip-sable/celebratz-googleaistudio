@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Listing, ComboPackage, BundleServiceItem, EventType, CategoryId } from '../types';
-import { EVENT_TYPES } from '../data/categories';
+import { EVENT_TYPES, formatEventType } from '../data/categories';
 import { formatIndianCurrency, get24HourEditStatus } from '../utils/theme';
 import { SubmissionConfirmationModal, SubmissionDetails } from './SubmissionConfirmationModal';
 import { useModalScrollLock } from '../hooks/useModalScrollLock';
@@ -334,13 +334,13 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
         className="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-stone-200 overflow-hidden relative text-left"
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-stone-200 flex items-center justify-between bg-gradient-to-r from-teal-900 to-teal-950 text-white">
+        <div className="px-6 py-4 border-b border-stone-200 flex items-center justify-between bg-gradient-to-r from-primary-dark to-primary text-primary-foreground">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300">
+            <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/40 flex items-center justify-center text-accent">
               <Layers className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-accent">
                 Multi-Service Package Builder
               </span>
               <h3 className="font-serif font-bold text-lg text-white">
@@ -361,18 +361,18 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
         {/* Modal Form Content */}
         <form onSubmit={handleSubmit} className="overflow-y-auto p-6 space-y-6 flex-1 text-left">
           {initialCombo && !cooldownStatus.canEdit && (
-            <div className="p-4 bg-amber-50 border border-amber-300 rounded-2xl flex items-start gap-3 text-xs text-amber-950">
-              <div className="w-8 h-8 rounded-xl bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-800 shrink-0 mt-0.5">
+            <div className="p-4 bg-gold-light/40 border border-gold rounded-2xl flex items-start gap-3 text-xs text-gold-dark">
+              <div className="w-8 h-8 rounded-xl bg-gold-light border border-gold flex items-center justify-center text-gold-dark shrink-0 mt-0.5">
                 <Lock className="w-4 h-4" />
               </div>
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-amber-950">24-Hour Edit Restriction Active</span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-200 text-amber-950">
+                  <span className="font-bold text-gold-dark">24-Hour Edit Restriction Active</span>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-gold-light text-gold-dark">
                     {cooldownStatus.formattedRemaining} left
                   </span>
                 </div>
-                <p className="text-[11px] text-amber-900 leading-relaxed">
+                <p className="text-[11px] text-gold-dark leading-relaxed">
                   This combo package was edited {cooldownStatus.lastEditedText}. Because package changes require verification before being republished, vendors are limited to 1 update per 24 hours.
                 </p>
               </div>
@@ -397,7 +397,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 placeholder="e.g. Royal Vivah Grand Combo: Lawn + Mandap Decor + Shahi Feast"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:border-teal-700 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:border-primary focus:outline-none"
                 required
               />
               <p className="text-[11px] text-stone-500">
@@ -414,7 +414,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                 value={badge}
                 onChange={e => setBadge(e.target.value)}
                 placeholder="e.g. 🌟 Best Value Wedding Combo"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:border-teal-700 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:border-primary focus:outline-none"
               />
             </div>
           </div>
@@ -429,7 +429,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
               value={description}
               onChange={e => setDescription(e.target.value)}
               placeholder="Explain why choosing this combined package gives the customer peace of mind, premium quality, and massive savings..."
-              className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:border-teal-700 focus:outline-none"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:border-primary focus:outline-none"
             />
           </div>
 
@@ -438,24 +438,24 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
             <div className="flex items-center justify-between">
               <div>
                 <h4 className="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
-                  <Building className="w-4 h-4 text-teal-800" />
+                  <Building className="w-4 h-4 text-primary" />
                   Select Services to Combine (Min. 2 Services)
                 </h4>
                 <p className="text-xs text-stone-500">
                   Select 2 or more of your active listings. Customer will receive a single all-in-one quote.
                 </p>
               </div>
-              <span className="text-xs font-bold px-2.5 py-1 bg-teal-50 text-teal-900 border border-teal-200 rounded-full">
+              <span className="text-xs font-bold px-2.5 py-1 bg-primary-subtle text-primary border border-border-subtle rounded-full">
                 {selectedListingIds.length} Services Selected
               </span>
             </div>
 
             {vendorListings.length < 2 ? (
-              <div className="p-4 bg-amber-50 rounded-2xl border border-amber-300 text-xs text-amber-950 space-y-1">
+              <div className="p-4 bg-gold-light/40 rounded-2xl border border-gold text-xs text-gold-dark space-y-1">
                 <span className="font-bold flex items-center gap-1.5">
                   ⚠️ Minimum 2 Active Listings Required
                 </span>
-                <p className="text-[11px] text-amber-900">
+                <p className="text-[11px] text-gold-dark">
                   Vendors can create multi-service combo bundles only for <strong>approved and active listings</strong>. You currently have {vendorListings.length} active listing{vendorListings.length === 1 ? '' : 's'}. Please ensure at least 2 listings are approved and live before creating a combo bundle.
                 </p>
               </div>
@@ -469,7 +469,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                       onClick={() => handleToggleListing(item.id)}
                       className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
                         isChecked 
-                          ? 'bg-teal-50/70 border-teal-700 shadow-xs' 
+                          ? 'bg-primary-subtle border-primary shadow-xs' 
                           : 'bg-white border-stone-200 hover:border-stone-300'
                       }`}
                     >
@@ -478,7 +478,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => {}} // handled by div click
-                          className="mt-1 w-4 h-4 rounded text-teal-800 focus:ring-teal-700 cursor-pointer"
+                          className="mt-1 w-4 h-4 rounded text-primary focus:ring-primary cursor-pointer"
                         />
                         <img
                           src={item.coverImage}
@@ -487,7 +487,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                           referrerPolicy="no-referrer"
                         />
                         <div className="min-w-0 flex-1">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-teal-800 block">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-primary block">
                             {(item.category || '').toUpperCase().replace('_', ' ')}
                           </span>
                           <h5 className="font-bold text-xs text-stone-900 truncate">{item.title}</h5>
@@ -507,7 +507,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
           {selectedListingIds.length > 0 && (
             <div className="space-y-4 pt-2 border-t border-stone-200">
               <h4 className="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-amber-600" />
+                <Sparkles className="w-4 h-4 text-accent" />
                 Customize Inclusions & Price Breakdown Per Service
               </h4>
 
@@ -553,7 +553,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                               key={i} 
                               className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white border border-stone-200 text-xs text-stone-800"
                             >
-                              <CheckCircle2 className="w-3 h-3 text-teal-700 shrink-0" />
+                              <CheckCircle2 className="w-3 h-3 text-primary shrink-0" />
                               <span>{inc}</span>
                               <button
                                 type="button"
@@ -605,9 +605,9 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
           )}
 
           {/* SECTION 4: SMART PRICING & SAVINGS CALCULATION ENGINE */}
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-amber-50 via-teal-50 to-stone-50 border border-amber-300/80 space-y-4">
+          <div className="p-5 rounded-2xl bg-gradient-to-br from-accent-subtle via-primary-subtle to-stone-50 border border-accent/40 space-y-4">
             <h4 className="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
-              <IndianRupee className="w-4 h-4 text-teal-900" />
+              <IndianRupee className="w-4 h-4 text-primary" />
               Smart Package Pricing & Discount Engine
             </h4>
 
@@ -624,8 +624,8 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
               </div>
 
               {/* Combo Price Input */}
-              <div className="p-3.5 bg-white rounded-xl border-2 border-teal-800 space-y-1">
-                <label className="text-[10px] font-bold uppercase text-teal-950 block">
+              <div className="p-3.5 bg-white rounded-xl border-2 border-primary space-y-1">
+                <label className="text-[10px] font-bold uppercase text-primary block">
                   Special Combo Bundle Price <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
@@ -635,11 +635,11 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                     placeholder="e.g. 150000"
                     value={comboPrice === 0 ? '' : comboPrice}
                     onChange={e => setComboPrice(e.target.value === '' ? 0 : Number(e.target.value))}
-                    className="w-full pl-6 pr-2 py-1 text-lg sm:text-xl font-bold font-serif text-teal-950 focus:outline-none"
+                    className="w-full pl-6 pr-2 py-1 text-lg sm:text-xl font-bold font-serif text-primary focus:outline-none"
                     required
                   />
                 </div>
-                <span className="text-[11px] text-teal-700 font-medium">All-in-one offer price</span>
+                <span className="text-[11px] text-primary font-medium">All-in-one offer price</span>
               </div>
 
               {/* Instant Savings Badge */}
@@ -666,7 +666,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
             {/* Guest Capacity */}
             <div className="space-y-2">
               <label className="text-xs font-bold text-stone-700 block flex items-center gap-1.5">
-                <Users className="w-3.5 h-3.5 text-teal-800" />
+                <Users className="w-3.5 h-3.5 text-primary" />
                 Target Guest Capacity Range
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -696,7 +696,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
             {/* Event Types */}
             <div className="space-y-2">
               <label className="text-xs font-bold text-stone-700 block flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-teal-800" />
+                <Calendar className="w-3.5 h-3.5 text-primary" />
                 Suitable Event Types
               </label>
               <div className="flex flex-wrap gap-1.5">
@@ -715,11 +715,11 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                       }}
                       className={`px-2.5 py-1 rounded-lg text-xs font-medium border transition-colors cursor-pointer ${
                         isSelected 
-                          ? 'bg-teal-900 text-white border-teal-900' 
+                          ? 'bg-primary text-primary-foreground border-primary' 
                           : 'bg-white text-stone-700 border-stone-200 hover:bg-stone-50'
                       }`}
                     >
-                      {type}
+                      {formatEventType(type)}
                     </button>
                   );
                 })}
@@ -736,7 +736,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
               {features.map((feat, idx) => (
                 <div key={idx} className="flex items-center justify-between p-2 rounded-xl bg-stone-50 border border-stone-200 text-xs">
                   <span className="flex items-center gap-2 text-stone-800">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-teal-800 shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
                     <span>{feat}</span>
                   </span>
                   <button
@@ -762,7 +762,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                     handleAddFeature();
                   }
                 }}
-                className="flex-1 px-3.5 py-2 rounded-xl border border-stone-200 text-xs focus:border-teal-700 focus:outline-none"
+                className="flex-1 px-3.5 py-2 rounded-xl border border-stone-200 text-xs focus:border-primary focus:outline-none"
               />
               <button
                 type="button"
@@ -789,16 +789,16 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
             type="button"
             onClick={handleSubmit}
             disabled={initialCombo ? !cooldownStatus.canEdit : false}
-            className="px-6 py-2.5 bg-teal-900 text-white rounded-xl text-xs font-bold shadow-md hover:bg-teal-950 transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-2.5 bg-primary text-primary-foreground rounded-xl text-xs font-bold shadow-md hover:bg-primary-dark transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {initialCombo && !cooldownStatus.canEdit ? (
               <>
-                <Lock className="w-4 h-4 text-amber-400" />
+                <Lock className="w-4 h-4 text-accent" />
                 <span>Locked ({cooldownStatus.formattedRemaining})</span>
               </>
             ) : (
               <>
-                <Sparkles className="w-4 h-4 text-amber-400" />
+                <Sparkles className="w-4 h-4 text-accent" />
                 <span>{initialCombo ? 'Review & Save Changes' : 'Review & Publish Combo'}</span>
               </>
             )}

@@ -38,7 +38,7 @@ import {
 import { Listing, CalendarStatus, ComboPackage } from '../types';
 import { useApp } from '../context/AppContext';
 import { formatIndianCurrency, getDaysAgoText } from '../utils/theme';
-import { CATEGORIES } from '../data/categories';
+import { CATEGORIES, formatEventType } from '../data/categories';
 import { getEffectivePrice } from '../utils/pricing';
 import { getGoogleMapsSearchUrl, getGoogleMapsDirectionsUrl, openGoogleMaps } from '../utils/mapUtils';
 import { ComboPackageDetailModal } from './ComboPackageDetailModal';
@@ -182,7 +182,7 @@ export const ListingDetailModal: React.FC = () => {
         {/* Sticky Modal Top Bar */}
         <div className="px-5 py-3.5 border-b border-stone-200 flex items-center justify-between bg-white/95 backdrop-blur-md sticky top-0 z-20">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-50 text-teal-900 border border-teal-200">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-primary-subtle text-primary border border-border-subtle">
               {categoryMeta?.name || listing.category}
             </span>
             <span className="text-xs text-stone-500 hidden sm:inline">&bull; {listing.locality}, Pune</span>
@@ -191,7 +191,7 @@ export const ListingDetailModal: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={handleNativeShare}
-              className="p-2 rounded-xl bg-stone-50 hover:bg-stone-100 text-stone-700 hover:text-teal-900 border border-stone-200 transition-colors flex items-center gap-1.5 cursor-pointer"
+              className="p-2 rounded-xl bg-stone-50 hover:bg-stone-100 text-stone-700 hover:text-primary border border-stone-200 transition-colors flex items-center gap-1.5 cursor-pointer"
               title="Share listing"
             >
               <Share2 className="w-4 h-4 text-stone-600" />
@@ -201,7 +201,7 @@ export const ListingDetailModal: React.FC = () => {
             <button
               onClick={() => toggleComparison(listing.id)}
               className={`p-2 rounded-xl text-xs font-medium border flex items-center gap-1.5 transition-colors ${
-                isCompared ? 'bg-amber-100 text-amber-900 border-amber-300' : 'bg-stone-50 hover:bg-stone-100 text-stone-700 border-stone-200'
+                isCompared ? 'bg-gold-light text-gold-dark border-gold' : 'bg-stone-50 hover:bg-stone-100 text-stone-700 border-stone-200'
               }`}
             >
               <Scale className="w-4 h-4" />
@@ -248,7 +248,7 @@ export const ListingDetailModal: React.FC = () => {
                     key={idx}
                     onClick={() => setActiveImageIndex(idx)}
                     className={`w-20 h-14 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${
-                      activeImageIndex === idx ? 'border-teal-800 scale-95 shadow-md' : 'border-transparent opacity-70 hover:opacity-100'
+                      activeImageIndex === idx ? 'border-primary scale-95 shadow-md' : 'border-transparent opacity-70 hover:opacity-100'
                     }`}
                   >
                     <img src={img} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
@@ -268,21 +268,21 @@ export const ListingDetailModal: React.FC = () => {
                       href={getGoogleMapsDirectionsUrl(listing)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs text-stone-600 hover:text-teal-900 font-medium bg-stone-100 hover:bg-stone-200/80 px-2.5 py-1 rounded-lg transition-colors group cursor-pointer"
+                      className="inline-flex items-center gap-1.5 text-xs text-stone-600 hover:text-primary font-medium bg-stone-100 hover:bg-stone-200/80 px-2.5 py-1 rounded-lg transition-colors group cursor-pointer"
                       title="Open location in Google Maps"
                     >
                       <MapPin className="w-3.5 h-3.5 text-rose-600 shrink-0" />
                       <span className="underline-offset-2 group-hover:underline">{listing.address}</span>
-                      <ExternalLink className="w-3 h-3 text-stone-400 group-hover:text-teal-900 shrink-0" />
+                      <ExternalLink className="w-3 h-3 text-stone-400 group-hover:text-primary shrink-0" />
                     </a>
 
                     <a
                       href={getGoogleMapsDirectionsUrl(listing)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-teal-50 text-teal-900 border border-teal-200 hover:bg-teal-100 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-primary-subtle text-primary border border-border-subtle hover:bg-primary-light transition-colors cursor-pointer"
                     >
-                      <Navigation className="w-3 h-3 text-teal-700" />
+                      <Navigation className="w-3 h-3 text-primary" />
                       <span>Navigate</span>
                     </a>
                   </>
@@ -297,14 +297,14 @@ export const ListingDetailModal: React.FC = () => {
                     href={listing.websiteUrl.startsWith('http') ? listing.websiteUrl : `https://${listing.websiteUrl}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs text-teal-900 hover:text-teal-950 font-semibold bg-teal-50/90 hover:bg-teal-100 border border-teal-200 px-2.5 py-1 rounded-lg transition-colors group cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-xs text-primary hover:text-primary-dark font-semibold bg-primary-subtle/90 hover:bg-primary-light border border-border-subtle px-2.5 py-1 rounded-lg transition-colors group cursor-pointer"
                     title="Visit Official Website"
                   >
-                    <Globe className="w-3.5 h-3.5 text-teal-700 shrink-0" />
+                    <Globe className="w-3.5 h-3.5 text-primary shrink-0" />
                     <span className="underline-offset-2 group-hover:underline">
                       {listing.websiteUrl.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
                     </span>
-                    <ExternalLink className="w-3 h-3 text-teal-600 group-hover:text-teal-900 shrink-0" />
+                    <ExternalLink className="w-3 h-3 text-primary group-hover:text-primary-dark shrink-0" />
                   </a>
                 )}
               </div>
@@ -316,17 +316,17 @@ export const ListingDetailModal: React.FC = () => {
                 <p className="text-xs text-stone-600 font-medium">
                   Managed by <span className="text-stone-900 font-bold">{listing.vendorName}</span> &bull; Verified Pune Vendor
                 </p>
-                <span className="inline-flex items-center gap-1 text-[11px] text-teal-900 bg-teal-50 px-2 py-0.5 rounded-md border border-teal-200 font-medium">
-                  <Clock className="w-3 h-3 text-teal-700" />
+                <span className="inline-flex items-center gap-1 text-[11px] text-primary bg-primary-subtle px-2 py-0.5 rounded-md border border-border-subtle font-medium">
+                  <Clock className="w-3 h-3 text-primary" />
                   <span>Response time: Usually within 2 hours</span>
                 </span>
                 <button
                   type="button"
                   onClick={handleNativeShare}
-                  className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-md transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-accent-dark bg-accent-subtle hover:bg-gold-light border border-gold px-2 py-0.5 rounded-md transition-colors cursor-pointer"
                   title="Share this listing"
                 >
-                  <Share2 className="w-3 h-3 text-amber-700" />
+                  <Share2 className="w-3 h-3 text-accent" />
                   <span>Share</span>
                 </button>
               </div>
@@ -334,15 +334,15 @@ export const ListingDetailModal: React.FC = () => {
 
             {/* Price Box: Tiered comparison summary if tiers exist, else flat price block */}
             {hasTiers ? (
-              <div className="bg-gradient-to-br from-amber-50 to-stone-50 p-4 rounded-2xl border border-amber-300 shrink-0 w-full sm:w-auto text-left sm:text-right shadow-2xs">
+              <div className="bg-gradient-to-br from-accent-subtle to-stone-50 p-4 rounded-2xl border border-accent shrink-0 w-full sm:w-auto text-left sm:text-right shadow-2xs">
                 <div className="flex items-center gap-1.5 sm:justify-end mb-0.5">
-                  <span className="text-[10px] uppercase font-bold text-amber-900 px-2.5 py-0.5 rounded-full bg-amber-200/80 tracking-wider">
+                  <span className="text-[10px] uppercase font-bold text-accent-dark px-2.5 py-0.5 rounded-full bg-accent-subtle tracking-wider">
                     Tiered Pricing ({activeTiers.length} Options)
                   </span>
                 </div>
                 <div className="flex items-baseline gap-1 sm:justify-end">
                   <span className="text-xs text-stone-500 font-medium mr-1">from</span>
-                  <span className="font-extrabold text-2xl sm:text-3xl text-teal-950 font-serif">
+                  <span className="font-extrabold text-2xl sm:text-3xl text-primary font-serif">
                     {formatIndianCurrency(effectivePrice)}
                   </span>
                   <span className="text-xs text-stone-500 font-medium">
@@ -351,7 +351,7 @@ export const ListingDetailModal: React.FC = () => {
                 </div>
                 <a 
                   href="#package-tiers"
-                  className="text-[11px] font-bold text-amber-800 hover:text-amber-950 underline mt-1 block"
+                  className="text-[11px] font-bold text-accent-dark hover:text-accent underline mt-1 block"
                 >
                   Compare All {activeTiers.length} Tiers Below &darr;
                 </a>
@@ -362,7 +362,7 @@ export const ListingDetailModal: React.FC = () => {
                   Starting Pricing
                 </span>
                 <div className="flex items-baseline gap-1 sm:justify-end">
-                  <span className="font-extrabold text-2xl sm:text-3xl text-teal-950 font-serif">
+                  <span className="font-extrabold text-2xl sm:text-3xl text-primary font-serif">
                     {formatIndianCurrency(listing.price_from ?? listing.startingPrice)}
                   </span>
                   <span className="text-xs text-stone-500 font-medium">
@@ -378,13 +378,13 @@ export const ListingDetailModal: React.FC = () => {
 
           {/* 2.5. Events Catered & Celebrations Offered */}
           {listing.eventTypes && listing.eventTypes.length > 0 && (
-            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-teal-50/70 via-stone-50 to-amber-50/60 border border-teal-200/90 space-y-2.5">
+            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-primary-subtle/70 via-stone-50 to-accent-subtle/60 border border-border-subtle space-y-2.5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
                 <h3 className="font-serif font-bold text-sm sm:text-base text-stone-900 flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
+                  <Sparkles className="w-4 h-4 text-accent shrink-0" />
                   <span>Celebrations & Event Types Offered</span>
                 </h3>
-                <span className="text-[10px] font-bold text-teal-900 bg-teal-100/90 px-2.5 py-0.5 rounded-full w-fit">
+                <span className="text-[10px] font-bold text-primary bg-primary-subtle px-2.5 py-0.5 rounded-full w-fit">
                   {listing.eventTypes.length} Event Formats Supported
                 </span>
               </div>
@@ -406,10 +406,10 @@ export const ListingDetailModal: React.FC = () => {
                   return (
                     <span
                       key={type}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-teal-300/80 text-stone-800 text-xs font-semibold shadow-2xs hover:border-teal-600 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-border text-stone-800 text-xs font-semibold shadow-2xs hover:border-primary transition-colors"
                     >
                       <span className="text-sm">{getIcon(type)}</span>
-                      <span>{type}</span>
+                      <span>{formatEventType(type)}</span>
                     </span>
                   );
                 })}
@@ -420,7 +420,7 @@ export const ListingDetailModal: React.FC = () => {
           {/* 3. Category-Specific Specs Matrix */}
           <div className="space-y-4">
             <h3 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-amber-600" />
+              <Sparkles className="w-4 h-4 text-accent" />
               Venue & Service Highlights
             </h3>
 
@@ -430,7 +430,7 @@ export const ListingDetailModal: React.FC = () => {
                 <>
                   <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
                     <div className="flex items-center gap-1.5 text-stone-500 text-xs mb-1">
-                      <Users className="w-4 h-4 text-teal-800" />
+                      <Users className="w-4 h-4 text-primary" />
                       <span>Capacity</span>
                     </div>
                     <div className="font-bold text-sm text-stone-900">
@@ -440,7 +440,7 @@ export const ListingDetailModal: React.FC = () => {
 
                   <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
                     <div className="flex items-center gap-1.5 text-stone-500 text-xs mb-1">
-                      <Car className="w-4 h-4 text-amber-700" />
+                      <Car className="w-4 h-4 text-secondary" />
                       <span>Parking</span>
                     </div>
                     <div className="font-bold text-sm text-stone-900">
@@ -604,13 +604,13 @@ export const ListingDetailModal: React.FC = () => {
           {listing.customAttributes && listing.customAttributes.length > 0 && (
             <div className="space-y-3">
               <h3 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
-                <Tag className="w-4 h-4 text-teal-800" />
+                <Tag className="w-4 h-4 text-primary" />
                 Special Features & Vendor Highlights
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {listing.customAttributes.map((attr, idx) => (
-                  <div key={idx} className="p-3.5 bg-teal-50/50 rounded-xl border border-teal-200/80 space-y-1">
-                    <div className="text-[10px] font-bold text-teal-900 uppercase tracking-wider">
+                  <div key={idx} className="p-3.5 bg-primary-subtle/50 rounded-xl border border-border-subtle space-y-1">
+                    <div className="text-[10px] font-bold text-primary uppercase tracking-wider">
                       {attr.label}
                     </div>
                     <div className="font-semibold text-xs sm:text-sm text-stone-900">
@@ -624,11 +624,11 @@ export const ListingDetailModal: React.FC = () => {
 
           {/* 5. ALL-IN-ONE MULTI-SERVICE COMBO PACKAGES (Combined Services) */}
           {availableCombos.length > 0 && (
-            <div className="space-y-3.5 p-5 rounded-3xl bg-gradient-to-br from-amber-500/10 via-teal-50/70 to-emerald-50/50 border-2 border-amber-300 shadow-xs">
+            <div className="space-y-3.5 p-5 rounded-3xl bg-gradient-to-br from-accent-subtle via-primary-subtle to-secondary-subtle border-2 border-accent shadow-xs">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-200/60 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-amber-700" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent-dark bg-accent-subtle px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-accent" />
                     Exclusive Bundled Deals
                   </span>
                   <h3 className="font-serif font-bold text-lg text-stone-900 mt-1">
@@ -645,7 +645,7 @@ export const ListingDetailModal: React.FC = () => {
                     setSelectedListingId(null);
                     setActiveRoute('packages');
                   }}
-                  className="px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-stone-950 text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs self-start sm:self-auto shrink-0"
+                  className="px-3.5 py-1.5 rounded-xl bg-accent hover:bg-accent-hover text-accent-foreground text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs self-start sm:self-auto shrink-0"
                 >
                   <Layers className="w-3.5 h-3.5" />
                   <span>Browse All /packages &rarr;</span>
@@ -656,14 +656,14 @@ export const ListingDetailModal: React.FC = () => {
                 {availableCombos.map(combo => (
                   <div 
                     key={combo.id}
-                    className="p-4 sm:p-5 rounded-2xl bg-white border border-amber-200/90 shadow-xs space-y-3 hover:border-amber-400 transition-all"
+                    className="p-4 sm:p-5 rounded-2xl bg-white border border-accent/30 shadow-xs space-y-3 hover:border-accent transition-all"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                       <div className="space-y-1">
                         <div className="flex flex-wrap items-center gap-2">
                           <h4 className="font-serif font-bold text-base text-stone-900">{combo.title}</h4>
                           {combo.badge && (
-                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold-light text-gold-dark border border-gold">
                               {combo.badge}
                             </span>
                           )}
@@ -672,10 +672,10 @@ export const ListingDetailModal: React.FC = () => {
                       </div>
 
                       {/* Pricing block */}
-                      <div className="sm:text-right shrink-0 bg-amber-50/60 sm:bg-transparent p-2.5 sm:p-0 rounded-xl">
+                      <div className="sm:text-right shrink-0 bg-accent-subtle/60 sm:bg-transparent p-2.5 sm:p-0 rounded-xl">
                         <span className="text-[10px] font-bold uppercase text-stone-500 block">Bundle Price</span>
                         <div className="flex items-baseline gap-1.5 sm:justify-end">
-                          <span className="font-serif font-extrabold text-xl sm:text-2xl text-teal-950">
+                          <span className="font-serif font-extrabold text-xl sm:text-2xl text-primary">
                             {formatIndianCurrency(combo.comboPrice)}
                           </span>
                           <span className="text-xs text-stone-500 line-through">
@@ -700,8 +700,8 @@ export const ListingDetailModal: React.FC = () => {
                               key={idx}
                               className="px-3 py-1.5 rounded-xl bg-stone-50 border border-stone-200 text-xs text-stone-800 flex items-center gap-1.5"
                             >
-                              <span className="w-2 h-2 rounded-full bg-teal-600 shrink-0" />
-                              <span className="font-bold text-teal-950 uppercase text-[10px]">{srv.category?.replace('_', ' ')}:</span>
+                              <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
+                              <span className="font-bold text-primary uppercase text-[10px]">{srv.category?.replace('_', ' ')}:</span>
                               <span className="truncate max-w-[200px]">{srv.listingTitle}</span>
                             </div>
                           ))
@@ -713,7 +713,7 @@ export const ListingDetailModal: React.FC = () => {
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-2 border-t border-stone-100">
                       <div className="text-[11px] text-stone-500 flex items-center gap-1">
                         <Users className="w-3.5 h-3.5 text-stone-400" />
-                        <span>Suitable for {combo.minGuestCapacity || 0}–{combo.maxGuestCapacity || 0} Guests &bull; {combo.eventTypes?.slice(0, 2).join(', ') || 'All Celebrations'}</span>
+                        <span>Suitable for {combo.minGuestCapacity || 0}–{combo.maxGuestCapacity || 0} Guests &bull; {combo.eventTypes?.slice(0, 2).map(formatEventType).join(', ') || 'All Celebrations'}</span>
                       </div>
 
                       <div className="flex gap-2 w-full sm:w-auto">
@@ -725,9 +725,9 @@ export const ListingDetailModal: React.FC = () => {
                         </button>
                         <button
                           onClick={() => openEnquiryForPackage(listing.id, undefined, combo)}
-                          className="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-teal-900 hover:bg-teal-950 text-white text-xs font-bold shadow-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                          className="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-primary hover:bg-primary-dark text-primary-foreground text-xs font-bold shadow-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                         >
-                          <Send className="w-3.5 h-3.5 text-amber-400" />
+                          <Send className="w-3.5 h-3.5 text-accent" />
                           <span>Request Combo Quote</span>
                         </button>
                       </div>
@@ -756,7 +756,7 @@ export const ListingDetailModal: React.FC = () => {
                       Compare inclusions across tiers. Each tier inherits the listing unit ({(listing.pricingUnit || 'event').replace('per_', '')}).
                     </p>
                   </div>
-                  <span className="text-xs text-amber-900 font-bold bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-300">
+                  <span className="text-xs text-gold-dark font-bold bg-gold-light px-2.5 py-0.5 rounded-full border border-gold">
                     {activePricingPackages.length} Tiers Available
                   </span>
                 </div>
@@ -767,7 +767,7 @@ export const ListingDetailModal: React.FC = () => {
                       key={idx} 
                       className={`p-4 rounded-2xl border flex flex-col justify-between space-y-3 transition-all ${
                         pkg.isPopular 
-                          ? 'bg-amber-50/50 border-amber-300 shadow-xs' 
+                          ? 'bg-accent-subtle/50 border-accent shadow-xs' 
                           : 'bg-stone-50/70 border-stone-200 hover:border-stone-300'
                       }`}
                     >
@@ -775,14 +775,14 @@ export const ListingDetailModal: React.FC = () => {
                         <div className="flex justify-between items-start">
                           <div>
                             {pkg.badge && (
-                              <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-200 text-amber-900 inline-block mb-1">
+                              <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-accent-subtle text-accent-dark inline-block mb-1">
                                 {pkg.badge}
                               </span>
                             )}
                             <h4 className="font-bold text-sm text-stone-900">{pkg.name}</h4>
                           </div>
                           <div className="text-right">
-                            <span className="font-serif font-extrabold text-base sm:text-lg text-teal-950 block">
+                            <span className="font-serif font-extrabold text-base sm:text-lg text-primary block">
                               {formatIndianCurrency(pkg.price)}
                             </span>
                             <span className="text-[10px] text-stone-500">
@@ -796,7 +796,7 @@ export const ListingDetailModal: React.FC = () => {
                         <ul className="space-y-1.5 pt-2 border-t border-stone-200/80">
                           {pkg.features.map((f, i) => (
                             <li key={i} className="text-xs text-stone-700 flex items-center gap-1.5">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-teal-700 shrink-0" />
+                              <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
                               <span>{f}</span>
                             </li>
                           ))}
@@ -805,9 +805,9 @@ export const ListingDetailModal: React.FC = () => {
 
                       <button
                         onClick={() => openEnquiryForPackage(listing.id, { id: pkg.id || pkg.name, name: pkg.name, price: pkg.price })}
-                        className="w-full mt-2 py-2.5 px-3.5 rounded-xl bg-teal-900 hover:bg-teal-950 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-[0.99]"
+                        className="w-full mt-2 py-2.5 px-3.5 rounded-xl bg-primary hover:bg-primary-dark text-primary-foreground text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-[0.99]"
                       >
-                        <Check className="w-3.5 h-3.5 text-amber-300" />
+                        <Check className="w-3.5 h-3.5 text-accent" />
                         <span>Choose this tier</span>
                       </button>
                     </div>
@@ -822,7 +822,7 @@ export const ListingDetailModal: React.FC = () => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-stone-100">
               <div>
                 <h3 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
-                  <CalendarIcon className="w-5 h-5 text-teal-800" />
+                  <CalendarIcon className="w-5 h-5 text-primary" />
                   Availability Calendar
                 </h3>
                 <p className="text-xs text-stone-500">
@@ -833,7 +833,7 @@ export const ListingDetailModal: React.FC = () => {
               {/* Staleness Badge */}
               <div className={`px-3 py-1 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 border self-start sm:self-auto ${
                 isStale 
-                  ? 'bg-amber-100 text-amber-900 border-amber-300' 
+                  ? 'bg-gold-light text-gold-dark border-gold' 
                   : 'bg-emerald-100 text-emerald-900 border-emerald-300'
               }`}>
                 <Clock className="w-3.5 h-3.5" />
@@ -843,11 +843,11 @@ export const ListingDetailModal: React.FC = () => {
 
             {/* If Stale (> 30 days old): Warning banner per approved design */}
             {isStale && (
-              <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2.5 text-xs text-amber-900">
-                <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <div className="p-3 bg-gold-light/40 border border-gold rounded-xl flex items-start gap-2.5 text-xs text-gold-dark">
+                <AlertTriangle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold">Availability updated more than 30 days ago.</span>
-                  <p className="text-[11px] text-amber-800 mt-0.5">
+                  <p className="text-[11px] text-gold-dark mt-0.5">
                     Dates may have changed since the last update. Please submit an enquiry to confirm exact current availability with the vendor.
                   </p>
                 </div>
@@ -883,7 +883,7 @@ export const ListingDetailModal: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setSelectedMonthOffset(0)}
-                    className="text-xs font-bold text-teal-800 hover:text-teal-950 underline cursor-pointer"
+                    className="text-xs font-bold text-primary hover:text-primary-dark underline cursor-pointer"
                   >
                     Current Month
                   </button>
@@ -998,9 +998,9 @@ export const ListingDetailModal: React.FC = () => {
                       href={getGoogleMapsDirectionsUrl(listing)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-teal-900 hover:bg-teal-950 text-amber-50 text-xs font-bold shadow-xs transition-all cursor-pointer"
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-primary-foreground text-xs font-bold shadow-xs transition-all cursor-pointer"
                     >
-                      <Navigation className="w-4 h-4 text-amber-300" />
+                      <Navigation className="w-4 h-4 text-gold-light" />
                       <span>Get Driving Directions</span>
                     </a>
 
@@ -1029,9 +1029,9 @@ export const ListingDetailModal: React.FC = () => {
               {/* Business Website Card in Location & Credentials Section */}
               {listing.websiteUrl && (
                 <div className="pt-3 border-t border-stone-100">
-                  <div className="p-3.5 bg-teal-50/70 rounded-xl border border-teal-200/80 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                  <div className="p-3.5 bg-primary-subtle/70 rounded-xl border border-border-subtle flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-9 h-9 rounded-lg bg-teal-900 text-amber-300 flex items-center justify-center shrink-0 shadow-2xs">
+                      <div className="w-9 h-9 rounded-lg bg-primary text-gold-light flex items-center justify-center shrink-0 shadow-2xs">
                         <Globe className="w-4 h-4" />
                       </div>
                       <div className="min-w-0">
@@ -1041,7 +1041,7 @@ export const ListingDetailModal: React.FC = () => {
                             Verified
                           </span>
                         </div>
-                        <p className="text-xs text-teal-950 font-medium truncate">
+                        <p className="text-xs text-primary font-medium truncate">
                           {listing.websiteUrl}
                         </p>
                       </div>
@@ -1051,10 +1051,10 @@ export const ListingDetailModal: React.FC = () => {
                       href={listing.websiteUrl.startsWith('http') ? listing.websiteUrl : `https://${listing.websiteUrl}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full sm:w-auto px-3.5 py-2 bg-teal-900 hover:bg-teal-950 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-2xs shrink-0 cursor-pointer"
+                      className="w-full sm:w-auto px-3.5 py-2 bg-primary hover:bg-primary-dark text-primary-foreground rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-2xs shrink-0 cursor-pointer"
                     >
                       <span>Visit Website</span>
-                      <ExternalLink className="w-3.5 h-3.5 text-amber-300" />
+                      <ExternalLink className="w-3.5 h-3.5 text-gold-light" />
                     </a>
                   </div>
                 </div>
@@ -1067,7 +1067,7 @@ export const ListingDetailModal: React.FC = () => {
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
-                  <Star className="w-5 h-5 fill-amber-500 text-amber-500" />
+                  <Star className="w-5 h-5 fill-accent text-accent" />
                   Verified Reviews ({reviews.length})
                 </h3>
                 <p className="text-xs text-stone-500">
@@ -1086,7 +1086,7 @@ export const ListingDetailModal: React.FC = () => {
                   <div key={rev.id} className="p-4 rounded-xl bg-white border border-stone-200 space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-teal-900 text-amber-300 font-bold text-xs flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-full bg-primary text-gold-light font-bold text-xs flex items-center justify-center">
                           {rev.customerName[0]}
                         </div>
                         <div>
@@ -1094,11 +1094,11 @@ export const ListingDetailModal: React.FC = () => {
                           <div className="text-[10px] text-stone-500">Celebrated {rev.eventType} &bull; {rev.eventDate}</div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-0.5 text-amber-500">
+                      <div className="flex items-center gap-0.5 text-accent">
                         {Array.from({ length: 5 }).map((_, i) => (
                           <Star 
                             key={i} 
-                            className={`w-3.5 h-3.5 ${i < rev.rating ? 'fill-amber-500' : 'text-stone-300'}`} 
+                            className={`w-3.5 h-3.5 ${i < rev.rating ? 'fill-accent' : 'text-stone-300'}`} 
                           />
                         ))}
                       </div>
@@ -1166,8 +1166,8 @@ export const ListingDetailModal: React.FC = () => {
             {/* Header */}
             <div className="flex items-center justify-between pb-3 border-b border-stone-100">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-amber-100 text-amber-900">
-                  <Share2 className="w-4 h-4 text-amber-800" />
+                <div className="p-2 rounded-xl bg-gold-light text-gold-dark">
+                  <Share2 className="w-4 h-4 text-accent-dark" />
                 </div>
                 <div>
                   <h3 className="font-serif font-bold text-base text-stone-900">Share Celebration Listing</h3>
@@ -1192,7 +1192,7 @@ export const ListingDetailModal: React.FC = () => {
                 referrerPolicy="no-referrer"
               />
               <div className="min-w-0 space-y-0.5">
-                <span className="px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-teal-100 text-teal-900">
+                <span className="px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-primary-subtle text-primary">
                   {categoryMeta?.name || listing.category}
                 </span>
                 <h4 className="font-bold text-xs text-stone-900 truncate">{listing.title}</h4>
@@ -1218,7 +1218,7 @@ export const ListingDetailModal: React.FC = () => {
                   className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shrink-0 cursor-pointer shadow-xs ${
                     copiedLink
                       ? 'bg-emerald-600 text-white'
-                      : 'bg-teal-900 hover:bg-teal-950 text-white'
+                      : 'bg-primary hover:bg-primary-dark text-primary-foreground'
                   }`}
                 >
                   {copiedLink ? (
@@ -1269,7 +1269,7 @@ export const ListingDetailModal: React.FC = () => {
                   rel="noopener noreferrer"
                   className="p-2.5 rounded-xl bg-stone-900 hover:bg-black text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-2xs cursor-pointer"
                 >
-                  <Send className="w-3.5 h-3.5 text-amber-300" />
+                  <Send className="w-3.5 h-3.5 text-accent" />
                   <span>X (Twitter)</span>
                 </a>
 

@@ -5,7 +5,7 @@ export const PrivacyPolicyView: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto py-8 px-4 space-y-6 text-stone-800 text-left pb-24">
       <div className="border-b border-stone-200 pb-4">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 block">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-accent block">
           Legal & Trust &bull; Pune Launch
         </span>
         <h1 className="font-serif font-extrabold text-2xl sm:text-3xl text-stone-900 mt-1">
@@ -22,9 +22,9 @@ export const PrivacyPolicyView: React.FC = () => {
           </p>
         </section>
 
-        <section className="space-y-2 p-4 bg-amber-50/70 border border-amber-200 rounded-2xl">
+        <section className="space-y-2 p-4 bg-accent-subtle/50 border border-accent/30 rounded-2xl">
           <h3 className="font-bold text-base text-stone-900 flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-amber-700" />
+            <ShieldCheck className="w-5 h-5 text-accent" />
             2. Customer Contact Sharing with Vendors
           </h3>
           <p className="text-xs text-stone-800 font-medium">
@@ -39,7 +39,7 @@ export const PrivacyPolicyView: React.FC = () => {
           <h3 className="font-bold text-base text-stone-900">3. Information We Collect</h3>
           <ul className="list-disc pl-5 space-y-1 text-xs sm:text-sm">
             <li><strong>Account Details:</strong> Name, email address, profile avatar, and verified or double-entered phone numbers.</li>
-            <li><strong>Event Specifics:</strong> Event type (Wedding, Engagement, Birthday, Naming Ceremony, Corporate), event dates, estimated guest count, and custom notes.</li>
+            <li><strong>Event Specifics:</strong> Event type (Wedding, Engagement, Birthday, Naming Ceremony, Corporate Event), event dates, estimated guest count, and custom notes.</li>
             <li><strong>Vendor Data:</strong> Business name, Pune locality, capacity specs, pricing tiers, and calendar availability entries.</li>
           </ul>
         </section>
@@ -54,7 +54,7 @@ export const PrivacyPolicyView: React.FC = () => {
         <section className="space-y-2">
           <h3 className="font-bold text-base text-stone-900">5. Contact Our Privacy Team</h3>
           <p>
-            If you have questions about your stored data, account deletion, or vendor privacy protocols, reach out directly to our team at <a href="mailto:celebratzapp@gmail.com" className="text-teal-900 font-bold underline">celebratzapp@gmail.com</a>.
+            If you have questions about your stored data, account deletion, or vendor privacy protocols, reach out directly to our team at <a href="mailto:celebratzapp@gmail.com" className="text-primary font-bold underline">celebratzapp@gmail.com</a>.
           </p>
         </section>
       </div>
@@ -66,7 +66,7 @@ export const TermsOfServiceView: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto py-8 px-4 space-y-6 text-stone-800 text-left pb-24">
       <div className="border-b border-stone-200 pb-4">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 block">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-accent block">
           Legal & Trust &bull; Pune Launch
         </span>
         <h1 className="font-serif font-extrabold text-2xl sm:text-3xl text-stone-900 mt-1">
@@ -112,7 +112,7 @@ export const TermsOfServiceView: React.FC = () => {
         <section className="space-y-2">
           <h3 className="font-bold text-base text-stone-900">5. Support & Inquiries</h3>
           <p>
-            For support inquiries or vendor onboarding assistance, please email <a href="mailto:celebratzapp@gmail.com" className="text-teal-900 font-bold underline">celebratzapp@gmail.com</a>.
+            For support inquiries or vendor onboarding assistance, please email <a href="mailto:celebratzapp@gmail.com" className="text-primary font-bold underline">celebratzapp@gmail.com</a>.
           </p>
         </section>
       </div>
@@ -136,7 +136,7 @@ export const AboutContactView: React.FC = () => {
     <div className="max-w-4xl mx-auto py-8 px-4 space-y-8 text-stone-800 text-left pb-24">
       {/* Hero */}
       <div className="space-y-3">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 block">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-accent block">
           About Celebratz &bull; Pune
         </span>
         <h1 className="font-serif font-extrabold text-3xl sm:text-4xl text-stone-900">
@@ -150,8 +150,8 @@ export const AboutContactView: React.FC = () => {
       {/* Grid Features */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="p-5 bg-white rounded-2xl border border-stone-200 space-y-2 shadow-2xs">
-          <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-800 flex items-center justify-center font-bold">
-            <MapPin className="w-5 h-5 text-teal-800" />
+          <div className="w-10 h-10 rounded-xl bg-primary-subtle text-primary flex items-center justify-center font-bold">
+            <MapPin className="w-5 h-5 text-primary" />
           </div>
           <h3 className="font-serif font-bold text-base text-stone-900">Rooted in Pune</h3>
           <p className="text-xs text-stone-600 font-light leading-relaxed">
@@ -160,8 +160,8 @@ export const AboutContactView: React.FC = () => {
         </div>
 
         <div className="p-5 bg-white rounded-2xl border border-stone-200 space-y-2 shadow-2xs">
-          <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-800 flex items-center justify-center font-bold">
-            <ShieldCheck className="w-5 h-5 text-amber-700" />
+          <div className="w-10 h-10 rounded-xl bg-accent-subtle text-accent-dark flex items-center justify-center font-bold">
+            <ShieldCheck className="w-5 h-5 text-accent" />
           </div>
           <h3 className="font-serif font-bold text-base text-stone-900">Direct & Unbiased</h3>
           <p className="text-xs text-stone-600 font-light leading-relaxed">
@@ -226,9 +226,9 @@ export const AboutContactView: React.FC = () => {
 
             <button
               type="submit"
-              className="px-6 py-3 bg-teal-900 hover:bg-teal-950 text-white rounded-xl text-xs font-bold shadow-sm flex items-center gap-2"
+              className="px-6 py-3 bg-primary hover:bg-primary-dark text-primary-foreground rounded-xl text-xs font-bold shadow-sm flex items-center gap-2"
             >
-              <Send className="w-4 h-4 text-amber-300" />
+              <Send className="w-4 h-4 text-accent" />
               <span>Send Message</span>
             </button>
           </form>

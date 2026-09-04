@@ -16,7 +16,7 @@ import {
 import { Listing } from '../types';
 import { useApp } from '../context/AppContext';
 import { formatIndianCurrency, getDaysAgoText } from '../utils/theme';
-import { CATEGORIES } from '../data/categories';
+import { CATEGORIES, formatEventType } from '../data/categories';
 import { getGoogleMapsDirectionsUrl } from '../utils/mapUtils';
 
 interface ListingCardProps {
@@ -56,7 +56,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
     return (
       <div 
         onClick={handleCardClick}
-        className="group bg-white rounded-2xl border border-stone-200 hover:border-amber-400 hover:shadow-lg transition-all p-4 cursor-pointer flex flex-col sm:flex-row gap-4 relative select-none"
+        className="group bg-white rounded-2xl border border-stone-200 hover:border-accent hover:shadow-lg transition-all p-4 cursor-pointer flex flex-col sm:flex-row gap-4 relative select-none"
       >
         {/* Thumbnail Image */}
         <div className="sm:w-64 h-48 sm:h-auto rounded-xl overflow-hidden relative shrink-0">
@@ -67,7 +67,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute top-2 left-2 flex gap-1">
-            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-stone-900/80 text-amber-300 backdrop-blur-xs">
+            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-stone-900/80 text-accent backdrop-blur-xs">
               {categoryMeta?.name || listing.category}
             </span>
           </div>
@@ -95,27 +95,27 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1 hover:text-teal-900 transition-colors group/loc cursor-pointer"
+                      className="inline-flex items-center gap-1 hover:text-primary transition-colors group/loc cursor-pointer"
                       title="Open in Google Maps"
                     >
-                      <MapPin className="w-3.5 h-3.5 text-teal-800 shrink-0 group-hover/loc:text-rose-600" />
+                      <MapPin className="w-3.5 h-3.5 text-primary shrink-0 group-hover/loc:text-rose-600" />
                       <span className="group-hover/loc:underline">{listing.locality}, Pune</span>
                     </a>
                   ) : (
                     <div className="inline-flex items-center gap-1 text-stone-500">
-                      <MapPin className="w-3.5 h-3.5 text-teal-800 shrink-0" />
+                      <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
                       <span>{listing.locality}, Pune</span>
                     </div>
                   )}
                 </div>
-                <h3 className="font-serif font-bold text-base sm:text-lg text-stone-900 group-hover:text-teal-950">
+                <h3 className="font-serif font-bold text-base sm:text-lg text-stone-900 group-hover:text-primary">
                   {listing.title}
                 </h3>
               </div>
 
               {/* Rating */}
-              <div className="flex items-center gap-1 bg-amber-50 px-2 py-1 rounded-lg border border-amber-200 shrink-0">
-                <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+              <div className="flex items-center gap-1 bg-accent-subtle/40 px-2 py-1 rounded-lg border border-accent/30 shrink-0">
+                <Star className="w-3.5 h-3.5 fill-accent text-accent" />
                 <span className="text-xs font-bold text-stone-900">{listing.avgRating || '4.8'}</span>
                 <span className="text-[10px] text-stone-500">({listing.reviewCount})</span>
               </div>
@@ -129,11 +129,11 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
             <div className="flex flex-wrap items-center gap-1.5 mt-3">
               {listing.eventTypes.slice(0, 3).map(et => (
                 <span key={et} className="text-[10px] px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-medium">
-                  {et}
+                  {formatEventType(et)}
                 </span>
               ))}
               {listing.category === 'venues' && listing.categoryAttributes.capacityMax && (
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-teal-50 text-teal-900 font-medium flex items-center gap-1">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary-subtle text-primary font-medium flex items-center gap-1">
                   <Users className="w-3 h-3" />
                   Up to {listing.categoryAttributes.capacityMax} guests
                 </span>
@@ -141,8 +141,8 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
             </div>
 
             {/* Response Time Badge */}
-            <div className="mt-2.5 inline-flex items-center gap-1.5 text-[11px] text-teal-900 bg-teal-50/90 px-2.5 py-0.5 rounded-full border border-teal-200/70 font-medium">
-              <Clock className="w-3 h-3 text-teal-700 shrink-0" />
+            <div className="mt-2.5 inline-flex items-center gap-1.5 text-[11px] text-primary bg-primary-subtle px-2.5 py-0.5 rounded-full border border-border-subtle font-medium">
+              <Clock className="w-3 h-3 text-primary shrink-0" />
               <span>Response time: Usually within 2 hours</span>
             </div>
           </div>
@@ -175,7 +175,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
                 }}
                 className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold border flex items-center gap-1 transition-colors ${
                   isCompared 
-                    ? 'bg-amber-100 text-amber-900 border-amber-300' 
+                    ? 'bg-accent-subtle text-accent-dark border-accent' 
                     : 'bg-white hover:bg-stone-50 text-stone-700 border-stone-200'
                 }`}
               >
@@ -201,7 +201,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
     return (
       <div
         onClick={handleCardClick}
-        className="group bg-white rounded-xl border border-stone-200 hover:border-amber-400 hover:shadow-md transition-all p-3 cursor-pointer flex flex-col justify-between space-y-2 select-none"
+        className="group bg-white rounded-xl border border-stone-200 hover:border-accent hover:shadow-md transition-all p-3 cursor-pointer flex flex-col justify-between space-y-2 select-none"
       >
         <div className="h-36 rounded-lg overflow-hidden relative">
           <img
@@ -210,7 +210,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
             referrerPolicy="no-referrer"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
-          <span className="absolute top-1.5 left-1.5 px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-stone-900/80 text-amber-300 backdrop-blur-xs">
+          <span className="absolute top-1.5 left-1.5 px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-stone-900/80 text-accent backdrop-blur-xs">
             {listing.locality}
           </span>
           <button
@@ -228,17 +228,17 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
           <div className="flex items-center justify-between text-[11px] text-stone-500 mb-0.5">
             <span className="capitalize">{categoryMeta?.name || listing.category}</span>
             <div className="flex items-center gap-0.5 font-bold text-stone-800">
-              <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
+              <Star className="w-3 h-3 fill-accent text-accent" />
               <span>{listing.avgRating || '4.8'}</span>
             </div>
           </div>
-          <h4 className="font-bold text-xs sm:text-sm text-stone-900 line-clamp-1 group-hover:text-teal-950">
+          <h4 className="font-bold text-xs sm:text-sm text-stone-900 line-clamp-1 group-hover:text-primary">
             {listing.title}
           </h4>
           
           {/* Subtle Response Time Badge */}
-          <div className="mt-1.5 inline-flex items-center gap-1 text-[10px] text-teal-900 bg-teal-50/90 px-2 py-0.5 rounded-md border border-teal-200/60 font-medium">
-            <Clock className="w-2.5 h-2.5 text-teal-700 shrink-0" />
+          <div className="mt-1.5 inline-flex items-center gap-1 text-[10px] text-primary bg-primary-subtle px-2 py-0.5 rounded-md border border-border-subtle font-medium">
+            <Clock className="w-2.5 h-2.5 text-primary shrink-0" />
             <span>Responds within 2 hrs</span>
           </div>
         </div>
@@ -252,7 +252,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
           </div>
           <button
             onClick={handleDirectEnquire}
-            className="text-[11px] font-bold text-teal-900 hover:text-amber-700 flex items-center gap-0.5"
+            className="text-[11px] font-bold text-primary hover:text-accent flex items-center gap-0.5"
           >
             <span>Details</span>
             <ArrowRight className="w-3 h-3" />
@@ -266,7 +266,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
   return (
     <div
       onClick={handleCardClick}
-      className="group bg-white rounded-2xl border border-stone-200 hover:border-amber-400/80 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between relative select-none"
+      className="group bg-white rounded-2xl border border-stone-200 hover:border-accent/80 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between relative select-none"
     >
       {/* Top Media Banner */}
       <div className="h-56 relative overflow-hidden">
@@ -282,11 +282,11 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
 
         {/* Top Badges */}
         <div className="absolute top-3 left-3 flex items-center gap-1.5">
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-teal-950/90 text-amber-300 border border-amber-400/30 backdrop-blur-xs shadow-xs">
+          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-primary-dark/90 text-accent border border-accent/30 backdrop-blur-xs shadow-xs">
             {categoryMeta?.name || listing.category}
           </span>
           {listing.isFeatured && (
-            <span className="px-2 py-1 rounded-full text-[10px] font-bold bg-amber-500 text-stone-950 shadow-xs">
+            <span className="px-2 py-1 rounded-full text-[10px] font-bold bg-accent text-accent-foreground shadow-xs">
               Featured
             </span>
           )}
@@ -311,21 +311,21 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="flex items-center gap-1 drop-shadow-sm font-medium hover:text-amber-300 transition-colors group/pin cursor-pointer"
+              className="flex items-center gap-1 drop-shadow-sm font-medium hover:text-accent transition-colors group/pin cursor-pointer"
               title="Open in Google Maps"
             >
-              <MapPin className="w-3.5 h-3.5 text-amber-400 group-hover/pin:scale-110 transition-transform" />
+              <MapPin className="w-3.5 h-3.5 text-accent group-hover/pin:scale-110 transition-transform" />
               <span className="group-hover/pin:underline">{listing.locality}, Pune</span>
             </a>
           ) : (
             <div className="flex items-center gap-1 drop-shadow-sm font-medium text-stone-200">
-              <MapPin className="w-3.5 h-3.5 text-amber-400" />
+              <MapPin className="w-3.5 h-3.5 text-accent" />
               <span>{listing.locality}, Pune</span>
             </div>
           )}
 
           <div className={`px-2 py-0.5 rounded-md text-[10px] font-semibold backdrop-blur-xs ${
-            isStale ? 'bg-amber-950/80 text-amber-200 border border-amber-500/40' : 'bg-black/50 text-stone-200'
+            isStale ? 'bg-primary-dark/80 text-accent border border-accent/40' : 'bg-black/50 text-stone-200'
           }`}>
             {daysAgoText}
           </div>
@@ -336,12 +336,12 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
         <div>
           <div className="flex items-start justify-between gap-2 mb-1.5">
-            <h3 className="font-serif font-bold text-base sm:text-lg text-stone-900 group-hover:text-teal-950 transition-colors leading-snug">
+            <h3 className="font-serif font-bold text-base sm:text-lg text-stone-900 group-hover:text-primary transition-colors leading-snug">
               {listing.title}
             </h3>
             {/* Star Rating */}
-            <div className="flex items-center gap-1 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/80 shrink-0">
-              <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+            <div className="flex items-center gap-1 bg-accent-subtle/40 px-2 py-0.5 rounded-md border border-accent/30 shrink-0">
+              <Star className="w-3.5 h-3.5 fill-accent text-accent" />
               <span className="text-xs font-bold text-stone-900">{listing.avgRating || '4.8'}</span>
             </div>
           </div>
@@ -391,8 +391,8 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
           </div>
 
           {/* Subtle Response Time Badge */}
-          <div className="mt-3 inline-flex items-center gap-1.5 text-[11px] text-teal-900 bg-teal-50/90 px-2.5 py-0.5 rounded-full border border-teal-200/70 font-medium">
-            <Clock className="w-3 h-3 text-teal-700 shrink-0" />
+          <div className="mt-3 inline-flex items-center gap-1.5 text-[11px] text-primary bg-primary-subtle px-2.5 py-0.5 rounded-full border border-border-subtle font-medium">
+            <Clock className="w-3 h-3 text-primary shrink-0" />
             <span>Response time: Usually within 2 hours</span>
           </div>
         </div>
@@ -422,7 +422,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
               title="Add to side-by-side comparison"
               className={`p-2 rounded-xl text-xs border transition-colors ${
                 isCompared
-                  ? 'bg-amber-100 text-amber-900 border-amber-300 font-bold'
+                  ? 'bg-accent-subtle text-accent-dark border-accent font-bold'
                   : 'bg-stone-50 hover:bg-stone-100 text-stone-700 border-stone-200'
               }`}
             >

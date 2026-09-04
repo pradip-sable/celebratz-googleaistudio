@@ -82,3 +82,8 @@ export const EVENT_TYPES: EventType[] = [
 export const getCategoryById = (id: string): CategorySpec | undefined => {
   return CATEGORIES.find(c => c.id === id);
 };
+
+export const formatEventType = (type: EventType | string): string => {
+  if (type === 'Corporate') return 'Corporate Event';
+  return type;
+};

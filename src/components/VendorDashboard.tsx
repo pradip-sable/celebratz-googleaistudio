@@ -48,7 +48,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Listing, CategoryId, PuneLocality, EventType, CalendarStatus, CustomAttribute, ComboPackage, PricingPackage, PricingUnit, ListingTier } from '../types';
-import { CATEGORIES, PUNE_LOCALITIES, EVENT_TYPES } from '../data/categories';
+import { CATEGORIES, PUNE_LOCALITIES, EVENT_TYPES, formatEventType } from '../data/categories';
 import { CITIES, getCityById } from '../data/cities';
 import { formatIndianCurrency, getDaysAgoText, get24HourEditStatus, CooldownStatus } from '../utils/theme';
 import { getEffectivePrice, getPackagePublicVisibility, isMaterialListingChange } from '../utils/pricing';
@@ -758,7 +758,7 @@ export const VendorDashboard: React.FC = () => {
         packagesCount: formListingTiers.length,
         photosCount: uploadedPhotos.length,
         customDetails: [
-          { label: 'Event Types', value: newEventTypes.join(', ') || 'Wedding' },
+          { label: 'Event Types', value: newEventTypes.map(t => formatEventType(t)).join(', ') || 'Wedding' },
           { label: 'Pricing Structure', value: activeTiers.length >= 2 ? `${activeTiers.length} Active Tiers` : 'Flat Starting Price' },
           { label: 'Moderation Policy', value: 'Admin Verification / Instant Live (non-material)' },
           { label: 'Edit Lock', value: '24-Hour Cooldown Activated' }
@@ -2734,27 +2734,47 @@ export const VendorDashboard: React.FC = () => {
                 <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
                   Service Category *
                 </label>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {CATEGORIES.map(c => (
-                    <button
-                      key={c.id}
-                      type="button"
-                      onClick={() => {
-                        setNewCategory(c.id);
-                        setNewPricingUnit(c.defaultPricingUnit || (c.id === 'catering' ? 'per_plate' : 'per_day'));
-                      }}
-                      className={`p-3 rounded-xl border text-xs font-bold text-left transition-all ${
-                        newCategory === c.id ? 'bg-teal-900 text-white border-teal-900 shadow-xs' : 'bg-stone-50 text-stone-800 border-stone-200 hover:bg-stone-100'
-                      }`}
-                    >
-                      {c.name}
-                    </button>
-                  ))}
+                <div className="flex flex-wrap gap-2">
+                  {CATEGORIES.map(c => {
+                    const isSelected = newCategory === c.id;
+                    return (
+                      <button
+                        key={c.id}
+                        type="button"
+                        onClick={() => {
+                          setNewCategory(c.id);
+                          setNewPricingUnit(c.defaultPricingUnit || (c.id === 'catering' ? 'per_plate' : 'per_day'));
+                        }}
+                        className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+                          isSelected
+                            ? 'bg-teal-900 text-white border-teal-900 shadow-xs'
+                            : 'bg-stone-50 text-stone-700 border-stone-300 hover:bg-stone-100'
+                        }`}
+                      >
+                        {c.name} {isSelected && '✓'}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
-              {/* City, Title & Locality */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {/* Listing Title (placed above City field) */}
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                  Listing Title *
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Pune Grand Heritage Lawns"
+                  value={newTitle}
+                  onChange={(e) => setNewTitle(e.target.value)}
+                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden"
+                />
+              </div>
+
+              {/* City & Locality */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
                     City (India) *
@@ -2777,20 +2797,6 @@ export const VendorDashboard: React.FC = () => {
                       </option>
                     ))}
                   </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
-                    Listing Title *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Pune Grand Heritage Lawns"
-                    value={newTitle}
-                    onChange={(e) => setNewTitle(e.target.value)}
-                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden"
-                  />
                 </div>
 
                 <div>
@@ -2830,13 +2836,13 @@ export const VendorDashboard: React.FC = () => {
                             setNewEventTypes(prev => [...prev, eventType]);
                           }
                         }}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
+                        className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
                           isSelected
                             ? 'bg-teal-900 text-white border-teal-900 shadow-xs'
                             : 'bg-stone-50 text-stone-700 border-stone-300 hover:bg-stone-100'
                         }`}
                       >
-                        {eventType} {isSelected && '✓'}
+                        {formatEventType(eventType)} {isSelected && '✓'}
                       </button>
                     );
                   })}
@@ -2915,31 +2921,31 @@ export const VendorDashboard: React.FC = () => {
                 </div>
               </div>
 
-              {/* 🏷️ PACKAGE TIERS SECTION (Only shown when editing an existing listing with tiers; removed from new listing create option) */}
-              {editingListingId && formListingTiers.length > 0 && (
-                <div className="p-5 bg-stone-50 rounded-2xl border border-stone-200 space-y-4">
+              {/* 🏷️ PACKAGE TIERS SECTION (Optional for listings; 0 = flat pricing, 2+ = tiered) */}
+              {editingListingId && (
+                <div className="p-5 bg-muted/40 rounded-2xl border border-border space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
-                        <Layers className="w-4 h-4 text-teal-800" />
+                      <h3 className="font-serif font-bold text-base text-foreground flex items-center gap-2">
+                        <Layers className="w-4 h-4 text-primary" />
                         Package Tiers (Optional)
                       </h3>
                       {formListingTiers.filter(t => t.is_active !== false).length >= 2 ? (
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-teal-100 text-teal-900 border border-teal-300">
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-primary-subtle text-primary-dark border border-primary/30">
                           {formListingTiers.filter(t => t.is_active !== false).length} Tiers Active
                         </span>
                       ) : formListingTiers.filter(t => t.is_active !== false).length === 1 ? (
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-rose-100 text-rose-800 border border-rose-300">
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-destructive/10 text-destructive border border-destructive/30">
                           ⚠️ 1 Tier Invalid
                         </span>
                       ) : (
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-stone-200 text-stone-700">
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-muted text-muted-foreground">
                           Flat Pricing
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-stone-500 mt-1 max-w-2xl leading-relaxed">
+                    <p className="text-xs text-muted-foreground mt-1 max-w-2xl leading-relaxed">
                       Optionally define 2 or more named packages (e.g. Basic, Premium, Royal). Tiers inherit this listing's price unit ({newPricingUnit.replace('per_', '')}). Note: Exactly 1 tier is not allowed (0 = flat pricing, 2+ = tiered).
                     </p>
                   </div>
@@ -2947,7 +2953,7 @@ export const VendorDashboard: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleAddFormTier}
-                    className="px-3.5 py-2 rounded-xl bg-teal-900 hover:bg-teal-800 text-white text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer shrink-0 transition-colors"
+                    className="px-3.5 py-2 rounded-xl bg-primary hover:bg-primary-dark text-primary-foreground text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer shrink-0 transition-colors"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>+ Add Package Tier</span>
@@ -2955,17 +2961,17 @@ export const VendorDashboard: React.FC = () => {
                 </div>
 
                 {formListingTiers.length === 0 ? (
-                  <div className="p-4 rounded-xl bg-white border border-dashed border-stone-300 text-center space-y-1">
-                    <p className="text-xs font-semibold text-stone-700">No package tiers configured</p>
-                    <p className="text-[11px] text-stone-500">
+                  <div className="p-4 rounded-xl bg-card border border-dashed border-border text-center space-y-1">
+                    <p className="text-xs font-semibold text-foreground">No package tiers configured</p>
+                    <p className="text-[11px] text-muted-foreground">
                       Customers will see a single starting quotation at ₹{(Number(newPrice) || 0).toLocaleString('en-IN')} / {newPricingUnit.replace('per_', '')}. Click "+ Add Package Tier" to offer multiple package levels.
                     </p>
                   </div>
                 ) : (
                   <div className="space-y-3 pt-1">
                     {formListingTiers.filter(t => t.is_active !== false).length === 1 && (
-                      <div className="p-3 bg-rose-50 border border-rose-300 rounded-xl text-xs text-rose-900 flex items-start gap-2">
-                        <AlertCircle className="w-4 h-4 text-rose-700 shrink-0 mt-0.5" />
+                      <div className="p-3 bg-destructive/10 border border-destructive/30 rounded-xl text-xs text-destructive flex items-start gap-2">
+                        <AlertCircle className="w-4 h-4 text-destructive shrink-0 mt-0.5" />
                         <div>
                           <strong className="block font-bold">Action Required: Exactly 1 tier is not allowed</strong>
                           <span>Add at least one more tier to offer comparison options, or delete this tier to return to flat starting pricing.</span>
@@ -2979,20 +2985,20 @@ export const VendorDashboard: React.FC = () => {
                           key={tier.id || `ftier_${tIdx}`}
                           className={`p-4 rounded-xl border transition-all ${
                             tier.is_active === false
-                              ? 'bg-stone-100 border-stone-300 opacity-70'
-                              : 'bg-white border-stone-200 shadow-xs'
+                              ? 'bg-muted/80 border-border opacity-70'
+                              : 'bg-card border-border shadow-xs'
                           }`}
                         >
-                          <div className="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-stone-100">
+                          <div className="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-border-subtle">
                             <div className="flex items-center gap-2 min-w-0">
-                              <span className="w-6 h-6 rounded-lg bg-teal-100 text-teal-900 text-xs font-bold flex items-center justify-center shrink-0">
+                              <span className="w-6 h-6 rounded-lg bg-primary-subtle text-primary-dark text-xs font-bold flex items-center justify-center shrink-0">
                                 {tIdx + 1}
                               </span>
-                              <span className="text-xs font-bold text-stone-800 truncate">
+                              <span className="text-xs font-bold text-foreground truncate">
                                 {tier.name || `Tier ${tIdx + 1}`}
                               </span>
                               {tier.is_active === false && (
-                                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-stone-300 text-stone-700 uppercase">
+                                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-muted text-muted-foreground uppercase">
                                   Soft-Deactivated
                                 </span>
                               )}
@@ -3005,8 +3011,8 @@ export const VendorDashboard: React.FC = () => {
                                 onClick={() => handleToggleFormTierActive(tIdx)}
                                 className={`px-2 py-1 rounded-lg text-[10px] font-bold cursor-pointer transition-colors ${
                                   tier.is_active === false
-                                    ? 'bg-amber-100 text-amber-900 hover:bg-amber-200'
-                                    : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                                    ? 'bg-accent-subtle text-accent-dark hover:bg-accent/20'
+                                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
                                 }`}
                               >
                                 {tier.is_active === false ? 'Activate' : 'Deactivate'}
@@ -3014,7 +3020,7 @@ export const VendorDashboard: React.FC = () => {
                               <button
                                 type="button"
                                 onClick={() => handleRemoveFormTier(tIdx)}
-                                className="p-1 text-stone-400 hover:text-rose-600 rounded-md hover:bg-rose-50 cursor-pointer transition-colors"
+                                className="p-1 text-muted-foreground hover:text-destructive rounded-md hover:bg-destructive/10 cursor-pointer transition-colors"
                                 title="Delete tier"
                               >
                                 <Trash2 className="w-3.5 h-3.5" />
@@ -3025,7 +3031,7 @@ export const VendorDashboard: React.FC = () => {
                           <div className="space-y-2.5 text-xs">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                               <div>
-                                <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-0.5">
+                                <label className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-0.5">
                                   Tier Name *
                                 </label>
                                 <input
@@ -3033,11 +3039,11 @@ export const VendorDashboard: React.FC = () => {
                                   value={tier.name}
                                   onChange={(e) => handleUpdateFormTier(tIdx, 'name', e.target.value)}
                                   placeholder="e.g. Standard Package"
-                                  className="w-full bg-stone-50 border border-stone-300 rounded-lg p-2 text-xs text-stone-900 font-semibold outline-hidden"
+                                  className="w-full bg-input/40 border border-input rounded-lg p-2 text-xs text-foreground font-semibold outline-hidden"
                                 />
                               </div>
                               <div>
-                                <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-0.5">
+                                <label className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-0.5">
                                   Price (₹ / {newPricingUnit.replace('per_', '')}) *
                                 </label>
                                 <input
@@ -3045,13 +3051,13 @@ export const VendorDashboard: React.FC = () => {
                                   min="1"
                                   value={tier.price}
                                   onChange={(e) => handleUpdateFormTier(tIdx, 'price', Number(e.target.value))}
-                                  className="w-full bg-stone-50 border border-stone-300 rounded-lg p-2 text-xs text-stone-900 font-bold font-mono outline-hidden"
+                                  className="w-full bg-input/40 border border-input rounded-lg p-2 text-xs text-foreground font-bold font-mono outline-hidden"
                                 />
                               </div>
                             </div>
 
                             <div>
-                              <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-0.5">
+                              <label className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-0.5">
                                 Description
                               </label>
                               <input
@@ -3059,20 +3065,20 @@ export const VendorDashboard: React.FC = () => {
                                 value={tier.description}
                                 onChange={(e) => handleUpdateFormTier(tIdx, 'description', e.target.value)}
                                 placeholder="Brief overview of what is included"
-                                className="w-full bg-stone-50 border border-stone-300 rounded-lg p-2 text-xs text-stone-800 outline-hidden"
+                                className="w-full bg-input/40 border border-input rounded-lg p-2 text-xs text-foreground outline-hidden"
                               />
                             </div>
 
                             {/* Features Checklist */}
                             <div>
                               <div className="flex items-center justify-between mb-1">
-                                <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500">
+                                <label className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                                   Included Features & Deliverables
                                 </label>
                                 <button
                                   type="button"
                                   onClick={() => handleAddFormTierFeature(tIdx)}
-                                  className="text-[10px] text-teal-800 hover:text-teal-950 font-bold cursor-pointer"
+                                  className="text-[10px] text-primary hover:text-primary-dark font-bold cursor-pointer"
                                 >
                                   + Add Feature
                                 </button>
@@ -3080,17 +3086,17 @@ export const VendorDashboard: React.FC = () => {
                               <div className="space-y-1.5 max-h-36 overflow-y-auto pr-1">
                                 {(tier.features || []).map((feat, fIdx) => (
                                   <div key={`feat_${tIdx}_${fIdx}`} className="flex items-center gap-1.5">
-                                    <span className="text-emerald-700 font-bold text-xs">✓</span>
+                                    <span className="text-success font-bold text-xs">✓</span>
                                     <input
                                       type="text"
                                       value={feat}
                                       onChange={(e) => handleUpdateFormTierFeature(tIdx, fIdx, e.target.value)}
-                                      className="flex-1 bg-stone-50 border border-stone-200 rounded-md px-2 py-1 text-[11px] text-stone-800 outline-hidden"
+                                      className="flex-1 bg-input/40 border border-border rounded-md px-2 py-1 text-[11px] text-foreground outline-hidden"
                                     />
                                     <button
                                       type="button"
                                       onClick={() => handleRemoveFormTierFeature(tIdx, fIdx)}
-                                      className="p-1 text-stone-400 hover:text-rose-600 rounded cursor-pointer"
+                                      className="p-1 text-muted-foreground hover:text-destructive rounded cursor-pointer"
                                     >
                                       <Trash2 className="w-3 h-3" />
                                     </button>

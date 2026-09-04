@@ -2,6 +2,7 @@ import React from 'react';
 import { Scale, X, ArrowRight, Star, Users, MapPin, Check, Plus } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { formatIndianCurrency } from '../utils/theme';
+import { formatEventType } from '../data/categories';
 
 export const ComparisonBar: React.FC = () => {
   const { comparisonList, clearComparison, setActiveRoute, listings, toggleComparison } = useApp();
@@ -13,7 +14,7 @@ export const ComparisonBar: React.FC = () => {
   return (
     <div className="fixed bottom-16 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 bg-stone-950 text-white rounded-2xl px-4 py-3 shadow-2xl border border-stone-800 flex items-center gap-3 sm:gap-6 max-w-xl w-[92%] sm:w-auto animate-in slide-in-from-bottom-5">
       <div className="flex items-center gap-2">
-        <Scale className="w-5 h-5 text-amber-400 shrink-0" />
+        <Scale className="w-5 h-5 text-accent shrink-0" />
         <span className="text-xs font-bold text-stone-100 hidden sm:inline">
           Compare ({comparisonList.length}/3):
         </span>
@@ -54,7 +55,7 @@ export const ComparisonBar: React.FC = () => {
         </button>
         <button
           onClick={() => setActiveRoute('compare')}
-          className="px-3.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-1 shadow-xs"
+          className="px-3.5 py-1.5 bg-accent hover:bg-accent-hover text-accent-foreground rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-1 shadow-xs"
         >
           <span>Compare Now</span>
           <ArrowRight className="w-3.5 h-3.5" />
@@ -81,7 +82,7 @@ export const ComparisonView: React.FC = () => {
         </p>
         <button
           onClick={() => setActiveRoute('search')}
-          className="px-5 py-2.5 bg-teal-900 text-white rounded-xl text-xs font-bold"
+          className="px-5 py-2.5 bg-primary hover:bg-primary-hover text-primary-foreground rounded-xl text-xs font-bold"
         >
           Explore Pune Listings
         </button>
@@ -102,7 +103,7 @@ export const ComparisonView: React.FC = () => {
         </div>
         <button
           onClick={() => setActiveRoute('search')}
-          className="text-xs font-semibold text-teal-900 hover:underline"
+          className="text-xs font-semibold text-primary hover:underline"
         >
           &larr; Add more listings
         </button>
@@ -126,14 +127,14 @@ export const ComparisonView: React.FC = () => {
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
-                  <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-stone-900/80 text-amber-300">
+                  <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-stone-900/80 text-gold-light">
                     {item.locality}
                   </span>
                 </div>
 
                 <h3 className="font-serif font-bold text-base text-stone-900">{item.title}</h3>
                 <div className="flex items-center gap-1 text-xs text-stone-600 mt-1">
-                  <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                  <Star className="w-3.5 h-3.5 fill-accent text-accent" />
                   <span className="font-bold text-stone-900">{item.avgRating || '4.8'}</span>
                   <span>({item.reviewCount} reviews)</span>
                 </div>
@@ -143,7 +144,7 @@ export const ComparisonView: React.FC = () => {
               <div className="space-y-3 pt-3 border-t border-stone-100 text-xs">
                 <div>
                   <span className="text-[10px] text-stone-500 font-bold uppercase block">Starting Rate</span>
-                  <span className="font-serif font-extrabold text-lg text-teal-950">
+                  <span className="font-serif font-extrabold text-lg text-primary">
                     {formatIndianCurrency(item.startingPrice)}
                   </span>
                   <span className="text-[10px] text-stone-500"> /{(item.pricingUnit || 'event').replace('per_', '')}</span>
@@ -175,7 +176,7 @@ export const ComparisonView: React.FC = () => {
                   <div className="flex flex-wrap gap-1 mt-1">
                     {item.eventTypes.map(t => (
                       <span key={t} className="text-[10px] px-2 py-0.5 bg-stone-100 rounded-md font-medium text-stone-700">
-                        {t}
+                        {formatEventType(t)}
                       </span>
                     ))}
                   </div>
@@ -195,7 +196,7 @@ export const ComparisonView: React.FC = () => {
                     setSelectedListingId(item.id);
                     setIsEnquiryModalOpen(true);
                   }}
-                  className="flex-1 py-2 text-xs font-bold bg-teal-900 hover:bg-teal-950 text-white rounded-xl"
+                  className="flex-1 py-2 text-xs font-bold bg-primary hover:bg-primary-dark text-primary-foreground rounded-xl"
                 >
                   Enquire
                 </button>

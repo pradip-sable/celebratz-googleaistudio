@@ -411,7 +411,7 @@ export function matchesSearchQuery(
       item.description || '',
       item.pricingNote || '',
       item.category || '',
-      ...(item.eventTypes || []),
+      ...(item.eventTypes?.flatMap(t => t === 'Corporate' ? ['Corporate', 'Corporate Event'] : [t]) || []),
       ...(item.pricingPackages?.filter(p => p.status === 'active' || (!p.status && item.status === 'active')).flatMap(p => [p.name, p.description || '', ...(p.features || [])]) || []),
       JSON.stringify(item.categoryAttributes || {})
     ].join(' ').toLowerCase();

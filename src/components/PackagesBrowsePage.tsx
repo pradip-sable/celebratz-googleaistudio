@@ -19,7 +19,7 @@ import {
 import { useApp } from '../context/AppContext';
 import { usePackages } from '../hooks/usePackages';
 import { EventType, Package, ComboPackage } from '../types';
-import { EVENT_TYPES } from '../data/categories';
+import { EVENT_TYPES, formatEventType } from '../data/categories';
 import { formatIndianCurrency } from '../utils/theme';
 import { calculatePackagePrice, getPackageAvailability, getPackageReviewRollup } from '../utils/pricing';
 import { ComboPackageDetailModal } from './ComboPackageDetailModal';
@@ -44,8 +44,8 @@ export const PackagesBrowsePage: React.FC = () => {
       <div className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-2xs space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1.5 max-w-2xl">
-            <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-amber-700">
-              <Sparkles className="w-4 h-4 text-amber-600" />
+            <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-accent">
+              <Sparkles className="w-4 h-4 text-accent" />
               <span>Multi-Service Bundles &bull; Pune Verified</span>
             </div>
             <h1 className="font-serif font-extrabold text-2xl sm:text-3xl lg:text-4xl text-stone-900 leading-tight">
@@ -59,7 +59,7 @@ export const PackagesBrowsePage: React.FC = () => {
           {/* Quick Date Availability Check Bar */}
           <div className="bg-stone-50 p-3.5 sm:p-4 rounded-2xl border border-stone-200/90 shrink-0 space-y-1.5 self-start md:self-auto w-full md:w-auto">
             <label htmlFor="package-check-date-input" className="text-[11px] font-bold uppercase tracking-wider text-stone-700 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-teal-800" />
+              <Calendar className="w-3.5 h-3.5 text-primary" />
               <span>Check Derived Availability:</span>
             </label>
             <input
@@ -68,7 +68,7 @@ export const PackagesBrowsePage: React.FC = () => {
               value={targetDate}
               min={new Date().toISOString().split('T')[0]}
               onChange={(e) => setTargetDate(e.target.value)}
-              className="bg-white border border-stone-300 rounded-xl px-3 py-1.5 text-xs text-stone-900 font-bold focus:outline-hidden focus:border-teal-800 shadow-2xs w-full cursor-pointer"
+              className="bg-white border border-stone-300 rounded-xl px-3 py-1.5 text-xs text-stone-900 font-bold focus:outline-hidden focus:border-primary shadow-2xs w-full cursor-pointer"
             />
             <p className="text-[10px] text-stone-600">
               Derives live status across all bundled services for this date
@@ -84,7 +84,7 @@ export const PackagesBrowsePage: React.FC = () => {
             onClick={() => setSelectedEventType('all')}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
               selectedEventType === 'all'
-                ? 'bg-teal-900 text-white shadow-xs'
+                ? 'bg-primary text-primary-foreground shadow-xs'
                 : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
             }`}
           >
@@ -97,11 +97,11 @@ export const PackagesBrowsePage: React.FC = () => {
               onClick={() => setSelectedEventType(type)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
                 selectedEventType === type
-                  ? 'bg-teal-900 text-white shadow-xs'
+                  ? 'bg-primary text-primary-foreground shadow-xs'
                   : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
               }`}
             >
-              {type}
+              {formatEventType(type)}
             </button>
           ))}
         </div>
@@ -120,7 +120,7 @@ export const PackagesBrowsePage: React.FC = () => {
       {/* Packages Grid */}
       {publicPackages.length === 0 ? (
         <div className="bg-white rounded-3xl border border-stone-200 p-12 text-center space-y-4 max-w-md mx-auto">
-          <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-800 flex items-center justify-center mx-auto text-2xl">
+          <div className="w-14 h-14 rounded-2xl bg-accent-subtle text-accent flex items-center justify-center mx-auto text-2xl">
             📦
           </div>
           <h3 className="font-serif font-bold text-xl text-stone-900">
@@ -132,7 +132,7 @@ export const PackagesBrowsePage: React.FC = () => {
           <button
             type="button"
             onClick={() => setSelectedEventType('all')}
-            className="px-4 py-2 bg-teal-900 text-white text-xs font-bold rounded-xl shadow-xs hover:bg-teal-950 transition-colors cursor-pointer"
+            className="px-4 py-2 bg-primary text-primary-foreground text-xs font-bold rounded-xl shadow-xs hover:bg-primary-dark transition-colors cursor-pointer"
           >
             View All Packages
           </button>
@@ -165,7 +165,7 @@ export const PackagesBrowsePage: React.FC = () => {
 
                     {/* Top Badges */}
                     <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
-                      <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-amber-400 text-stone-950 shadow-sm">
+                      <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-accent text-accent-foreground shadow-sm">
                         {pkg.badge || `${priceData.discountPercentage}% OFF BUNDLE`}
                       </span>
 
@@ -177,7 +177,7 @@ export const PackagesBrowsePage: React.FC = () => {
 
                     {/* Bottom overlay inside image */}
                     <div className="absolute bottom-3.5 left-3.5 right-3.5 text-white space-y-1">
-                      <div className="flex items-center gap-2 text-xs text-amber-300 font-semibold">
+                      <div className="flex items-center gap-2 text-xs text-accent font-semibold">
                         <span>{pkg.vendorName}</span>
                         <span>&bull;</span>
                         <span className="flex items-center gap-1">
@@ -196,7 +196,7 @@ export const PackagesBrowsePage: React.FC = () => {
                     {/* Review Rollup Header */}
                     <div className="flex items-center justify-between pb-3 border-b border-stone-100 text-xs">
                       <div className="flex items-center gap-1.5">
-                        <span className="font-extrabold text-amber-600">★ {reviews.avgRating.toFixed(1)}</span>
+                        <span className="font-extrabold text-accent">★ {reviews.avgRating.toFixed(1)}</span>
                         <span className="text-stone-500">({reviews.reviewCount} verified reviews)</span>
                         <span className="text-[10px] text-stone-600 italic hidden sm:inline">&bull; Rolled up from component services</span>
                       </div>
@@ -231,7 +231,7 @@ export const PackagesBrowsePage: React.FC = () => {
                                 {listing.title}
                               </span>
                             </div>
-                            <span className="text-xs font-extrabold text-teal-950 shrink-0 ml-2">
+                            <span className="text-xs font-extrabold text-primary shrink-0 ml-2">
                               {formatIndianCurrency(effectivePrice)}
                               <span className="text-[10px] font-normal text-stone-500">
                                 /{priceUnit.replace('per_', '')}
@@ -302,7 +302,7 @@ export const PackagesBrowsePage: React.FC = () => {
                       )}
                     </div>
                     <div className="flex items-baseline gap-2">
-                      <span className="font-serif font-extrabold text-2xl sm:text-3xl text-teal-950">
+                      <span className="font-serif font-extrabold text-2xl sm:text-3xl text-primary">
                         {formatIndianCurrency(priceData.startingPrice)}
                       </span>
                       {priceData.rawSum > priceData.startingPrice && (
@@ -328,9 +328,9 @@ export const PackagesBrowsePage: React.FC = () => {
                         const primaryListingId = pkg.includedListingIds[0] || 'list_venue_1';
                         openEnquiryForPackage(primaryListingId, undefined, pkg);
                       }}
-                      className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-teal-900 hover:bg-teal-950 text-white text-xs font-bold shadow-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-primary-foreground text-xs font-bold shadow-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                     >
-                      <Send className="w-3.5 h-3.5 text-amber-400" />
+                      <Send className="w-3.5 h-3.5 text-accent" />
                       <span>Request Package</span>
                     </button>
                   </div>

@@ -59,7 +59,7 @@ export const HomeHero: React.FC = () => {
   return (
     <div className="space-y-12">
       {/* Hero Header Section */}
-      <section className="relative overflow-hidden rounded-3xl bg-linear-to-br from-primary-dark via-slate-900 to-accent-dark text-white p-6 sm:p-10 lg:p-14 shadow-2xl border border-accent/40">
+      <section className="relative overflow-hidden rounded-3xl bg-linear-to-br from-primary-dark via-black to-accent-dark text-white p-6 sm:p-10 lg:p-14 shadow-2xl border border-accent/40">
         {/* Subtle decorative motif */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20" />
@@ -82,7 +82,7 @@ export const HomeHero: React.FC = () => {
             Discover & Compare Top Venues & Event Services in {activeCity?.name || 'Pune'}
           </h1>
 
-          <p className="text-stone-300 text-sm sm:text-base max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto font-light leading-relaxed">
             {activeCity?.id === 'pune' 
               ? 'Directly connect with vetted banquet halls, caterers, photographers, decorators, DJs, and Vedic pandits. Check availability, compare transparent pricing, and request walk-throughs in minutes.'
               : `Explore upcoming venues, curated decorators, and celebration spaces across ${activeCity?.name || 'India'}. Currently operating live in Pune with multi-city expansion underway.`}
@@ -91,19 +91,19 @@ export const HomeHero: React.FC = () => {
           {/* Prominent Multi-Segment Search Bar */}
           <form 
             onSubmit={handleSearchSubmit}
-            className="mt-8 bg-white/98 rounded-3xl lg:rounded-full p-3 sm:p-4 lg:p-2 shadow-2xl border border-accent/40 max-w-5xl mx-auto flex flex-col lg:flex-row items-stretch lg:items-center gap-2 text-stone-800 text-left"
+            className="mt-8 bg-white/98 rounded-3xl lg:rounded-full p-3 sm:p-4 lg:p-2 shadow-2xl border border-accent/40 max-w-5xl mx-auto flex flex-col lg:flex-row items-stretch lg:items-center gap-2 text-foreground text-left"
           >
             {/* 1. Location Selector */}
-            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-stone-200">
+            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-border">
               <MapPin className="w-4 h-4 text-primary shrink-0" />
               <div className="w-full">
-                <label className="block text-[10px] uppercase font-bold tracking-wider text-stone-600">
+                <label className="block text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
                   Location ({activeCity?.name || 'Pune'})
                 </label>
                 <select
                   value={filters.locality}
                   onChange={(e) => setFilters(prev => ({ ...prev, locality: e.target.value as any }))}
-                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-stone-900 outline-hidden cursor-pointer"
+                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-foreground outline-hidden cursor-pointer"
                 >
                   <option value="all">All {activeCity?.name || 'Pune'} Neighborhoods</option>
                   {(activeCity?.localities || PUNE_LOCALITIES).map(loc => (
@@ -114,16 +114,16 @@ export const HomeHero: React.FC = () => {
             </div>
 
             {/* 2. Event Type Selector */}
-            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-stone-200">
+            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-border">
               <Sparkles className="w-4 h-4 text-accent shrink-0" />
               <div className="w-full">
-                <label className="block text-[10px] uppercase font-bold tracking-wider text-stone-600">
+                <label className="block text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
                   Event Type
                 </label>
                 <select
                   value={filters.eventType}
                   onChange={(e) => setFilters(prev => ({ ...prev, eventType: e.target.value as any }))}
-                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-stone-900 outline-hidden cursor-pointer"
+                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-foreground outline-hidden cursor-pointer"
                 >
                   <option value="all">Any Celebration</option>
                   {EVENT_TYPES.map(type => (
@@ -134,16 +134,16 @@ export const HomeHero: React.FC = () => {
             </div>
 
             {/* 3. Service Category Selector */}
-            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-stone-200">
+            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-border">
               <Building2 className="w-4 h-4 text-primary shrink-0" />
               <div className="w-full">
-                <label className="block text-[10px] uppercase font-bold tracking-wider text-stone-600">
+                <label className="block text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
                   Service Category
                 </label>
                 <select
                   value={filters.category}
                   onChange={(e) => setFilters(prev => ({ ...prev, category: e.target.value as any }))}
-                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-stone-900 outline-hidden cursor-pointer"
+                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-foreground outline-hidden cursor-pointer"
                 >
                   <option value="all">All Services</option>
                   {CATEGORIES.map(cat => (
@@ -154,34 +154,34 @@ export const HomeHero: React.FC = () => {
             </div>
 
             {/* 4. Event Date Picker */}
-            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-stone-200">
+            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 lg:border-r border-border">
               <CalendarIcon className="w-4 h-4 text-secondary shrink-0" />
               <div className="w-full">
-                <label className="block text-[10px] uppercase font-bold tracking-wider text-stone-600">
+                <label className="block text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
                   Event Date
                 </label>
                 <input
                   type="date"
                   value={filters.date}
                   onChange={(e) => setFilters(prev => ({ ...prev, date: e.target.value }))}
-                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-stone-900 outline-hidden cursor-pointer"
+                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-foreground outline-hidden cursor-pointer"
                 />
               </div>
             </div>
 
             {/* 5. Optional Guest Count Filter */}
             <div className="flex-1 flex items-center gap-2 px-3 py-1.5">
-              <Users className="w-4 h-4 text-emerald-700 shrink-0" />
+              <Users className="w-4 h-4 text-primary shrink-0" />
               <div className="w-full">
                 <div className="flex items-center justify-between">
-                  <label className="block text-[10px] uppercase font-bold tracking-wider text-stone-600">
+                  <label className="block text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
                     Guests (Optional)
                   </label>
                   {filters.guestCount && filters.guestCount > 0 ? (
                     <button
                       type="button"
                       onClick={() => setFilters(prev => ({ ...prev, guestCount: 0 }))}
-                      className="text-[10px] text-stone-400 hover:text-stone-700 font-bold"
+                      className="text-[10px] text-muted-foreground hover:text-foreground font-bold"
                     >
                       Clear
                     </button>
@@ -194,7 +194,7 @@ export const HomeHero: React.FC = () => {
                   placeholder="e.g. 250"
                   value={filters.guestCount ? filters.guestCount : ''}
                   onChange={(e) => setFilters(prev => ({ ...prev, guestCount: e.target.value ? Math.max(0, Number(e.target.value)) : 0 }))}
-                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-stone-900 placeholder:text-stone-400 outline-hidden"
+                  className="w-full bg-transparent text-xs sm:text-sm font-semibold text-foreground placeholder:text-muted-foreground outline-hidden"
                 />
               </div>
             </div>
@@ -215,10 +215,10 @@ export const HomeHero: React.FC = () => {
       <section className="space-y-4">
         <div className="flex items-end justify-between">
           <div>
-            <h2 className="text-xl sm:text-2xl font-serif font-bold text-stone-900">
+            <h2 className="text-xl sm:text-2xl font-serif font-bold text-foreground">
               Browse by Celebration Services
             </h2>
-            <p className="text-xs sm:text-sm text-stone-500">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Handcrafted categories curated specifically for Indian family and corporate festivities
             </p>
           </div>
@@ -239,16 +239,16 @@ export const HomeHero: React.FC = () => {
             <div
               key={cat.id}
               onClick={() => handleCategoryClick(cat.id)}
-              className="group cursor-pointer bg-white rounded-2xl p-4 border border-stone-200 hover:border-accent/80 hover:shadow-lg transition-all text-center flex flex-col items-center justify-between space-y-2 hover:-translate-y-1 select-none"
+              className="group cursor-pointer bg-white rounded-2xl p-4 border border-border hover:border-accent/80 hover:shadow-lg transition-all text-center flex flex-col items-center justify-between space-y-2 hover:-translate-y-1 select-none"
             >
-              <div className="p-3.5 rounded-2xl bg-stone-50 group-hover:bg-accent-subtle transition-colors border border-stone-100 group-hover:border-accent/30">
+              <div className="p-3.5 rounded-2xl bg-muted/40 group-hover:bg-accent-subtle transition-colors border border-border-subtle group-hover:border-accent/30">
                 {getCategoryIcon(cat.iconName)}
               </div>
               <div>
-                <h3 className="font-bold text-xs sm:text-sm text-stone-900 group-hover:text-primary">
+                <h3 className="font-bold text-xs sm:text-sm text-foreground group-hover:text-primary">
                   {cat.name}
                 </h3>
-                <p className="text-[10px] text-stone-500 line-clamp-2 mt-0.5 leading-tight">
+                <p className="text-[10px] text-muted-foreground line-clamp-2 mt-0.5 leading-tight">
                   {cat.shortDescription}
                 </p>
               </div>
@@ -261,8 +261,8 @@ export const HomeHero: React.FC = () => {
       </section>
 
       {/* Browse By Event Types */}
-      <section className="bg-stone-50 rounded-2xl p-6 border border-stone-200/80 space-y-3">
-        <h3 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
+      <section className="bg-muted/40 rounded-2xl p-6 border border-border/80 space-y-3">
+        <h3 className="font-serif font-bold text-lg text-foreground flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-accent" />
           What are you celebrating?
         </h3>
@@ -271,10 +271,10 @@ export const HomeHero: React.FC = () => {
             <button
               key={type}
               onClick={() => handleEventTypeClick(type)}
-              className="flex items-center justify-center gap-2 p-3 bg-white rounded-xl border border-stone-200 hover:border-primary hover:bg-primary-subtle/40 text-stone-800 hover:text-primary font-semibold text-xs sm:text-sm transition-all shadow-2xs group"
+              className="flex items-center justify-center gap-2 p-3 bg-white rounded-xl border border-border hover:border-primary hover:bg-primary-subtle/40 text-foreground hover:text-primary font-semibold text-xs sm:text-sm transition-all shadow-2xs group"
             >
               <span>{formatEventType(type)}</span>
-              <ArrowRight className="w-3 h-3 text-stone-400 group-hover:text-primary group-hover:translate-x-0.5 transition-transform" />
+              <ArrowRight className="w-3 h-3 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-transform" />
             </button>
           ))}
         </div>
@@ -282,32 +282,32 @@ export const HomeHero: React.FC = () => {
 
       {/* Why Celebratz - Transparency & Direct Vendor Connection */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-        <div className="bg-white p-5 rounded-2xl border border-stone-200 shadow-2xs space-y-2">
+        <div className="bg-white p-5 rounded-2xl border border-border shadow-2xs space-y-2">
           <div className="w-9 h-9 rounded-xl bg-primary-subtle text-primary flex items-center justify-center font-bold">
             <CheckCircle2 className="w-5 h-5 text-primary" />
           </div>
-          <h4 className="font-bold text-sm text-stone-900">Direct Vendor Connection</h4>
-          <p className="text-xs text-stone-500 leading-relaxed">
+          <h4 className="font-bold text-sm text-foreground">Direct Vendor Connection</h4>
+          <p className="text-xs text-muted-foreground leading-relaxed">
             No middleman commission markups or hidden fees. Request a visit or enquiry and negotiate contracts directly with the venue management.
           </p>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-stone-200 shadow-2xs space-y-2">
+        <div className="bg-white p-5 rounded-2xl border border-border shadow-2xs space-y-2">
           <div className="w-9 h-9 rounded-xl bg-accent-subtle text-accent-dark flex items-center justify-center font-bold">
             <CalendarIcon className="w-5 h-5 text-accent" />
           </div>
-          <h4 className="font-bold text-sm text-stone-900">Live Availability & Staleness Radar</h4>
-          <p className="text-xs text-stone-500 leading-relaxed">
+          <h4 className="font-bold text-sm text-foreground">Live Availability & Staleness Radar</h4>
+          <p className="text-xs text-muted-foreground leading-relaxed">
             Easily see open, tentative, or booked dates with a clear "Last updated X days ago" timestamp before you reach out.
           </p>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-stone-200 shadow-2xs space-y-2">
+        <div className="bg-white p-5 rounded-2xl border border-border shadow-2xs space-y-2">
           <div className="w-9 h-9 rounded-xl bg-secondary-subtle text-secondary-dark flex items-center justify-center font-bold">
             <ShieldCheck className="w-5 h-5 text-secondary" />
           </div>
-          <h4 className="font-bold text-sm text-stone-900">Strict Admin Curation</h4>
-          <p className="text-xs text-stone-500 leading-relaxed">
+          <h4 className="font-bold text-sm text-foreground">Strict Admin Curation</h4>
+          <p className="text-xs text-muted-foreground leading-relaxed">
             Every vendor profile and banquet space is manually verified in Pune for genuine pricing, capacity, and valid contacts.
           </p>
         </div>

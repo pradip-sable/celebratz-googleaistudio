@@ -956,23 +956,23 @@ export const VendorDashboard: React.FC = () => {
       {feedbackToast && (
         <div className={`p-4 rounded-2xl flex items-center justify-between gap-3 text-xs shadow-sm animate-in fade-in ${
           feedbackToast.type === 'warning'
-            ? 'bg-amber-50 border border-amber-300 text-amber-950'
+            ? 'bg-accent-subtle border border-accent/40 text-accent-dark'
             : feedbackToast.type === 'info'
-            ? 'bg-teal-50 border border-teal-300 text-teal-950'
-            : 'bg-emerald-50 border border-emerald-300 text-emerald-950'
+            ? 'bg-primary-subtle border border-primary/40 text-primary-dark'
+            : 'bg-success-subtle border border-success/30 text-success'
         }`}>
           <div className="flex items-center gap-2.5">
-            <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-success shrink-0" />
             <div>
               <span className="font-bold">{feedbackToast.title}</span>
               {feedbackToast.message && (
-                <span className="ml-1.5 font-normal text-stone-700">{feedbackToast.message}</span>
+                <span className="ml-1.5 font-normal text-foreground">{feedbackToast.message}</span>
               )}
             </div>
           </div>
           <button 
             onClick={() => setFeedbackToast(null)} 
-            className="p-1 text-stone-500 hover:text-stone-900 font-bold rounded-lg cursor-pointer"
+            className="p-1 text-muted-foreground hover:text-foreground font-bold rounded-lg cursor-pointer"
           >
             ✕
           </button>
@@ -980,18 +980,18 @@ export const VendorDashboard: React.FC = () => {
       )}
 
       {/* Vendor Top Banner */}
-      <div className="bg-stone-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-primary-dark text-white rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-stone-950">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-accent text-foreground">
               Vendor Management Studio
             </span>
-            <span className="text-xs text-stone-400">&bull; Pune Partner Hub</span>
+            <span className="text-xs text-muted-foreground">&bull; Pune Partner Hub</span>
           </div>
-          <h1 className="font-serif font-bold text-2xl sm:text-3xl text-amber-50">
+          <h1 className="font-serif font-bold text-2xl sm:text-3xl text-accent-subtle">
             {currentUser.businessName || currentUser.fullName}
           </h1>
-          <p className="text-xs sm:text-sm text-stone-300 font-light mt-1">
+          <p className="text-xs sm:text-sm text-muted-foreground font-light mt-1">
             Manage your availability calendar, incoming client leads, and Pune listing profiles.
           </p>
         </div>
@@ -999,7 +999,7 @@ export const VendorDashboard: React.FC = () => {
         {/* Action Button */}
         <button
           onClick={() => setActiveTab('new_listing')}
-          className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs sm:text-sm rounded-xl flex items-center gap-2 transition-transform active:scale-95 shadow-md shrink-0"
+          className="px-5 py-2.5 bg-accent hover:bg-accent text-foreground font-bold text-xs sm:text-sm rounded-xl flex items-center gap-2 transition-transform active:scale-95 shadow-md shrink-0"
         >
           <Plus className="w-4 h-4 stroke-[3]" />
           <span>Add New Listing</span>
@@ -1007,11 +1007,11 @@ export const VendorDashboard: React.FC = () => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex flex-wrap gap-2 p-1.5 bg-stone-100 rounded-2xl text-xs font-semibold">
+      <div className="flex flex-wrap gap-2 p-1.5 bg-muted rounded-2xl text-xs font-semibold">
         <button
           onClick={() => setActiveTab('overview')}
           className={`px-4 py-2.5 rounded-xl transition-all ${
-            activeTab === 'overview' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+            activeTab === 'overview' ? 'bg-white text-primary-dark shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           📊 Overview
@@ -1019,12 +1019,12 @@ export const VendorDashboard: React.FC = () => {
         <button
           onClick={() => setActiveTab('leads')}
           className={`px-4 py-2.5 rounded-xl transition-all relative cursor-pointer ${
-            activeTab === 'leads' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+            activeTab === 'leads' ? 'bg-white text-primary-dark shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           📥 Leads & Enquiries ({totalLeadsCount})
           {pendingLeadsCount > 0 && (
-            <span className="ml-1.5 px-1.5 py-0.2 bg-amber-500 text-stone-950 rounded-full text-[10px] font-bold">
+            <span className="ml-1.5 px-1.5 py-0.2 bg-accent text-foreground rounded-full text-[10px] font-bold">
               {pendingLeadsCount} New
             </span>
           )}
@@ -1032,7 +1032,7 @@ export const VendorDashboard: React.FC = () => {
         <button
           onClick={() => setActiveTab('calendar')}
           className={`px-4 py-2.5 rounded-xl transition-all cursor-pointer ${
-            activeTab === 'calendar' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+            activeTab === 'calendar' ? 'bg-white text-primary-dark shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           📅 Availability Calendar (Tap-to-Toggle)
@@ -1040,7 +1040,7 @@ export const VendorDashboard: React.FC = () => {
         <button
           onClick={() => setActiveTab('listings')}
           className={`px-4 py-2.5 rounded-xl transition-all cursor-pointer ${
-            activeTab === 'listings' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+            activeTab === 'listings' ? 'bg-white text-primary-dark shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           🏢 My Listings ({vendorListings.length})
@@ -1048,7 +1048,7 @@ export const VendorDashboard: React.FC = () => {
         <button
           onClick={() => setActiveTab('packages')}
           className={`px-4 py-2.5 rounded-xl transition-all relative cursor-pointer ${
-            activeTab === 'packages' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+            activeTab === 'packages' ? 'bg-white text-primary-dark shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           🎁 Packages & Bundles ({vendorCombos.length})
@@ -1056,7 +1056,7 @@ export const VendorDashboard: React.FC = () => {
         <button
           onClick={() => setActiveTab('new_listing')}
           className={`px-4 py-2.5 rounded-xl transition-all cursor-pointer ${
-            activeTab === 'new_listing' ? 'bg-white text-teal-950 shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+            activeTab === 'new_listing' ? 'bg-white text-primary-dark shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           + Create Listing
@@ -1067,94 +1067,94 @@ export const VendorDashboard: React.FC = () => {
       {activeTab === 'overview' && (
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="p-5 bg-white rounded-2xl border border-stone-200 shadow-2xs space-y-2">
-              <div className="flex justify-between items-center text-stone-500 text-xs font-semibold">
+            <div className="p-5 bg-white rounded-2xl border border-border shadow-2xs space-y-2">
+              <div className="flex justify-between items-center text-muted-foreground text-xs font-semibold">
                 <span>Active Listings</span>
-                <Store className="w-4 h-4 text-teal-800" />
+                <Store className="w-4 h-4 text-primary" />
               </div>
-              <div className="font-serif font-extrabold text-3xl text-stone-900">
+              <div className="font-serif font-extrabold text-3xl text-foreground">
                 {vendorListings.filter(l => l.status === 'active').length}
               </div>
-              <p className="text-[11px] text-stone-500">Live in search results</p>
+              <p className="text-[11px] text-muted-foreground">Live in search results</p>
             </div>
 
             <div 
               onClick={() => setActiveTab('leads')}
-              className="p-5 bg-white rounded-2xl border border-stone-200 shadow-2xs space-y-2 cursor-pointer hover:border-amber-400 transition-colors group"
+              className="p-5 bg-white rounded-2xl border border-border shadow-2xs space-y-2 cursor-pointer hover:border-accent transition-colors group"
             >
-              <div className="flex justify-between items-center text-stone-500 text-xs font-semibold">
+              <div className="flex justify-between items-center text-muted-foreground text-xs font-semibold">
                 <span>Total Leads Received</span>
-                <Inbox className="w-4 h-4 text-amber-600 group-hover:scale-110 transition-transform" />
+                <Inbox className="w-4 h-4 text-accent group-hover:scale-110 transition-transform" />
               </div>
-              <div className="font-serif font-extrabold text-3xl text-stone-900 flex items-center gap-2">
+              <div className="font-serif font-extrabold text-3xl text-foreground flex items-center gap-2">
                 <span>{totalLeadsCount}</span>
                 {pendingLeadsCount > 0 && (
-                  <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
+                  <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-accent-subtle text-accent-dark border border-accent/40">
                     {pendingLeadsCount} Pending
                   </span>
                 )}
               </div>
-              <p className="text-[11px] text-stone-500 flex items-center justify-between">
+              <p className="text-[11px] text-muted-foreground flex items-center justify-between">
                 <span>{pendingLeadsCount} awaiting vendor action</span>
-                <span className="text-teal-900 font-bold group-hover:underline">Open &rarr;</span>
+                <span className="text-primary font-bold group-hover:underline">Open &rarr;</span>
               </p>
             </div>
 
-            <div className="p-5 bg-white rounded-2xl border border-stone-200 shadow-2xs space-y-2">
-              <div className="flex justify-between items-center text-stone-500 text-xs font-semibold">
+            <div className="p-5 bg-white rounded-2xl border border-border shadow-2xs space-y-2">
+              <div className="flex justify-between items-center text-muted-foreground text-xs font-semibold">
                 <span>Calendar Staleness Radar</span>
-                <Clock className="w-4 h-4 text-emerald-600" />
+                <Clock className="w-4 h-4 text-success" />
               </div>
-              <div className="font-serif font-extrabold text-xl text-emerald-800">
+              <div className="font-serif font-extrabold text-xl text-success">
                 {currentListing ? getDaysAgoText(currentListing.calendarLastUpdatedAt).text : 'Up to Date'}
               </div>
-              <p className="text-[11px] text-stone-500">Tap dates regularly to keep availability fresh</p>
+              <p className="text-[11px] text-muted-foreground">Tap dates regularly to keep availability fresh</p>
             </div>
           </div>
 
           {/* Recent Leads Preview */}
-          <div className="bg-white rounded-2xl border border-stone-200 p-5 space-y-4">
+          <div className="bg-white rounded-2xl border border-border p-5 space-y-4">
             <div className="flex justify-between items-center">
-              <h3 className="font-serif font-bold text-lg text-stone-900">Recent Inquiries & Booking Requests</h3>
+              <h3 className="font-serif font-bold text-lg text-foreground">Recent Inquiries & Booking Requests</h3>
               <button 
                 onClick={() => setActiveTab('leads')} 
-                className="text-xs font-bold text-teal-900 hover:text-teal-950 hover:underline cursor-pointer"
+                className="text-xs font-bold text-primary hover:text-primary-dark hover:underline cursor-pointer"
               >
                 View & Manage All ({totalLeadsCount}) &rarr;
               </button>
             </div>
 
             {allEnquiries.length === 0 ? (
-              <div className="p-8 text-center text-xs text-stone-500 bg-stone-50 rounded-xl border border-stone-200">
+              <div className="p-8 text-center text-xs text-muted-foreground bg-muted/40 rounded-xl border border-border">
                 No customer inquiries submitted yet. Explore listings on Celebratz and send a test request!
               </div>
             ) : (
               <div className="space-y-2.5">
                 {allEnquiries.slice(0, 5).map(enq => (
-                  <div key={enq.id} className="p-3.5 bg-stone-50 hover:bg-stone-100/80 transition-colors rounded-xl border border-stone-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-xs">
+                  <div key={enq.id} className="p-3.5 bg-muted/40 hover:bg-muted/80 transition-colors rounded-xl border border-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-xs">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-bold text-stone-900">{enq.customerName}</span>
-                        <span className="text-stone-500">&bull; {enq.eventType} ({enq.eventDate}) &bull; {enq.customerPhone}</span>
-                        <span className="text-stone-700 font-semibold">&rarr; {enq.listingTitle}</span>
+                        <span className="font-bold text-foreground">{enq.customerName}</span>
+                        <span className="text-muted-foreground">&bull; {enq.eventType} ({enq.eventDate}) &bull; {enq.customerPhone}</span>
+                        <span className="text-foreground font-semibold">&rarr; {enq.listingTitle}</span>
                         {(enq.comboPackageTitle || enq.selectedPackageName) && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">
-                            <Package className="w-3 h-3 text-amber-700" />
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-accent-subtle text-accent-dark border border-accent/40">
+                            <Package className="w-3 h-3 text-accent" />
                             <span>{enq.comboPackageTitle || enq.selectedPackageName}</span>
                             {enq.selectedPackagePrice && (
-                              <span className="text-teal-950 font-serif font-extrabold ml-0.5">
+                              <span className="text-primary-dark font-serif font-extrabold ml-0.5">
                                 ({formatIndianCurrency(enq.selectedPackagePrice)})
                               </span>
                             )}
                           </span>
                         )}
                       </div>
-                      <p className="text-[11px] text-stone-600 italic">"{enq.message}"</p>
+                      <p className="text-[11px] text-muted-foreground italic">"{enq.message}"</p>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
                       <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase ${
-                        enq.vendorStatus === 'accepted' ? 'bg-emerald-100 text-emerald-900' : 
-                        enq.vendorStatus === 'declined' ? 'bg-rose-100 text-rose-900' : 'bg-amber-100 text-amber-900'
+                        enq.vendorStatus === 'accepted' ? 'bg-success-subtle text-success' : 
+                        enq.vendorStatus === 'declined' ? 'bg-destructive-subtle text-destructive' : 'bg-accent-subtle text-accent-dark'
                       }`}>
                         {enq.vendorStatus}
                       </span>
@@ -1164,7 +1164,7 @@ export const VendorDashboard: React.FC = () => {
                             setActiveTab('leads');
                             setSelectedLeadStatusFilter('pending');
                           }}
-                          className="px-2.5 py-1 rounded-lg bg-teal-900 text-white text-[11px] font-bold hover:bg-teal-950 cursor-pointer shadow-2xs"
+                          className="px-2.5 py-1 rounded-lg bg-primary text-white text-[11px] font-bold hover:bg-primary-dark cursor-pointer shadow-2xs"
                         >
                           Review & Accept
                         </button>
@@ -1182,32 +1182,32 @@ export const VendorDashboard: React.FC = () => {
       {activeTab === 'leads' && (
         <div className="space-y-4">
           {/* Header & Filter Controls Bar */}
-          <div className="bg-white rounded-2xl border border-stone-200 p-5 shadow-xs space-y-4">
+          <div className="bg-white rounded-2xl border border-border p-5 shadow-xs space-y-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
               <div>
-                <h2 className="font-serif font-bold text-xl text-stone-900 flex items-center gap-2">
+                <h2 className="font-serif font-bold text-xl text-foreground flex items-center gap-2">
                   <span>Client Inquiries & Booking Requests</span>
                   {pendingLeadsCount > 0 && (
-                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-accent-subtle text-accent-dark border border-accent/40">
                       {pendingLeadsCount} Pending Action
                     </span>
                   )}
                 </h2>
-                <p className="text-xs text-stone-500 mt-0.5">
+                <p className="text-xs text-muted-foreground mt-0.5">
                   Review event dates, preferred visit slots, custom notes, and accept or decline incoming customer requests.
                 </p>
               </div>
 
               {/* Listing / Service Selector Filter */}
               <div className="flex items-center gap-2 w-full sm:w-auto">
-                <label htmlFor="lead-listing-filter" className="text-xs font-semibold text-stone-600 shrink-0">
+                <label htmlFor="lead-listing-filter" className="text-xs font-semibold text-muted-foreground shrink-0">
                   Filter by Listing:
                 </label>
                 <select
                   id="lead-listing-filter"
                   value={selectedLeadListingFilter}
                   onChange={(e) => setSelectedLeadListingFilter(e.target.value)}
-                  className="w-full sm:w-64 px-3 py-1.5 rounded-xl border border-stone-300 text-xs font-medium text-stone-800 bg-stone-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
+                  className="w-full sm:w-64 px-3 py-1.5 rounded-xl border border-border text-xs font-medium text-foreground bg-muted/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent cursor-pointer"
                 >
                   <option value="all">All Listings & Services ({totalLeadsCount} leads)</option>
                   {Array.from(new Set(allEnquiries.map(e => e.listingId).filter(Boolean))).map((lid, idx) => {
@@ -1225,14 +1225,14 @@ export const VendorDashboard: React.FC = () => {
             </div>
 
             {/* Status Filter Tabs */}
-            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-stone-100">
-              <span className="text-xs font-bold text-stone-500 mr-1">Status:</span>
+            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-border-subtle">
+              <span className="text-xs font-bold text-muted-foreground mr-1">Status:</span>
               <button
                 onClick={() => setSelectedLeadStatusFilter('all')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                   selectedLeadStatusFilter === 'all'
-                    ? 'bg-stone-900 text-white shadow-2xs'
-                    : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                    ? 'bg-primary-dark text-white shadow-2xs'
+                    : 'bg-muted text-foreground hover:bg-muted'
                 }`}
               >
                 All ({totalLeadsCount})
@@ -1241,12 +1241,12 @@ export const VendorDashboard: React.FC = () => {
                 onClick={() => setSelectedLeadStatusFilter('pending')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 ${
                   selectedLeadStatusFilter === 'pending'
-                    ? 'bg-amber-500 text-stone-950 shadow-2xs'
-                    : 'bg-amber-50 text-amber-900 hover:bg-amber-100 border border-amber-200'
+                    ? 'bg-accent text-foreground shadow-2xs'
+                    : 'bg-accent-subtle text-accent-dark hover:bg-accent-subtle border border-accent/30'
                 }`}
               >
                 <span>⏳ Awaiting Action</span>
-                <span className="px-1.5 py-0.2 bg-amber-600 text-white rounded-full text-[10px]">
+                <span className="px-1.5 py-0.2 bg-accent text-white rounded-full text-[10px]">
                   {pendingLeadsCount}
                 </span>
               </button>
@@ -1254,12 +1254,12 @@ export const VendorDashboard: React.FC = () => {
                 onClick={() => setSelectedLeadStatusFilter('accepted')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 ${
                   selectedLeadStatusFilter === 'accepted'
-                    ? 'bg-teal-900 text-white shadow-2xs'
-                    : 'bg-emerald-50 text-emerald-900 hover:bg-emerald-100 border border-emerald-200'
+                    ? 'bg-primary text-white shadow-2xs'
+                    : 'bg-success-subtle text-success hover:bg-success-subtle border border-success/20'
                 }`}
               >
                 <span>✓ Accepted</span>
-                <span className="px-1.5 py-0.2 bg-emerald-200 text-emerald-950 rounded-full text-[10px]">
+                <span className="px-1.5 py-0.2 bg-success-subtle text-success rounded-full text-[10px]">
                   {acceptedLeadsCount}
                 </span>
               </button>
@@ -1267,12 +1267,12 @@ export const VendorDashboard: React.FC = () => {
                 onClick={() => setSelectedLeadStatusFilter('declined')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 ${
                   selectedLeadStatusFilter === 'declined'
-                    ? 'bg-rose-900 text-white shadow-2xs'
-                    : 'bg-rose-50 text-rose-900 hover:bg-rose-100 border border-rose-200'
+                    ? 'bg-destructive text-white shadow-2xs'
+                    : 'bg-destructive-subtle text-destructive hover:bg-destructive-subtle border border-destructive/20'
                 }`}
               >
                 <span>✕ Declined</span>
-                <span className="px-1.5 py-0.2 bg-rose-200 text-rose-950 rounded-full text-[10px]">
+                <span className="px-1.5 py-0.2 bg-destructive-subtle text-destructive rounded-full text-[10px]">
                   {declinedLeadsCount}
                 </span>
               </button>
@@ -1281,17 +1281,17 @@ export const VendorDashboard: React.FC = () => {
 
           {/* Enquiries List */}
           {displayedVendorEnquiries.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-stone-200 p-12 text-center text-xs text-stone-500 space-y-2">
-              <Inbox className="w-8 h-8 text-stone-400 mx-auto" />
-              <p className="font-semibold text-stone-800 text-sm">No inquiries match the selected filter.</p>
-              <p className="text-stone-500">
+            <div className="bg-white rounded-2xl border border-border p-12 text-center text-xs text-muted-foreground space-y-2">
+              <Inbox className="w-8 h-8 text-muted-foreground mx-auto" />
+              <p className="font-semibold text-foreground text-sm">No inquiries match the selected filter.</p>
+              <p className="text-muted-foreground">
                 {selectedLeadStatusFilter !== 'all' || selectedLeadListingFilter !== 'all' ? (
                   <button
                     onClick={() => {
                       setSelectedLeadStatusFilter('all');
                       setSelectedLeadListingFilter('all');
                     }}
-                    className="text-teal-900 font-bold underline cursor-pointer"
+                    className="text-primary font-bold underline cursor-pointer"
                   >
                     Clear filters to view all {totalLeadsCount} inquiries
                   </button>
@@ -1316,31 +1316,31 @@ export const VendorDashboard: React.FC = () => {
                 );
 
                 return (
-                  <div key={enq.id} className="bg-white rounded-2xl border border-stone-200 p-5 shadow-xs space-y-3.5 hover:border-amber-300 transition-colors">
+                  <div key={enq.id} className="bg-white rounded-2xl border border-border p-5 shadow-xs space-y-3.5 hover:border-accent/40 transition-colors">
                     {/* Header */}
                     <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="font-serif font-bold text-base text-stone-900">{enq.customerName}</h3>
-                          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-stone-100 text-stone-800">
+                          <h3 className="font-serif font-bold text-base text-foreground">{enq.customerName}</h3>
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-muted text-foreground">
                             {enq.requestType === 'request_to_book' ? 'Booking / Visit Request' : 'General Enquiry'}
                           </span>
                           {enq.guestCount && (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-stone-50 text-stone-600 border border-stone-200">
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-muted/40 text-muted-foreground border border-border">
                               👥 {enq.guestCount} Guests
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-stone-500 mt-0.5">
-                          Listing: <span className="font-semibold text-stone-800">{enq.listingTitle}</span> &bull; Received {new Date(enq.createdAt).toLocaleDateString()}
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          Listing: <span className="font-semibold text-foreground">{enq.listingTitle}</span> &bull; Received {new Date(enq.createdAt).toLocaleDateString()}
                         </p>
                       </div>
 
                       <div className="flex items-center gap-2">
                         <span className={`px-3 py-1 rounded-full text-xs font-bold capitalize ${
-                          enq.vendorStatus === 'accepted' ? 'bg-emerald-100 text-emerald-900 border border-emerald-300' :
-                          enq.vendorStatus === 'declined' ? 'bg-rose-100 text-rose-900 border border-rose-300' : 
-                          'bg-amber-100 text-amber-900 border border-amber-300 animate-pulse'
+                          enq.vendorStatus === 'accepted' ? 'bg-success-subtle text-success border border-success/30' :
+                          enq.vendorStatus === 'declined' ? 'bg-destructive-subtle text-destructive border border-destructive/30' : 
+                          'bg-accent-subtle text-accent-dark border border-accent/40 animate-pulse'
                         }`}>
                           Status: {enq.vendorStatus === 'pending' ? 'Pending Action' : enq.vendorStatus}
                         </span>
@@ -1349,39 +1349,39 @@ export const VendorDashboard: React.FC = () => {
 
                     {/* ATTACHED PACKAGE / COMBO CARD - HIGHLIGHTED FOR VENDOR */}
                     {hasAttachedPackage ? (
-                      <div className="p-3.5 rounded-xl border bg-gradient-to-r from-amber-50/90 via-teal-50/40 to-stone-50 border-amber-300/90 space-y-2.5 shadow-2xs">
+                      <div className="p-3.5 rounded-xl border bg-gradient-to-r from-accent-subtle/90 via-primary-subtle/40 to-muted/40 border-accent/90 space-y-2.5 shadow-2xs">
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                           <div className="flex items-start gap-2.5 min-w-0">
-                            <div className="w-8 h-8 rounded-lg bg-teal-900 text-amber-300 flex items-center justify-center font-bold text-xs shrink-0 shadow-2xs mt-0.5">
+                            <div className="w-8 h-8 rounded-lg bg-primary text-accent flex items-center justify-center font-bold text-xs shrink-0 shadow-2xs mt-0.5">
                               {enq.comboPackageTitle || enq.comboPackageId ? '🌟' : '🎁'}
                             </div>
                             <div className="min-w-0">
                               <div className="flex items-center gap-1.5 flex-wrap">
-                                <span className="text-[10px] font-extrabold uppercase tracking-wider text-teal-950 bg-teal-100/90 px-2 py-0.5 rounded-md">
+                                <span className="text-[10px] font-extrabold uppercase tracking-wider text-primary-dark bg-primary-subtle/90 px-2 py-0.5 rounded-md">
                                   {enq.comboPackageTitle || enq.comboPackageId ? '🌟 All-in-One Multi-Service Combo' : 'Attached Pricing Tier'}
                                 </span>
                                 {matchedTier?.badge && (
-                                  <span className="text-[9px] font-bold px-1.5 py-0.5 bg-amber-100 text-amber-900 border border-amber-300 rounded-full">
+                                  <span className="text-[9px] font-bold px-1.5 py-0.5 bg-accent-subtle text-accent-dark border border-accent/40 rounded-full">
                                     {matchedTier.badge}
                                   </span>
                                 )}
                                 {matchedCombo?.badge && (
-                                  <span className="text-[9px] font-bold px-1.5 py-0.5 bg-amber-100 text-amber-900 border border-amber-300 rounded-full">
+                                  <span className="text-[9px] font-bold px-1.5 py-0.5 bg-accent-subtle text-accent-dark border border-accent/40 rounded-full">
                                     {matchedCombo.badge}
                                   </span>
                                 )}
                               </div>
-                              <h4 className="font-serif font-bold text-sm text-stone-900 mt-1 truncate">
+                              <h4 className="font-serif font-bold text-sm text-foreground mt-1 truncate">
                                 {enq.comboPackageTitle || enq.selectedPackageName}
                               </h4>
                             </div>
                           </div>
 
-                          <div className="text-left sm:text-right bg-white px-3 py-1.5 rounded-xl border border-amber-200 shadow-2xs shrink-0">
-                            <span className="text-[9px] uppercase font-bold text-stone-500 block">
+                          <div className="text-left sm:text-right bg-white px-3 py-1.5 rounded-xl border border-accent/30 shadow-2xs shrink-0">
+                            <span className="text-[9px] uppercase font-bold text-muted-foreground block">
                               Selected Package Value
                             </span>
-                            <span className="font-serif font-extrabold text-sm sm:text-base text-teal-950">
+                            <span className="font-serif font-extrabold text-sm sm:text-base text-primary-dark">
                               {enq.selectedPackagePrice ? formatIndianCurrency(enq.selectedPackagePrice) : 'Custom Quote'}
                             </span>
                           </div>
@@ -1389,26 +1389,26 @@ export const VendorDashboard: React.FC = () => {
 
                         {/* Bundled Services in Combo */}
                         {matchedCombo && matchedCombo.includedServices && matchedCombo.includedServices.length > 0 && (
-                          <div className="pt-2 border-t border-amber-200/80 text-xs">
+                          <div className="pt-2 border-t border-accent/80 text-xs">
                             <div className="flex items-center justify-between gap-2 mb-1.5">
-                              <span className="text-[10px] font-bold uppercase text-teal-950 tracking-wider flex items-center gap-1">
-                                <Layers className="w-3 h-3 text-teal-800" />
+                              <span className="text-[10px] font-bold uppercase text-primary-dark tracking-wider flex items-center gap-1">
+                                <Layers className="w-3 h-3 text-primary" />
                                 Bundled Inclusions ({matchedCombo.includedServices.length} Services):
                               </span>
                               {matchedCombo.savingsAmount > 0 && (
-                                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded-md border border-emerald-200">
+                                <span className="text-[10px] font-bold text-success bg-success-subtle px-1.5 py-0.2 rounded-md border border-success/20">
                                   Combo Savings: {formatIndianCurrency(matchedCombo.savingsAmount)} ({matchedCombo.savingsPercentage}% OFF)
                                 </span>
                               )}
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                               {matchedCombo.includedServices.map((srv, si) => (
-                                <div key={`${enq.id}_srv_${srv.listingId || si}_${si}`} className="text-[11px] bg-white border border-amber-200/90 px-2 py-1 rounded-lg text-stone-800 flex items-center justify-between gap-1 shadow-2xs">
+                                <div key={`${enq.id}_srv_${srv.listingId || si}_${si}`} className="text-[11px] bg-white border border-accent/90 px-2 py-1 rounded-lg text-foreground flex items-center justify-between gap-1 shadow-2xs">
                                   <div className="truncate">
-                                    <span className="font-bold text-teal-900 uppercase text-[9px] mr-1">{srv.category.replace('_', ' ')}:</span>
-                                    <span className="font-medium text-stone-900">{srv.listingTitle}</span>
+                                    <span className="font-bold text-primary uppercase text-[9px] mr-1">{srv.category.replace('_', ' ')}:</span>
+                                    <span className="font-medium text-foreground">{srv.listingTitle}</span>
                                   </div>
-                                  <span className="text-[10px] font-bold text-stone-500 shrink-0 font-serif">
+                                  <span className="text-[10px] font-bold text-muted-foreground shrink-0 font-serif">
                                     {formatIndianCurrency(srv.originalPrice)}
                                   </span>
                                 </div>
@@ -1419,14 +1419,14 @@ export const VendorDashboard: React.FC = () => {
 
                         {/* Features in Tier Package */}
                         {matchedTier && matchedTier.features && matchedTier.features.length > 0 && (
-                          <div className="pt-2 border-t border-amber-200/80 text-xs">
-                            <span className="text-[10px] font-bold uppercase text-stone-600 tracking-wider block mb-1">
+                          <div className="pt-2 border-t border-accent/80 text-xs">
+                            <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-wider block mb-1">
                               Package Inclusions:
                             </span>
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[11px] text-stone-700">
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[11px] text-foreground">
                               {matchedTier.features.map((feat, fi) => (
                                 <li key={`${enq.id}_feat_${fi}_${feat}`} className="flex items-center gap-1.5">
-                                  <Check className="w-3 h-3 text-teal-700 shrink-0" />
+                                  <Check className="w-3 h-3 text-primary shrink-0" />
                                   <span className="truncate">{feat}</span>
                                 </li>
                               ))}
@@ -1435,59 +1435,59 @@ export const VendorDashboard: React.FC = () => {
                         )}
                       </div>
                     ) : (
-                      <div className="px-3.5 py-2.5 bg-stone-50 rounded-xl border border-stone-200/80 flex items-center justify-between text-xs text-stone-600">
+                      <div className="px-3.5 py-2.5 bg-muted/40 rounded-xl border border-border/80 flex items-center justify-between text-xs text-muted-foreground">
                         <span className="flex items-center gap-1.5">
-                          <Tag className="w-3.5 h-3.5 text-stone-400" />
-                          <span className="font-bold text-stone-800">General Inquiry / Custom Quote</span> &bull; No fixed package attached
+                          <Tag className="w-3.5 h-3.5 text-muted-foreground" />
+                          <span className="font-bold text-foreground">General Inquiry / Custom Quote</span> &bull; No fixed package attached
                         </span>
                         {matchedListing && (
-                          <span className="text-[11px] text-stone-500 font-medium">
-                            Base Starting Price: <strong className="text-teal-950 font-serif">{formatIndianCurrency(matchedListing.startingPrice)}</strong>
+                          <span className="text-[11px] text-muted-foreground font-medium">
+                            Base Starting Price: <strong className="text-primary-dark font-serif">{formatIndianCurrency(matchedListing.startingPrice)}</strong>
                           </span>
                         )}
                       </div>
                     )}
 
                     {/* Customer Contact & Event Details */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-3 bg-stone-50 rounded-xl border border-stone-200 text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-3 bg-muted/40 rounded-xl border border-border text-xs">
                       <div className="flex items-center gap-2">
-                        <Phone className="w-3.5 h-3.5 text-teal-800" />
-                        <span className="font-bold text-stone-900">{enq.customerPhone}</span>
+                        <Phone className="w-3.5 h-3.5 text-primary" />
+                        <span className="font-bold text-foreground">{enq.customerPhone}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Mail className="w-3.5 h-3.5 text-teal-800" />
-                        <span className="text-stone-700 truncate">{enq.customerEmail}</span>
+                        <Mail className="w-3.5 h-3.5 text-primary" />
+                        <span className="text-foreground truncate">{enq.customerEmail}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <CalendarIcon className="w-3.5 h-3.5 text-amber-600" />
-                        <span className="font-semibold text-stone-900">{enq.eventType} &bull; {enq.eventDate}</span>
+                        <CalendarIcon className="w-3.5 h-3.5 text-accent" />
+                        <span className="font-semibold text-foreground">{enq.eventType} &bull; {enq.eventDate}</span>
                       </div>
                     </div>
 
                     {/* Notes & Visit Slot */}
-                    <div className="text-xs text-stone-700 p-3.5 bg-white rounded-xl border border-stone-200 space-y-1.5">
+                    <div className="text-xs text-foreground p-3.5 bg-white rounded-xl border border-border space-y-1.5">
                       <div>
-                        <span className="font-bold text-stone-900">Client Note:</span> "{enq.message}"
+                        <span className="font-bold text-foreground">Client Note:</span> "{enq.message}"
                       </div>
                       {enq.preferredVisitTime && (
-                        <div className="text-stone-700 text-xs bg-amber-50/70 p-2 rounded-lg border border-amber-200 flex items-center gap-2">
-                          <Clock className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                        <div className="text-foreground text-xs bg-accent-subtle/70 p-2 rounded-lg border border-accent/30 flex items-center gap-2">
+                          <Clock className="w-3.5 h-3.5 text-accent shrink-0" />
                           <span><strong>Preferred Visit / Call Slot:</strong> {enq.preferredVisitTime}</span>
                         </div>
                       )}
                       {enq.vendorResponseNote && (
-                        <div className="pt-2 border-t border-stone-100 text-teal-950 font-medium bg-emerald-50/50 p-2 rounded-lg">
-                          <strong className="text-emerald-900">Your Response Note:</strong> "{enq.vendorResponseNote}"
+                        <div className="pt-2 border-t border-border-subtle text-primary-dark font-medium bg-success-subtle/50 p-2 rounded-lg">
+                          <strong className="text-success">Your Response Note:</strong> "{enq.vendorResponseNote}"
                         </div>
                       )}
                     </div>
 
                     {/* Custom Reply Box (when toggled) */}
                     {customReplyEnquiryId === enq.id && (
-                      <div className="p-4 bg-stone-50 rounded-xl border border-amber-300 space-y-3 animate-fade-in">
+                      <div className="p-4 bg-muted/40 rounded-xl border border-accent/40 space-y-3 animate-fade-in">
                         <div className="flex items-center justify-between">
-                          <label className="text-xs font-bold text-stone-900 flex items-center gap-1.5">
-                            <Edit3 className="w-3.5 h-3.5 text-amber-600" />
+                          <label className="text-xs font-bold text-foreground flex items-center gap-1.5">
+                            <Edit3 className="w-3.5 h-3.5 text-accent" />
                             <span>Add Personalized Note for {enq.customerName}:</span>
                           </label>
                           <button
@@ -1495,7 +1495,7 @@ export const VendorDashboard: React.FC = () => {
                               setCustomReplyEnquiryId(null);
                               setVendorReplyNote('');
                             }}
-                            className="text-stone-400 hover:text-stone-600 text-xs cursor-pointer font-bold"
+                            className="text-muted-foreground hover:text-muted-foreground text-xs cursor-pointer font-bold"
                           >
                             ✕ Cancel
                           </button>
@@ -1505,7 +1505,7 @@ export const VendorDashboard: React.FC = () => {
                           onChange={(e) => setVendorReplyNote(e.target.value)}
                           placeholder="e.g. We have blocked Saturday 4 PM for your venue walkthrough and catering tasting! Looking forward to meeting you."
                           rows={2}
-                          className="w-full p-2.5 bg-white rounded-xl border border-stone-300 text-xs text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                          className="w-full p-2.5 bg-white rounded-xl border border-border text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                         />
                         <div className="flex items-center gap-2">
                           <button
@@ -1520,9 +1520,9 @@ export const VendorDashboard: React.FC = () => {
                                 type: 'success'
                               });
                             }}
-                            className="px-4 py-2 bg-teal-900 hover:bg-teal-950 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer"
+                            className="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer"
                           >
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                            <CheckCircle2 className="w-4 h-4 text-success" />
                             <span>Send Acceptance Note & Confirm</span>
                           </button>
                           <button
@@ -1537,7 +1537,7 @@ export const VendorDashboard: React.FC = () => {
                                 type: 'info'
                               });
                             }}
-                            className="px-3.5 py-2 bg-stone-200 hover:bg-stone-300 text-stone-800 rounded-xl text-xs font-semibold cursor-pointer"
+                            className="px-3.5 py-2 bg-muted hover:bg-border text-foreground rounded-xl text-xs font-semibold cursor-pointer"
                           >
                             Decline with Note
                           </button>
@@ -1558,9 +1558,9 @@ export const VendorDashboard: React.FC = () => {
                               type: 'success'
                             });
                           }}
-                          className="px-4 py-2.5 bg-teal-900 hover:bg-teal-950 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer transition-all active:scale-98"
+                          className="px-4 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer transition-all active:scale-98"
                         >
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                          <CheckCircle2 className="w-4 h-4 text-success" />
                           <span>Accept Request</span>
                         </button>
 
@@ -1570,9 +1570,9 @@ export const VendorDashboard: React.FC = () => {
                             setCustomReplyEnquiryId(enq.id);
                             setVendorReplyNote('Thank you for reaching out to us! We are available for your event date and would love to schedule a walkthrough.');
                           }}
-                          className="px-3.5 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
+                          className="px-3.5 py-2.5 bg-accent-subtle hover:bg-accent-subtle text-accent-dark border border-accent/40 rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                         >
-                          <Edit3 className="w-3.5 h-3.5 text-amber-700" />
+                          <Edit3 className="w-3.5 h-3.5 text-accent" />
                           <span>Accept with Custom Note</span>
                         </button>
 
@@ -1586,9 +1586,9 @@ export const VendorDashboard: React.FC = () => {
                               type: 'info'
                             });
                           }}
-                          className="px-3.5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors"
+                          className="px-3.5 py-2.5 bg-muted hover:bg-muted text-foreground rounded-xl text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors"
                         >
-                          <XCircle className="w-4 h-4 text-rose-500" />
+                          <XCircle className="w-4 h-4 text-destructive" />
                           <span>Decline</span>
                         </button>
                       </div>
@@ -1596,14 +1596,14 @@ export const VendorDashboard: React.FC = () => {
 
                     {/* Post-Acceptance Quick Contact Actions for Vendor */}
                     {enq.vendorStatus === 'accepted' && (
-                      <div className="flex items-center justify-between flex-wrap gap-2 pt-2 border-t border-stone-100">
+                      <div className="flex items-center justify-between flex-wrap gap-2 pt-2 border-t border-border-subtle">
                         <div className="flex items-center gap-2 flex-wrap">
                           {cleanDigits && (
                             <a
                               href={`tel:${cleanDigits}`}
-                              className="px-3.5 py-2 bg-stone-100 hover:bg-stone-200 text-stone-900 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors border border-stone-300 cursor-pointer"
+                              className="px-3.5 py-2 bg-muted hover:bg-muted text-foreground rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors border border-border cursor-pointer"
                             >
-                              <Phone className="w-3.5 h-3.5 text-teal-800" />
+                              <Phone className="w-3.5 h-3.5 text-primary" />
                               <span>Call Client ({enq.customerPhone})</span>
                             </a>
                           )}
@@ -1613,18 +1613,18 @@ export const VendorDashboard: React.FC = () => {
                               href={`https://wa.me/91${cleanDigits}?text=${waMessage}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
+                              className="px-3.5 py-2 bg-success hover:bg-success text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
                             >
-                              <MessageSquare className="w-3.5 h-3.5 text-emerald-100" />
+                              <MessageSquare className="w-3.5 h-3.5 text-success-subtle" />
                               <span>Chat on WhatsApp</span>
                             </a>
                           )}
 
                           <a
                             href={`mailto:${enq.customerEmail}?subject=Celebratz Booking Confirmation - ${enq.eventType}`}
-                            className="px-3.5 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors border border-stone-300"
+                            className="px-3.5 py-2 bg-muted hover:bg-muted text-foreground rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors border border-border"
                           >
-                            <Mail className="w-3.5 h-3.5 text-stone-600" />
+                            <Mail className="w-3.5 h-3.5 text-muted-foreground" />
                             <span>Email</span>
                           </a>
                         </div>
@@ -1635,9 +1635,9 @@ export const VendorDashboard: React.FC = () => {
                               setCustomReplyEnquiryId(enq.id);
                               setVendorReplyNote(enq.vendorResponseNote || '');
                             }}
-                            className="text-xs font-semibold text-stone-500 hover:text-stone-800 flex items-center gap-1 cursor-pointer"
+                            className="text-xs font-semibold text-muted-foreground hover:text-foreground flex items-center gap-1 cursor-pointer"
                           >
-                            <Edit3 className="w-3 h-3 text-stone-500" />
+                            <Edit3 className="w-3 h-3 text-muted-foreground" />
                             <span>Update Note</span>
                           </button>
                         )}
@@ -1646,7 +1646,7 @@ export const VendorDashboard: React.FC = () => {
 
                     {/* Post-Decline Actions for Vendor */}
                     {enq.vendorStatus === 'declined' && (
-                      <div className="flex items-center justify-between flex-wrap gap-2 pt-1 text-xs text-rose-800 bg-rose-50/70 p-2.5 rounded-xl border border-rose-200">
+                      <div className="flex items-center justify-between flex-wrap gap-2 pt-1 text-xs text-destructive bg-destructive-subtle/70 p-2.5 rounded-xl border border-destructive/20">
                         <span>This request was declined.</span>
                         <button
                           onClick={() => {
@@ -1657,7 +1657,7 @@ export const VendorDashboard: React.FC = () => {
                               type: 'success'
                             });
                           }}
-                          className="text-teal-900 font-bold underline hover:text-teal-950 cursor-pointer"
+                          className="text-primary font-bold underline hover:text-primary-dark cursor-pointer"
                         >
                           Change to Accepted
                         </button>
@@ -1673,25 +1673,25 @@ export const VendorDashboard: React.FC = () => {
 
       {/* 3. TAP-TO-TOGGLE AVAILABILITY CALENDAR */}
       {activeTab === 'calendar' && (
-        <div className="bg-white rounded-3xl border border-stone-200 p-6 space-y-5">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-stone-100">
+        <div className="bg-white rounded-3xl border border-border p-6 space-y-5">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-border-subtle">
             <div>
-              <h2 className="font-serif font-bold text-xl text-stone-900 flex items-center gap-2">
-                <CalendarIcon className="w-5 h-5 text-teal-800" />
+              <h2 className="font-serif font-bold text-xl text-foreground flex items-center gap-2">
+                <CalendarIcon className="w-5 h-5 text-primary" />
                 Tap-to-Toggle Availability Manager
               </h2>
-              <p className="text-xs text-stone-500">
-                Click any calendar date to cycle: <span className="font-bold text-emerald-700">Available</span> ➔ <span className="font-bold text-amber-700">Tentative</span> ➔ <span className="font-bold text-rose-700">Booked</span>. Updates your last-updated timestamp immediately.
+              <p className="text-xs text-muted-foreground">
+                Click any calendar date to cycle: <span className="font-bold text-success">Available</span> ➔ <span className="font-bold text-accent">Tentative</span> ➔ <span className="font-bold text-destructive">Booked</span>. Updates your last-updated timestamp immediately.
               </p>
             </div>
 
             {/* Listing Switcher for Vendors with Multiple Listings */}
             <div className="flex items-center gap-2 w-full sm:w-auto">
-              <label className="text-xs font-bold text-stone-600 shrink-0">Listing:</label>
+              <label className="text-xs font-bold text-muted-foreground shrink-0">Listing:</label>
               <select
                 value={selectedListingForCalendar}
                 onChange={(e) => setSelectedListingForCalendar(e.target.value)}
-                className="bg-stone-50 border border-stone-300 rounded-xl p-2 text-xs font-semibold text-stone-900 outline-hidden"
+                className="bg-muted/40 border border-border rounded-xl p-2 text-xs font-semibold text-foreground outline-hidden"
               >
                 {vendorListings.map(l => (
                   <option key={l.id} value={l.id}>{l.title}</option>
@@ -1701,24 +1701,24 @@ export const VendorDashboard: React.FC = () => {
           </div>
 
           {/* Month Navigation & Stats Header */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-stone-50 p-3.5 rounded-2xl border border-stone-200">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-muted/40 p-3.5 rounded-2xl border border-border">
             <div className="flex items-center justify-between sm:justify-start gap-3">
               <div className="flex items-center gap-1.5">
                 <button
                   type="button"
                   onClick={() => setCalendarMonthOffset(prev => prev - 1)}
-                  className="p-2 rounded-xl border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 transition-colors shadow-2xs cursor-pointer"
+                  className="p-2 rounded-xl border border-border bg-white hover:bg-muted text-foreground transition-colors shadow-2xs cursor-pointer"
                   title="Previous Month"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
-                <span className="font-serif font-bold text-base sm:text-lg text-stone-900 px-2 min-w-[140px] text-center">
+                <span className="font-serif font-bold text-base sm:text-lg text-foreground px-2 min-w-[140px] text-center">
                   {monthName}
                 </span>
                 <button
                   type="button"
                   onClick={() => setCalendarMonthOffset(prev => prev + 1)}
-                  className="p-2 rounded-xl border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 transition-colors shadow-2xs cursor-pointer"
+                  className="p-2 rounded-xl border border-border bg-white hover:bg-muted text-foreground transition-colors shadow-2xs cursor-pointer"
                   title="Next Month"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -1729,7 +1729,7 @@ export const VendorDashboard: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCalendarMonthOffset(0)}
-                  className="text-xs font-bold text-teal-800 hover:text-teal-950 underline cursor-pointer"
+                  className="text-xs font-bold text-primary hover:text-primary-dark underline cursor-pointer"
                 >
                   Current Month
                 </button>
@@ -1738,16 +1738,16 @@ export const VendorDashboard: React.FC = () => {
 
             {/* Quick Summary Counts */}
             <div className="flex items-center gap-2 text-xs flex-wrap">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-950 font-bold">
-                <span className="w-2 h-2 rounded-full bg-emerald-600" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-success-subtle text-success font-bold">
+                <span className="w-2 h-2 rounded-full bg-success" />
                 <span>{calendarDays.filter(d => d.status === 'available').length} Available</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-100 text-amber-950 font-bold">
-                <span className="w-2 h-2 rounded-full bg-amber-600" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-accent-subtle text-accent-dark font-bold">
+                <span className="w-2 h-2 rounded-full bg-accent" />
                 <span>{calendarDays.filter(d => d.status === 'tentative').length} Tentative</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-100 text-rose-950 font-bold">
-                <span className="w-2 h-2 rounded-full bg-rose-600" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-destructive-subtle text-destructive font-bold">
+                <span className="w-2 h-2 rounded-full bg-destructive" />
                 <span>{calendarDays.filter(d => d.status === 'booked').length} Booked</span>
               </span>
             </div>
@@ -1756,7 +1756,7 @@ export const VendorDashboard: React.FC = () => {
           {/* Calendar Day Grid */}
           <div className="grid grid-cols-7 gap-1.5 sm:gap-2 text-center text-xs">
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-              <div key={d} className="text-[11px] font-extrabold text-stone-500 uppercase tracking-wider py-1">
+              <div key={d} className="text-[11px] font-extrabold text-muted-foreground uppercase tracking-wider py-1">
                 {d}
               </div>
             ))}
@@ -1766,17 +1766,17 @@ export const VendorDashboard: React.FC = () => {
             ))}
 
             {calendarDays.map(({ dayNum, dateStr, status }) => {
-              let btnStyle = 'bg-emerald-100 text-emerald-950 hover:bg-emerald-200/90';
-              let textColor = 'text-emerald-800';
+              let btnStyle = 'bg-success-subtle text-success hover:bg-success-subtle/90';
+              let textColor = 'text-success';
               let label = 'Available';
 
               if (status === 'tentative') {
-                btnStyle = 'bg-amber-100 text-amber-950 hover:bg-amber-200';
-                textColor = 'text-amber-800';
+                btnStyle = 'bg-accent-subtle text-accent-dark hover:bg-accent-subtle';
+                textColor = 'text-accent-dark';
                 label = 'Tentative';
               } else if (status === 'booked') {
-                btnStyle = 'bg-rose-100 text-rose-950 hover:bg-rose-200';
-                textColor = 'text-rose-800';
+                btnStyle = 'bg-destructive-subtle text-destructive hover:bg-destructive-subtle';
+                textColor = 'text-destructive';
                 label = 'Booked';
               }
 
@@ -1788,7 +1788,7 @@ export const VendorDashboard: React.FC = () => {
                   title={`${dateStr}: ${status.toUpperCase()} (Tap to toggle)`}
                   className={`p-1 sm:p-2 rounded-xl sm:rounded-2xl flex flex-col items-center justify-center gap-0.5 sm:gap-1 min-h-[46px] sm:min-h-[52px] transition-all cursor-pointer select-none active:scale-95 overflow-hidden ${btnStyle}`}
                 >
-                  <span className="font-sans font-bold text-xs sm:text-sm text-stone-800 leading-none">
+                  <span className="font-sans font-bold text-xs sm:text-sm text-foreground leading-none">
                     {dayNum}
                   </span>
                   
@@ -1801,9 +1801,9 @@ export const VendorDashboard: React.FC = () => {
             })}
           </div>
 
-          <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 flex justify-between items-center text-xs text-stone-600">
-            <span>Last Updated: <strong className="text-stone-900">{currentListing ? getDaysAgoText(currentListing.calendarLastUpdatedAt).text : 'Now'}</strong></span>
-            <span className="text-[11px] text-teal-900 font-semibold">⚡ Auto-saved to live marketplace</span>
+          <div className="p-3 bg-muted/40 rounded-xl border border-border flex justify-between items-center text-xs text-muted-foreground">
+            <span>Last Updated: <strong className="text-foreground">{currentListing ? getDaysAgoText(currentListing.calendarLastUpdatedAt).text : 'Now'}</strong></span>
+            <span className="text-[11px] text-primary font-semibold">⚡ Auto-saved to live marketplace</span>
           </div>
         </div>
       )}
@@ -1812,10 +1812,10 @@ export const VendorDashboard: React.FC = () => {
       {activeTab === 'listings' && (
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h2 className="font-serif font-bold text-xl text-stone-900">Your Listed Venues & Services</h2>
+            <h2 className="font-serif font-bold text-xl text-foreground">Your Listed Venues & Services</h2>
             <button
               onClick={() => setActiveTab('new_listing')}
-              className="px-4 py-2 bg-teal-900 text-white rounded-xl text-xs font-bold flex items-center gap-1"
+              className="px-4 py-2 bg-primary text-white rounded-xl text-xs font-bold flex items-center gap-1"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Listing</span>
@@ -1826,7 +1826,7 @@ export const VendorDashboard: React.FC = () => {
             {vendorListings.map(listing => {
               const cooldown = get24HourEditStatus(listing.lastEditedAt);
               return (
-                <div key={listing.id} className="bg-white rounded-2xl border border-stone-200 p-4 flex flex-col justify-between shadow-xs gap-3">
+                <div key={listing.id} className="bg-white rounded-2xl border border-border p-4 flex flex-col justify-between shadow-xs gap-3">
                   <div className="flex gap-3">
                     <img
                       src={listing.coverImage}
@@ -1836,30 +1836,30 @@ export const VendorDashboard: React.FC = () => {
                     />
                     <div className="flex-1 min-w-0 space-y-1">
                       <div className="flex items-center justify-between gap-1 flex-wrap">
-                        <span className="px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-stone-100 text-stone-800">
+                        <span className="px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-muted text-foreground">
                           {listing.category}
                         </span>
                         <div className="flex items-center gap-1">
                           <span className={`px-2 py-0.5 rounded text-[10px] font-bold capitalize ${
-                            listing.status === 'active' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                            listing.status === 'active' ? 'bg-success-subtle text-success' : 'bg-accent-subtle text-accent-dark'
                           }`}>
                             {(listing.status || 'active').replace('_', ' ')}
                           </span>
                         </div>
                       </div>
-                      <h4 className="font-bold text-sm text-stone-900 truncate">{listing.title}</h4>
-                      <p className="text-xs text-stone-500">{listing.locality} &bull; {formatIndianCurrency(listing.startingPrice)}/{(listing.pricingUnit || 'event').replace('per_', '')}</p>
+                      <h4 className="font-bold text-sm text-foreground truncate">{listing.title}</h4>
+                      <p className="text-xs text-muted-foreground">{listing.locality} &bull; {formatIndianCurrency(listing.startingPrice)}/{(listing.pricingUnit || 'event').replace('per_', '')}</p>
                       
                       {/* 24-Hour Edit Restriction Pill */}
                       <div className="pt-1">
                         {!cooldown.canEdit ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-900 border border-amber-300">
-                            <Lock className="w-2.5 h-2.5 text-amber-700" />
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-accent-subtle text-accent-dark border border-accent/40">
+                            <Lock className="w-2.5 h-2.5 text-accent" />
                             <span>Edit locked ({cooldown.formattedRemaining} left)</span>
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-900 border border-emerald-300">
-                            <Unlock className="w-2.5 h-2.5 text-emerald-700" />
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-success-subtle text-success border border-success/30">
+                            <Unlock className="w-2.5 h-2.5 text-success" />
                             <span>Unlocked (24h window ready)</span>
                           </span>
                         )}
@@ -1868,18 +1868,18 @@ export const VendorDashboard: React.FC = () => {
                   </div>
 
                   {/* Actions Bar */}
-                  <div className="pt-2 border-t border-stone-100 flex flex-wrap gap-2.5 items-center justify-between">
+                  <div className="pt-2 border-t border-border-subtle flex flex-wrap gap-2.5 items-center justify-between">
                     <div className="flex flex-wrap gap-2.5 items-center">
                       <button
                         onClick={() => handleStartEditListing(listing)}
                         className={`text-[11px] font-bold flex items-center gap-1 cursor-pointer ${
                           !cooldown.canEdit 
-                            ? 'text-amber-800 hover:text-amber-950 font-semibold' 
-                            : 'text-teal-900 hover:underline'
+                            ? 'text-accent-dark hover:text-accent-dark font-semibold' 
+                            : 'text-primary hover:underline'
                         }`}
                         title={!cooldown.canEdit ? `Locked: Next edit unlocks in ${cooldown.formattedRemaining}` : 'Edit listing information'}
                       >
-                        {!cooldown.canEdit ? <Lock className="w-3 h-3 text-amber-600" /> : <Edit3 className="w-3 h-3 text-teal-800" />}
+                        {!cooldown.canEdit ? <Lock className="w-3 h-3 text-accent" /> : <Edit3 className="w-3 h-3 text-primary" />}
                         <span>Edit Listing Details</span>
                       </button>
                       <button
@@ -1887,7 +1887,7 @@ export const VendorDashboard: React.FC = () => {
                           setSelectedListingForCalendar(listing.id);
                           setActiveTab('calendar');
                         }}
-                        className="text-[11px] font-bold text-teal-900 hover:underline flex items-center gap-1 cursor-pointer"
+                        className="text-[11px] font-bold text-primary hover:underline flex items-center gap-1 cursor-pointer"
                       >
                         <CalendarIcon className="w-3 h-3" />
                         Manage Calendar
@@ -1898,7 +1898,7 @@ export const VendorDashboard: React.FC = () => {
                           setPackagesSubTab('tiers');
                           setActiveTab('packages');
                         }}
-                        className="text-[11px] font-bold text-amber-700 hover:underline flex items-center gap-1 cursor-pointer"
+                        className="text-[11px] font-bold text-accent hover:underline flex items-center gap-1 cursor-pointer"
                       >
                         <Gift className="w-3 h-3" />
                         Manage Packages ({listing.pricingPackages?.length || 0})
@@ -1910,10 +1910,10 @@ export const VendorDashboard: React.FC = () => {
                         href={listing.websiteUrl.startsWith('http') ? listing.websiteUrl : `https://${listing.websiteUrl}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[11px] font-medium text-stone-500 hover:text-teal-900 flex items-center gap-1"
+                        className="text-[11px] font-medium text-muted-foreground hover:text-primary flex items-center gap-1"
                         title="Visit Website"
                       >
-                        <Globe className="w-3 h-3 text-teal-700" />
+                        <Globe className="w-3 h-3 text-primary" />
                         <span>Website</span>
                       </a>
                     )}
@@ -1929,16 +1929,16 @@ export const VendorDashboard: React.FC = () => {
       {activeTab === 'packages' && (
         <div className="space-y-6">
           {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-teal-900 to-amber-950 text-white p-6 rounded-3xl shadow-md">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-primary to-accent-dark text-white p-6 rounded-3xl shadow-md">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-400 text-stone-950">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-accent text-foreground">
                   Revenue Maximizer
                 </span>
-                <span className="text-xs text-amber-200">&bull; Transparent Pricing & Bundle Deals</span>
+                <span className="text-xs text-accent-subtle">&bull; Transparent Pricing & Bundle Deals</span>
               </div>
-              <h2 className="font-serif font-bold text-2xl text-amber-50">Packages & Bundled Deals Studio</h2>
-              <p className="text-xs text-stone-200 mt-1 max-w-2xl font-light">
+              <h2 className="font-serif font-bold text-2xl text-accent-subtle">Packages & Bundled Deals Studio</h2>
+              <p className="text-xs text-muted-foreground mt-1 max-w-2xl font-light">
                 Create tiered packages within individual listings or combine 2+ of your listings (e.g., Marriage Lawn + Decoration + Catering) into discounted All-in-One packages that win clients faster.
               </p>
             </div>
@@ -1950,12 +1950,12 @@ export const VendorDashboard: React.FC = () => {
                     type="button"
                     disabled
                     title="Minimum 2 active, approved listings required to form a combo bundle"
-                    className="px-4 py-2.5 bg-stone-700/80 text-stone-300 font-bold text-xs rounded-xl flex items-center gap-1.5 cursor-not-allowed opacity-70"
+                    className="px-4 py-2.5 bg-foreground/80 text-muted-foreground font-bold text-xs rounded-xl flex items-center gap-1.5 cursor-not-allowed opacity-70"
                   >
                     <Plus className="w-4 h-4 stroke-[3]" />
                     <span>+ Create Multi-Service Combo</span>
                   </button>
-                  <span className="text-[10px] text-amber-300 font-medium">
+                  <span className="text-[10px] text-accent font-medium">
                     (Requires 2+ active listings &bull; You have {vendorListings.filter(l => l.status === 'active').length})
                   </span>
                 </div>
@@ -1966,7 +1966,7 @@ export const VendorDashboard: React.FC = () => {
                     setEditingCombo(null);
                     setComboStudioOpen(true);
                   }}
-                  className="px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-xs transition-transform active:scale-95 cursor-pointer"
+                  className="px-4 py-2.5 bg-accent hover:bg-accent-subtle text-foreground font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-xs transition-transform active:scale-95 cursor-pointer"
                 >
                   <Plus className="w-4 h-4 stroke-[3]" />
                   <span>+ Create Multi-Service Combo</span>
@@ -1976,17 +1976,17 @@ export const VendorDashboard: React.FC = () => {
           </div>
 
           {/* Sub-Tab Navigation */}
-          <div className="flex border-b border-stone-200 text-xs font-bold gap-6">
+          <div className="flex border-b border-border text-xs font-bold gap-6">
             <button
               type="button"
               onClick={() => setPackagesSubTab('combos')}
               className={`pb-3 transition-colors flex items-center gap-2 cursor-pointer ${
                 packagesSubTab === 'combos'
-                  ? 'border-b-2 border-teal-900 text-teal-950 font-extrabold'
-                  : 'text-stone-500 hover:text-stone-800'
+                  ? 'border-b-2 border-primary text-primary-dark font-extrabold'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              <Layers className="w-4 h-4 text-amber-600" />
+              <Layers className="w-4 h-4 text-accent" />
               <span>Multi-Service Combo Packages ({vendorCombos.length})</span>
             </button>
             <button
@@ -1994,11 +1994,11 @@ export const VendorDashboard: React.FC = () => {
               onClick={() => setPackagesSubTab('tiers')}
               className={`pb-3 transition-colors flex items-center gap-2 cursor-pointer ${
                 packagesSubTab === 'tiers'
-                  ? 'border-b-2 border-teal-900 text-teal-950 font-extrabold'
-                  : 'text-stone-500 hover:text-stone-800'
+                  ? 'border-b-2 border-primary text-primary-dark font-extrabold'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              <Gift className="w-4 h-4 text-teal-800" />
+              <Gift className="w-4 h-4 text-primary" />
               <span>Intra-Listing Tier Packages ({vendorListings.reduce((acc, l) => acc + (l.pricingPackages?.length || 0), 0)})</span>
             </button>
           </div>
@@ -2007,13 +2007,13 @@ export const VendorDashboard: React.FC = () => {
           {packagesSubTab === 'combos' && (
             <div className="space-y-4">
               {vendorCombos.length === 0 ? (
-                <div className="bg-white rounded-3xl border border-stone-200 p-10 text-center space-y-4 shadow-xs max-w-2xl mx-auto">
-                  <div className="w-16 h-16 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center mx-auto text-2xl font-bold">
+                <div className="bg-white rounded-3xl border border-border p-10 text-center space-y-4 shadow-xs max-w-2xl mx-auto">
+                  <div className="w-16 h-16 rounded-2xl bg-accent-subtle text-accent-dark flex items-center justify-center mx-auto text-2xl font-bold">
                     🎁
                   </div>
                   <div>
-                    <h3 className="font-serif font-bold text-lg text-stone-900">No Multi-Service Combo Packages Yet</h3>
-                    <p className="text-xs text-stone-500 max-w-md mx-auto mt-1">
+                    <h3 className="font-serif font-bold text-lg text-foreground">No Multi-Service Combo Packages Yet</h3>
+                    <p className="text-xs text-muted-foreground max-w-md mx-auto mt-1">
                       Combine two or more of your active listings (e.g. Lawn + Decor + Catering) into an irresistible discounted package. Clients love one-stop booking!
                     </p>
                   </div>
@@ -2023,7 +2023,7 @@ export const VendorDashboard: React.FC = () => {
                       setEditingCombo(null);
                       setComboStudioOpen(true);
                     }}
-                    className="px-5 py-2.5 bg-teal-900 hover:bg-teal-950 text-white font-bold text-xs rounded-xl shadow-md cursor-pointer"
+                    className="px-5 py-2.5 bg-primary hover:bg-primary-dark text-white font-bold text-xs rounded-xl shadow-md cursor-pointer"
                   >
                     + Create Your First Multi-Service Combo
                   </button>
@@ -2037,11 +2037,11 @@ export const VendorDashboard: React.FC = () => {
                     return (
                     <div
                       key={combo.id}
-                      className="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between"
+                      className="bg-white rounded-3xl border border-border overflow-hidden shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between"
                     >
                       <div>
                         {/* Cover Image & Header */}
-                        <div className="relative h-44 w-full bg-stone-100 overflow-hidden">
+                        <div className="relative h-44 w-full bg-muted overflow-hidden">
                           <img
                             src={combo.coverImage}
                             alt={combo.title}
@@ -2052,24 +2052,24 @@ export const VendorDashboard: React.FC = () => {
                           
                           <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 items-center">
                             {combo.badge && (
-                              <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-400 text-stone-950 shadow-xs">
+                              <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-accent text-foreground shadow-xs">
                                 {combo.badge}
                               </span>
                             )}
                             {isComponentNotLive ? (
-                              <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-amber-400 text-amber-950 shadow-xs flex items-center gap-1">
-                                <AlertCircle className="w-3 h-3 text-amber-950" />
+                              <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-accent text-accent-dark shadow-xs flex items-center gap-1">
+                                <AlertCircle className="w-3 h-3 text-accent-dark" />
                                 inactive — component not live
                               </span>
                             ) : (
                               <span className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider shadow-xs ${
                                 combo.status === 'active' 
-                                  ? 'bg-emerald-600 text-white' 
+                                  ? 'bg-success text-white' 
                                   : combo.status === 'pending_approval'
-                                  ? 'bg-amber-400 text-amber-950 font-black'
+                                  ? 'bg-accent text-accent-dark font-black'
                                   : combo.status === 'rejected'
-                                  ? 'bg-rose-600 text-white'
-                                  : 'bg-stone-700 text-white'
+                                  ? 'bg-destructive text-white'
+                                  : 'bg-foreground/80 text-white'
                               }`}>
                                 {combo.status === 'pending_approval' ? '⏳ Pending Approval' : combo.status === 'active' ? '🟢 Live' : combo.status === 'rejected' ? '🔴 Rejected' : '⏸️ Paused'}
                               </span>
@@ -2077,7 +2077,7 @@ export const VendorDashboard: React.FC = () => {
                           </div>
 
                           <div className="absolute bottom-3 left-3 right-3 text-white">
-                            <span className="text-[10px] uppercase font-bold tracking-widest text-amber-300 block">
+                            <span className="text-[10px] uppercase font-bold tracking-widest text-accent block">
                               {(combo.includedServices?.length || combo.includedListingIds?.length || 0)} Services Bundled &bull; {combo.locality || 'Pune'}
                             </span>
                             <h3 className="font-serif font-bold text-lg leading-tight line-clamp-1">
@@ -2090,73 +2090,73 @@ export const VendorDashboard: React.FC = () => {
                         <div className="p-5 space-y-4">
                           {/* Inactive Component Notice */}
                           {isComponentNotLive && (
-                            <div className="p-3 bg-amber-50 border border-amber-300 rounded-2xl text-xs text-amber-950 space-y-1">
-                              <span className="font-bold flex items-center gap-1.5 text-amber-900">
-                                <AlertTriangle className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                            <div className="p-3 bg-accent-subtle border border-accent/40 rounded-2xl text-xs text-accent-dark space-y-1">
+                              <span className="font-bold flex items-center gap-1.5 text-accent-dark">
+                                <AlertTriangle className="w-3.5 h-3.5 text-accent shrink-0" />
                                 inactive — component not live
                               </span>
-                              <p className="text-[11px] text-amber-800 leading-relaxed">
+                              <p className="text-[11px] text-accent-dark leading-relaxed">
                                 Only {visibility.liveComponentCount} of {visibility.totalComponentCount} component listings are live. This package is <strong>automatically hidden from public view</strong> without altering its stored status until at least 2 components are live.
                               </p>
                             </div>
                           )}
 
                           {combo.status === 'rejected' && combo.rejectionReason && (
-                            <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-900 space-y-1">
-                              <span className="font-bold flex items-center gap-1 text-rose-950">
+                            <div className="p-3 bg-destructive-subtle border border-destructive/20 rounded-xl text-xs text-destructive space-y-1">
+                              <span className="font-bold flex items-center gap-1 text-destructive">
                                 ⚠️ Admin Feedback / Rejection Note:
                               </span>
-                              <p className="text-[11px] text-rose-800">{combo.rejectionReason}</p>
+                              <p className="text-[11px] text-destructive">{combo.rejectionReason}</p>
                             </div>
                           )}
 
-                          <p className="text-xs text-stone-600 line-clamp-2">
+                          <p className="text-xs text-muted-foreground line-clamp-2">
                             {combo.description}
                           </p>
 
                           {/* Bundled Services Chips */}
                           <div className="space-y-1.5">
-                            <span className="text-[11px] font-bold uppercase tracking-wider text-stone-500 block">
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground block">
                               Included Service Listings:
                             </span>
                             <div className="space-y-1.5">
                               {combo.includedServices && combo.includedServices.length > 0 ? (
                                 combo.includedServices.map((srv, idx) => (
-                                  <div key={srv.listingId ? `${combo.id}_${srv.listingId}_${idx}` : `srv_${combo.id}_${idx}`} className="flex items-center justify-between p-2 rounded-xl bg-stone-50 border border-stone-200 text-xs">
+                                  <div key={srv.listingId ? `${combo.id}_${srv.listingId}_${idx}` : `srv_${combo.id}_${idx}`} className="flex items-center justify-between p-2 rounded-xl bg-muted/40 border border-border text-xs">
                                     <div className="flex items-center gap-2 min-w-0">
-                                      <span className="w-5 h-5 rounded-md bg-teal-100 text-teal-900 flex items-center justify-center font-bold text-[10px] shrink-0">
+                                      <span className="w-5 h-5 rounded-md bg-primary-subtle text-primary flex items-center justify-center font-bold text-[10px] shrink-0">
                                         {idx + 1}
                                       </span>
-                                      <span className="font-bold text-stone-900 truncate">{srv.listingTitle}</span>
-                                      <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-stone-200 text-stone-700 uppercase font-semibold">
+                                      <span className="font-bold text-foreground truncate">{srv.listingTitle}</span>
+                                      <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-muted text-foreground uppercase font-semibold">
                                         {srv.category}
                                       </span>
                                     </div>
-                                    <span className="font-mono text-stone-500 text-[11px] shrink-0">
+                                    <span className="font-mono text-muted-foreground text-[11px] shrink-0">
                                       ₹{srv.originalPrice.toLocaleString('en-IN')}
                                     </span>
                                   </div>
                                 ))
                               ) : (
-                                <p className="text-xs text-stone-400 italic">No bundled services listed</p>
+                                <p className="text-xs text-muted-foreground italic">No bundled services listed</p>
                               )}
                             </div>
                           </div>
 
                           {/* Pricing & Discount Card */}
-                          <div className="p-3.5 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-amber-200/80 flex items-center justify-between">
+                          <div className="p-3.5 bg-gradient-to-r from-accent-subtle to-accent-subtle/40 rounded-2xl border border-accent/80 flex items-center justify-between">
                             <div>
                               <div className="flex items-center gap-2">
-                                <span className="text-xs text-stone-400 line-through">
+                                <span className="text-xs text-muted-foreground line-through">
                                   ₹{(combo.totalOriginalPrice || combo.comboPrice)?.toLocaleString('en-IN')}
                                 </span>
-                                <span className="px-2 py-0.5 bg-emerald-100 text-emerald-900 text-[10px] font-bold rounded-md">
+                                <span className="px-2 py-0.5 bg-success-subtle text-success text-[10px] font-bold rounded-md">
                                   Save ₹{(combo.savingsAmount || 0)?.toLocaleString('en-IN')} ({combo.savingsPercentage || 0}% OFF)
                                 </span>
                               </div>
-                              <div className="font-serif font-extrabold text-xl text-teal-950 mt-0.5">
+                              <div className="font-serif font-extrabold text-xl text-primary-dark mt-0.5">
                                 ₹{combo.comboPrice.toLocaleString('en-IN')}
-                                <span className="text-[11px] font-normal text-stone-500 font-sans ml-1">all-inclusive</span>
+                                <span className="text-[11px] font-normal text-muted-foreground font-sans ml-1">all-inclusive</span>
                               </div>
                             </div>
 
@@ -2166,12 +2166,12 @@ export const VendorDashboard: React.FC = () => {
                       </div>
 
                       {/* Footer Actions */}
-                      <div className="px-5 py-3.5 bg-stone-50 border-t border-stone-100 flex items-center justify-between gap-2">
+                      <div className="px-5 py-3.5 bg-muted/40 border-t border-border-subtle flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
                           <button
                             type="button"
                             onClick={() => setPreviewCombo(combo)}
-                            className="px-3 py-1.5 rounded-xl border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 text-xs font-bold flex items-center gap-1 cursor-pointer"
+                            className="px-3 py-1.5 rounded-xl border border-border bg-white hover:bg-muted text-foreground text-xs font-bold flex items-center gap-1 cursor-pointer"
                           >
                             <Eye className="w-3.5 h-3.5" />
                             <span>Preview</span>
@@ -2182,7 +2182,7 @@ export const VendorDashboard: React.FC = () => {
                               setEditingCombo(combo);
                               setComboStudioOpen(true);
                             }}
-                            className="px-3 py-1.5 rounded-xl border border-teal-800/30 bg-teal-50 hover:bg-teal-100 text-teal-950 text-xs font-bold flex items-center gap-1 cursor-pointer"
+                            className="px-3 py-1.5 rounded-xl border border-primary/30 bg-primary-subtle hover:bg-primary-subtle text-primary-dark text-xs font-bold flex items-center gap-1 cursor-pointer"
                           >
                             <Edit3 className="w-3.5 h-3.5" />
                             <span>Edit</span>
@@ -2191,8 +2191,8 @@ export const VendorDashboard: React.FC = () => {
 
                         <div className="flex items-center gap-2">
                           {combo.status === 'pending_approval' ? (
-                            <span className="px-2.5 py-1 rounded-xl text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300 flex items-center gap-1">
-                              <Clock className="w-3 h-3 text-amber-700" />
+                            <span className="px-2.5 py-1 rounded-xl text-[11px] font-bold bg-accent-subtle text-accent-dark border border-accent/40 flex items-center gap-1">
+                              <Clock className="w-3 h-3 text-accent" />
                               <span>Under Admin Review</span>
                             </span>
                           ) : combo.status === 'rejected' ? (
@@ -2202,7 +2202,7 @@ export const VendorDashboard: React.FC = () => {
                                 setEditingCombo(combo);
                                 setComboStudioOpen(true);
                               }}
-                              className="px-2.5 py-1 rounded-xl text-[11px] font-bold bg-rose-100 text-rose-900 border border-rose-300 hover:bg-rose-200 cursor-pointer"
+                              className="px-2.5 py-1 rounded-xl text-[11px] font-bold bg-destructive-subtle text-destructive border border-destructive/30 hover:bg-destructive-subtle cursor-pointer"
                             >
                               Edit & Resubmit
                             </button>
@@ -2212,8 +2212,8 @@ export const VendorDashboard: React.FC = () => {
                               onClick={() => updateComboPackage(combo.id, { status: combo.status === 'active' ? 'paused' : 'active' })}
                               className={`px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-colors ${
                                 combo.status === 'active'
-                                  ? 'bg-stone-200 text-stone-700 hover:bg-stone-300'
-                                  : 'bg-emerald-600 text-white hover:bg-emerald-700'
+                                  ? 'bg-muted text-foreground hover:bg-border'
+                                  : 'bg-success text-white hover:bg-success'
                               }`}
                             >
                               {combo.status === 'active' ? 'Pause' : 'Resume Live'}
@@ -2227,7 +2227,7 @@ export const VendorDashboard: React.FC = () => {
                                 deleteComboPackage(combo.id);
                               }
                             }}
-                            className="p-1.5 text-stone-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 cursor-pointer"
+                            className="p-1.5 text-muted-foreground hover:text-destructive rounded-lg hover:bg-destructive-subtle cursor-pointer"
                             title="Delete Combo"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -2252,15 +2252,15 @@ export const VendorDashboard: React.FC = () => {
                 return (
                   <>
                     {/* Listing Selector */}
-                    <div className="p-4 bg-stone-50 rounded-2xl border border-stone-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="p-4 bg-muted/40 rounded-2xl border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div className="flex items-center gap-3 flex-wrap">
-                        <span className="text-xs font-bold text-stone-600 uppercase tracking-wider">
+                        <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                           Select Listing to Manage:
                         </span>
                         <select
                           value={selectedListingForTiers}
                           onChange={(e) => setSelectedListingForTiers(e.target.value)}
-                          className="bg-white border border-stone-300 rounded-xl px-3 py-1.5 text-xs text-stone-900 font-bold outline-hidden shadow-2xs"
+                          className="bg-white border border-border rounded-xl px-3 py-1.5 text-xs text-foreground font-bold outline-hidden shadow-2xs"
                         >
                           {vendorListings.map(l => (
                             <option key={l.id} value={l.id}>
@@ -2277,8 +2277,8 @@ export const VendorDashboard: React.FC = () => {
                         title={!isSelectedListingActive ? 'Packages can only be added for approved and active listings' : 'Add new tier'}
                         className={`px-4 py-2 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-2xs self-start sm:self-auto transition-colors ${
                           isSelectedListingActive 
-                            ? 'bg-teal-900 hover:bg-teal-950 cursor-pointer' 
-                            : 'bg-stone-400 cursor-not-allowed opacity-75'
+                            ? 'bg-primary hover:bg-primary-dark cursor-pointer' 
+                            : 'bg-muted-foreground cursor-not-allowed opacity-75'
                         }`}
                       >
                         <Plus className="w-3.5 h-3.5 stroke-[3]" />
@@ -2288,7 +2288,7 @@ export const VendorDashboard: React.FC = () => {
 
                     {/* Current Listing Selected Details */}
                     {!activeL ? (
-                      <div className="p-8 text-center text-xs text-stone-500">
+                      <div className="p-8 text-center text-xs text-muted-foreground">
                         No listing selected.
                       </div>
                     ) : (() => {
@@ -2299,11 +2299,11 @@ export const VendorDashboard: React.FC = () => {
                         <div className="space-y-4">
                           {/* Active Listing Policy Alert if Listing is Not Active */}
                           {!isSelectedListingActive && (
-                            <div className="p-4 bg-amber-50 border border-amber-300 rounded-2xl flex items-start gap-3 text-xs text-amber-950 shadow-2xs">
+                            <div className="p-4 bg-accent-subtle border border-accent/40 rounded-2xl flex items-start gap-3 text-xs text-accent-dark shadow-2xs">
                               <span className="text-lg">⚠️</span>
                               <div className="space-y-0.5">
                                 <span className="font-bold">Active Listing Requirement</span>
-                                <p className="text-[11px] text-amber-900 leading-relaxed">
+                                <p className="text-[11px] text-accent-dark leading-relaxed">
                                   Package tiers can only be configured for <strong>approved & active listings</strong>. This listing is currently <strong>{activeL.status === 'pending_approval' ? 'Pending Admin Approval' : activeL.status}</strong>. Once reviewed and approved by admin, you will be able to add and customize tiered packages.
                                 </p>
                               </div>
@@ -2312,26 +2312,26 @@ export const VendorDashboard: React.FC = () => {
 
                           {/* 24-Hour Cooldown Banner if locked */}
                           {isSelectedListingActive && !cooldown.canEdit && (
-                            <div className="p-4 bg-amber-50 border border-amber-300 rounded-2xl flex items-start sm:items-center justify-between gap-3 text-xs text-amber-950 shadow-2xs">
+                            <div className="p-4 bg-accent-subtle border border-accent/40 rounded-2xl flex items-start sm:items-center justify-between gap-3 text-xs text-accent-dark shadow-2xs">
                               <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-xl bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-800 shrink-0">
+                                <div className="w-8 h-8 rounded-xl bg-accent-subtle border border-accent/40 flex items-center justify-center text-accent-dark shrink-0">
                                   <Lock className="w-4 h-4" />
                                 </div>
                                 <div>
                                   <span className="font-bold">24-Hour Edit Restriction Active</span>
-                                  <p className="text-[11px] text-amber-900">
+                                  <p className="text-[11px] text-accent-dark">
                                     This listing was edited {cooldown.lastEditedText}. Adding or modifying package tiers requires administrative re-approval and is limited to once per 24 hours. Next edit unlocks in <strong>{cooldown.formattedRemaining}</strong>.
                                   </p>
                                 </div>
                               </div>
-                              <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-amber-200 text-amber-950 shrink-0">
+                              <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-accent-subtle text-accent-dark shrink-0">
                                 Locked ({cooldown.formattedRemaining})
                               </span>
                             </div>
                           )}
 
                           {/* Selected Listing Summary Header */}
-                          <div className="flex items-center gap-3 p-3.5 bg-white rounded-2xl border border-stone-200 shadow-2xs">
+                          <div className="flex items-center gap-3 p-3.5 bg-white rounded-2xl border border-border shadow-2xs">
                             <img
                               src={activeL.coverImage}
                               alt=""
@@ -2340,38 +2340,38 @@ export const VendorDashboard: React.FC = () => {
                             />
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2 flex-wrap">
-                                <span className="px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-stone-100 text-stone-800">
+                                <span className="px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-muted text-foreground">
                                   {activeL.category}
                                 </span>
-                                <span className="text-xs text-stone-500">&bull; {activeL.locality}, Pune</span>
+                                <span className="text-xs text-muted-foreground">&bull; {activeL.locality}, Pune</span>
                                 <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${
-                                  activeL.status === 'active' ? 'bg-emerald-100 text-emerald-900' : 'bg-amber-100 text-amber-900'
+                                  activeL.status === 'active' ? 'bg-success-subtle text-success' : 'bg-accent-subtle text-accent-dark'
                                 }`}>
                                   {activeL.status === 'active' ? 'Active' : 'Pending Approval'}
                                 </span>
                               </div>
-                              <h3 className="font-bold text-sm text-stone-900 truncate">{activeL.title}</h3>
-                              <p className="text-xs text-stone-500">
-                                Base starting price: <strong className="text-teal-950">{formatIndianCurrency(activeL.startingPrice)}</strong>
+                              <h3 className="font-bold text-sm text-foreground truncate">{activeL.title}</h3>
+                              <p className="text-xs text-muted-foreground">
+                                Base starting price: <strong className="text-primary-dark">{formatIndianCurrency(activeL.startingPrice)}</strong>
                               </p>
                             </div>
                           </div>
 
                           {/* Tiers List */}
                           {tiers.length === 0 ? (
-                            <div className="bg-white rounded-2xl border border-dashed border-stone-300 p-8 text-center space-y-3">
-                              <div className="w-12 h-12 rounded-xl bg-teal-50 text-teal-800 flex items-center justify-center mx-auto text-xl">
+                            <div className="bg-white rounded-2xl border border-dashed border-border p-8 text-center space-y-3">
+                              <div className="w-12 h-12 rounded-xl bg-primary-subtle text-primary flex items-center justify-center mx-auto text-xl">
                                 🏷️
                               </div>
-                              <h4 className="font-serif font-bold text-base text-stone-900">No Tiered Packages Defined for this Listing</h4>
-                              <p className="text-xs text-stone-500 max-w-md mx-auto">
+                              <h4 className="font-serif font-bold text-base text-foreground">No Tiered Packages Defined for this Listing</h4>
+                              <p className="text-xs text-muted-foreground max-w-md mx-auto">
                                 Create 2-3 clear packages (e.g. "Standard Day Pass", "Deluxe Full Day", "Royal 24H Exclusive") with itemized features so customers know exactly what they get.
                               </p>
                               {isSelectedListingActive && (
                                 <button
                                   type="button"
                                   onClick={() => setIsAddingTierModal(true)}
-                                  className="px-4 py-2 bg-teal-900 text-white font-bold text-xs rounded-xl shadow-xs cursor-pointer"
+                                  className="px-4 py-2 bg-primary text-white font-bold text-xs rounded-xl shadow-xs cursor-pointer"
                                 >
                                   + Add First Package Tier
                                 </button>
@@ -2383,24 +2383,24 @@ export const VendorDashboard: React.FC = () => {
                                 <div
                                   key={tier.id || `tier_${activeL.id}_${tIdx}_${tier.name}`}
                                   className={`bg-white rounded-2xl border p-5 flex flex-col justify-between shadow-xs relative transition-all ${
-                                    tier.isPopular ? 'border-amber-400 ring-2 ring-amber-400/20' : 'border-stone-200'
+                                    tier.isPopular ? 'border-accent ring-2 ring-accent/20' : 'border-border'
                                   }`}
                                 >
                                   <div className="space-y-3">
                                     <div className="flex items-start justify-between gap-2">
                                       <div>
                                         {tier.badge && (
-                                          <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase bg-amber-400 text-stone-950 inline-block mb-1">
+                                          <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase bg-accent text-foreground inline-block mb-1">
                                             {tier.badge}
                                           </span>
                                         )}
-                                        <h4 className="font-serif font-bold text-base text-stone-900">{tier.name}</h4>
+                                        <h4 className="font-serif font-bold text-base text-foreground">{tier.name}</h4>
                                       </div>
                                       {isSelectedListingActive && (
                                         <button
                                           type="button"
                                           onClick={() => handleDeleteTierFromListing(activeL.id, tier.id || '')}
-                                          className="p-1.5 text-stone-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 cursor-pointer"
+                                          className="p-1.5 text-muted-foreground hover:text-destructive rounded-lg hover:bg-destructive-subtle cursor-pointer"
                                           title="Delete Package Tier"
                                         >
                                           <Trash2 className="w-4 h-4" />
@@ -2408,28 +2408,28 @@ export const VendorDashboard: React.FC = () => {
                                       )}
                                     </div>
 
-                                    <div className="font-serif font-extrabold text-2xl text-teal-950">
+                                    <div className="font-serif font-extrabold text-2xl text-primary-dark">
                                       ₹{tier.price.toLocaleString('en-IN')}
-                                      <span className="text-xs font-normal text-stone-500 font-sans ml-1">
+                                      <span className="text-xs font-normal text-muted-foreground font-sans ml-1">
                                         / {(tier.pricingUnit || 'per_event').replace('per_', '')}
                                       </span>
                                     </div>
 
                                     {tier.description && (
-                                      <p className="text-xs text-stone-600 line-clamp-2">
+                                      <p className="text-xs text-muted-foreground line-clamp-2">
                                         {tier.description}
                                       </p>
                                     )}
 
                                     {/* Features checklist */}
-                                    <div className="space-y-1.5 pt-2 border-t border-stone-100">
-                                      <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">
+                                    <div className="space-y-1.5 pt-2 border-t border-border-subtle">
+                                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block">
                                         Included Features:
                                       </span>
-                                      <ul className="space-y-1 text-xs text-stone-700">
+                                      <ul className="space-y-1 text-xs text-foreground">
                                         {tier.features?.map((feat, fIdx) => (
                                           <li key={`${tier.id || tier.name || 'tier'}_f_${fIdx}_${feat}`} className="flex items-start gap-1.5">
-                                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                                            <CheckCircle2 className="w-3.5 h-3.5 text-success shrink-0 mt-0.5" />
                                             <span>{feat}</span>
                                           </li>
                                         ))}
@@ -2437,20 +2437,20 @@ export const VendorDashboard: React.FC = () => {
                                     </div>
                                   </div>
 
-                                  <div className="mt-4 pt-3 border-t border-stone-100 flex justify-between items-center text-[11px]">
-                                    <span className="text-stone-500">Marketplace Status</span>
+                                  <div className="mt-4 pt-3 border-t border-border-subtle flex justify-between items-center text-[11px]">
+                                    <span className="text-muted-foreground">Marketplace Status</span>
                                     {tier.status === 'pending_approval' ? (
-                                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 flex items-center gap-1">
-                                        <Clock className="w-3 h-3 text-amber-700" />
+                                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-accent-subtle text-accent-dark border border-accent/40 flex items-center gap-1">
+                                        <Clock className="w-3 h-3 text-accent" />
                                         Pending Admin Approval
                                       </span>
                                     ) : tier.status === 'rejected' ? (
-                                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-900 border border-rose-300">
+                                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-destructive-subtle text-destructive border border-destructive/30">
                                         Rejected by Admin
                                       </span>
                                     ) : (
-                                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-900 border border-emerald-300 flex items-center gap-1">
-                                        <CheckCircle2 className="w-3 h-3 text-emerald-700" />
+                                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-success-subtle text-success border border-success/30 flex items-center gap-1">
+                                        <CheckCircle2 className="w-3 h-3 text-success" />
                                         Live in Marketplace
                                       </span>
                                     )}
@@ -2471,20 +2471,20 @@ export const VendorDashboard: React.FC = () => {
           {/* Quick Add Tier Modal */}
           {isAddingTierModal && (
             <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-              <div className="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-stone-200 text-left my-8">
-                <div className="flex items-center justify-between border-b border-stone-200 pb-3">
+              <div className="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-border text-left my-8">
+                <div className="flex items-center justify-between border-b border-border pb-3">
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-amber-700 block">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-accent block">
                       Add Tiered Service Package
                     </span>
-                    <h3 className="font-serif font-bold text-lg text-stone-900">
+                    <h3 className="font-serif font-bold text-lg text-foreground">
                       New Package for {listings.find(l => l.id === selectedListingForTiers)?.title || vendorListings.find(l => l.id === selectedListingForTiers)?.title || vendorListings[0]?.title || 'Selected Listing'}
                     </h3>
                   </div>
                   <button
                     type="button"
                     onClick={() => setIsAddingTierModal(false)}
-                    className="p-2 rounded-xl text-stone-400 hover:text-stone-700 hover:bg-stone-100 cursor-pointer"
+                    className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted cursor-pointer"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -2492,7 +2492,7 @@ export const VendorDashboard: React.FC = () => {
 
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-xs font-bold text-stone-700 mb-1">
+                    <label className="block text-xs font-bold text-foreground mb-1">
                       Package Name *
                     </label>
                     <input
@@ -2500,13 +2500,13 @@ export const VendorDashboard: React.FC = () => {
                       placeholder="e.g. Royal Vivah Full Day Access"
                       value={newTierName}
                       onChange={(e) => setNewTierName(e.target.value)}
-                      className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden font-semibold"
+                      className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground outline-hidden font-semibold"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-bold text-stone-700 mb-1">
+                      <label className="block text-xs font-bold text-foreground mb-1">
                         Price (₹ INR) *
                       </label>
                       <input
@@ -2515,17 +2515,17 @@ export const VendorDashboard: React.FC = () => {
                         placeholder="e.g. 50000"
                         value={newTierPrice === '' ? '' : newTierPrice}
                         onChange={(e) => setNewTierPrice(e.target.value === '' ? '' : Number(e.target.value))}
-                        className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden font-mono"
+                        className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground outline-hidden font-mono"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-stone-700 mb-1">
+                      <label className="block text-xs font-bold text-foreground mb-1">
                         Pricing Unit
                       </label>
                       <select
                         value={newTierPricingUnit}
                         onChange={(e) => setNewTierPricingUnit(e.target.value)}
-                        className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden"
+                        className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground outline-hidden"
                       >
                         <option value="per_event">Per Event / Day</option>
                         <option value="per_plate">Per Plate / Guest</option>
@@ -2535,7 +2535,7 @@ export const VendorDashboard: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-stone-700 mb-1">
+                    <label className="block text-xs font-bold text-foreground mb-1">
                       Package Description & Scope
                     </label>
                     <textarea
@@ -2543,13 +2543,13 @@ export const VendorDashboard: React.FC = () => {
                       placeholder="Short description of what this package is best suited for..."
                       value={newTierDesc}
                       onChange={(e) => setNewTierDesc(e.target.value)}
-                      className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2 text-xs text-stone-900 outline-hidden resize-none"
+                      className="w-full bg-muted/40 border border-border rounded-xl p-2 text-xs text-foreground outline-hidden resize-none"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-bold text-stone-700 mb-1">
+                      <label className="block text-xs font-bold text-foreground mb-1">
                         Badge (Optional)
                       </label>
                       <input
@@ -2557,7 +2557,7 @@ export const VendorDashboard: React.FC = () => {
                         placeholder="e.g. 👑 Most Popular"
                         value={newTierBadge}
                         onChange={(e) => setNewTierBadge(e.target.value)}
-                        className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2 text-xs text-stone-900 outline-hidden"
+                        className="w-full bg-muted/40 border border-border rounded-xl p-2 text-xs text-foreground outline-hidden"
                       />
                     </div>
                     <div className="flex items-center gap-2 pt-5">
@@ -2566,9 +2566,9 @@ export const VendorDashboard: React.FC = () => {
                         id="isPop"
                         checked={newTierIsPopular}
                         onChange={(e) => setNewTierIsPopular(e.target.checked)}
-                        className="w-4 h-4 rounded text-teal-900 cursor-pointer"
+                        className="w-4 h-4 rounded text-primary cursor-pointer"
                       />
-                      <label htmlFor="isPop" className="text-xs font-bold text-stone-700 cursor-pointer">
+                      <label htmlFor="isPop" className="text-xs font-bold text-foreground cursor-pointer">
                         Highlight as Most Popular
                       </label>
                     </div>
@@ -2576,7 +2576,7 @@ export const VendorDashboard: React.FC = () => {
 
                   {/* Included features builder */}
                   <div>
-                    <label className="block text-xs font-bold text-stone-700 mb-1">
+                    <label className="block text-xs font-bold text-foreground mb-1">
                       Included Package Features ({newTierFeatures.length})
                     </label>
                     <div className="flex gap-2 mb-2">
@@ -2597,7 +2597,7 @@ export const VendorDashboard: React.FC = () => {
                             }
                           }
                         }}
-                        className="flex-1 bg-stone-50 border border-stone-300 rounded-xl p-2 text-xs text-stone-900 outline-hidden"
+                        className="flex-1 bg-muted/40 border border-border rounded-xl p-2 text-xs text-foreground outline-hidden"
                       />
                       <button
                         type="button"
@@ -2610,20 +2610,20 @@ export const VendorDashboard: React.FC = () => {
                             setNewTierFeatureInput('');
                           }
                         }}
-                        className="px-3 py-2 bg-stone-800 text-white rounded-xl text-xs font-bold cursor-pointer"
+                        className="px-3 py-2 bg-foreground text-white rounded-xl text-xs font-bold cursor-pointer"
                       >
                         + Add
                       </button>
                     </div>
 
-                    <div className="space-y-1 max-h-36 overflow-y-auto p-2 bg-stone-50 rounded-xl border border-stone-200">
+                    <div className="space-y-1 max-h-36 overflow-y-auto p-2 bg-muted/40 rounded-xl border border-border">
                       {newTierFeatures.map((feat) => (
-                        <div key={feat.id} className="flex items-center justify-between text-xs bg-white p-1.5 px-2.5 rounded-lg border border-stone-200">
+                        <div key={feat.id} className="flex items-center justify-between text-xs bg-white p-1.5 px-2.5 rounded-lg border border-border">
                           <span className="truncate">{feat.text}</span>
                           <button
                             type="button"
                             onClick={() => setNewTierFeatures(prev => prev.filter(f => f.id !== feat.id))}
-                            className="text-stone-400 hover:text-rose-600 font-bold ml-2 cursor-pointer"
+                            className="text-muted-foreground hover:text-destructive font-bold ml-2 cursor-pointer"
                           >
                             ✕
                           </button>
@@ -2633,11 +2633,11 @@ export const VendorDashboard: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex justify-end gap-2 pt-3 border-t border-stone-200">
+                <div className="flex justify-end gap-2 pt-3 border-t border-border">
                   <button
                     type="button"
                     onClick={() => setIsAddingTierModal(false)}
-                    className="px-4 py-2.5 rounded-xl text-xs font-bold text-stone-600 hover:bg-stone-100 cursor-pointer"
+                    className="px-4 py-2.5 rounded-xl text-xs font-bold text-muted-foreground hover:bg-muted cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -2645,7 +2645,7 @@ export const VendorDashboard: React.FC = () => {
                     type="button"
                     disabled={!newTierName.trim() || !newTierPrice}
                     onClick={handleAddTierToListing}
-                    className="px-5 py-2.5 bg-teal-900 hover:bg-teal-950 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer disabled:opacity-50"
+                    className="px-5 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-bold shadow-md cursor-pointer disabled:opacity-50"
                   >
                     Save Package Tier to Listing
                   </button>
@@ -2658,26 +2658,26 @@ export const VendorDashboard: React.FC = () => {
 
       {/* 5. CREATE / EDIT LISTING WITH DYNAMIC CATEGORY FIELDS & PHOTO UPLOADS */}
       {activeTab === 'new_listing' && (
-        <form onSubmit={handleCreateListing} className="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 space-y-6 max-w-4xl mx-auto shadow-sm text-left">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-stone-100">
+        <form onSubmit={handleCreateListing} className="bg-white rounded-3xl border border-border p-6 sm:p-8 space-y-6 max-w-4xl mx-auto shadow-sm text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-border-subtle">
             <div>
               <div className="flex items-center gap-2 mb-1">
                 {editingListingId ? (
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-amber-500 text-stone-950 flex items-center gap-1">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-accent text-foreground flex items-center gap-1">
                     <Edit3 className="w-3 h-3" />
                     Editing Listing Mode
                   </span>
                 ) : (
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-teal-900 text-white">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-primary text-white">
                     New Listing Creation
                   </span>
                 )}
-                <span className="text-xs text-stone-500">&bull; 24-Hour Approval Policy</span>
+                <span className="text-xs text-muted-foreground">&bull; 24-Hour Approval Policy</span>
               </div>
-              <h2 className="font-serif font-bold text-2xl text-stone-900">
+              <h2 className="font-serif font-bold text-2xl text-foreground">
                 {editingListingId ? `Edit Listing & Packages: ${newTitle}` : `List Your Venue or Service in ${getCityById(newCity)?.name || 'Pune'}`}
               </h2>
-              <p className="text-xs text-stone-500 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 {editingListingId
                   ? 'Update your details, pricing, and package tiers. Edits will be submitted to admin for re-approval and locked for 24 hours.'
                   : 'Upload high-resolution photos, configure category specifications, and define tiered packages for maximum bookings.'}
@@ -2688,7 +2688,7 @@ export const VendorDashboard: React.FC = () => {
               <button
                 type="button"
                 onClick={handleCancelEditListing}
-                className="px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold text-xs rounded-xl self-start sm:self-auto cursor-pointer"
+                className="px-4 py-2 bg-muted hover:bg-muted text-foreground font-bold text-xs rounded-xl self-start sm:self-auto cursor-pointer"
               >
                 Cancel Edit
               </button>
@@ -2696,25 +2696,25 @@ export const VendorDashboard: React.FC = () => {
           </div>
 
           {/* 24-Hour Policy Notice Banner */}
-          <div className="p-4 bg-teal-50 border border-teal-200 rounded-2xl flex items-start gap-3 text-xs text-teal-950">
-            <div className="w-7 h-7 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center shrink-0 mt-0.5 font-bold">
+          <div className="p-4 bg-primary-subtle border border-primary/30 rounded-2xl flex items-start gap-3 text-xs text-primary-dark">
+            <div className="w-7 h-7 rounded-xl bg-primary-subtle text-primary flex items-center justify-center shrink-0 mt-0.5 font-bold">
               ℹ️
             </div>
             <div className="space-y-0.5">
-              <span className="font-bold text-teal-950">Marketplace Integrity & Approval Policy</span>
-              <p className="text-[11px] text-teal-900 leading-relaxed">
+              <span className="font-bold text-primary-dark">Marketplace Integrity & Approval Policy</span>
+              <p className="text-[11px] text-primary leading-relaxed">
                 All listing changes and pricing updates undergo re-verification by Celebratz admin before going live. To prevent pricing fluctuations, vendors may submit listing & package edits <strong>only once every 24 hours</strong>. A confirmation modal will display prior to submission.
               </p>
             </div>
           </div>
 
           {submissionError && (
-            <div className="p-4 bg-rose-50 border border-rose-200 text-rose-800 rounded-2xl flex items-center justify-between text-xs font-semibold">
+            <div className="p-4 bg-destructive-subtle border border-destructive/20 text-destructive rounded-2xl flex items-center justify-between text-xs font-semibold">
               <span>{submissionError}</span>
               <button
                 type="button"
                 onClick={() => setSubmissionError(null)}
-                className="text-rose-600 hover:text-rose-900 font-bold ml-2"
+                className="text-destructive hover:text-destructive font-bold ml-2"
               >
                 ✕
               </button>
@@ -2722,8 +2722,8 @@ export const VendorDashboard: React.FC = () => {
           )}
 
           {isListingCreated ? (
-            <div className="p-6 bg-emerald-50 text-emerald-800 text-center rounded-2xl space-y-2">
-              <CheckCircle2 className="w-8 h-8 text-emerald-600 mx-auto" />
+            <div className="p-6 bg-success-subtle text-success text-center rounded-2xl space-y-2">
+              <CheckCircle2 className="w-8 h-8 text-success mx-auto" />
               <h4 className="font-bold text-base">Listing Submitted for Approval!</h4>
               <p className="text-xs">Your listing has been created and placed in the admin approval queue.</p>
             </div>
@@ -2731,7 +2731,7 @@ export const VendorDashboard: React.FC = () => {
             <div className="space-y-6">
               {/* Category selector */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
                   Service Category *
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -2747,8 +2747,8 @@ export const VendorDashboard: React.FC = () => {
                         }}
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
                           isSelected
-                            ? 'bg-teal-900 text-white border-teal-900 shadow-xs'
-                            : 'bg-stone-50 text-stone-700 border-stone-300 hover:bg-stone-100'
+                            ? 'bg-primary text-white border-primary shadow-xs'
+                            : 'bg-muted/40 text-foreground border-border hover:bg-muted'
                         }`}
                       >
                         {c.name} {isSelected && '✓'}
@@ -2760,7 +2760,7 @@ export const VendorDashboard: React.FC = () => {
 
               {/* Listing Title (placed above City field) */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                   Listing Title *
                 </label>
                 <input
@@ -2769,14 +2769,14 @@ export const VendorDashboard: React.FC = () => {
                   placeholder="e.g. Pune Grand Heritage Lawns"
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
-                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden"
+                  className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground outline-hidden"
                 />
               </div>
 
               {/* City & Locality */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                     City (India) *
                   </label>
                   <select
@@ -2789,7 +2789,7 @@ export const VendorDashboard: React.FC = () => {
                         setNewLocality(cityCfg.localities[0]);
                       }
                     }}
-                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden font-semibold"
+                    className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground outline-hidden font-semibold"
                   >
                     {CITIES.map(c => (
                       <option key={c.id} value={c.id}>
@@ -2800,13 +2800,13 @@ export const VendorDashboard: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                     Locality / Area *
                   </label>
                   <select
                     value={newLocality}
                     onChange={(e) => setNewLocality(e.target.value)}
-                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden"
+                    className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground outline-hidden"
                   >
                     {(getCityById(newCity)?.localities || PUNE_LOCALITIES).map(loc => (
                       <option key={loc} value={loc}>{loc}</option>
@@ -2817,7 +2817,7 @@ export const VendorDashboard: React.FC = () => {
 
               {/* Supported Event Types */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
                   Suitable Event Types (Select all that apply)
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -2838,8 +2838,8 @@ export const VendorDashboard: React.FC = () => {
                         }}
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
                           isSelected
-                            ? 'bg-teal-900 text-white border-teal-900 shadow-xs'
-                            : 'bg-stone-50 text-stone-700 border-stone-300 hover:bg-stone-100'
+                            ? 'bg-primary text-white border-primary shadow-xs'
+                            : 'bg-muted/40 text-foreground border-border hover:bg-muted'
                         }`}
                       >
                         {formatEventType(eventType)} {isSelected && '✓'}
@@ -2852,7 +2852,7 @@ export const VendorDashboard: React.FC = () => {
               {/* Full Address & Google Maps Link */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                     Full Venue / Studio Address
                   </label>
                   <input
@@ -2860,12 +2860,12 @@ export const VendorDashboard: React.FC = () => {
                     placeholder="e.g. Survey No. 42/1, Pancard Club Road, Baner"
                     value={newAddress}
                     onChange={(e) => setNewAddress(e.target.value)}
-                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden"
+                    className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground outline-hidden"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                     Google Maps Link / Share URL (Optional)
                   </label>
                   <input
@@ -2873,9 +2873,9 @@ export const VendorDashboard: React.FC = () => {
                     placeholder="e.g. https://maps.app.goo.gl/... or https://goo.gl/maps/..."
                     value={newGoogleMapsUrl}
                     onChange={(e) => setNewGoogleMapsUrl(e.target.value)}
-                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden"
+                    className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground outline-hidden"
                   />
-                  <span className="text-[10px] text-stone-500 mt-0.5 block">
+                  <span className="text-[10px] text-muted-foreground mt-0.5 block">
                     Paste Google Maps location link to enable 1-tap navigation
                   </span>
                 </div>
@@ -2884,7 +2884,7 @@ export const VendorDashboard: React.FC = () => {
               {/* Pricing & Units */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                     Starting Price (₹ INR) *
                   </label>
                   <input
@@ -2894,20 +2894,20 @@ export const VendorDashboard: React.FC = () => {
                     placeholder="e.g. 100000"
                     value={newPrice === '' ? '' : newPrice}
                     onChange={(e) => setNewPrice(e.target.value === '' ? '' : Number(e.target.value))}
-                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden font-semibold"
+                    className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground outline-hidden font-semibold"
                   />
-                  <span className="text-[10px] text-stone-500 mt-0.5 block">
+                  <span className="text-[10px] text-muted-foreground mt-0.5 block">
                     Base starting quotation or minimum package cost
                   </span>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                     Pricing Unit *
                   </label>
                   <select
                     value={newPricingUnit}
                     onChange={(e) => setNewPricingUnit(e.target.value as PricingUnit)}
-                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-semibold outline-hidden cursor-pointer"
+                    className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground font-semibold outline-hidden cursor-pointer"
                   >
                     <option value="per_day">Per Day (₹ / day — Venues, Studios, Lawns)</option>
                     <option value="per_plate">Per Plate (₹ / plate — Catering & Food Packages)</option>
@@ -2915,7 +2915,7 @@ export const VendorDashboard: React.FC = () => {
                     <option value="per_hour">Per Hour (₹ / hr — Hourly Rentals & Music Sets)</option>
                     <option value="fixed_package">Fixed Package (₹ / package — All-inclusive bundle)</option>
                   </select>
-                  <span className="text-[10px] text-stone-500 mt-0.5 block">
+                  <span className="text-[10px] text-muted-foreground mt-0.5 block">
                     Defines how your quotation is structured on cards & filters
                   </span>
                 </div>
@@ -3114,27 +3114,27 @@ export const VendorDashboard: React.FC = () => {
               )}
 
               {/* 📸 UNIFIED PHOTO UPLOAD SECTION (MULTIPLE PHOTOS + SELECTABLE COVER PHOTO) */}
-              <div className="p-5 bg-amber-50/40 rounded-2xl border border-amber-200/80 space-y-4">
+              <div className="p-5 bg-accent-subtle/40 rounded-2xl border border-accent/80 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
-                    <h3 className="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
-                      <Camera className="w-4 h-4 text-amber-700" />
+                    <h3 className="font-serif font-bold text-base text-foreground flex items-center gap-2">
+                      <Camera className="w-4 h-4 text-accent" />
                       Photos & Media Showcase
                     </h3>
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-muted-foreground">
                       Upload multiple photos for your listing. You can select any photo as the cover photo; otherwise the first photo will be used automatically.
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-300/60 w-fit">
+                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-accent-subtle text-accent-dark border border-accent/60 w-fit">
                       {uploadedPhotos.length} Photo{uploadedPhotos.length === 1 ? '' : 's'}
                     </span>
-                    <div className="flex bg-stone-100 p-0.5 rounded-lg text-[11px] font-semibold">
+                    <div className="flex bg-muted p-0.5 rounded-lg text-[11px] font-semibold">
                       <button
                         type="button"
                         onClick={() => setPhotoInputType('upload')}
                         className={`px-2.5 py-1 rounded-md transition-all flex items-center gap-1 cursor-pointer ${
-                          photoInputType === 'upload' ? 'bg-white shadow-xs text-teal-950 font-bold' : 'text-stone-600 hover:text-stone-900'
+                          photoInputType === 'upload' ? 'bg-white shadow-xs text-primary-dark font-bold' : 'text-muted-foreground hover:text-foreground'
                         }`}
                       >
                         <Upload className="w-3 h-3" />
@@ -3144,7 +3144,7 @@ export const VendorDashboard: React.FC = () => {
                         type="button"
                         onClick={() => setPhotoInputType('url')}
                         className={`px-2.5 py-1 rounded-md transition-all flex items-center gap-1 cursor-pointer ${
-                          photoInputType === 'url' ? 'bg-white shadow-xs text-teal-950 font-bold' : 'text-stone-600 hover:text-stone-900'
+                          photoInputType === 'url' ? 'bg-white shadow-xs text-primary-dark font-bold' : 'text-muted-foreground hover:text-foreground'
                         }`}
                       >
                         <Link className="w-3 h-3" />
@@ -3155,14 +3155,14 @@ export const VendorDashboard: React.FC = () => {
                 </div>
 
                 {/* Upload Inputs */}
-                <div className="p-4 bg-white rounded-xl border border-stone-200 space-y-4">
+                <div className="p-4 bg-white rounded-xl border border-border space-y-4">
                   {photoInputType === 'upload' ? (
-                    <label className="w-full flex flex-col items-center justify-center border-2 border-dashed border-stone-300 hover:border-teal-700 bg-stone-50 hover:bg-teal-50/30 rounded-xl p-6 cursor-pointer transition-colors text-center group">
-                      <div className="p-3 rounded-full bg-teal-50 text-teal-800 group-hover:scale-110 transition-transform mb-2">
+                    <label className="w-full flex flex-col items-center justify-center border-2 border-dashed border-border hover:border-primary bg-muted/40 hover:bg-primary-subtle/30 rounded-xl p-6 cursor-pointer transition-colors text-center group">
+                      <div className="p-3 rounded-full bg-primary-subtle text-primary group-hover:scale-110 transition-transform mb-2">
                         <Upload className="w-6 h-6" />
                       </div>
-                      <span className="text-sm font-bold text-teal-950 mb-0.5">Click to browse or drop photos here</span>
-                      <span className="text-xs text-stone-500">Select one or multiple images (JPG, PNG, WEBP)</span>
+                      <span className="text-sm font-bold text-primary-dark mb-0.5">Click to browse or drop photos here</span>
+                      <span className="text-xs text-muted-foreground">Select one or multiple images (JPG, PNG, WEBP)</span>
                       <input
                         type="file"
                         multiple
@@ -3184,12 +3184,12 @@ export const VendorDashboard: React.FC = () => {
                             handleAddPhotoUrl();
                           }
                         }}
-                        className="flex-1 bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden focus:border-teal-700"
+                        className="flex-1 bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground outline-hidden focus:border-primary"
                       />
                       <button
                         type="button"
                         onClick={handleAddPhotoUrl}
-                        className="px-4 py-2.5 bg-teal-900 hover:bg-teal-950 text-white rounded-xl text-xs font-bold shrink-0 shadow-xs cursor-pointer"
+                        className="px-4 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-bold shrink-0 shadow-xs cursor-pointer"
                       >
                         + Add Photo
                       </button>
@@ -3199,12 +3199,12 @@ export const VendorDashboard: React.FC = () => {
                   {/* Photo Showcase & Cover Selection Grid */}
                   {uploadedPhotos.length > 0 ? (
                     <div className="pt-2 space-y-3">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-stone-600 gap-1 pb-1 border-b border-stone-100">
-                        <span className="font-semibold text-stone-800 flex items-center gap-1.5">
-                          <ImageIcon className="w-3.5 h-3.5 text-amber-600" />
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-muted-foreground gap-1 pb-1 border-b border-border-subtle">
+                        <span className="font-semibold text-foreground flex items-center gap-1.5">
+                          <ImageIcon className="w-3.5 h-3.5 text-accent" />
                           Listing Gallery ({uploadedPhotos.length})
                         </span>
-                        <span className="text-[11px] text-stone-500 italic">
+                        <span className="text-[11px] text-muted-foreground italic">
                           Click &quot;Set as Cover&quot; on any photo to choose your main showcase image.
                         </span>
                       </div>
@@ -3218,10 +3218,10 @@ export const VendorDashboard: React.FC = () => {
                           return (
                             <div 
                               key={`${img}-${idx}`} 
-                              className={`relative group rounded-xl overflow-hidden aspect-4/3 bg-stone-100 shadow-2xs transition-all ${
+                              className={`relative group rounded-xl overflow-hidden aspect-4/3 bg-muted shadow-2xs transition-all ${
                                 isEffectiveCover 
-                                  ? 'ring-3 ring-amber-500 border-2 border-amber-400 shadow-md' 
-                                  : 'border border-stone-200 hover:border-stone-400'
+                                  ? 'ring-3 ring-accent border-2 border-accent shadow-md' 
+                                  : 'border border-border hover:border-border'
                               }`}
                             >
                               <img
@@ -3233,15 +3233,15 @@ export const VendorDashboard: React.FC = () => {
 
                               {/* Cover Badge / Set Cover Button */}
                               {isEffectiveCover ? (
-                                <span className="absolute top-1.5 left-1.5 bg-amber-500 text-stone-950 text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-md flex items-center gap-1">
-                                  <Sparkles className="w-3 h-3 fill-stone-950" />
+                                <span className="absolute top-1.5 left-1.5 bg-accent text-foreground text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-md flex items-center gap-1">
+                                  <Sparkles className="w-3 h-3 fill-foreground" />
                                   Cover Photo
                                 </span>
                               ) : (
                                 <button
                                   type="button"
                                   onClick={() => handleSelectCoverPhoto(img)}
-                                  className="absolute top-1.5 left-1.5 bg-stone-900/80 hover:bg-teal-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow-xs transition-colors opacity-90 hover:opacity-100 cursor-pointer"
+                                  className="absolute top-1.5 left-1.5 bg-primary-dark/80 hover:bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow-xs transition-colors opacity-90 hover:opacity-100 cursor-pointer"
                                   title="Make this the main cover photo"
                                 >
                                   Set as Cover
@@ -3257,7 +3257,7 @@ export const VendorDashboard: React.FC = () => {
                               <button
                                 type="button"
                                 onClick={() => handleRemovePhoto(idx)}
-                                className="absolute top-1.5 right-1.5 p-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-md shadow-xs opacity-90 hover:opacity-100 transition-all cursor-pointer"
+                                className="absolute top-1.5 right-1.5 p-1.5 bg-destructive hover:bg-destructive text-white rounded-md shadow-xs opacity-90 hover:opacity-100 transition-all cursor-pointer"
                                 title="Remove this photo"
                               >
                                 <Trash2 className="w-3 h-3" />
@@ -3268,7 +3268,7 @@ export const VendorDashboard: React.FC = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="text-center py-6 text-stone-400 text-xs bg-stone-50 rounded-xl border border-stone-200">
+                    <div className="text-center py-6 text-muted-foreground text-xs bg-muted/40 rounded-xl border border-border">
                       No photos added yet. Upload files or paste URLs above to showcase your business.
                     </div>
                   )}
@@ -3276,13 +3276,13 @@ export const VendorDashboard: React.FC = () => {
               </div>
 
               {/* 🛠️ EXPANDED CATEGORY SPECIFIC ATTRIBUTES */}
-              <div className="p-5 bg-stone-50 rounded-2xl border border-stone-200 space-y-4">
+              <div className="p-5 bg-muted/40 rounded-2xl border border-border space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-teal-950 flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-amber-600" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-primary-dark flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-accent" />
                     Default Specifications for {CATEGORIES.find(c => c.id === newCategory)?.name || newCategory}
                   </span>
-                  <span className="text-[10px] text-stone-500 bg-white px-2 py-0.5 rounded border border-stone-200">
+                  <span className="text-[10px] text-muted-foreground bg-white px-2 py-0.5 rounded border border-border">
                     Category Defaults
                   </span>
                 </div>
@@ -3292,11 +3292,11 @@ export const VendorDashboard: React.FC = () => {
                   <div className="space-y-4 text-xs">
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Venue Type</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Venue Type</label>
                         <select
                           value={venueType}
                           onChange={(e) => setVenueType(e.target.value)}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2 font-medium"
+                          className="w-full bg-white border border-border rounded-xl p-2 font-medium"
                         >
                           <option value="Marriage Lawn & Garden">Marriage Lawn & Garden</option>
                           <option value="Banquet Hall">Banquet Hall</option>
@@ -3308,11 +3308,11 @@ export const VendorDashboard: React.FC = () => {
                       </div>
 
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Setup Type</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Setup Type</label>
                         <select
                           value={venueIndoorOutdoor}
                           onChange={(e) => setVenueIndoorOutdoor(e.target.value)}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2 font-medium"
+                          className="w-full bg-white border border-border rounded-xl p-2 font-medium"
                         >
                           <option value="Both Hall & Lawn">Both Indoor Hall & Open Lawn</option>
                           <option value="Indoor AC Hall">Indoor AC Hall Only</option>
@@ -3321,11 +3321,11 @@ export const VendorDashboard: React.FC = () => {
                       </div>
 
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Catering Policy</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Catering Policy</label>
                         <select
                           value={venueCateringPolicy}
                           onChange={(e) => setVenueCateringPolicy(e.target.value)}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2 font-medium"
+                          className="w-full bg-white border border-border rounded-xl p-2 font-medium"
                         >
                           <option value="Both allowed">In-house + Outside Allowed</option>
                           <option value="In-house only">In-house Catering Only</option>
@@ -3336,81 +3336,81 @@ export const VendorDashboard: React.FC = () => {
 
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Min Guests (Pax)</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Min Guests (Pax)</label>
                         <input
                           type="number"
                           placeholder="e.g. 200"
                           value={venueCapacityMin === '' ? '' : venueCapacityMin}
                           onChange={(e) => setVenueCapacityMin(e.target.value === '' ? '' : Number(e.target.value))}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                          className="w-full bg-white border border-border rounded-xl p-2"
                         />
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Max Guests (Pax)</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Max Guests (Pax)</label>
                         <input
                           type="number"
                           placeholder="e.g. 1000"
                           value={venueCapacityMax === '' ? '' : venueCapacityMax}
                           onChange={(e) => setVenueCapacityMax(e.target.value === '' ? '' : Number(e.target.value))}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                          className="w-full bg-white border border-border rounded-xl p-2"
                         />
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Parking Slots</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Parking Slots</label>
                         <input
                           type="number"
                           placeholder="e.g. 200"
                           value={venueParking === '' ? '' : venueParking}
                           onChange={(e) => setVenueParking(e.target.value === '' ? '' : Number(e.target.value))}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                          className="w-full bg-white border border-border rounded-xl p-2"
                         />
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">AC Bridal Rooms</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">AC Bridal Rooms</label>
                         <input
                           type="number"
                           placeholder="e.g. 2"
                           value={venueBridalRooms === '' ? '' : venueBridalRooms}
                           onChange={(e) => setVenueBridalRooms(e.target.value === '' ? '' : Number(e.target.value))}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                          className="w-full bg-white border border-border rounded-xl p-2"
                         />
                       </div>
                     </div>
 
                     {/* Checkbox Options */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
-                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-stone-200 cursor-pointer font-medium">
+                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-border cursor-pointer font-medium">
                         <input
                           type="checkbox"
                           checked={venueHasAC}
                           onChange={(e) => setVenueHasAC(e.target.checked)}
-                          className="w-4 h-4 accent-teal-800"
+                          className="w-4 h-4 accent-primary"
                         />
                         <span>Central AC Banquet</span>
                       </label>
-                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-stone-200 cursor-pointer font-medium">
+                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-border cursor-pointer font-medium">
                         <input
                           type="checkbox"
                           checked={venueHasValet}
                           onChange={(e) => setVenueHasValet(e.target.checked)}
-                          className="w-4 h-4 accent-teal-800"
+                          className="w-4 h-4 accent-primary"
                         />
                         <span>Valet Parking</span>
                       </label>
-                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-stone-200 cursor-pointer font-medium">
+                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-border cursor-pointer font-medium">
                         <input
                           type="checkbox"
                           checked={venuePowerBackup}
                           onChange={(e) => setVenuePowerBackup(e.target.checked)}
-                          className="w-4 h-4 accent-teal-800"
+                          className="w-4 h-4 accent-primary"
                         />
                         <span>100% DG Power Backup</span>
                       </label>
-                      <div className="flex items-center p-2.5 bg-white rounded-xl border border-stone-200">
+                      <div className="flex items-center p-2.5 bg-white rounded-xl border border-border">
                         <select
                           value={venueAlcoholPolicy}
                           onChange={(e) => setVenueAlcoholPolicy(e.target.value)}
-                          className="w-full bg-transparent outline-hidden font-medium text-stone-800"
+                          className="w-full bg-transparent outline-hidden font-medium text-foreground"
                         >
                           <option value="Allowed with Permit">Alcohol: Permit Ok</option>
                           <option value="Strictly Not Allowed">Alcohol: Not Allowed</option>
@@ -3425,23 +3425,23 @@ export const VendorDashboard: React.FC = () => {
                   <div className="space-y-3 text-xs">
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Delivery Timeline (Days)</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Delivery Timeline (Days)</label>
                         <input
                           type="number"
                           placeholder="e.g. 21"
                           value={photoTimeline === '' ? '' : photoTimeline}
                           onChange={(e) => setPhotoTimeline(e.target.value === '' ? '' : Number(e.target.value))}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                          className="w-full bg-white border border-border rounded-xl p-2"
                         />
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Team Crew Size</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Team Crew Size</label>
                         <input
                           type="number"
                           placeholder="e.g. 4"
                           value={photoTeamSize === '' ? '' : photoTeamSize}
                           onChange={(e) => setPhotoTeamSize(e.target.value === '' ? '' : Number(e.target.value))}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                          className="w-full bg-white border border-border rounded-xl p-2"
                         />
                       </div>
                       <div className="flex items-center gap-3 pt-4">
@@ -3450,7 +3450,7 @@ export const VendorDashboard: React.FC = () => {
                             type="checkbox"
                             checked={photoDroneAvailable}
                             onChange={(e) => setPhotoDroneAvailable(e.target.checked)}
-                            className="w-4 h-4 accent-teal-800"
+                            className="w-4 h-4 accent-primary"
                           />
                           <span>4K Drone Included</span>
                         </label>
@@ -3459,7 +3459,7 @@ export const VendorDashboard: React.FC = () => {
                             type="checkbox"
                             checked={photoPreWedding}
                             onChange={(e) => setPhotoPreWedding(e.target.checked)}
-                            className="w-4 h-4 accent-teal-800"
+                            className="w-4 h-4 accent-primary"
                           />
                           <span>Pre-Wedding Shoot</span>
                         </label>
@@ -3467,24 +3467,24 @@ export const VendorDashboard: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Deliverables Package</label>
+                      <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Deliverables Package</label>
                       <input
                         type="text"
                         value={photoDeliverables}
                         onChange={(e) => setPhotoDeliverables(e.target.value)}
                         placeholder="Raw photos, 400 retouched, 40-page album, 4K film..."
-                        className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                        className="w-full bg-white border border-border rounded-xl p-2"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Camera & Lighting Equipment</label>
+                      <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Camera & Lighting Equipment</label>
                       <input
                         type="text"
                         value={photoEquipment}
                         onChange={(e) => setPhotoEquipment(e.target.value)}
                         placeholder="Sony FX3 / A7S III, Ronin Gimbals, Godox Lighting..."
-                        className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                        className="w-full bg-white border border-border rounded-xl p-2"
                       />
                     </div>
                   </div>
@@ -3495,11 +3495,11 @@ export const VendorDashboard: React.FC = () => {
                   <div className="space-y-3 text-xs">
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Food Category</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Food Category</label>
                         <select
                           value={caterVegType}
                           onChange={(e) => setCaterVegType(e.target.value)}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2 font-medium"
+                          className="w-full bg-white border border-border rounded-xl p-2 font-medium"
                         >
                           <option value="Pure Veg">Pure Veg Only (Jain Available)</option>
                           <option value="Veg & Non-Veg">Veg & Non-Veg (Separate Kitchens)</option>
@@ -3508,22 +3508,22 @@ export const VendorDashboard: React.FC = () => {
                       </div>
 
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Min Plates (Guests)</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Min Plates (Guests)</label>
                         <input
                           type="number"
                           placeholder="e.g. 50"
                           value={caterMinGuests === '' ? '' : caterMinGuests}
                           onChange={(e) => setCaterMinGuests(e.target.value === '' ? '' : Number(e.target.value))}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                          className="w-full bg-white border border-border rounded-xl p-2"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Service Style</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Service Style</label>
                         <select
                           value={caterServiceStyle}
                           onChange={(e) => setCaterServiceStyle(e.target.value)}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2 font-medium"
+                          className="w-full bg-white border border-border rounded-xl p-2 font-medium"
                         >
                           <option value="Royal Buffet">Royal Buffet with Live Counters</option>
                           <option value="Sit-down Table Service">Traditional Sit-down Table Thali</option>
@@ -3534,7 +3534,7 @@ export const VendorDashboard: React.FC = () => {
 
                     {/* Cuisines Pills */}
                     <div>
-                      <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1.5">Cuisines Offered (Click to toggle)</label>
+                      <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1.5">Cuisines Offered (Click to toggle)</label>
                       <div className="flex flex-wrap gap-1.5">
                         {['Maharashtrian', 'North Indian', 'South Indian', 'Chaat & Live Counters', 'Continental & Italian', 'Dessert & Mocktail Bar', 'Mughlai & Biryani'].map(cuisine => {
                           const isSelected = caterCuisines.includes(cuisine);
@@ -3549,8 +3549,8 @@ export const VendorDashboard: React.FC = () => {
                               }}
                               className={`px-2.5 py-1 rounded-full text-xs font-semibold border transition-all ${
                                 isSelected 
-                                  ? 'bg-emerald-900 text-white border-emerald-900' 
-                                  : 'bg-white text-stone-700 border-stone-300 hover:border-emerald-700'
+                                  ? 'bg-success text-white border-success' 
+                                  : 'bg-white text-foreground border-border hover:border-success'
                               }`}
                             >
                               {cuisine} {isSelected ? '✓' : '+'}
@@ -3561,30 +3561,30 @@ export const VendorDashboard: React.FC = () => {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
-                      <label className="flex items-center gap-2 p-2 bg-white rounded-xl border border-stone-200 cursor-pointer font-medium">
+                      <label className="flex items-center gap-2 p-2 bg-white rounded-xl border border-border cursor-pointer font-medium">
                         <input
                           type="checkbox"
                           checked={caterCrockeryIncluded}
                           onChange={(e) => setCaterCrockeryIncluded(e.target.checked)}
-                          className="w-4 h-4 accent-teal-800"
+                          className="w-4 h-4 accent-primary"
                         />
                         <span>Bone China / Brass Crockery</span>
                       </label>
-                      <label className="flex items-center gap-2 p-2 bg-white rounded-xl border border-stone-200 cursor-pointer font-medium">
+                      <label className="flex items-center gap-2 p-2 bg-white rounded-xl border border-border cursor-pointer font-medium">
                         <input
                           type="checkbox"
                           checked={caterLiveCounters}
                           onChange={(e) => setCaterLiveCounters(e.target.checked)}
-                          className="w-4 h-4 accent-teal-800"
+                          className="w-4 h-4 accent-primary"
                         />
                         <span>Live Chaat / Dosa Stations</span>
                       </label>
-                      <label className="flex items-center gap-2 p-2 bg-white rounded-xl border border-stone-200 cursor-pointer font-medium">
+                      <label className="flex items-center gap-2 p-2 bg-white rounded-xl border border-border cursor-pointer font-medium">
                         <input
                           type="checkbox"
                           checked={caterWelcomeDrinks}
                           onChange={(e) => setCaterWelcomeDrinks(e.target.checked)}
-                          className="w-4 h-4 accent-teal-800"
+                          className="w-4 h-4 accent-primary"
                         />
                         <span>Welcome Mocktail Bar</span>
                       </label>
@@ -3597,11 +3597,11 @@ export const VendorDashboard: React.FC = () => {
                   <div className="space-y-3 text-xs">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Flower Sourcing</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Flower Sourcing</label>
                         <select
                           value={decorFlowerType}
                           onChange={(e) => setDecorFlowerType(e.target.value)}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2 font-medium"
+                          className="w-full bg-white border border-border rounded-xl p-2 font-medium"
                         >
                           <option value="Fresh Exotic & Desi Flowers">Fresh Exotic & Desi Flowers (Roses, Orchids, Marigold)</option>
                           <option value="Premium Artificial Silk">Premium High-grade Silk Flowers</option>
@@ -3609,19 +3609,19 @@ export const VendorDashboard: React.FC = () => {
                         </select>
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Setup Duration Prior (Hours)</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Setup Duration Prior (Hours)</label>
                         <input
                           type="number"
                           placeholder="e.g. 6"
                           value={decorSetupHours === '' ? '' : decorSetupHours}
                           onChange={(e) => setDecorSetupHours(e.target.value === '' ? '' : Number(e.target.value))}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                          className="w-full bg-white border border-border rounded-xl p-2"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1.5">Decoration Themes Supported</label>
+                      <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1.5">Decoration Themes Supported</label>
                       <div className="flex flex-wrap gap-1.5">
                         {['Traditional Vedic Mandap', 'Royal Peshwai / Maratha', 'Floral Luxury & Exotic Blooms', 'Minimalist Boho / Pastel', 'Grand LED & Crystal', 'Outdoor Canopy'].map(theme => {
                           const isSelected = decorStyles.includes(theme);
@@ -3636,8 +3636,8 @@ export const VendorDashboard: React.FC = () => {
                               }}
                               className={`px-2.5 py-1 rounded-full text-xs font-semibold border transition-all ${
                                 isSelected 
-                                  ? 'bg-rose-900 text-white border-rose-900' 
-                                  : 'bg-white text-stone-700 border-stone-300 hover:border-rose-700'
+                                  ? 'bg-destructive text-white border-destructive' 
+                                  : 'bg-white text-foreground border-border hover:border-destructive'
                               }`}
                             >
                               {theme} {isSelected ? '✓' : '+'}
@@ -3648,21 +3648,21 @@ export const VendorDashboard: React.FC = () => {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-stone-200 cursor-pointer font-medium">
+                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-border cursor-pointer font-medium">
                         <input
                           type="checkbox"
                           checked={decorMandapCustom}
                           onChange={(e) => setDecorMandapCustom(e.target.checked)}
-                          className="w-4 h-4 accent-teal-800"
+                          className="w-4 h-4 accent-primary"
                         />
                         <span>100% Custom Mandap & Havan Kund Setup</span>
                       </label>
-                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-stone-200 cursor-pointer font-medium">
+                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-border cursor-pointer font-medium">
                         <input
                           type="checkbox"
                           checked={decorLightingIncluded}
                           onChange={(e) => setDecorLightingIncluded(e.target.checked)}
-                          className="w-4 h-4 accent-teal-800"
+                          className="w-4 h-4 accent-primary"
                         />
                         <span>Full Ambient LED, Focus Spotlights & Truss Setup</span>
                       </label>
@@ -3675,29 +3675,29 @@ export const VendorDashboard: React.FC = () => {
                   <div className="space-y-3 text-xs">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Sound Wattage</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Sound Wattage</label>
                         <input
                           type="text"
                           value={djWattage}
                           onChange={(e) => setDjWattage(e.target.value)}
                           placeholder="e.g. 10,000W RMS Line Array"
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                          className="w-full bg-white border border-border rounded-xl p-2"
                         />
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Cordless Wireless Mics</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Cordless Wireless Mics</label>
                         <input
                           type="number"
                           placeholder="e.g. 4"
                           value={djWirelessMics === '' ? '' : djWirelessMics}
                           onChange={(e) => setDjWirelessMics(e.target.value === '' ? '' : Number(e.target.value))}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                          className="w-full bg-white border border-border rounded-xl p-2"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1.5">Music Genres</label>
+                      <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1.5">Music Genres</label>
                       <div className="flex flex-wrap gap-1.5">
                         {['Bollywood', 'Marathi Zingaat & Kolhapuri', 'EDM & Commercial', 'Punjabi Beats', 'Classical Shehnai / Fusion', 'English Pop'].map(g => {
                           const isSelected = djGenres.includes(g);
@@ -3713,7 +3713,7 @@ export const VendorDashboard: React.FC = () => {
                               className={`px-2.5 py-1 rounded-full text-xs font-semibold border transition-all ${
                                 isSelected 
                                   ? 'bg-purple-900 text-white border-purple-900' 
-                                  : 'bg-white text-stone-700 border-stone-300'
+                                  : 'bg-white text-foreground border-border'
                               }`}
                             >
                               {g} {isSelected ? '✓' : '+'}
@@ -3724,21 +3724,21 @@ export const VendorDashboard: React.FC = () => {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-stone-200 cursor-pointer font-medium">
+                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-border cursor-pointer font-medium">
                         <input
                           type="checkbox"
                           checked={djIncludesDholTasha}
                           onChange={(e) => setDjIncludesDholTasha(e.target.checked)}
-                          className="w-4 h-4 accent-teal-800"
+                          className="w-4 h-4 accent-primary"
                         />
                         <span>Live Puneri Dhol Tasha Pathak Available</span>
                       </label>
-                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-stone-200 cursor-pointer font-medium">
+                      <label className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-border cursor-pointer font-medium">
                         <input
                           type="checkbox"
                           checked={djVisualsLights}
                           onChange={(e) => setDjVisualsLights(e.target.checked)}
-                          className="w-4 h-4 accent-teal-800"
+                          className="w-4 h-4 accent-primary"
                         />
                         <span>LED Video Wall, Sharpies & Fog Machines</span>
                       </label>
@@ -3751,13 +3751,13 @@ export const VendorDashboard: React.FC = () => {
                   <div className="space-y-3 text-xs">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1">Years of Vedic Experience</label>
+                        <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">Years of Vedic Experience</label>
                         <input
                           type="number"
                           placeholder="e.g. 15"
                           value={panditExp === '' ? '' : panditExp}
                           onChange={(e) => setPanditExp(e.target.value === '' ? '' : Number(e.target.value))}
-                          className="w-full bg-white border border-stone-300 rounded-xl p-2"
+                          className="w-full bg-white border border-border rounded-xl p-2"
                         />
                       </div>
                       <div className="flex items-center gap-3 pt-4">
@@ -3766,7 +3766,7 @@ export const VendorDashboard: React.FC = () => {
                             type="checkbox"
                             checked={panditSamagriIncluded}
                             onChange={(e) => setPanditSamagriIncluded(e.target.checked)}
-                            className="w-4 h-4 accent-teal-800"
+                            className="w-4 h-4 accent-primary"
                           />
                           <span>Complete Havan & Puja Samagri Included</span>
                         </label>
@@ -3775,7 +3775,7 @@ export const VendorDashboard: React.FC = () => {
                             type="checkbox"
                             checked={panditMuhuratConsultation}
                             onChange={(e) => setPanditMuhuratConsultation(e.target.checked)}
-                            className="w-4 h-4 accent-teal-800"
+                            className="w-4 h-4 accent-primary"
                           />
                           <span>Kundali & Shubh Muhurat Consultation</span>
                         </label>
@@ -3783,7 +3783,7 @@ export const VendorDashboard: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-bold text-stone-600 uppercase mb-1.5">Rituals & Ceremonies Supported</label>
+                      <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1.5">Rituals & Ceremonies Supported</label>
                       <div className="flex flex-wrap gap-1.5">
                         {['Vedic Vivah (Wedding)', 'Sakharpuda / Engagement', 'Griha Pravesh / Vastu', 'Satyanarayan Puja', 'Upanayan (Thread Ceremony)'].map(ceremony => {
                           const isSelected = panditCeremonies.includes(ceremony);
@@ -3799,7 +3799,7 @@ export const VendorDashboard: React.FC = () => {
                               className={`px-2.5 py-1 rounded-full text-xs font-semibold border transition-all ${
                                 isSelected 
                                   ? 'bg-orange-900 text-white border-orange-900' 
-                                  : 'bg-white text-stone-700 border-stone-300'
+                                  : 'bg-white text-foreground border-border'
                               }`}
                             >
                               {ceremony} {isSelected ? '✓' : '+'}
@@ -3813,21 +3813,21 @@ export const VendorDashboard: React.FC = () => {
               </div>
 
               {/* 🏷️ CUSTOM VENDOR ATTRIBUTES / HIGHLIGHTS BUILDER */}
-              <div className="p-5 bg-teal-50/40 rounded-2xl border border-teal-200/80 space-y-3">
+              <div className="p-5 bg-primary-subtle/40 rounded-2xl border border-primary/80 space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
-                    <h3 className="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
-                      <Tag className="w-4 h-4 text-teal-800" />
+                    <h3 className="font-serif font-bold text-base text-foreground flex items-center gap-2">
+                      <Tag className="w-4 h-4 text-primary" />
                       Custom Features & Highlights
                     </h3>
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-muted-foreground">
                       Add any custom key-value details unique to your service (e.g. "Chauffeur Service", "Sound Curfew", "Bridal Dressing Studio", "Eco-friendly Decor").
                     </p>
                   </div>
                   <button
                     type="button"
                     onClick={handleAddCustomAttribute}
-                    className="px-3 py-1.5 bg-teal-900 hover:bg-teal-950 text-white rounded-xl text-xs font-bold flex items-center gap-1 shrink-0 self-start sm:self-auto cursor-pointer"
+                    className="px-3 py-1.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-bold flex items-center gap-1 shrink-0 self-start sm:self-auto cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Custom Feature</span>
@@ -3835,20 +3835,20 @@ export const VendorDashboard: React.FC = () => {
                 </div>
 
                 {customAttributes.length === 0 ? (
-                  <p className="text-xs text-stone-500 italic py-2">
+                  <p className="text-xs text-muted-foreground italic py-2">
                     No custom features added yet. Click &quot;Add Custom Feature&quot; above to add your own bullet points.
                   </p>
                 ) : (
                   <div className="space-y-2.5">
                     {customAttributes.map((attr, idx) => (
-                      <div key={attr.id || `attr_${idx}_${attr.label}`} className="flex items-center gap-2 bg-white p-2.5 rounded-xl border border-stone-200 shadow-2xs">
+                      <div key={attr.id || `attr_${idx}_${attr.label}`} className="flex items-center gap-2 bg-white p-2.5 rounded-xl border border-border shadow-2xs">
                         <div className="w-1/3">
                           <input
                             type="text"
                             placeholder="Feature Name (e.g. Valet Parking)"
                             value={attr.label}
                             onChange={(e) => handleUpdateCustomAttribute(idx, 'label', e.target.value)}
-                            className="w-full bg-stone-50 border border-stone-300 rounded-lg p-2 text-xs text-stone-900 font-semibold outline-hidden"
+                            className="w-full bg-muted/40 border border-border rounded-lg p-2 text-xs text-foreground font-semibold outline-hidden"
                           />
                         </div>
                         <div className="flex-1">
@@ -3857,13 +3857,13 @@ export const VendorDashboard: React.FC = () => {
                             placeholder="Feature Details (e.g. 10 Dedicated Drivers Included)"
                             value={attr.value}
                             onChange={(e) => handleUpdateCustomAttribute(idx, 'value', e.target.value)}
-                            className="w-full bg-stone-50 border border-stone-300 rounded-lg p-2 text-xs text-stone-900 outline-hidden"
+                            className="w-full bg-muted/40 border border-border rounded-lg p-2 text-xs text-foreground outline-hidden"
                           />
                         </div>
                         <button
                           type="button"
                           onClick={() => handleRemoveCustomAttribute(idx)}
-                          className="p-2 text-stone-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
+                          className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive-subtle rounded-lg transition-colors cursor-pointer"
                           title="Remove custom feature"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -3875,21 +3875,21 @@ export const VendorDashboard: React.FC = () => {
               </div>
 
               {/* 🎁 PACKAGES & TIERS CREATION NOTICE (CREATION FOR ACTIVE LISTINGS ONLY) */}
-              <div className="p-5 bg-gradient-to-r from-teal-50/70 via-stone-50 to-amber-50/50 rounded-2xl border border-teal-200/90 space-y-2">
+              <div className="p-5 bg-gradient-to-r from-primary-subtle/70 via-muted/40 to-accent-subtle/50 rounded-2xl border border-primary/90 space-y-2">
                 <div className="flex items-center gap-2">
-                  <Gift className="w-5 h-5 text-teal-800 shrink-0" />
-                  <h3 className="font-serif font-bold text-sm text-stone-900">
+                  <Gift className="w-5 h-5 text-primary shrink-0" />
+                  <h3 className="font-serif font-bold text-sm text-foreground">
                     Packages & Pricing Tiers Policy
                   </h3>
                 </div>
-                <p className="text-xs text-stone-600 leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed">
                   To ensure quality compliance, vendors can create tiered packages and multi-service bundles for <strong>approved and active listings only</strong>. Once this new listing is reviewed and approved by the admin team, you can configure your custom package tiers anytime from the <strong>Packages Studio</strong>.
                 </p>
               </div>
 
               {/* Description */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                   Description & Highlights *
                 </label>
                 <textarea
@@ -3897,15 +3897,15 @@ export const VendorDashboard: React.FC = () => {
                   placeholder="Describe your venue layout, stage facilities, packages, or equipment..."
                   value={newDescription}
                   onChange={(e) => setNewDescription(e.target.value)}
-                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 outline-hidden resize-none"
+                  className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground outline-hidden resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3.5 bg-teal-900 hover:bg-teal-950 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md cursor-pointer flex items-center justify-center gap-2"
+                className="w-full py-3.5 bg-primary hover:bg-primary-dark text-white font-bold text-xs sm:text-sm rounded-xl shadow-md cursor-pointer flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-4 h-4 text-amber-400" />
+                <Sparkles className="w-4 h-4 text-accent" />
                 <span>{editingListingId ? 'Review & Submit Listing Changes' : 'Review & Submit Listing for Approval'}</span>
               </button>
             </div>
@@ -3939,36 +3939,36 @@ export const VendorDashboard: React.FC = () => {
         <div 
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-xs"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs"
         >
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-200 text-left space-y-4">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-border text-left space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-800">
+                <div className="w-10 h-10 rounded-2xl bg-accent-subtle border border-accent/40 flex items-center justify-center text-accent-dark">
                   <Lock className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-serif font-bold text-base text-stone-900">24-Hour Edit Restriction</h3>
-                  <span className="text-[11px] font-bold text-amber-700">Marketplace Verification Policy</span>
+                  <h3 className="font-serif font-bold text-base text-foreground">24-Hour Edit Restriction</h3>
+                  <span className="text-[11px] font-bold text-accent">Marketplace Verification Policy</span>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setCooldownNoticeModal(null)}
-                className="p-1.5 text-stone-400 hover:text-stone-700 rounded-lg cursor-pointer"
+                className="p-1.5 text-muted-foreground hover:text-foreground rounded-lg cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 space-y-2 text-xs text-amber-950">
+            <div className="p-4 bg-accent-subtle rounded-2xl border border-accent/30 space-y-2 text-xs text-accent-dark">
               <div className="flex items-center justify-between font-bold">
                 <span>{cooldownNoticeModal.listingTitle}</span>
-                <span className="px-2 py-0.5 rounded-full bg-amber-200 text-[10px]">
+                <span className="px-2 py-0.5 rounded-full bg-accent-subtle text-[10px]">
                   {cooldownNoticeModal.formattedRemaining} Remaining
                 </span>
               </div>
-              <p className="text-[11px] text-amber-900 leading-relaxed">
+              <p className="text-[11px] text-accent-dark leading-relaxed">
                 This listing or its packages were modified <strong>{cooldownNoticeModal.lastEditedText}</strong>. To ensure accurate pricing for active client enquiries, vendors can submit listing & package revisions only once every 24 hours.
               </p>
             </div>
@@ -3977,7 +3977,7 @@ export const VendorDashboard: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setCooldownNoticeModal(null)}
-                className="w-full py-2.5 bg-teal-900 hover:bg-teal-950 text-white font-bold text-xs rounded-xl shadow-xs cursor-pointer"
+                className="w-full py-2.5 bg-primary hover:bg-primary-dark text-white font-bold text-xs rounded-xl shadow-xs cursor-pointer"
               >
                 Understood, Close
               </button>

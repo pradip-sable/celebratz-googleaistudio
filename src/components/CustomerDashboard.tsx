@@ -88,7 +88,7 @@ export const CustomerDashboard: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto space-y-6 pb-20">
       {/* Header Profile Summary */}
-      <div className="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-white rounded-3xl p-6 border border-border shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <img
             src={currentUser.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'}
@@ -98,21 +98,21 @@ export const CustomerDashboard: React.FC = () => {
           />
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="font-serif font-bold text-xl sm:text-2xl text-stone-900">{currentUser.fullName}</h1>
+              <h1 className="font-serif font-bold text-xl sm:text-2xl text-foreground">{currentUser.fullName}</h1>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary-subtle text-primary border border-border-subtle">
                 Customer
               </span>
             </div>
-            <p className="text-xs text-stone-500">{currentUser.email} &bull; {currentUser.phoneNumber || 'Mobile number entered on first enquiry'}</p>
+            <p className="text-xs text-muted-foreground">{currentUser.email} &bull; {currentUser.phoneNumber || 'Mobile number entered on first enquiry'}</p>
           </div>
         </div>
 
         {/* Quick Tabs */}
-        <div className="flex flex-wrap gap-1.5 p-1 bg-stone-100 rounded-2xl w-full sm:w-auto text-xs font-semibold">
+        <div className="flex flex-wrap gap-1.5 p-1 bg-muted rounded-2xl w-full sm:w-auto text-xs font-semibold">
           <button
             onClick={() => setActiveTab('requests')}
             className={`px-4 py-2 rounded-xl transition-all ${
-              activeTab === 'requests' ? 'bg-white text-primary shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+              activeTab === 'requests' ? 'bg-white text-primary shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             My Requests ({myEnquiries.length})
@@ -120,7 +120,7 @@ export const CustomerDashboard: React.FC = () => {
           <button
             onClick={() => setActiveTab('wishlist')}
             className={`px-4 py-2 rounded-xl transition-all ${
-              activeTab === 'wishlist' ? 'bg-white text-primary shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+              activeTab === 'wishlist' ? 'bg-white text-primary shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             Wishlist ({myWishlistListings.length})
@@ -128,7 +128,7 @@ export const CustomerDashboard: React.FC = () => {
           <button
             onClick={() => setActiveTab('reviews')}
             className={`px-4 py-2 rounded-xl transition-all ${
-              activeTab === 'reviews' ? 'bg-white text-primary shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+              activeTab === 'reviews' ? 'bg-white text-primary shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             My Reviews ({myReviews.length})
@@ -136,7 +136,7 @@ export const CustomerDashboard: React.FC = () => {
           <button
             onClick={() => setActiveTab('profile')}
             className={`px-4 py-2 rounded-xl transition-all ${
-              activeTab === 'profile' ? 'bg-white text-primary shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+              activeTab === 'profile' ? 'bg-white text-primary shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             Profile
@@ -148,7 +148,7 @@ export const CustomerDashboard: React.FC = () => {
       {activeTab === 'requests' && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="font-serif font-bold text-xl text-stone-900">Celebration Enquiries & Booking Requests</h2>
+            <h2 className="font-serif font-bold text-xl text-foreground">Celebration Enquiries & Booking Requests</h2>
             <button
               onClick={() => setActiveRoute('search')}
               className="text-xs font-bold text-primary hover:underline"
@@ -158,10 +158,10 @@ export const CustomerDashboard: React.FC = () => {
           </div>
 
           {myEnquiries.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-stone-200 p-12 text-center space-y-3">
-              <CalendarCheck className="w-10 h-10 text-stone-300 mx-auto" />
-              <h3 className="font-serif font-bold text-base text-stone-900">No requests sent yet</h3>
-              <p className="text-xs text-stone-500 max-w-sm mx-auto">
+            <div className="bg-white rounded-2xl border border-border p-12 text-center space-y-3">
+              <CalendarCheck className="w-10 h-10 text-muted-foreground mx-auto" />
+              <h3 className="font-serif font-bold text-base text-foreground">No requests sent yet</h3>
+              <p className="text-xs text-muted-foreground max-w-sm mx-auto">
                 Explore venues and vendors in Pune, check their availability calendar, and request a booking or walkthrough visit.
               </p>
               <button
@@ -179,7 +179,7 @@ export const CustomerDashboard: React.FC = () => {
                 const hasReviewed = reviews.some(r => r.enquiryId === enquiry.id || (r.listingId === enquiry.listingId && r.customerId === currentUser.id));
 
                 return (
-                  <div key={enquiry.id} className="bg-white rounded-2xl border border-stone-200 p-5 shadow-xs space-y-4">
+                  <div key={enquiry.id} className="bg-white rounded-2xl border border-border p-5 shadow-xs space-y-4">
                     <div className="flex flex-col sm:flex-row justify-between items-start gap-3">
                       <div className="flex items-center gap-3">
                         <img
@@ -198,13 +198,13 @@ export const CustomerDashboard: React.FC = () => {
                                   setActiveRoute('packages');
                                 }
                               }}
-                              className="font-serif font-bold text-base text-stone-900 hover:text-primary cursor-pointer"
+                              className="font-serif font-bold text-base text-foreground hover:text-primary cursor-pointer"
                             >
                               {enquiry.comboPackageTitle || enquiry.listingTitle}
                             </h3>
                           </div>
-                          <p className="text-xs text-stone-500">
-                            {enquiry.eventType} &bull; Date: <span className="font-semibold text-stone-800">{enquiry.eventDate}</span>
+                          <p className="text-xs text-muted-foreground">
+                            {enquiry.eventType} &bull; Date: <span className="font-semibold text-foreground">{enquiry.eventDate}</span>
                             {enquiry.guestCount ? ` • ~${enquiry.guestCount} Guests` : ''}
                           </p>
                         </div>
@@ -219,13 +219,13 @@ export const CustomerDashboard: React.FC = () => {
                           </span>
                         )}
                         {enquiry.vendorStatus === 'accepted' && (
-                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-300">
+                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-success-subtle text-success border border-success/30">
                             <CheckCircle2 className="w-3.5 h-3.5" />
                             Request Accepted 🎉
                           </span>
                         )}
                         {enquiry.vendorStatus === 'declined' && (
-                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-800 border border-rose-300">
+                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-destructive-subtle text-destructive border border-destructive/30">
                             <XCircle className="w-3.5 h-3.5" />
                             Declined by Vendor
                           </span>
@@ -241,17 +241,17 @@ export const CustomerDashboard: React.FC = () => {
                             {enquiry.comboPackageTitle ? '🌟' : '🎁'}
                           </span>
                           <div className="min-w-0">
-                            <span className="text-[10px] font-bold uppercase text-stone-500 block">
+                            <span className="text-[10px] font-bold uppercase text-muted-foreground block">
                               {enquiry.comboPackageTitle ? 'Requested Combo Bundle' : 'Requested Package Tier'}
                             </span>
-                            <span className="font-serif font-bold text-stone-900 truncate block">
+                            <span className="font-serif font-bold text-foreground truncate block">
                               {enquiry.comboPackageTitle || enquiry.selectedPackageName}
                             </span>
                           </div>
                         </div>
                         {enquiry.selectedPackagePrice && (
                           <div className="text-right shrink-0 bg-white px-2.5 py-1 rounded-lg border border-border">
-                            <span className="text-[9px] uppercase font-bold text-stone-400 block">Tier Price</span>
+                            <span className="text-[9px] uppercase font-bold text-muted-foreground block">Tier Price</span>
                             <span className="font-serif font-extrabold text-primary">
                               {formatIndianCurrency(enquiry.selectedPackagePrice)}
                             </span>
@@ -261,19 +261,19 @@ export const CustomerDashboard: React.FC = () => {
                     )}
 
                     {/* Customer Message & Vendor Response note */}
-                    <div className="bg-stone-50 rounded-xl p-3.5 border border-stone-200 text-xs space-y-2">
-                      <div className="text-stone-700">
-                        <span className="font-bold text-stone-900">Your Message:</span> "{enquiry.message}"
+                    <div className="bg-muted/40 rounded-xl p-3.5 border border-border text-xs space-y-2">
+                      <div className="text-foreground">
+                        <span className="font-bold text-foreground">Your Message:</span> "{enquiry.message}"
                         {enquiry.preferredVisitTime && (
-                          <span className="block text-[11px] text-stone-500 mt-0.5">
+                          <span className="block text-[11px] text-muted-foreground mt-0.5">
                             Preferred Visit/Call: {enquiry.preferredVisitTime}
                           </span>
                         )}
                       </div>
 
                       {enquiry.vendorResponseNote && (
-                        <div className="pt-2 border-t border-stone-200/80 text-primary font-medium">
-                          <span className="font-bold text-stone-900">Vendor Reply:</span> "{enquiry.vendorResponseNote}"
+                        <div className="pt-2 border-t border-border/80 text-primary font-medium">
+                          <span className="font-bold text-foreground">Vendor Reply:</span> "{enquiry.vendorResponseNote}"
                         </div>
                       )}
                     </div>
@@ -284,8 +284,8 @@ export const CustomerDashboard: React.FC = () => {
                         <div className="flex items-center gap-2.5">
                           <Sparkles className="w-5 h-5 text-accent shrink-0" />
                           <div>
-                            <span className="font-bold text-xs text-stone-900">Your event date has passed!</span>
-                            <p className="text-[11px] text-stone-600">How was your celebration with {enquiry.vendorName}? Leave a verified review.</p>
+                            <span className="font-bold text-xs text-foreground">Your event date has passed!</span>
+                            <p className="text-[11px] text-muted-foreground">How was your celebration with {enquiry.vendorName}? Leave a verified review.</p>
                           </div>
                         </div>
                         <button
@@ -301,21 +301,21 @@ export const CustomerDashboard: React.FC = () => {
                     {reviewingEnquiryId === enquiry.id && (
                       <div className="p-5 bg-white rounded-2xl border-2 border-accent space-y-3 animate-in fade-in">
                         <div className="flex justify-between items-center">
-                          <h4 className="font-bold text-sm text-stone-900">Review {enquiry.listingTitle}</h4>
-                          <button onClick={() => setReviewingEnquiryId(null)} className="text-stone-400">
+                          <h4 className="font-bold text-sm text-foreground">Review {enquiry.listingTitle}</h4>
+                          <button onClick={() => setReviewingEnquiryId(null)} className="text-muted-foreground">
                             <XCircle className="w-4 h-4" />
                           </button>
                         </div>
 
                         {reviewSuccess ? (
-                          <div className="p-4 bg-emerald-50 text-emerald-800 text-xs font-bold rounded-xl flex items-center gap-2">
+                          <div className="p-4 bg-success-subtle text-success text-xs font-bold rounded-xl flex items-center gap-2">
                             <CheckCircle2 className="w-4 h-4" />
                             Thank you! Your verified review has been published.
                           </div>
                         ) : (
                           <div className="space-y-3">
                             <div className="flex items-center gap-1 text-accent">
-                              <span className="text-xs font-semibold text-stone-700 mr-2">Rating:</span>
+                              <span className="text-xs font-semibold text-foreground mr-2">Rating:</span>
                               {[1, 2, 3, 4, 5].map(star => (
                                 <button
                                   key={star}
@@ -323,7 +323,7 @@ export const CustomerDashboard: React.FC = () => {
                                   onClick={() => setReviewRating(star)}
                                   className="p-1 hover:scale-110 transition-transform"
                                 >
-                                  <Star className={`w-5 h-5 ${star <= reviewRating ? 'fill-accent text-accent' : 'text-stone-300'}`} />
+                                  <Star className={`w-5 h-5 ${star <= reviewRating ? 'fill-accent text-accent' : 'text-muted-foreground'}`} />
                                 </button>
                               ))}
                             </div>
@@ -333,7 +333,7 @@ export const CustomerDashboard: React.FC = () => {
                               placeholder="Review Headline (e.g. Magnificent lawn for our 800 guests)"
                               value={reviewTitle}
                               onChange={(e) => setReviewTitle(e.target.value)}
-                              className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs outline-hidden"
+                              className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs outline-hidden"
                             />
 
                             <textarea
@@ -341,7 +341,7 @@ export const CustomerDashboard: React.FC = () => {
                               placeholder="Tell other Pune families about the management, parking, hospitality, food, or photo quality..."
                               value={reviewText}
                               onChange={(e) => setReviewText(e.target.value)}
-                              className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs outline-hidden resize-none"
+                              className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs outline-hidden resize-none"
                             />
 
                             <button
@@ -365,12 +365,12 @@ export const CustomerDashboard: React.FC = () => {
       {/* 2. WISHLIST TAB */}
       {activeTab === 'wishlist' && (
         <div className="space-y-4">
-          <h2 className="font-serif font-bold text-xl text-stone-900">Saved Venues & Vendors ({myWishlistListings.length})</h2>
+          <h2 className="font-serif font-bold text-xl text-foreground">Saved Venues & Vendors ({myWishlistListings.length})</h2>
           {myWishlistListings.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-stone-200 p-12 text-center space-y-3">
-              <Heart className="w-10 h-10 text-stone-300 mx-auto" />
-              <h3 className="font-serif font-bold text-base text-stone-900">No saved favorites yet</h3>
-              <p className="text-xs text-stone-500 max-w-sm mx-auto">
+            <div className="bg-white rounded-2xl border border-border p-12 text-center space-y-3">
+              <Heart className="w-10 h-10 text-muted-foreground mx-auto" />
+              <h3 className="font-serif font-bold text-base text-foreground">No saved favorites yet</h3>
+              <p className="text-xs text-muted-foreground max-w-sm mx-auto">
                 Tap the heart icon on any venue or vendor card to save it for quick comparison.
               </p>
             </div>
@@ -387,29 +387,29 @@ export const CustomerDashboard: React.FC = () => {
       {/* 3. MY REVIEWS TAB */}
       {activeTab === 'reviews' && (
         <div className="space-y-4">
-          <h2 className="font-serif font-bold text-xl text-stone-900">My Published Reviews ({myReviews.length})</h2>
+          <h2 className="font-serif font-bold text-xl text-foreground">My Published Reviews ({myReviews.length})</h2>
           {myReviews.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-stone-200 p-12 text-center space-y-3">
-              <Star className="w-10 h-10 text-stone-300 mx-auto" />
-              <h3 className="font-serif font-bold text-base text-stone-900">No reviews published yet</h3>
-              <p className="text-xs text-stone-500 max-w-sm mx-auto">
+            <div className="bg-white rounded-2xl border border-border p-12 text-center space-y-3">
+              <Star className="w-10 h-10 text-muted-foreground mx-auto" />
+              <h3 className="font-serif font-bold text-base text-foreground">No reviews published yet</h3>
+              <p className="text-xs text-muted-foreground max-w-sm mx-auto">
                 Reviews become eligible once your event date has passed after vendor acceptance.
               </p>
             </div>
           ) : (
             <div className="space-y-3">
               {myReviews.map(r => (
-                <div key={r.id} className="bg-white rounded-2xl border border-stone-200 p-5 space-y-2">
+                <div key={r.id} className="bg-white rounded-2xl border border-border p-5 space-y-2">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-1 text-accent">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className={`w-4 h-4 ${i < r.rating ? 'fill-accent' : 'text-stone-300'}`} />
+                        <Star key={i} className={`w-4 h-4 ${i < r.rating ? 'fill-accent' : 'text-muted-foreground'}`} />
                       ))}
                     </div>
-                    <span className="text-[10px] text-stone-500">Submitted on {r.eventDate}</span>
+                    <span className="text-[10px] text-muted-foreground">Submitted on {r.eventDate}</span>
                   </div>
-                  <h4 className="font-bold text-sm text-stone-900">{r.title}</h4>
-                  <p className="text-xs text-stone-600 font-light">{r.reviewText}</p>
+                  <h4 className="font-bold text-sm text-foreground">{r.title}</h4>
+                  <p className="text-xs text-muted-foreground font-light">{r.reviewText}</p>
                 </div>
               ))}
             </div>
@@ -422,28 +422,28 @@ export const CustomerDashboard: React.FC = () => {
         <div className="space-y-6 max-w-3xl">
           {/* Quick Hub Navigation Cards */}
           <div>
-            <h2 className="font-serif font-bold text-xl text-stone-900 mb-3">My Activity & Shortcuts</h2>
+            <h2 className="font-serif font-bold text-xl text-foreground mb-3">My Activity & Shortcuts</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Card 1: My Requests */}
               <button
                 type="button"
                 onClick={() => setCustomerTab('requests')}
-                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-primary/40 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+                className="bg-white rounded-3xl border border-border p-5 text-left hover:border-primary/40 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
               >
                 <div className="flex items-center gap-3.5">
                   <div className="w-12 h-12 rounded-2xl bg-primary-subtle text-primary flex items-center justify-center border border-border-subtle">
                     <CalendarCheck className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-primary transition-colors">
+                    <h3 className="font-serif font-bold text-base text-foreground group-hover:text-primary transition-colors">
                       My Requests
                     </h3>
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-muted-foreground">
                       {myEnquiries.length} booking enquiries &bull; {pendingCount} pending
                     </p>
                   </div>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-primary group-hover:text-primary-foreground flex items-center justify-center transition-colors text-stone-600">
+                <div className="w-8 h-8 rounded-full bg-muted group-hover:bg-primary group-hover:text-primary-foreground flex items-center justify-center transition-colors text-muted-foreground">
                   <ChevronRight className="w-4 h-4" />
                 </div>
               </button>
@@ -452,22 +452,22 @@ export const CustomerDashboard: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setCustomerTab('wishlist')}
-                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-rose-300 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+                className="bg-white rounded-3xl border border-border p-5 text-left hover:border-destructive/30 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-200">
-                    <Heart className="w-6 h-6 fill-rose-500 text-rose-500" />
+                  <div className="w-12 h-12 rounded-2xl bg-destructive-subtle text-destructive flex items-center justify-center border border-destructive/20">
+                    <Heart className="w-6 h-6 fill-destructive text-destructive" />
                   </div>
                   <div>
-                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-rose-700 transition-colors">
+                    <h3 className="font-serif font-bold text-base text-foreground group-hover:text-destructive transition-colors">
                       My Wishlist
                     </h3>
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-muted-foreground">
                       {myWishlistListings.length} saved venues & vendors
                     </p>
                   </div>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-rose-600 group-hover:text-white flex items-center justify-center transition-colors text-stone-600">
+                <div className="w-8 h-8 rounded-full bg-muted group-hover:bg-destructive group-hover:text-white flex items-center justify-center transition-colors text-muted-foreground">
                   <ChevronRight className="w-4 h-4" />
                 </div>
               </button>
@@ -476,22 +476,22 @@ export const CustomerDashboard: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setCustomerTab('reviews')}
-                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-accent hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+                className="bg-white rounded-3xl border border-border p-5 text-left hover:border-accent hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
               >
                 <div className="flex items-center gap-3.5">
                   <div className="w-12 h-12 rounded-2xl bg-accent-subtle text-accent flex items-center justify-center border border-accent/30">
                     <Star className="w-6 h-6 fill-accent text-accent" />
                   </div>
                   <div>
-                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-accent transition-colors">
+                    <h3 className="font-serif font-bold text-base text-foreground group-hover:text-accent transition-colors">
                       My Reviews
                     </h3>
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-muted-foreground">
                       {myReviews.length} reviews published
                     </p>
                   </div>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-accent group-hover:text-accent-foreground flex items-center justify-center transition-colors text-stone-600">
+                <div className="w-8 h-8 rounded-full bg-muted group-hover:bg-accent group-hover:text-accent-foreground flex items-center justify-center transition-colors text-muted-foreground">
                   <ChevronRight className="w-4 h-4" />
                 </div>
               </button>
@@ -500,22 +500,22 @@ export const CustomerDashboard: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setActiveRoute('search')}
-                className="bg-white rounded-3xl border border-stone-200 p-5 text-left hover:border-stone-400 hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+                className="bg-white rounded-3xl border border-border p-5 text-left hover:border-border hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-stone-100 text-stone-700 flex items-center justify-center border border-stone-200">
+                  <div className="w-12 h-12 rounded-2xl bg-muted text-foreground flex items-center justify-center border border-border">
                     <Sparkles className="w-6 h-6 text-accent" />
                   </div>
                   <div>
-                    <h3 className="font-serif font-bold text-base text-stone-900 group-hover:text-stone-950 transition-colors">
+                    <h3 className="font-serif font-bold text-base text-foreground group-hover:text-foreground transition-colors">
                       Explore Vendors
                     </h3>
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-muted-foreground">
                       Search Pune venues, caterers & decorators
                     </p>
                   </div>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-stone-100 group-hover:bg-stone-800 group-hover:text-white flex items-center justify-center transition-colors text-stone-600">
+                <div className="w-8 h-8 rounded-full bg-muted group-hover:bg-foreground group-hover:text-white flex items-center justify-center transition-colors text-muted-foreground">
                   <ChevronRight className="w-4 h-4" />
                 </div>
               </button>
@@ -523,37 +523,37 @@ export const CustomerDashboard: React.FC = () => {
           </div>
 
           {/* Account Details Form */}
-          <div className="bg-white rounded-3xl border border-stone-200 p-6 space-y-4">
-            <h2 className="font-serif font-bold text-xl text-stone-900">Personal Information</h2>
+          <div className="bg-white rounded-3xl border border-border p-6 space-y-4">
+            <h2 className="font-serif font-bold text-xl text-foreground">Personal Information</h2>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                   Full Name
                 </label>
                 <input
                   type="text"
                   value={currentUser.fullName}
                   onChange={(e) => setCurrentUser({ ...currentUser, fullName: e.target.value })}
-                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white transition-colors"
+                  className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground font-medium outline-hidden focus:border-primary focus:bg-white transition-colors"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                     Email Address
                   </label>
                   <input
                     type="email"
                     disabled
                     value={currentUser.email}
-                    className="w-full bg-stone-100 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-500 font-medium outline-hidden cursor-not-allowed"
+                    className="w-full bg-muted border border-border rounded-xl p-2.5 text-xs text-muted-foreground font-medium outline-hidden cursor-not-allowed"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
                     Primary Phone Number (+91)
                   </label>
                   <input
@@ -561,7 +561,7 @@ export const CustomerDashboard: React.FC = () => {
                     value={currentUser.phoneNumber || ''}
                     onChange={(e) => setCurrentUser({ ...currentUser, phoneNumber: e.target.value })}
                     placeholder="+91 98230 45678"
-                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium outline-hidden focus:border-primary focus:bg-white transition-colors"
+                    className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground font-medium outline-hidden focus:border-primary focus:bg-white transition-colors"
                   />
                 </div>
               </div>
@@ -573,12 +573,12 @@ export const CustomerDashboard: React.FC = () => {
                 </span>
               </div>
 
-              <div className="pt-3 border-t border-stone-200 flex flex-wrap items-center justify-between gap-3">
+              <div className="pt-3 border-t border-border flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={() => openAuthModal('login')}
-                    className="px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs transition-colors cursor-pointer border border-stone-300"
+                    className="px-4 py-2 bg-muted hover:bg-muted text-foreground font-bold rounded-xl text-xs transition-colors cursor-pointer border border-border"
                   >
                     Switch Account / Sign In
                   </button>
@@ -594,7 +594,7 @@ export const CustomerDashboard: React.FC = () => {
                 <button
                   type="button"
                   onClick={logout}
-                  className="px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold rounded-xl text-xs transition-colors cursor-pointer border border-rose-200"
+                  className="px-4 py-2 bg-destructive-subtle hover:bg-destructive-subtle text-destructive font-bold rounded-xl text-xs transition-colors cursor-pointer border border-destructive/20"
                 >
                   Sign Out
                 </button>

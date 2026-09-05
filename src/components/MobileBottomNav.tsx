@@ -31,7 +31,7 @@ export const MobileBottomNav: React.FC = () => {
     (currentUser.role === 'vendor' && activeRoute === 'vendor-dashboard' && vendorTab === 'overview');
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-stone-200 py-1.5 px-2 md:hidden shadow-lg">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-border py-1.5 px-2 md:hidden shadow-lg">
       <div className="flex items-center justify-around">
         {/* 1. Home */}
         <button
@@ -39,7 +39,7 @@ export const MobileBottomNav: React.FC = () => {
           className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
             activeRoute === 'home' 
               ? 'text-primary font-bold' 
-              : 'text-stone-500 hover:text-stone-900'
+              : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           <Home className={`w-5 h-5 ${activeRoute === 'home' ? 'stroke-[2.5] text-accent' : ''}`} />
@@ -52,7 +52,7 @@ export const MobileBottomNav: React.FC = () => {
           className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
             activeRoute === 'search' 
               ? 'text-primary font-bold' 
-              : 'text-stone-500 hover:text-stone-900'
+              : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           <Search className={`w-5 h-5 ${activeRoute === 'search' ? 'stroke-[2.5] text-accent' : ''}`} />
@@ -69,7 +69,7 @@ export const MobileBottomNav: React.FC = () => {
           className={`relative flex flex-col items-center justify-center w-16 py-1 rounded-lg transition-colors ${
             isRequestsActive
               ? 'text-primary font-bold' 
-              : 'text-stone-500 hover:text-stone-900'
+              : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           {currentUser.role === 'vendor' ? (
@@ -104,7 +104,7 @@ export const MobileBottomNav: React.FC = () => {
             className={`relative flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
               isVendorListingsActive
                 ? 'text-secondary font-bold'
-                : 'text-stone-500 hover:text-stone-900'
+                : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             <Store className={`w-5 h-5 ${isVendorListingsActive ? 'stroke-[2.5] text-accent' : 'text-accent'}`} />
@@ -116,7 +116,7 @@ export const MobileBottomNav: React.FC = () => {
             className={`relative flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
               isWishlistActive
                 ? 'text-rose font-bold'
-                : 'text-stone-500 hover:text-stone-900'
+                : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             <Heart className={`w-5 h-5 ${isWishlistActive ? 'stroke-[2.5] fill-rose text-rose' : 'text-rose'}`} />
@@ -138,7 +138,7 @@ export const MobileBottomNav: React.FC = () => {
           className={`flex flex-col items-center justify-center w-14 py-1 rounded-lg transition-colors ${
             isProfileActive 
               ? 'text-primary font-bold' 
-              : 'text-stone-500 hover:text-stone-900'
+              : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           {currentUser.role === 'vendor' ? (

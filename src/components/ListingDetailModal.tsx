@@ -177,31 +177,31 @@ export const ListingDetailModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-stone-950/70 backdrop-blur-xs animate-in fade-in overflow-y-auto">
-      <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[94vh] flex flex-col shadow-2xl border border-stone-200 overflow-hidden relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/70 backdrop-blur-xs animate-in fade-in overflow-y-auto">
+      <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[94vh] flex flex-col shadow-2xl border border-border overflow-hidden relative">
         {/* Sticky Modal Top Bar */}
-        <div className="px-5 py-3.5 border-b border-stone-200 flex items-center justify-between bg-white/95 backdrop-blur-md sticky top-0 z-20">
+        <div className="px-5 py-3.5 border-b border-border flex items-center justify-between bg-white/95 backdrop-blur-md sticky top-0 z-20">
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-primary-subtle text-primary border border-border-subtle">
               {categoryMeta?.name || listing.category}
             </span>
-            <span className="text-xs text-stone-500 hidden sm:inline">&bull; {listing.locality}, Pune</span>
+            <span className="text-xs text-muted-foreground hidden sm:inline">&bull; {listing.locality}, Pune</span>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handleNativeShare}
-              className="p-2 rounded-xl bg-stone-50 hover:bg-stone-100 text-stone-700 hover:text-primary border border-stone-200 transition-colors flex items-center gap-1.5 cursor-pointer"
+              className="p-2 rounded-xl bg-muted/40 hover:bg-muted text-foreground hover:text-primary border border-border transition-colors flex items-center gap-1.5 cursor-pointer"
               title="Share listing"
             >
-              <Share2 className="w-4 h-4 text-stone-600" />
+              <Share2 className="w-4 h-4 text-muted-foreground" />
               <span className="hidden sm:inline text-xs font-semibold">Share</span>
             </button>
 
             <button
               onClick={() => toggleComparison(listing.id)}
               className={`p-2 rounded-xl text-xs font-medium border flex items-center gap-1.5 transition-colors ${
-                isCompared ? 'bg-gold-light text-gold-dark border-gold' : 'bg-stone-50 hover:bg-stone-100 text-stone-700 border-stone-200'
+                isCompared ? 'bg-gold-light text-gold-dark border-gold' : 'bg-muted/40 hover:bg-muted text-foreground border-border'
               }`}
             >
               <Scale className="w-4 h-4" />
@@ -210,14 +210,14 @@ export const ListingDetailModal: React.FC = () => {
 
             <button
               onClick={() => toggleWishlist(listing.id)}
-              className="p-2 rounded-xl bg-stone-50 hover:bg-stone-100 text-stone-700 hover:text-rose-600 border border-stone-200 transition-colors"
+              className="p-2 rounded-xl bg-muted/40 hover:bg-muted text-foreground hover:text-destructive border border-border transition-colors"
             >
-              <Heart className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
+              <Heart className={`w-4 h-4 ${isSaved ? 'fill-destructive text-destructive' : ''}`} />
             </button>
 
             <button
               onClick={() => setSelectedListingId(null)}
-              className="p-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors"
+              className="p-2 rounded-xl bg-muted hover:bg-muted text-foreground transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -228,7 +228,7 @@ export const ListingDetailModal: React.FC = () => {
         <div className="overflow-y-auto flex-1 p-5 sm:p-8 space-y-8">
           {/* 1. Photo Gallery Carousel / Mosaic */}
           <div className="space-y-3">
-            <div className="h-64 sm:h-96 rounded-2xl overflow-hidden relative shadow-inner bg-stone-900">
+            <div className="h-64 sm:h-96 rounded-2xl overflow-hidden relative shadow-inner bg-primary-dark">
               <img
                 src={listing.galleryImages[activeImageIndex] || listing.coverImage}
                 alt={listing.title}
@@ -259,7 +259,7 @@ export const ListingDetailModal: React.FC = () => {
           </div>
 
           {/* 2. Listing Title, Locality & Pricing Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start gap-4 pb-6 border-b border-stone-200">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-4 pb-6 border-b border-border">
             <div className="space-y-2 max-w-xl">
               <div className="flex flex-wrap items-center gap-2">
                 {listing.googleMapsUrl && listing.googleMapsUrl.trim().length > 0 ? (
@@ -268,12 +268,12 @@ export const ListingDetailModal: React.FC = () => {
                       href={getGoogleMapsDirectionsUrl(listing)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs text-stone-600 hover:text-primary font-medium bg-stone-100 hover:bg-stone-200/80 px-2.5 py-1 rounded-lg transition-colors group cursor-pointer"
+                      className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary font-medium bg-muted hover:bg-muted/80 px-2.5 py-1 rounded-lg transition-colors group cursor-pointer"
                       title="Open location in Google Maps"
                     >
-                      <MapPin className="w-3.5 h-3.5 text-rose-600 shrink-0" />
+                      <MapPin className="w-3.5 h-3.5 text-destructive shrink-0" />
                       <span className="underline-offset-2 group-hover:underline">{listing.address}</span>
-                      <ExternalLink className="w-3 h-3 text-stone-400 group-hover:text-primary shrink-0" />
+                      <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-primary shrink-0" />
                     </a>
 
                     <a
@@ -287,8 +287,8 @@ export const ListingDetailModal: React.FC = () => {
                     </a>
                   </>
                 ) : (
-                  <div className="inline-flex items-center gap-1.5 text-xs text-stone-600 font-medium bg-stone-100 px-2.5 py-1 rounded-lg">
-                    <MapPin className="w-3.5 h-3.5 text-rose-600 shrink-0" />
+                  <div className="inline-flex items-center gap-1.5 text-xs text-muted-foreground font-medium bg-muted px-2.5 py-1 rounded-lg">
+                    <MapPin className="w-3.5 h-3.5 text-destructive shrink-0" />
                     <span>{listing.address}</span>
                   </div>
                 )}
@@ -309,12 +309,12 @@ export const ListingDetailModal: React.FC = () => {
                 )}
               </div>
 
-              <h1 className="font-serif font-extrabold text-2xl sm:text-3xl text-stone-900 leading-snug">
+              <h1 className="font-serif font-extrabold text-2xl sm:text-3xl text-foreground leading-snug">
                 {listing.title}
               </h1>
               <div className="flex flex-wrap items-center gap-2 pt-1">
-                <p className="text-xs text-stone-600 font-medium">
-                  Managed by <span className="text-stone-900 font-bold">{listing.vendorName}</span> &bull; Verified Pune Vendor
+                <p className="text-xs text-muted-foreground font-medium">
+                  Managed by <span className="text-foreground font-bold">{listing.vendorName}</span> &bull; Verified Pune Vendor
                 </p>
                 <span className="inline-flex items-center gap-1 text-[11px] text-primary bg-primary-subtle px-2 py-0.5 rounded-md border border-border-subtle font-medium">
                   <Clock className="w-3 h-3 text-primary" />
@@ -334,18 +334,18 @@ export const ListingDetailModal: React.FC = () => {
 
             {/* Price Box: Tiered comparison summary if tiers exist, else flat price block */}
             {hasTiers ? (
-              <div className="bg-gradient-to-br from-accent-subtle to-stone-50 p-4 rounded-2xl border border-accent shrink-0 w-full sm:w-auto text-left sm:text-right shadow-2xs">
+              <div className="bg-gradient-to-br from-accent-subtle to-muted/40 p-4 rounded-2xl border border-accent shrink-0 w-full sm:w-auto text-left sm:text-right shadow-2xs">
                 <div className="flex items-center gap-1.5 sm:justify-end mb-0.5">
                   <span className="text-[10px] uppercase font-bold text-accent-dark px-2.5 py-0.5 rounded-full bg-accent-subtle tracking-wider">
                     Tiered Pricing ({activeTiers.length} Options)
                   </span>
                 </div>
                 <div className="flex items-baseline gap-1 sm:justify-end">
-                  <span className="text-xs text-stone-500 font-medium mr-1">from</span>
+                  <span className="text-xs text-muted-foreground font-medium mr-1">from</span>
                   <span className="font-extrabold text-2xl sm:text-3xl text-primary font-serif">
                     {formatIndianCurrency(effectivePrice)}
                   </span>
-                  <span className="text-xs text-stone-500 font-medium">
+                  <span className="text-xs text-muted-foreground font-medium">
                     /{(listing.pricingUnit || 'event').replace('per_', '')}
                   </span>
                 </div>
@@ -357,20 +357,20 @@ export const ListingDetailModal: React.FC = () => {
                 </a>
               </div>
             ) : (
-              <div className="bg-stone-50 p-4 rounded-2xl border border-stone-200/80 shrink-0 w-full sm:w-auto text-left sm:text-right">
-                <span className="text-[10px] uppercase font-bold text-stone-600 block tracking-wider">
+              <div className="bg-muted/40 p-4 rounded-2xl border border-border/80 shrink-0 w-full sm:w-auto text-left sm:text-right">
+                <span className="text-[10px] uppercase font-bold text-muted-foreground block tracking-wider">
                   Starting Pricing
                 </span>
                 <div className="flex items-baseline gap-1 sm:justify-end">
                   <span className="font-extrabold text-2xl sm:text-3xl text-primary font-serif">
                     {formatIndianCurrency(listing.price_from ?? listing.startingPrice)}
                   </span>
-                  <span className="text-xs text-stone-500 font-medium">
+                  <span className="text-xs text-muted-foreground font-medium">
                     /{(listing.pricingUnit || 'event').replace('per_', '')}
                   </span>
                 </div>
                 {listing.pricingNote && (
-                  <p className="text-[11px] text-stone-500 mt-1 max-w-xs">{listing.pricingNote}</p>
+                  <p className="text-[11px] text-muted-foreground mt-1 max-w-xs">{listing.pricingNote}</p>
                 )}
               </div>
             )}
@@ -378,9 +378,9 @@ export const ListingDetailModal: React.FC = () => {
 
           {/* 2.5. Events Catered & Celebrations Offered */}
           {listing.eventTypes && listing.eventTypes.length > 0 && (
-            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-primary-subtle/70 via-stone-50 to-accent-subtle/60 border border-border-subtle space-y-2.5">
+            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-primary-subtle/70 via-muted/40 to-accent-subtle/60 border border-border-subtle space-y-2.5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
-                <h3 className="font-serif font-bold text-sm sm:text-base text-stone-900 flex items-center gap-2">
+                <h3 className="font-serif font-bold text-sm sm:text-base text-foreground flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-accent shrink-0" />
                   <span>Celebrations & Event Types Offered</span>
                 </h3>
@@ -388,7 +388,7 @@ export const ListingDetailModal: React.FC = () => {
                   {listing.eventTypes.length} Event Formats Supported
                 </span>
               </div>
-              <p className="text-xs text-stone-600">
+              <p className="text-xs text-muted-foreground">
                 This verified vendor is equipped and experienced in hosting the following celebrations:
               </p>
               <div className="flex flex-wrap gap-2 pt-1">
@@ -406,7 +406,7 @@ export const ListingDetailModal: React.FC = () => {
                   return (
                     <span
                       key={type}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-border text-stone-800 text-xs font-semibold shadow-2xs hover:border-primary transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-border text-foreground text-xs font-semibold shadow-2xs hover:border-primary transition-colors"
                     >
                       <span className="text-sm">{getIcon(type)}</span>
                       <span>{formatEventType(type)}</span>
@@ -419,7 +419,7 @@ export const ListingDetailModal: React.FC = () => {
 
           {/* 3. Category-Specific Specs Matrix */}
           <div className="space-y-4">
-            <h3 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
+            <h3 className="font-serif font-bold text-lg text-foreground flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-accent" />
               Venue & Service Highlights
             </h3>
@@ -428,42 +428,42 @@ export const ListingDetailModal: React.FC = () => {
               {/* VENUES SPEC TILES */}
               {listing.category === 'venues' && (
                 <>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="flex items-center gap-1.5 text-stone-500 text-xs mb-1">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-1">
                       <Users className="w-4 h-4 text-primary" />
                       <span>Capacity</span>
                     </div>
-                    <div className="font-bold text-sm text-stone-900">
+                    <div className="font-bold text-sm text-foreground">
                       {listing.categoryAttributes.capacityMin} - {listing.categoryAttributes.capacityMax} Pax
                     </div>
                   </div>
 
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="flex items-center gap-1.5 text-stone-500 text-xs mb-1">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-1">
                       <Car className="w-4 h-4 text-secondary" />
                       <span>Parking</span>
                     </div>
-                    <div className="font-bold text-sm text-stone-900">
+                    <div className="font-bold text-sm text-foreground">
                       {listing.categoryAttributes.parkingCapacity} Vehicles
                     </div>
                   </div>
 
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="flex items-center gap-1.5 text-stone-500 text-xs mb-1">
-                      <Utensils className="w-4 h-4 text-emerald-700" />
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-1">
+                      <Utensils className="w-4 h-4 text-success" />
                       <span>Catering Policy</span>
                     </div>
-                    <div className="font-bold text-xs text-stone-900">
+                    <div className="font-bold text-xs text-foreground">
                       {listing.categoryAttributes.cateringPolicy}
                     </div>
                   </div>
 
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="flex items-center gap-1.5 text-stone-500 text-xs mb-1">
-                      <Sparkles className="w-4 h-4 text-sky-700" />
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-1">
+                      <Sparkles className="w-4 h-4 text-primary" />
                       <span>AC & Rooms</span>
                     </div>
-                    <div className="font-bold text-xs text-stone-900">
+                    <div className="font-bold text-xs text-foreground">
                       {listing.categoryAttributes.hasAC ? 'AC Hall' : 'Air Cooled'} + {listing.categoryAttributes.roomCount} Rooms
                     </div>
                   </div>
@@ -473,21 +473,21 @@ export const ListingDetailModal: React.FC = () => {
               {/* PHOTOGRAPHY SPEC TILES */}
               {listing.category === 'photography' && (
                 <>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="text-stone-500 text-xs mb-1">⚡ Deliverables Timeline</div>
-                    <div className="font-bold text-sm text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="text-muted-foreground text-xs mb-1">⚡ Deliverables Timeline</div>
+                    <div className="font-bold text-sm text-foreground">
                       {listing.categoryAttributes.deliveryTimelineDays} Days Retouched
                     </div>
                   </div>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="text-stone-500 text-xs mb-1">🎥 Drone Coverage</div>
-                    <div className="font-bold text-sm text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="text-muted-foreground text-xs mb-1">🎥 Drone Coverage</div>
+                    <div className="font-bold text-sm text-foreground">
                       {listing.categoryAttributes.droneAvailable ? 'Included / 4K' : 'On Request'}
                     </div>
                   </div>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200 col-span-2">
-                    <div className="text-stone-500 text-xs mb-1">📷 Gear Specs</div>
-                    <div className="font-bold text-xs text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border col-span-2">
+                    <div className="text-muted-foreground text-xs mb-1">📷 Gear Specs</div>
+                    <div className="font-bold text-xs text-foreground">
                       {listing.categoryAttributes.equipmentDetails}
                     </div>
                   </div>
@@ -497,21 +497,21 @@ export const ListingDetailModal: React.FC = () => {
               {/* CATERING SPEC TILES */}
               {listing.category === 'catering' && (
                 <>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="text-stone-500 text-xs mb-1">🥗 Veg / Non-Veg</div>
-                    <div className="font-bold text-sm text-emerald-800">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="text-muted-foreground text-xs mb-1">🥗 Veg / Non-Veg</div>
+                    <div className="font-bold text-sm text-success">
                       {listing.categoryAttributes.vegType}
                     </div>
                   </div>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="text-stone-500 text-xs mb-1">👥 Min Guests</div>
-                    <div className="font-bold text-sm text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="text-muted-foreground text-xs mb-1">👥 Min Guests</div>
+                    <div className="font-bold text-sm text-foreground">
                       {listing.categoryAttributes.minGuestCount} Plates
                     </div>
                   </div>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200 col-span-2">
-                    <div className="text-stone-500 text-xs mb-1">🍲 Cuisines</div>
-                    <div className="font-bold text-xs text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border col-span-2">
+                    <div className="text-muted-foreground text-xs mb-1">🍲 Cuisines</div>
+                    <div className="font-bold text-xs text-foreground">
                       {listing.categoryAttributes.cuisines?.join(', ')}
                     </div>
                   </div>
@@ -521,21 +521,21 @@ export const ListingDetailModal: React.FC = () => {
               {/* DECORATION SPEC TILES */}
               {listing.category === 'decoration' && (
                 <>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="text-stone-500 text-xs mb-1">🌸 Mandap Styling</div>
-                    <div className="font-bold text-sm text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="text-muted-foreground text-xs mb-1">🌸 Mandap Styling</div>
+                    <div className="font-bold text-sm text-foreground">
                       {listing.categoryAttributes.mandapCustomization ? 'Custom Vedic Mandap' : 'Standard'}
                     </div>
                   </div>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="text-stone-500 text-xs mb-1">💡 Ambient Lighting</div>
-                    <div className="font-bold text-sm text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="text-muted-foreground text-xs mb-1">💡 Ambient Lighting</div>
+                    <div className="font-bold text-sm text-foreground">
                       {listing.categoryAttributes.includesLighting ? 'Full LED & Truss Included' : 'Basic'}
                     </div>
                   </div>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200 col-span-2">
-                    <div className="text-stone-500 text-xs mb-1">🎨 Styles Offered</div>
-                    <div className="font-bold text-xs text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border col-span-2">
+                    <div className="text-muted-foreground text-xs mb-1">🎨 Styles Offered</div>
+                    <div className="font-bold text-xs text-foreground">
                       {listing.categoryAttributes.decorStyles?.join(' • ')}
                     </div>
                   </div>
@@ -545,21 +545,21 @@ export const ListingDetailModal: React.FC = () => {
               {/* DJ & MUSIC */}
               {listing.category === 'music_dj' && (
                 <>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="text-stone-500 text-xs mb-1">🔊 Sound Wattage</div>
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="text-muted-foreground text-xs mb-1">🔊 Sound Wattage</div>
                     <div className="font-bold text-sm text-purple-900">
                       {listing.categoryAttributes.soundWattage}
                     </div>
                   </div>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="text-stone-500 text-xs mb-1">🥁 Dhol Tasha Entry</div>
-                    <div className="font-bold text-sm text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="text-muted-foreground text-xs mb-1">🥁 Dhol Tasha Entry</div>
+                    <div className="font-bold text-sm text-foreground">
                       {listing.categoryAttributes.includesDholTasha ? 'Live Troop Available' : 'No'}
                     </div>
                   </div>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200 col-span-2">
-                    <div className="text-stone-500 text-xs mb-1">🎵 Genres</div>
-                    <div className="font-bold text-xs text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border col-span-2">
+                    <div className="text-muted-foreground text-xs mb-1">🎵 Genres</div>
+                    <div className="font-bold text-xs text-foreground">
                       {listing.categoryAttributes.genres?.join(', ')}
                     </div>
                   </div>
@@ -569,21 +569,21 @@ export const ListingDetailModal: React.FC = () => {
               {/* PANDIT & PRIEST */}
               {listing.category === 'pandit_priest' && (
                 <>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="text-stone-500 text-xs mb-1">🕉️ Experience</div>
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="text-muted-foreground text-xs mb-1">🕉️ Experience</div>
                     <div className="font-bold text-sm text-orange-900">
                       {listing.categoryAttributes.yearsExperience} Years in Pune
                     </div>
                   </div>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200">
-                    <div className="text-stone-500 text-xs mb-1">🗣️ Languages</div>
-                    <div className="font-bold text-xs text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border">
+                    <div className="text-muted-foreground text-xs mb-1">🗣️ Languages</div>
+                    <div className="font-bold text-xs text-foreground">
                       {listing.categoryAttributes.languages?.join(', ')}
                     </div>
                   </div>
-                  <div className="p-3.5 bg-stone-50 rounded-xl border border-stone-200 col-span-2">
-                    <div className="text-stone-500 text-xs mb-1">📜 Ceremonies</div>
-                    <div className="font-bold text-xs text-stone-900">
+                  <div className="p-3.5 bg-muted/40 rounded-xl border border-border col-span-2">
+                    <div className="text-muted-foreground text-xs mb-1">📜 Ceremonies</div>
+                    <div className="font-bold text-xs text-foreground">
                       {listing.categoryAttributes.ceremoniesSupported?.join(', ')}
                     </div>
                   </div>
@@ -594,8 +594,8 @@ export const ListingDetailModal: React.FC = () => {
 
           {/* 4. Description */}
           <div className="space-y-2">
-            <h3 className="font-serif font-bold text-lg text-stone-900">About this Venue / Service</h3>
-            <p className="text-xs sm:text-sm text-stone-700 leading-relaxed font-light">
+            <h3 className="font-serif font-bold text-lg text-foreground">About this Venue / Service</h3>
+            <p className="text-xs sm:text-sm text-foreground leading-relaxed font-light">
               {listing.description}
             </p>
           </div>
@@ -603,7 +603,7 @@ export const ListingDetailModal: React.FC = () => {
           {/* 4.1 Custom Highlights / Vendor Custom Attributes */}
           {listing.customAttributes && listing.customAttributes.length > 0 && (
             <div className="space-y-3">
-              <h3 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
+              <h3 className="font-serif font-bold text-lg text-foreground flex items-center gap-2">
                 <Tag className="w-4 h-4 text-primary" />
                 Special Features & Vendor Highlights
               </h3>
@@ -613,7 +613,7 @@ export const ListingDetailModal: React.FC = () => {
                     <div className="text-[10px] font-bold text-primary uppercase tracking-wider">
                       {attr.label}
                     </div>
-                    <div className="font-semibold text-xs sm:text-sm text-stone-900">
+                    <div className="font-semibold text-xs sm:text-sm text-foreground">
                       {attr.value}
                     </div>
                   </div>
@@ -631,11 +631,11 @@ export const ListingDetailModal: React.FC = () => {
                     <Sparkles className="w-3 h-3 text-accent" />
                     Exclusive Bundled Deals
                   </span>
-                  <h3 className="font-serif font-bold text-lg text-stone-900 mt-1">
+                  <h3 className="font-serif font-bold text-lg text-foreground mt-1">
                     All-in-One Multi-Service Combo Packages
                   </h3>
-                  <p className="text-xs text-stone-600">
-                    Book complete venue, decor, and catering from <span className="font-semibold text-stone-900">{listing.vendorName}</span> for guaranteed savings and zero vendor coordination hassle.
+                  <p className="text-xs text-muted-foreground">
+                    Book complete venue, decor, and catering from <span className="font-semibold text-foreground">{listing.vendorName}</span> for guaranteed savings and zero vendor coordination hassle.
                   </p>
                 </div>
 
@@ -661,36 +661,36 @@ export const ListingDetailModal: React.FC = () => {
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                       <div className="space-y-1">
                         <div className="flex flex-wrap items-center gap-2">
-                          <h4 className="font-serif font-bold text-base text-stone-900">{combo.title}</h4>
+                          <h4 className="font-serif font-bold text-base text-foreground">{combo.title}</h4>
                           {combo.badge && (
                             <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold-light text-gold-dark border border-gold">
                               {combo.badge}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-stone-600">{combo.description}</p>
+                        <p className="text-xs text-muted-foreground">{combo.description}</p>
                       </div>
 
                       {/* Pricing block */}
                       <div className="sm:text-right shrink-0 bg-accent-subtle/60 sm:bg-transparent p-2.5 sm:p-0 rounded-xl">
-                        <span className="text-[10px] font-bold uppercase text-stone-500 block">Bundle Price</span>
+                        <span className="text-[10px] font-bold uppercase text-muted-foreground block">Bundle Price</span>
                         <div className="flex items-baseline gap-1.5 sm:justify-end">
                           <span className="font-serif font-extrabold text-xl sm:text-2xl text-primary">
                             {formatIndianCurrency(combo.comboPrice)}
                           </span>
-                          <span className="text-xs text-stone-500 line-through">
+                          <span className="text-xs text-muted-foreground line-through">
                             {formatIndianCurrency(combo.totalOriginalPrice)}
                           </span>
                         </div>
-                        <span className="text-[11px] font-bold text-emerald-700 block">
+                        <span className="text-[11px] font-bold text-success block">
                           Save {formatIndianCurrency(combo.savingsAmount)} ({combo.savingsPercentage}% OFF)
                         </span>
                       </div>
                     </div>
 
                     {/* Included Services Tags */}
-                    <div className="space-y-1.5 pt-2 border-t border-stone-100">
-                      <span className="text-[10px] font-bold uppercase text-stone-500 tracking-wider block">
+                    <div className="space-y-1.5 pt-2 border-t border-border-subtle">
+                      <span className="text-[10px] font-bold uppercase text-muted-foreground tracking-wider block">
                         Included in this All-in-One Package:
                       </span>
                       <div className="flex flex-wrap gap-2">
@@ -698,7 +698,7 @@ export const ListingDetailModal: React.FC = () => {
                           combo.includedServices.map((srv, idx) => (
                             <div 
                               key={idx}
-                              className="px-3 py-1.5 rounded-xl bg-stone-50 border border-stone-200 text-xs text-stone-800 flex items-center gap-1.5"
+                              className="px-3 py-1.5 rounded-xl bg-muted/40 border border-border text-xs text-foreground flex items-center gap-1.5"
                             >
                               <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
                               <span className="font-bold text-primary uppercase text-[10px]">{srv.category?.replace('_', ' ')}:</span>
@@ -710,16 +710,16 @@ export const ListingDetailModal: React.FC = () => {
                     </div>
 
                     {/* Action buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-2 border-t border-stone-100">
-                      <div className="text-[11px] text-stone-500 flex items-center gap-1">
-                        <Users className="w-3.5 h-3.5 text-stone-400" />
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-2 border-t border-border-subtle">
+                      <div className="text-[11px] text-muted-foreground flex items-center gap-1">
+                        <Users className="w-3.5 h-3.5 text-muted-foreground" />
                         <span>Suitable for {combo.minGuestCapacity || 0}–{combo.maxGuestCapacity || 0} Guests &bull; {combo.eventTypes?.slice(0, 2).map(formatEventType).join(', ') || 'All Celebrations'}</span>
                       </div>
 
                       <div className="flex gap-2 w-full sm:w-auto">
                         <button
                           onClick={() => setSelectedComboForView(combo)}
-                          className="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold transition-colors cursor-pointer"
+                          className="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl bg-muted hover:bg-muted text-foreground text-xs font-semibold transition-colors cursor-pointer"
                         >
                           View Inclusions
                         </button>
@@ -749,10 +749,10 @@ export const ListingDetailModal: React.FC = () => {
               <div id="package-tiers" className="space-y-3 scroll-mt-20">
                 <div className="flex justify-between items-center">
                   <div>
-                    <h3 className="font-serif font-bold text-lg text-stone-900">
+                    <h3 className="font-serif font-bold text-lg text-foreground">
                       Package Tiers Comparison
                     </h3>
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-muted-foreground">
                       Compare inclusions across tiers. Each tier inherits the listing unit ({(listing.pricingUnit || 'event').replace('per_', '')}).
                     </p>
                   </div>
@@ -768,7 +768,7 @@ export const ListingDetailModal: React.FC = () => {
                       className={`p-4 rounded-2xl border flex flex-col justify-between space-y-3 transition-all ${
                         pkg.isPopular 
                           ? 'bg-accent-subtle/50 border-accent shadow-xs' 
-                          : 'bg-stone-50/70 border-stone-200 hover:border-stone-300'
+                          : 'bg-muted/70 border-border hover:border-border'
                       }`}
                     >
                       <div className="space-y-2">
@@ -779,23 +779,23 @@ export const ListingDetailModal: React.FC = () => {
                                 {pkg.badge}
                               </span>
                             )}
-                            <h4 className="font-bold text-sm text-stone-900">{pkg.name}</h4>
+                            <h4 className="font-bold text-sm text-foreground">{pkg.name}</h4>
                           </div>
                           <div className="text-right">
                             <span className="font-serif font-extrabold text-base sm:text-lg text-primary block">
                               {formatIndianCurrency(pkg.price)}
                             </span>
-                            <span className="text-[10px] text-stone-500">
+                            <span className="text-[10px] text-muted-foreground">
                               /{(pkg.pricingUnit || listing.pricingUnit || 'event').replace('per_', '')}
                             </span>
                           </div>
                         </div>
 
-                        <p className="text-xs text-stone-600">{pkg.description}</p>
+                        <p className="text-xs text-muted-foreground">{pkg.description}</p>
 
-                        <ul className="space-y-1.5 pt-2 border-t border-stone-200/80">
+                        <ul className="space-y-1.5 pt-2 border-t border-border/80">
                           {pkg.features.map((f, i) => (
-                            <li key={i} className="text-xs text-stone-700 flex items-center gap-1.5">
+                            <li key={i} className="text-xs text-foreground flex items-center gap-1.5">
                               <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
                               <span>{f}</span>
                             </li>
@@ -818,14 +818,14 @@ export const ListingDetailModal: React.FC = () => {
           })()}
 
           {/* 6. AVAILABILITY CALENDAR WITH STALENESS RADAR */}
-          <div className="bg-white rounded-3xl border border-stone-200 p-5 sm:p-6 space-y-5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-stone-100">
+          <div className="bg-white rounded-3xl border border-border p-5 sm:p-6 space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-border-subtle">
               <div>
-                <h3 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
+                <h3 className="font-serif font-bold text-lg text-foreground flex items-center gap-2">
                   <CalendarIcon className="w-5 h-5 text-primary" />
                   Availability Calendar
                 </h3>
-                <p className="text-xs text-stone-500">
+                <p className="text-xs text-muted-foreground">
                   Real-time calendar maintained directly by the vendor management
                 </p>
               </div>
@@ -834,7 +834,7 @@ export const ListingDetailModal: React.FC = () => {
               <div className={`px-3 py-1 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 border self-start sm:self-auto ${
                 isStale 
                   ? 'bg-gold-light text-gold-dark border-gold' 
-                  : 'bg-emerald-100 text-emerald-900 border-emerald-300'
+                  : 'bg-success-subtle text-success border-success/30'
               }`}>
                 <Clock className="w-3.5 h-3.5" />
                 <span>{daysAgoText}</span>
@@ -855,24 +855,24 @@ export const ListingDetailModal: React.FC = () => {
             )}
 
             {/* Month Navigation & Legend Header */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-stone-50 p-3.5 rounded-2xl border border-stone-200">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-muted/40 p-3.5 rounded-2xl border border-border">
               <div className="flex items-center justify-between sm:justify-start gap-2">
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
                     onClick={() => setSelectedMonthOffset(prev => prev - 1)}
-                    className="p-2 rounded-xl border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 transition-colors shadow-2xs cursor-pointer"
+                    className="p-2 rounded-xl border border-border bg-white hover:bg-muted text-foreground transition-colors shadow-2xs cursor-pointer"
                     title="Previous Month"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
-                  <span className="font-serif font-bold text-sm sm:text-base text-stone-900 px-2 min-w-[130px] text-center">
+                  <span className="font-serif font-bold text-sm sm:text-base text-foreground px-2 min-w-[130px] text-center">
                     {monthName}
                   </span>
                   <button
                     type="button"
                     onClick={() => setSelectedMonthOffset(prev => prev + 1)}
-                    className="p-2 rounded-xl border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 transition-colors shadow-2xs cursor-pointer"
+                    className="p-2 rounded-xl border border-border bg-white hover:bg-muted text-foreground transition-colors shadow-2xs cursor-pointer"
                     title="Next Month"
                   >
                     <ChevronRight className="w-4 h-4" />
@@ -892,16 +892,16 @@ export const ListingDetailModal: React.FC = () => {
 
               {/* Calendar Legend Pills */}
               <div className="flex items-center gap-2 text-xs flex-wrap">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-950 font-bold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-600" />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-success-subtle text-success font-bold">
+                  <span className="w-2 h-2 rounded-full bg-success" />
                   <span>Available</span>
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-100 text-amber-950 font-bold">
-                  <span className="w-2 h-2 rounded-full bg-amber-600" />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-accent-subtle text-accent-dark font-bold">
+                  <span className="w-2 h-2 rounded-full bg-accent" />
                   <span>Tentative</span>
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-100 text-rose-950 font-bold">
-                  <span className="w-2 h-2 rounded-full bg-rose-600" />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-destructive-subtle text-destructive font-bold">
+                  <span className="w-2 h-2 rounded-full bg-destructive" />
                   <span>Booked</span>
                 </span>
               </div>
@@ -910,7 +910,7 @@ export const ListingDetailModal: React.FC = () => {
             {/* Month Day Grid */}
             <div className="grid grid-cols-7 gap-1.5 sm:gap-2 text-center text-xs">
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-                <div key={d} className="text-[11px] font-extrabold text-stone-500 uppercase tracking-wider py-1">
+                <div key={d} className="text-[11px] font-extrabold text-muted-foreground uppercase tracking-wider py-1">
                   {d}
                 </div>
               ))}
@@ -920,17 +920,17 @@ export const ListingDetailModal: React.FC = () => {
               ))}
 
               {calendarDays.map(({ dayNum, status, dateStr }) => {
-                let statusClasses = 'bg-emerald-100 text-emerald-950 hover:bg-emerald-200/90';
-                let textColor = 'text-emerald-800';
+                let statusClasses = 'bg-success-subtle text-success hover:bg-success-subtle/90';
+                let textColor = 'text-success';
                 let label = 'Available';
 
                 if (status === 'tentative') {
-                  statusClasses = 'bg-amber-100 text-amber-950 hover:bg-amber-200';
-                  textColor = 'text-amber-800';
+                  statusClasses = 'bg-accent-subtle text-accent-dark hover:bg-accent-subtle';
+                  textColor = 'text-accent-dark';
                   label = 'Tentative';
                 } else if (status === 'booked') {
-                  statusClasses = 'bg-rose-100 text-rose-950 hover:bg-rose-200';
-                  textColor = 'text-rose-800';
+                  statusClasses = 'bg-destructive-subtle text-destructive hover:bg-destructive-subtle';
+                  textColor = 'text-destructive';
                   label = 'Booked';
                 }
 
@@ -940,7 +940,7 @@ export const ListingDetailModal: React.FC = () => {
                     title={`${dateStr}: ${status.toUpperCase()}`}
                     className={`p-1 sm:p-2 rounded-xl sm:rounded-2xl font-medium text-xs flex flex-col items-center justify-center gap-0.5 sm:gap-1 min-h-[46px] sm:min-h-[52px] transition-all select-none overflow-hidden ${statusClasses}`}
                   >
-                    <span className="font-sans font-bold text-xs sm:text-sm text-stone-800 leading-none">{dayNum}</span>
+                    <span className="font-sans font-bold text-xs sm:text-sm text-foreground leading-none">{dayNum}</span>
                     
                     {/* Status Text (compact, clean sans font style suited for small text) */}
                     <span className={`font-sans font-semibold text-[6.5px] sm:text-[8px] tracking-normal leading-tight whitespace-nowrap truncate w-full text-center block ${textColor}`}>
@@ -953,37 +953,37 @@ export const ListingDetailModal: React.FC = () => {
           </div>
 
           {/* 7. LOCATION & GOOGLE MAPS NAVIGATION */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-stone-50 border border-stone-200 space-y-4">
+          <div className="p-5 sm:p-6 rounded-2xl bg-muted/40 border border-border space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <h3 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
-                  <Compass className="w-5 h-5 text-rose-600" />
+                <h3 className="font-serif font-bold text-lg text-foreground flex items-center gap-2">
+                  <Compass className="w-5 h-5 text-destructive" />
                   Location & Driving Directions
                 </h3>
-                <p className="text-xs text-stone-500">
+                <p className="text-xs text-muted-foreground">
                   {listing.googleMapsUrl && listing.googleMapsUrl.trim().length > 0 
                     ? 'Navigate directly to the venue or vendor studio using Google Maps' 
                     : 'Physical address provided by the vendor'}
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-stone-200/80 text-stone-800 self-start sm:self-auto">
+              <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-muted/80 text-foreground self-start sm:self-auto">
                 📍 {listing.locality}, {listing.city ? listing.city.toUpperCase() : 'PUNE'}
               </span>
             </div>
 
             {/* Visual Location Card */}
-            <div className="bg-white rounded-xl border border-stone-200 p-4 space-y-3 shadow-2xs">
+            <div className="bg-white rounded-xl border border-border p-4 space-y-3 shadow-2xs">
               <div className="flex items-start gap-3">
-                <div className="p-2.5 rounded-xl bg-rose-50 text-rose-600 shrink-0">
+                <div className="p-2.5 rounded-xl bg-destructive-subtle text-destructive shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div className="space-y-1">
-                  <h4 className="font-bold text-sm text-stone-900">{listing.title}</h4>
-                  <p className="text-xs text-stone-600 leading-relaxed font-normal">
+                  <h4 className="font-bold text-sm text-foreground">{listing.title}</h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed font-normal">
                     {listing.address}
                   </p>
                   {listing.coordinates && (
-                    <p className="text-[10px] text-stone-400 font-mono">
+                    <p className="text-[10px] text-muted-foreground font-mono">
                       GPS: {listing.coordinates.lat.toFixed(4)}° N, {listing.coordinates.lng.toFixed(4)}° E
                     </p>
                   )}
@@ -993,7 +993,7 @@ export const ListingDetailModal: React.FC = () => {
               {/* Action Buttons - Rendered only if Google Maps URL is provided */}
               {listing.googleMapsUrl && listing.googleMapsUrl.trim().length > 0 ? (
                 <>
-                  <div className="pt-2 border-t border-stone-100 flex flex-wrap gap-2.5">
+                  <div className="pt-2 border-t border-border-subtle flex flex-wrap gap-2.5">
                     <a
                       href={getGoogleMapsDirectionsUrl(listing)}
                       target="_blank"
@@ -1008,27 +1008,27 @@ export const ListingDetailModal: React.FC = () => {
                       href={getGoogleMapsSearchUrl(listing)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold border border-stone-200 transition-colors cursor-pointer"
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-muted hover:bg-muted text-foreground text-xs font-semibold border border-border transition-colors cursor-pointer"
                     >
                       <span>Open in Google Maps</span>
-                      <ExternalLink className="w-3.5 h-3.5 text-stone-500" />
+                      <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />
                     </a>
                   </div>
 
-                  <p className="text-[11px] text-stone-500 italic pt-1">
+                  <p className="text-[11px] text-muted-foreground italic pt-1">
                     Tip: Tapping &quot;Get Driving Directions&quot; opens turn-by-turn navigation directly in your Google Maps app.
                   </p>
                 </>
               ) : (
-                <div className="pt-2 border-t border-stone-100 text-xs text-stone-500 flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+                <div className="pt-2 border-t border-border-subtle text-xs text-muted-foreground flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
                   <span>Google Maps link has not been linked for this listing. Contact vendor for exact landmarks.</span>
                 </div>
               )}
 
               {/* Business Website Card in Location & Credentials Section */}
               {listing.websiteUrl && (
-                <div className="pt-3 border-t border-stone-100">
+                <div className="pt-3 border-t border-border-subtle">
                   <div className="p-3.5 bg-primary-subtle/70 rounded-xl border border-border-subtle flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="w-9 h-9 rounded-lg bg-primary text-gold-light flex items-center justify-center shrink-0 shadow-2xs">
@@ -1036,8 +1036,8 @@ export const ListingDetailModal: React.FC = () => {
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <h4 className="font-bold text-xs text-stone-900">Official Business Website</h4>
-                          <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">
+                          <h4 className="font-bold text-xs text-foreground">Official Business Website</h4>
+                          <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-success-subtle text-success border border-success/30">
                             Verified
                           </span>
                         </div>
@@ -1066,46 +1066,46 @@ export const ListingDetailModal: React.FC = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
+                <h3 className="font-serif font-bold text-lg text-foreground flex items-center gap-2">
                   <Star className="w-5 h-5 fill-accent text-accent" />
                   Verified Reviews ({reviews.length})
                 </h3>
-                <p className="text-xs text-stone-500">
+                <p className="text-xs text-muted-foreground">
                   Reviews are gated to verified customers whose event date has passed
                 </p>
               </div>
             </div>
 
             {reviews.length === 0 ? (
-              <p className="text-xs text-stone-500 italic p-4 bg-stone-50 rounded-xl border border-stone-200">
+              <p className="text-xs text-muted-foreground italic p-4 bg-muted/40 rounded-xl border border-border">
                 No reviews yet. Be the first to leave a review after your event celebration!
               </p>
             ) : (
               <div className="space-y-3">
                 {reviews.map(rev => (
-                  <div key={rev.id} className="p-4 rounded-xl bg-white border border-stone-200 space-y-2">
+                  <div key={rev.id} className="p-4 rounded-xl bg-white border border-border space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-full bg-primary text-gold-light font-bold text-xs flex items-center justify-center">
                           {rev.customerName[0]}
                         </div>
                         <div>
-                          <div className="font-bold text-xs text-stone-900">{rev.customerName}</div>
-                          <div className="text-[10px] text-stone-500">Celebrated {rev.eventType} &bull; {rev.eventDate}</div>
+                          <div className="font-bold text-xs text-foreground">{rev.customerName}</div>
+                          <div className="text-[10px] text-muted-foreground">Celebrated {rev.eventType} &bull; {rev.eventDate}</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-0.5 text-accent">
                         {Array.from({ length: 5 }).map((_, i) => (
                           <Star 
                             key={i} 
-                            className={`w-3.5 h-3.5 ${i < rev.rating ? 'fill-accent' : 'text-stone-300'}`} 
+                            className={`w-3.5 h-3.5 ${i < rev.rating ? 'fill-accent' : 'text-muted-foreground'}`} 
                           />
                         ))}
                       </div>
                     </div>
 
-                    <h5 className="font-bold text-xs text-stone-900">{rev.title}</h5>
-                    <p className="text-xs text-stone-600 font-light leading-relaxed">{rev.reviewText}</p>
+                    <h5 className="font-bold text-xs text-foreground">{rev.title}</h5>
+                    <p className="text-xs text-muted-foreground font-light leading-relaxed">{rev.reviewText}</p>
                   </div>
                 ))}
               </div>
@@ -1114,29 +1114,29 @@ export const ListingDetailModal: React.FC = () => {
         </div>
 
         {/* Sticky Action Footer */}
-        <div className="p-4 sm:p-5 bg-white border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-3 sticky bottom-0 z-20 shadow-lg">
+        <div className="p-4 sm:p-5 bg-white border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3 sticky bottom-0 z-20 shadow-lg">
           <div className="hidden sm:block">
-            <span className="text-[10px] text-stone-600 uppercase font-semibold">Starting From</span>
+            <span className="text-[10px] text-muted-foreground uppercase font-semibold">Starting From</span>
             <div className="flex items-baseline gap-1">
-              <span className="font-extrabold text-xl text-stone-900 font-serif">
+              <span className="font-extrabold text-xl text-foreground font-serif">
                 {formatIndianCurrency(listing.startingPrice)}
               </span>
-              <span className="text-xs text-stone-500">/{(listing.pricingUnit || 'event').replace('per_', '')}</span>
+              <span className="text-xs text-muted-foreground">/{(listing.pricingUnit || 'event').replace('per_', '')}</span>
             </div>
           </div>
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <button
               onClick={handleNativeShare}
-              className="p-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-300 transition-colors shrink-0 flex items-center justify-center cursor-pointer"
+              className="p-3 rounded-xl bg-muted hover:bg-muted text-foreground border border-border transition-colors shrink-0 flex items-center justify-center cursor-pointer"
               title="Share listing"
             >
-              <Share2 className="w-4 h-4 text-stone-700" />
+              <Share2 className="w-4 h-4 text-foreground" />
             </button>
 
             <button
               onClick={handleOpenEnquiry}
-              className="flex-1 sm:flex-none px-4 py-3 rounded-xl text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 transition-colors"
+              className="flex-1 sm:flex-none px-4 py-3 rounded-xl text-xs font-semibold bg-muted hover:bg-muted text-foreground border border-border transition-colors"
             >
               General Enquiry
             </button>
@@ -1161,30 +1161,30 @@ export const ListingDetailModal: React.FC = () => {
 
       {/* Share Listing Modal */}
       {isShareModalOpen && (
-        <div className="fixed inset-0 z-60 flex items-center justify-center p-3 bg-stone-950/80 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-stone-200 space-y-5 relative animate-in zoom-in-95">
+        <div className="fixed inset-0 z-60 flex items-center justify-center p-3 bg-black/80 backdrop-blur-xs animate-in fade-in">
+          <div className="bg-white rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-border space-y-5 relative animate-in zoom-in-95">
             {/* Header */}
-            <div className="flex items-center justify-between pb-3 border-b border-stone-100">
+            <div className="flex items-center justify-between pb-3 border-b border-border-subtle">
               <div className="flex items-center gap-2">
                 <div className="p-2 rounded-xl bg-gold-light text-gold-dark">
                   <Share2 className="w-4 h-4 text-accent-dark" />
                 </div>
                 <div>
-                  <h3 className="font-serif font-bold text-base text-stone-900">Share Celebration Listing</h3>
-                  <p className="text-[11px] text-stone-500">Send to family, partner, or event planning groups</p>
+                  <h3 className="font-serif font-bold text-base text-foreground">Share Celebration Listing</h3>
+                  <p className="text-[11px] text-muted-foreground">Send to family, partner, or event planning groups</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setIsShareModalOpen(false)}
-                className="p-1.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-600 transition-colors cursor-pointer"
+                className="p-1.5 rounded-xl bg-muted hover:bg-muted text-muted-foreground transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Listing Preview Snippet */}
-            <div className="p-3 bg-stone-50 rounded-2xl border border-stone-200 flex gap-3 items-center">
+            <div className="p-3 bg-muted/40 rounded-2xl border border-border flex gap-3 items-center">
               <img
                 src={listing.coverImage}
                 alt={listing.title}
@@ -1195,14 +1195,14 @@ export const ListingDetailModal: React.FC = () => {
                 <span className="px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-primary-subtle text-primary">
                   {categoryMeta?.name || listing.category}
                 </span>
-                <h4 className="font-bold text-xs text-stone-900 truncate">{listing.title}</h4>
-                <p className="text-[11px] text-stone-500 truncate">{listing.locality}, Pune &bull; {formatIndianCurrency(listing.startingPrice)}/{(listing.pricingUnit || 'event').replace('per_', '')}</p>
+                <h4 className="font-bold text-xs text-foreground truncate">{listing.title}</h4>
+                <p className="text-[11px] text-muted-foreground truncate">{listing.locality}, Pune &bull; {formatIndianCurrency(listing.startingPrice)}/{(listing.pricingUnit || 'event').replace('per_', '')}</p>
               </div>
             </div>
 
             {/* Direct Copy Link Box */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-600">
+              <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Direct Listing Link
               </label>
               <div className="flex items-center gap-2">
@@ -1210,14 +1210,14 @@ export const ListingDetailModal: React.FC = () => {
                   type="text"
                   readOnly
                   value={getShareUrl()}
-                  className="w-full bg-stone-100 border border-stone-300 rounded-xl px-3 py-2 text-xs font-mono text-stone-800 select-all outline-hidden truncate"
+                  className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-xs font-mono text-foreground select-all outline-hidden truncate"
                 />
                 <button
                   type="button"
                   onClick={handleCopyLink}
                   className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shrink-0 cursor-pointer shadow-xs ${
                     copiedLink
-                      ? 'bg-emerald-600 text-white'
+                      ? 'bg-success text-white'
                       : 'bg-primary hover:bg-primary-dark text-primary-foreground'
                   }`}
                 >
@@ -1238,7 +1238,7 @@ export const ListingDetailModal: React.FC = () => {
 
             {/* Quick 1-Tap Sharing Channels */}
             <div className="space-y-2">
-              <label className="block text-xs font-bold uppercase tracking-wider text-stone-600">
+              <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Share via 1-Tap
               </label>
               <div className="grid grid-cols-2 gap-2.5">
@@ -1247,18 +1247,18 @@ export const ListingDetailModal: React.FC = () => {
                   href={`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + ' ' + getShareUrl())}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-950 text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-2xs cursor-pointer"
+                  className="p-2.5 rounded-xl bg-success-subtle hover:bg-success-subtle border border-success/30 text-success text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-2xs cursor-pointer"
                 >
-                  <MessageSquare className="w-4 h-4 text-emerald-600" />
+                  <MessageSquare className="w-4 h-4 text-success" />
                   <span>WhatsApp</span>
                 </a>
 
                 {/* Email */}
                 <a
                   href={`mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(shareText + '\n\n' + getShareUrl())}`}
-                  className="p-2.5 rounded-xl bg-stone-100 hover:bg-stone-200 border border-stone-300 text-stone-800 text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                  className="p-2.5 rounded-xl bg-muted hover:bg-muted border border-border text-foreground text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
                 >
-                  <Mail className="w-4 h-4 text-stone-600" />
+                  <Mail className="w-4 h-4 text-muted-foreground" />
                   <span>Email</span>
                 </a>
 
@@ -1267,7 +1267,7 @@ export const ListingDetailModal: React.FC = () => {
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(getShareUrl())}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-stone-900 hover:bg-black text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-2xs cursor-pointer"
+                  className="p-2.5 rounded-xl bg-primary-dark hover:bg-black text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-2xs cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5 text-accent" />
                   <span>X (Twitter)</span>
@@ -1278,9 +1278,9 @@ export const ListingDetailModal: React.FC = () => {
                   href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(getShareUrl())}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-300 text-sky-950 text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                  className="p-2.5 rounded-xl bg-info-subtle hover:bg-info/20 border border-info/30 text-info text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
                 >
-                  <Globe className="w-4 h-4 text-sky-600" />
+                  <Globe className="w-4 h-4 text-info" />
                   <span>Facebook</span>
                 </a>
               </div>
@@ -1291,7 +1291,7 @@ export const ListingDetailModal: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsShareModalOpen(false)}
-                className="w-full py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                className="w-full py-2.5 bg-muted hover:bg-muted text-foreground rounded-xl text-xs font-bold transition-colors cursor-pointer"
               >
                 Done
               </button>

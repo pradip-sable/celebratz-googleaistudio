@@ -274,22 +274,22 @@ export const RequestEnquireModal: React.FC = () => {
       role="dialog" 
       aria-modal="true" 
       aria-labelledby="enquiry-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/70 backdrop-blur-xs animate-in fade-in overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-xs animate-in fade-in overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) handleClose();
       }}
     >
       <div 
         id="request-enquiry-dialog"
-        className="bg-white rounded-3xl max-w-xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-stone-200 overflow-hidden relative"
+        className="bg-white rounded-3xl max-w-xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-border overflow-hidden relative"
       >
         {/* Modal Header */}
-        <div className="px-6 py-4 border-b border-stone-200 flex items-center justify-between bg-stone-50/80 sticky top-0 z-10">
+        <div className="px-6 py-4 border-b border-border flex items-center justify-between bg-muted/80 sticky top-0 z-10">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-accent block">
               Direct Vendor Connect &bull; Pune
             </span>
-            <h3 id="enquiry-modal-title" className="font-serif font-bold text-lg text-stone-900 leading-tight">
+            <h3 id="enquiry-modal-title" className="font-serif font-bold text-lg text-foreground leading-tight">
               {requestType === 'request_to_book' ? 'Request to Book / Venue Visit' : 'Send General Enquiry'}
             </h3>
           </div>
@@ -298,7 +298,7 @@ export const RequestEnquireModal: React.FC = () => {
             id="close-enquiry-modal-button"
             onClick={handleClose}
             aria-label="Close dialog"
-            className="text-stone-400 hover:text-stone-700 p-1 rounded-lg cursor-pointer transition-colors"
+            className="text-muted-foreground hover:text-foreground p-1 rounded-lg cursor-pointer transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -307,14 +307,14 @@ export const RequestEnquireModal: React.FC = () => {
         {/* Modal Body */}
         {isSubmitted ? (
           <div className="p-8 text-center space-y-4 my-auto">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto shadow-sm">
+            <div className="w-14 h-14 rounded-full bg-success-subtle text-success flex items-center justify-center mx-auto shadow-sm">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h4 className="font-serif font-extrabold text-2xl text-stone-900">
+            <h4 className="font-serif font-extrabold text-2xl text-foreground">
               Request Sent to {listing.vendorName}!
             </h4>
-            <p className="text-xs sm:text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
-              We’ve dispatched your event details to the vendor management. They will review your dates and reach out to you via phone/WhatsApp at <span className="font-bold text-stone-900">+91 {phonePrimary}</span> to confirm visit slots and pricing.
+            <p className="text-xs sm:text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+              We’ve dispatched your event details to the vendor management. They will review your dates and reach out to you via phone/WhatsApp at <span className="font-bold text-foreground">+91 {phonePrimary}</span> to confirm visit slots and pricing.
             </p>
             {activePackageData && (activePackageData.packageName || activePackageData.comboPackageTitle) && (
               <div className="p-3 bg-primary-subtle rounded-xl border border-primary/20 text-xs text-primary max-w-sm mx-auto font-medium">
@@ -324,7 +324,7 @@ export const RequestEnquireModal: React.FC = () => {
                 )}
               </div>
             )}
-            <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 text-xs text-stone-500 max-w-sm mx-auto">
+            <div className="p-3 bg-muted/40 rounded-xl border border-border text-xs text-muted-foreground max-w-sm mx-auto">
               You can track all status updates anytime in your <span className="font-semibold text-primary">Customer Dashboard</span>.
             </div>
 
@@ -349,7 +349,7 @@ export const RequestEnquireModal: React.FC = () => {
                   setSelectedListingId(null);
                   forceUnlockBodyScroll();
                 }}
-                className="px-5 py-2.5 bg-stone-100 text-stone-700 rounded-xl text-xs font-semibold hover:bg-stone-200 transition-colors cursor-pointer"
+                className="px-5 py-2.5 bg-muted text-foreground rounded-xl text-xs font-semibold hover:bg-muted transition-colors cursor-pointer"
               >
                 Keep Browsing
               </button>
@@ -366,22 +366,22 @@ export const RequestEnquireModal: React.FC = () => {
                 referrerPolicy="no-referrer"
               />
               <div className="flex-1 min-w-0">
-                <h4 className="font-bold text-xs sm:text-sm text-stone-900 truncate">{listing.title}</h4>
-                <p className="text-[11px] text-stone-500">{listing.locality}, Pune &bull; {listing.pricingNote || `From ${formatIndianCurrency(listing.startingPrice)}`}</p>
+                <h4 className="font-bold text-xs sm:text-sm text-foreground truncate">{listing.title}</h4>
+                <p className="text-[11px] text-muted-foreground">{listing.locality}, Pune &bull; {listing.pricingNote || `From ${formatIndianCurrency(listing.startingPrice)}`}</p>
               </div>
             </div>
 
             {/* PACKAGE SELECTION & MANAGEMENT SECTION */}
             {hasAvailablePackages ? (
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-stone-50/90 border border-stone-200 space-y-3">
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-muted/90 border border-border space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Package className="w-4 h-4 text-primary" />
                     <div>
-                      <span className="text-xs font-bold text-stone-900 block leading-tight">
+                      <span className="text-xs font-bold text-foreground block leading-tight">
                         Package / Pricing Tier
                       </span>
-                      <span className="text-[10px] text-stone-500">
+                      <span className="text-[10px] text-muted-foreground">
                         {activePackageData ? 'Customized package selected' : 'Choose a package or request custom pricing'}
                       </span>
                     </div>
@@ -404,7 +404,7 @@ export const RequestEnquireModal: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setShowPackagePicker(prev => !prev)}
-                      className="text-stone-500 hover:text-stone-800 p-1 rounded-lg hover:bg-stone-200/60 cursor-pointer"
+                      className="text-muted-foreground hover:text-foreground p-1 rounded-lg hover:bg-muted/60 cursor-pointer"
                       title={showPackagePicker ? 'Collapse packages' : 'Expand packages'}
                     >
                       {showPackagePicker ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -428,7 +428,7 @@ export const RequestEnquireModal: React.FC = () => {
                             Selected
                           </span>
                         </div>
-                        <h5 className="font-bold text-xs sm:text-sm text-stone-900 truncate">
+                        <h5 className="font-bold text-xs sm:text-sm text-foreground truncate">
                           {activePackageData.comboPackageTitle || activePackageData.packageName}
                           {(activePackageData.comboPrice || activePackageData.packagePrice) ? (
                             <span className="text-primary font-serif font-extrabold ml-1.5">
@@ -443,7 +443,7 @@ export const RequestEnquireModal: React.FC = () => {
                       type="button"
                       id="clear-package-banner-btn"
                       onClick={handleRemovePackage}
-                      className="text-stone-400 hover:text-destructive text-xs px-2 py-1 rounded-lg hover:bg-destructive/10 transition-colors shrink-0 cursor-pointer font-semibold flex items-center gap-0.5"
+                      className="text-muted-foreground hover:text-destructive text-xs px-2 py-1 rounded-lg hover:bg-destructive/10 transition-colors shrink-0 cursor-pointer font-semibold flex items-center gap-0.5"
                     >
                       <X className="w-3.5 h-3.5" />
                       <span className="hidden sm:inline">Remove</span>
@@ -460,21 +460,21 @@ export const RequestEnquireModal: React.FC = () => {
                       className={`p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 ${
                         !activePackageData 
                           ? 'bg-primary-subtle/60 border-primary ring-1 ring-primary shadow-2xs' 
-                          : 'bg-white border-stone-200 hover:border-stone-300 hover:bg-stone-50/50'
+                          : 'bg-white border-border hover:border-border hover:bg-muted/50'
                       }`}
                     >
                       <div className="flex items-center gap-2.5">
                         <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                          !activePackageData ? 'border-primary bg-primary text-primary-foreground' : 'border-stone-300 bg-white'
+                          !activePackageData ? 'border-primary bg-primary text-primary-foreground' : 'border-border bg-white'
                         }`}>
                           {!activePackageData && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                         </div>
                         <div>
-                          <h6 className="font-bold text-xs text-stone-900">General Inquiry / Custom Quote</h6>
-                          <p className="text-[10px] text-stone-500">No specific package attached &bull; Request custom pricing based on requirements</p>
+                          <h6 className="font-bold text-xs text-foreground">General Inquiry / Custom Quote</h6>
+                          <p className="text-[10px] text-muted-foreground">No specific package attached &bull; Request custom pricing based on requirements</p>
                         </div>
                       </div>
-                      <span className="text-xs font-bold text-stone-600 shrink-0">
+                      <span className="text-xs font-bold text-muted-foreground shrink-0">
                         From {formatIndianCurrency(listing.startingPrice)}
                       </span>
                     </div>
@@ -490,7 +490,7 @@ export const RequestEnquireModal: React.FC = () => {
                           className={`rounded-xl border transition-all overflow-hidden ${
                             isSelected 
                               ? 'bg-accent-subtle/50 border-accent ring-1 ring-accent shadow-2xs' 
-                              : 'bg-white border-stone-200 hover:border-stone-300'
+                              : 'bg-white border-border hover:border-border'
                           }`}
                         >
                           <div 
@@ -499,13 +499,13 @@ export const RequestEnquireModal: React.FC = () => {
                           >
                             <div className="flex items-start gap-2.5 min-w-0">
                               <div className={`w-4 h-4 mt-0.5 rounded-full border flex items-center justify-center shrink-0 ${
-                                isSelected ? 'border-accent bg-accent text-accent-foreground' : 'border-stone-300 bg-white'
+                                isSelected ? 'border-accent bg-accent text-accent-foreground' : 'border-border bg-white'
                               }`}>
                                 {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                               </div>
                               <div className="min-w-0">
                                 <div className="flex items-center gap-1.5 flex-wrap">
-                                  <h6 className="font-bold text-xs text-stone-900">{pkg.name}</h6>
+                                  <h6 className="font-bold text-xs text-foreground">{pkg.name}</h6>
                                   {pkg.badge && (
                                     <span className="text-[9px] font-bold px-1.5 py-0.2 bg-accent-subtle text-accent-dark border border-accent/40 rounded-full">
                                       {pkg.badge}
@@ -517,7 +517,7 @@ export const RequestEnquireModal: React.FC = () => {
                                     </span>
                                   )}
                                 </div>
-                                <p className="text-[10px] text-stone-500 line-clamp-1">{pkg.description}</p>
+                                <p className="text-[10px] text-muted-foreground line-clamp-1">{pkg.description}</p>
                               </div>
                             </div>
 
@@ -526,7 +526,7 @@ export const RequestEnquireModal: React.FC = () => {
                                 <span className="font-serif font-extrabold text-xs sm:text-sm text-primary block">
                                   {formatIndianCurrency(pkg.price)}
                                 </span>
-                                <span className="text-[9px] text-stone-500">
+                                <span className="text-[9px] text-muted-foreground">
                                   /{(pkg.pricingUnit || listing.pricingUnit || 'event').replace('per_', '')}
                                 </span>
                               </div>
@@ -537,7 +537,7 @@ export const RequestEnquireModal: React.FC = () => {
                                   e.stopPropagation();
                                   setExpandedPackageId(prev => prev === `tier_${idx}` ? null : `tier_${idx}`);
                                 }}
-                                className="text-stone-400 hover:text-stone-700 p-1 rounded-md hover:bg-stone-100 text-[10px]"
+                                className="text-muted-foreground hover:text-foreground p-1 rounded-md hover:bg-muted text-[10px]"
                                 title="View inclusions"
                               >
                                 {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
@@ -547,11 +547,11 @@ export const RequestEnquireModal: React.FC = () => {
 
                           {/* Expanded Features List */}
                           {isExpanded && pkg.features && pkg.features.length > 0 && (
-                            <div className="px-3 pb-3 pt-1 border-t border-stone-100 bg-stone-50/50 space-y-1">
-                              <span className="text-[9px] font-bold uppercase text-stone-500 tracking-wider block">
+                            <div className="px-3 pb-3 pt-1 border-t border-border-subtle bg-muted/50 space-y-1">
+                              <span className="text-[9px] font-bold uppercase text-muted-foreground tracking-wider block">
                                 Package Inclusions:
                               </span>
-                              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[11px] text-stone-700">
+                              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[11px] text-foreground">
                                 {pkg.features.map((feat, fi) => (
                                   <li key={fi} className="flex items-center gap-1.5">
                                     <CheckCircle2 className="w-3 h-3 text-primary shrink-0" />
@@ -595,14 +595,14 @@ export const RequestEnquireModal: React.FC = () => {
                                     <Sparkles className="w-2.5 h-2.5" />
                                     Combo
                                   </span>
-                                  <h6 className="font-bold text-xs text-stone-900">{combo.title}</h6>
+                                  <h6 className="font-bold text-xs text-foreground">{combo.title}</h6>
                                   {combo.badge && (
                                     <span className="text-[9px] font-bold px-1.5 py-0.2 bg-accent-subtle text-accent-dark border border-accent/40 rounded-full">
                                       {combo.badge}
                                     </span>
                                   )}
                                 </div>
-                                <p className="text-[10px] text-stone-500 line-clamp-1">{combo.description}</p>
+                                <p className="text-[10px] text-muted-foreground line-clamp-1">{combo.description}</p>
                               </div>
                             </div>
 
@@ -612,11 +612,11 @@ export const RequestEnquireModal: React.FC = () => {
                                   <span className="font-serif font-extrabold text-xs sm:text-sm text-primary">
                                     {formatIndianCurrency(combo.comboPrice)}
                                   </span>
-                                  <span className="text-[9px] text-stone-400 line-through">
+                                  <span className="text-[9px] text-muted-foreground line-through">
                                     {formatIndianCurrency(combo.totalOriginalPrice)}
                                   </span>
                                 </div>
-                                <span className="text-[9px] font-bold text-emerald-700 block">
+                                <span className="text-[9px] font-bold text-success block">
                                   Save {formatIndianCurrency(combo.savingsAmount)} ({combo.savingsPercentage}% OFF)
                                 </span>
                               </div>
@@ -627,7 +627,7 @@ export const RequestEnquireModal: React.FC = () => {
                                   e.stopPropagation();
                                   setExpandedPackageId(prev => prev === `combo_${combo.id}` ? null : `combo_${combo.id}`);
                                 }}
-                                className="text-stone-400 hover:text-stone-700 p-1 rounded-md hover:bg-stone-100 text-[10px]"
+                                className="text-muted-foreground hover:text-foreground p-1 rounded-md hover:bg-muted text-[10px]"
                                 title="View bundled services"
                               >
                                 {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
@@ -638,14 +638,14 @@ export const RequestEnquireModal: React.FC = () => {
                           {/* Expanded Combo Inclusions */}
                           {isExpanded && combo.includedServices && combo.includedServices.length > 0 && (
                             <div className="px-3 pb-3 pt-1 border-t border-accent/20 bg-accent-subtle/40 space-y-1">
-                              <span className="text-[9px] font-bold uppercase text-stone-500 tracking-wider block">
+                              <span className="text-[9px] font-bold uppercase text-muted-foreground tracking-wider block">
                                 Included Services in this Combo:
                               </span>
                               <div className="flex flex-wrap gap-1.5">
                                 {combo.includedServices.map((srv, si) => (
                                   <div 
                                     key={si}
-                                    className="px-2 py-1 rounded-lg bg-white border border-accent/30 text-[10px] text-stone-800 flex items-center gap-1"
+                                    className="px-2 py-1 rounded-lg bg-white border border-accent/30 text-[10px] text-foreground flex items-center gap-1"
                                   >
                                     <span className="font-bold text-primary uppercase text-[9px]">{srv.category?.replace('_', ' ')}:</span>
                                     <span className="truncate max-w-[150px]">{srv.listingTitle}</span>
@@ -663,7 +663,7 @@ export const RequestEnquireModal: React.FC = () => {
             ) : null}
 
             {/* Request Mode Toggle */}
-            <div role="tablist" aria-label="Enquiry kind" className="grid grid-cols-2 p-1 bg-stone-100 rounded-xl text-xs font-semibold">
+            <div role="tablist" aria-label="Enquiry kind" className="grid grid-cols-2 p-1 bg-muted rounded-xl text-xs font-semibold">
               <button
                 type="button"
                 role="tab"
@@ -671,7 +671,7 @@ export const RequestEnquireModal: React.FC = () => {
                 aria-selected={requestType === 'request_to_book'}
                 onClick={() => setRequestType('request_to_book')}
                 className={`py-2 rounded-lg transition-all cursor-pointer ${
-                  requestType === 'request_to_book' ? 'bg-white text-primary shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+                  requestType === 'request_to_book' ? 'bg-white text-primary shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 📅 Request to Book / Visit
@@ -683,7 +683,7 @@ export const RequestEnquireModal: React.FC = () => {
                 aria-selected={requestType === 'general_enquiry'}
                 onClick={() => setRequestType('general_enquiry')}
                 className={`py-2 rounded-lg transition-all cursor-pointer ${
-                  requestType === 'general_enquiry' ? 'bg-white text-primary shadow-xs font-bold' : 'text-stone-600 hover:text-stone-900'
+                  requestType === 'general_enquiry' ? 'bg-white text-primary shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 💬 General Enquiry
@@ -693,14 +693,14 @@ export const RequestEnquireModal: React.FC = () => {
             {/* 1. Event Type & Event Date */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label htmlFor="enquiry-event-type" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                <label htmlFor="enquiry-event-type" className="block text-[11px] uppercase font-bold text-foreground mb-1">
                   Celebration Type *
                 </label>
                 <select
                   id="enquiry-event-type"
                   value={eventType}
                   onChange={(e) => setEventType(e.target.value as EventType)}
-                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium focus:border-primary outline-hidden"
+                  className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground font-medium focus:border-primary outline-hidden"
                 >
                   {EVENT_TYPES.map(type => (
                     <option key={type} value={type}>{formatEventType(type)}</option>
@@ -709,7 +709,7 @@ export const RequestEnquireModal: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor="enquiry-event-date" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                <label htmlFor="enquiry-event-date" className="block text-[11px] uppercase font-bold text-foreground mb-1">
                   Event Date *
                 </label>
                 <input
@@ -719,7 +719,7 @@ export const RequestEnquireModal: React.FC = () => {
                   value={eventDate}
                   min={new Date().toISOString().split('T')[0]}
                   onChange={(e) => setEventDate(e.target.value)}
-                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium focus:border-primary outline-hidden"
+                  className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground font-medium focus:border-primary outline-hidden"
                 />
               </div>
             </div>
@@ -728,7 +728,7 @@ export const RequestEnquireModal: React.FC = () => {
             <div className="space-y-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label htmlFor="enquiry-guest-count" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                  <label htmlFor="enquiry-guest-count" className="block text-[11px] uppercase font-bold text-foreground mb-1">
                     Estimated Guests (Optional)
                   </label>
                   <input
@@ -737,12 +737,12 @@ export const RequestEnquireModal: React.FC = () => {
                     placeholder="e.g. 500"
                     value={guestCount}
                     onChange={(e) => setGuestCount(e.target.value ? Number(e.target.value) : '')}
-                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium focus:border-primary outline-hidden"
+                    className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground font-medium focus:border-primary outline-hidden"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="enquiry-visit-date" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                  <label htmlFor="enquiry-visit-date" className="block text-[11px] uppercase font-bold text-foreground mb-1">
                     Preferred Visit / Call Date
                   </label>
                   <input
@@ -751,21 +751,21 @@ export const RequestEnquireModal: React.FC = () => {
                     min={new Date().toISOString().split('T')[0]}
                     value={preferredVisitDate}
                     onChange={(e) => setPreferredVisitDate(e.target.value)}
-                    className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium focus:border-primary outline-hidden"
+                    className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground font-medium focus:border-primary outline-hidden"
                   />
                 </div>
               </div>
 
               {/* Dedicated Time Slot Selection */}
               <div>
-                <label htmlFor="enquiry-visit-slot" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                <label htmlFor="enquiry-visit-slot" className="block text-[11px] uppercase font-bold text-foreground mb-1">
                   Preferred Time Window *
                 </label>
                 <select
                   id="enquiry-visit-slot"
                   value={preferredVisitTimeSlot}
                   onChange={(e) => setPreferredVisitTimeSlot(e.target.value)}
-                  className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium focus:border-primary outline-hidden"
+                  className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground font-medium focus:border-primary outline-hidden"
                 >
                   <option value="10:00 AM - 12:00 PM (Morning Slot)">☀️ Morning Slot (10:00 AM - 12:00 PM)</option>
                   <option value="12:00 PM - 02:00 PM (Early Afternoon)">🌤️ Early Afternoon (12:00 PM - 02:00 PM)</option>
@@ -779,11 +779,11 @@ export const RequestEnquireModal: React.FC = () => {
             {/* 3. Name & Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label htmlFor="enquiry-customer-name" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                <label htmlFor="enquiry-customer-name" className="block text-[11px] uppercase font-bold text-foreground mb-1">
                   Your Full Name *
                 </label>
-                <div className="flex items-center bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 focus-within:border-primary">
-                  <UserIcon className="w-4 h-4 text-stone-400 mr-2" />
+                <div className="flex items-center bg-muted/40 border border-border rounded-xl px-2.5 py-1.5 focus-within:border-primary">
+                  <UserIcon className="w-4 h-4 text-muted-foreground mr-2" />
                   <input
                     id="enquiry-customer-name"
                     type="text"
@@ -791,17 +791,17 @@ export const RequestEnquireModal: React.FC = () => {
                     placeholder="Priya Sharma"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    className="w-full bg-transparent text-xs text-stone-900 outline-hidden"
+                    className="w-full bg-transparent text-xs text-foreground outline-hidden"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="enquiry-customer-email" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+                <label htmlFor="enquiry-customer-email" className="block text-[11px] uppercase font-bold text-foreground mb-1">
                   Email Address *
                 </label>
-                <div className="flex items-center bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 focus-within:border-primary">
-                  <Mail className="w-4 h-4 text-stone-400 mr-2" />
+                <div className="flex items-center bg-muted/40 border border-border rounded-xl px-2.5 py-1.5 focus-within:border-primary">
+                  <Mail className="w-4 h-4 text-muted-foreground mr-2" />
                   <input
                     id="enquiry-customer-email"
                     type="email"
@@ -809,20 +809,20 @@ export const RequestEnquireModal: React.FC = () => {
                     placeholder="priya@example.com"
                     value={customerEmail}
                     onChange={(e) => setCustomerEmail(e.target.value)}
-                    className="w-full bg-transparent text-xs text-stone-900 outline-hidden"
+                    className="w-full bg-transparent text-xs text-foreground outline-hidden"
                   />
                 </div>
               </div>
             </div>
 
             {/* 4. DOUBLE-ENTRY PHONE NUMBER VALIDATION (Phase 1 Typo Safeguard) */}
-            <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-3">
+            <div className="p-4 rounded-2xl bg-muted/40 border border-border space-y-3">
               <div>
-                <span className="text-xs font-bold text-stone-900 flex items-center gap-1.5">
+                <span className="text-xs font-bold text-foreground flex items-center gap-1.5">
                   <Phone className="w-3.5 h-3.5 text-primary" />
                   Contact Mobile Number (Double-Entry Verification)
                 </span>
-                <p className="text-[10px] text-stone-500 mt-0.5">
+                <p className="text-[10px] text-muted-foreground mt-0.5">
                   To ensure the vendor can reach you without SMS OTP delays, please enter your 10-digit number twice.
                 </p>
               </div>
@@ -830,11 +830,11 @@ export const RequestEnquireModal: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {/* Input 1 */}
                 <div>
-                  <label htmlFor="enquiry-phone-primary" className="block text-[10px] font-bold text-stone-600 uppercase mb-1">
+                  <label htmlFor="enquiry-phone-primary" className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">
                     Mobile Number (+91) *
                   </label>
-                  <div className="flex items-center bg-white border border-stone-300 rounded-xl px-3 py-2 focus-within:border-primary">
-                    <span className="text-xs font-bold text-stone-500 mr-1.5">+91</span>
+                  <div className="flex items-center bg-white border border-border rounded-xl px-3 py-2 focus-within:border-primary">
+                    <span className="text-xs font-bold text-muted-foreground mr-1.5">+91</span>
                     <input
                       id="enquiry-phone-primary"
                       type="tel"
@@ -846,24 +846,24 @@ export const RequestEnquireModal: React.FC = () => {
                       placeholder="9823045678"
                       value={phonePrimary}
                       onChange={(e) => handlePhonePrimaryChange(e.target.value)}
-                      className="w-full bg-transparent text-xs font-medium text-stone-900 outline-hidden"
+                      className="w-full bg-transparent text-xs font-medium text-foreground outline-hidden"
                     />
                   </div>
                 </div>
 
                 {/* Input 2 (Re-enter) */}
                 <div>
-                  <label htmlFor="enquiry-phone-confirm" className="block text-[10px] font-bold text-stone-600 uppercase mb-1">
+                  <label htmlFor="enquiry-phone-confirm" className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">
                     Re-Enter Number to Confirm *
                   </label>
                   <div className={`flex items-center bg-white border rounded-xl px-3 py-2 transition-colors ${
                     isPhoneMatching 
-                      ? 'border-emerald-500 bg-emerald-50/20' 
+                      ? 'border-success bg-success-subtle/20' 
                       : isPhoneMismatch 
                       ? 'border-destructive/50 bg-destructive/10' 
-                      : 'border-stone-300'
+                      : 'border-border'
                   }`}>
-                    <span className="text-xs font-bold text-stone-500 mr-1.5">+91</span>
+                    <span className="text-xs font-bold text-muted-foreground mr-1.5">+91</span>
                     <input
                       id="enquiry-phone-confirm"
                       type="tel"
@@ -875,9 +875,9 @@ export const RequestEnquireModal: React.FC = () => {
                       placeholder="Type again..."
                       value={phoneConfirm}
                       onChange={(e) => handlePhoneConfirmChange(e.target.value)}
-                      className="w-full bg-transparent text-xs font-medium text-stone-900 outline-hidden"
+                      className="w-full bg-transparent text-xs font-medium text-foreground outline-hidden"
                     />
-                    {isPhoneMatching && <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 ml-1" />}
+                    {isPhoneMatching && <CheckCircle2 className="w-4 h-4 text-success shrink-0 ml-1" />}
                   </div>
                 </div>
               </div>
@@ -892,7 +892,7 @@ export const RequestEnquireModal: React.FC = () => {
 
             {/* 5. Message Note */}
             <div>
-              <label htmlFor="enquiry-message" className="block text-[11px] uppercase font-bold text-stone-700 mb-1">
+              <label htmlFor="enquiry-message" className="block text-[11px] uppercase font-bold text-foreground mb-1">
                 Custom Requirements or Message (Optional)
               </label>
               <textarea
@@ -901,7 +901,7 @@ export const RequestEnquireModal: React.FC = () => {
                 placeholder="e.g. Inquiring about stage decoration options and outside catering permission..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs text-stone-900 font-medium focus:border-primary outline-hidden resize-none"
+                className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs text-foreground font-medium focus:border-primary outline-hidden resize-none"
               />
             </div>
 
@@ -916,8 +916,8 @@ export const RequestEnquireModal: React.FC = () => {
                   onChange={(e) => setConsentGiven(e.target.checked)}
                   className="w-4 h-4 text-primary rounded-xs accent-primary mt-0.5"
                 />
-                <span className="text-[11px] text-stone-800 leading-snug font-medium">
-                  I agree that my name and contact number (+91 {phonePrimary || 'XXXXXXXXXX'}) will be shared directly with <span className="font-bold text-stone-950">{listing.vendorName}</span> so they can contact me about this event request.
+                <span className="text-[11px] text-foreground leading-snug font-medium">
+                  I agree that my name and contact number (+91 {phonePrimary || 'XXXXXXXXXX'}) will be shared directly with <span className="font-bold text-foreground">{listing.vendorName}</span> so they can contact me about this event request.
                 </span>
               </label>
             </div>

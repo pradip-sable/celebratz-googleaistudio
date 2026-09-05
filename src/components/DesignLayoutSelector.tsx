@@ -77,22 +77,22 @@ export const DesignLayoutSelector: React.FC = () => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-stone-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary-dark/60 backdrop-blur-xs animate-in fade-in">
+      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-border">
         {/* Modal Header */}
-        <div className="px-6 py-4 border-b border-stone-100 flex items-center justify-between sticky top-0 bg-white z-10">
+        <div className="px-6 py-4 border-b border-border-subtle flex items-center justify-between sticky top-0 bg-white z-10">
           <div className="flex items-center gap-2">
             <div className="p-2 rounded-xl bg-gold-light text-gold-dark">
               <Palette className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-serif font-bold text-lg text-stone-900">Customize Design & Layout</h3>
-              <p className="text-xs text-stone-500">Choose your preferred visual theme, card presentation, and search style</p>
+              <h3 className="font-serif font-bold text-lg text-foreground">Customize Design & Layout</h3>
+              <p className="text-xs text-muted-foreground">Choose your preferred visual theme, card presentation, and search style</p>
             </div>
           </div>
           <button
             onClick={() => setIsDesignSelectorOpen(false)}
-            className="text-stone-400 hover:text-stone-700 p-1 rounded-lg"
+            className="text-muted-foreground hover:text-foreground p-1 rounded-lg"
           >
             <X className="w-5 h-5" />
           </button>
@@ -101,7 +101,7 @@ export const DesignLayoutSelector: React.FC = () => {
         <div className="p-6 space-y-6">
           {/* 1. Theme Palette Selection */}
           <div>
-            <h4 className="text-xs uppercase tracking-wider font-bold text-stone-500 mb-3 flex items-center gap-1.5">
+            <h4 className="text-xs uppercase tracking-wider font-bold text-muted-foreground mb-3 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-accent" />
               1. Visual Theme & Color Palette
             </h4>
@@ -115,7 +115,7 @@ export const DesignLayoutSelector: React.FC = () => {
                     className={`p-3.5 rounded-xl border text-left transition-all relative ${
                       isSelected
                         ? 'border-accent bg-accent-subtle/40 ring-2 ring-accent/30 shadow-xs'
-                        : 'border-stone-200 hover:border-stone-300 bg-stone-50/50'
+                        : 'border-border hover:border-border bg-muted/50'
                     }`}
                   >
                     {isSelected && (
@@ -127,13 +127,13 @@ export const DesignLayoutSelector: React.FC = () => {
                       {p.colors.map((c, i) => (
                         <span 
                           key={i} 
-                          className="w-4 h-4 rounded-full border border-stone-200 shadow-2xs" 
+                          className="w-4 h-4 rounded-full border border-border shadow-2xs" 
                           style={{ backgroundColor: c }}
                         />
                       ))}
                     </div>
-                    <div className="font-semibold text-xs text-stone-900">{p.name}</div>
-                    <div className="text-[11px] text-stone-500 mt-1 leading-snug">{p.description}</div>
+                    <div className="font-semibold text-xs text-foreground">{p.name}</div>
+                    <div className="text-[11px] text-muted-foreground mt-1 leading-snug">{p.description}</div>
                   </button>
                 );
               })}
@@ -142,7 +142,7 @@ export const DesignLayoutSelector: React.FC = () => {
 
           {/* 2. Card Layout Mode */}
           <div>
-            <h4 className="text-xs uppercase tracking-wider font-bold text-stone-500 mb-3 flex items-center gap-1.5">
+            <h4 className="text-xs uppercase tracking-wider font-bold text-muted-foreground mb-3 flex items-center gap-1.5">
               <LayoutGrid className="w-3.5 h-3.5 text-primary" />
               2. Vendor Card Presentation Mode
             </h4>
@@ -156,7 +156,7 @@ export const DesignLayoutSelector: React.FC = () => {
                     className={`p-3.5 rounded-xl border text-left transition-all relative ${
                       isSelected
                         ? 'border-primary bg-primary-subtle ring-2 ring-primary/30 shadow-xs'
-                        : 'border-stone-200 hover:border-stone-300 bg-stone-50/50'
+                        : 'border-border hover:border-border bg-muted/50'
                     }`}
                   >
                     {isSelected && (
@@ -164,11 +164,11 @@ export const DesignLayoutSelector: React.FC = () => {
                         <Check className="w-3 h-3 stroke-[3]" />
                       </span>
                     )}
-                    <div className="mb-2 p-1.5 bg-white w-fit rounded-lg border border-stone-200 shadow-2xs">
+                    <div className="mb-2 p-1.5 bg-white w-fit rounded-lg border border-border shadow-2xs">
                       {layout.icon}
                     </div>
-                    <div className="font-semibold text-xs text-stone-900">{layout.name}</div>
-                    <div className="text-[11px] text-stone-500 mt-1 leading-snug">{layout.description}</div>
+                    <div className="font-semibold text-xs text-foreground">{layout.name}</div>
+                    <div className="text-[11px] text-muted-foreground mt-1 leading-snug">{layout.description}</div>
                   </button>
                 );
               })}
@@ -177,7 +177,7 @@ export const DesignLayoutSelector: React.FC = () => {
 
           {/* 3. Hero Header Style */}
           <div>
-            <h4 className="text-xs uppercase tracking-wider font-bold text-stone-500 mb-3 flex items-center gap-1.5">
+            <h4 className="text-xs uppercase tracking-wider font-bold text-muted-foreground mb-3 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-accent" />
               3. Home Hero Experience
             </h4>
@@ -191,7 +191,7 @@ export const DesignLayoutSelector: React.FC = () => {
                     className={`p-3.5 rounded-xl border text-left transition-all relative ${
                       isSelected
                         ? 'border-accent bg-accent-subtle/40 ring-2 ring-accent/30 shadow-xs'
-                        : 'border-stone-200 hover:border-stone-300 bg-stone-50/50'
+                        : 'border-border hover:border-border bg-muted/50'
                     }`}
                   >
                     {isSelected && (
@@ -199,8 +199,8 @@ export const DesignLayoutSelector: React.FC = () => {
                         <Check className="w-3 h-3 stroke-[3]" />
                       </span>
                     )}
-                    <div className="font-semibold text-xs text-stone-900">{h.name}</div>
-                    <div className="text-[11px] text-stone-500 mt-1 leading-snug">{h.description}</div>
+                    <div className="font-semibold text-xs text-foreground">{h.name}</div>
+                    <div className="text-[11px] text-muted-foreground mt-1 leading-snug">{h.description}</div>
                   </button>
                 );
               })}
@@ -209,13 +209,13 @@ export const DesignLayoutSelector: React.FC = () => {
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-3.5 bg-stone-50 border-t border-stone-200 flex items-center justify-between">
-          <p className="text-xs text-stone-500">
-            Selected: <span className="font-semibold text-stone-800 capitalize">{(designPrefs?.palette || 'teal_gold').replace('_', ' ')}</span> &bull; <span className="font-semibold text-stone-800 capitalize">{(designPrefs?.cardLayout || 'spacious_cards').replace('_', ' ')}</span>
+        <div className="px-6 py-3.5 bg-muted/40 border-t border-border flex items-center justify-between">
+          <p className="text-xs text-muted-foreground">
+            Selected: <span className="font-semibold text-foreground capitalize">{(designPrefs?.palette || 'teal_gold').replace('_', ' ')}</span> &bull; <span className="font-semibold text-foreground capitalize">{(designPrefs?.cardLayout || 'spacious_cards').replace('_', ' ')}</span>
           </p>
           <button
             onClick={() => setIsDesignSelectorOpen(false)}
-            className="px-4 py-2 bg-stone-900 text-white rounded-xl text-xs font-semibold hover:bg-stone-800 transition-colors shadow-sm"
+            className="px-4 py-2 bg-primary-dark text-white rounded-xl text-xs font-semibold hover:bg-foreground transition-colors shadow-sm"
           >
             Apply Layout
           </button>

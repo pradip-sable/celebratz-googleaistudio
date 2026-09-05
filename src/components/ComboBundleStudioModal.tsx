@@ -327,14 +327,14 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
   return (
     <div 
       id="combo-bundle-studio-overlay"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/70 backdrop-blur-xs overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-xs overflow-y-auto"
     >
       <div 
         id="combo-bundle-studio-modal"
-        className="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-stone-200 overflow-hidden relative text-left"
+        className="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-border overflow-hidden relative text-left"
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-stone-200 flex items-center justify-between bg-gradient-to-r from-primary-dark to-primary text-primary-foreground">
+        <div className="px-6 py-4 border-b border-border flex items-center justify-between bg-gradient-to-r from-primary-dark to-primary text-primary-foreground">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/40 flex items-center justify-center text-accent">
               <Layers className="w-5 h-5" />
@@ -352,7 +352,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
           <button
             onClick={onClose}
             aria-label="Close"
-            className="text-stone-300 hover:text-white p-1 rounded-lg cursor-pointer"
+            className="text-muted-foreground hover:text-white p-1 rounded-lg cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -380,8 +380,8 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
           )}
 
           {errorMessage && (
-            <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2.5 text-xs text-rose-800 font-semibold">
-              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+            <div className="p-3.5 bg-destructive-subtle border border-destructive/20 rounded-xl flex items-center gap-2.5 text-xs text-destructive font-semibold">
+              <AlertCircle className="w-4 h-4 text-destructive shrink-0" />
               <span>{errorMessage}</span>
             </div>
           )}
@@ -389,24 +389,24 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
           {/* SECTION 1: Package Title & Marketing Badge */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="md:col-span-2 space-y-1.5">
-              <label className="text-xs font-bold text-stone-700 block">
-                Combo Package Title <span className="text-rose-500">*</span>
+              <label className="text-xs font-bold text-foreground block">
+                Combo Package Title <span className="text-destructive">*</span>
               </label>
               <input
                 type="text"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 placeholder="e.g. Royal Vivah Grand Combo: Lawn + Mandap Decor + Shahi Feast"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:border-primary focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-border text-xs sm:text-sm focus:border-primary focus:outline-none"
                 required
               />
-              <p className="text-[11px] text-stone-500">
+              <p className="text-[11px] text-muted-foreground">
                 Highlight the bundled services in the title so customers immediately know what is included.
               </p>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-stone-700 block">
+              <label className="text-xs font-bold text-foreground block">
                 Highlight Tag / Badge
               </label>
               <input
@@ -414,14 +414,14 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                 value={badge}
                 onChange={e => setBadge(e.target.value)}
                 placeholder="e.g. 🌟 Best Value Wedding Combo"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:border-primary focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-border text-xs sm:text-sm focus:border-primary focus:outline-none"
               />
             </div>
           </div>
 
           {/* Description */}
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-stone-700 block">
+            <label className="text-xs font-bold text-foreground block">
               Package Description & Value Proposition
             </label>
             <textarea
@@ -429,19 +429,19 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
               value={description}
               onChange={e => setDescription(e.target.value)}
               placeholder="Explain why choosing this combined package gives the customer peace of mind, premium quality, and massive savings..."
-              className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:border-primary focus:outline-none"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-border text-xs sm:text-sm focus:border-primary focus:outline-none"
             />
           </div>
 
           {/* SECTION 2: Select Vendor's Services to Combine */}
-          <div className="space-y-3 pt-2 border-t border-stone-200">
+          <div className="space-y-3 pt-2 border-t border-border">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
+                <h4 className="font-serif font-bold text-base text-foreground flex items-center gap-2">
                   <Building className="w-4 h-4 text-primary" />
                   Select Services to Combine (Min. 2 Services)
                 </h4>
-                <p className="text-xs text-stone-500">
+                <p className="text-xs text-muted-foreground">
                   Select 2 or more of your active listings. Customer will receive a single all-in-one quote.
                 </p>
               </div>
@@ -470,7 +470,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                       className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
                         isChecked 
                           ? 'bg-primary-subtle border-primary shadow-xs' 
-                          : 'bg-white border-stone-200 hover:border-stone-300'
+                          : 'bg-white border-border hover:border-border'
                       }`}
                     >
                       <div className="flex items-start gap-3">
@@ -490,8 +490,8 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                           <span className="text-[10px] font-bold uppercase tracking-wider text-primary block">
                             {(item.category || '').toUpperCase().replace('_', ' ')}
                           </span>
-                          <h5 className="font-bold text-xs text-stone-900 truncate">{item.title}</h5>
-                          <p className="text-[11px] text-stone-500 font-medium">
+                          <h5 className="font-bold text-xs text-foreground truncate">{item.title}</h5>
+                          <p className="text-[11px] text-muted-foreground font-medium">
                             Standard: {formatIndianCurrency(item.startingPrice)}
                           </p>
                         </div>
@@ -505,8 +505,8 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
 
           {/* SECTION 3: Service-Specific Inclusions & Individual Values */}
           {selectedListingIds.length > 0 && (
-            <div className="space-y-4 pt-2 border-t border-stone-200">
-              <h4 className="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
+            <div className="space-y-4 pt-2 border-t border-border">
+              <h4 className="font-serif font-bold text-base text-foreground flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-accent" />
                 Customize Inclusions & Price Breakdown Per Service
               </h4>
@@ -518,25 +518,25 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                   const data = serviceCustomData[id] || { price: item.startingPrice, inclusions: [] };
 
                   return (
-                    <div key={id} className="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-3">
+                    <div key={id} className="p-4 rounded-2xl bg-muted/40 border border-border space-y-3">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
-                          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-stone-200 text-stone-800">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-muted text-foreground">
                             {item.category}
                           </span>
-                          <h5 className="font-bold text-xs sm:text-sm text-stone-900">{item.title}</h5>
+                          <h5 className="font-bold text-xs sm:text-sm text-foreground">{item.title}</h5>
                         </div>
 
                         <div className="flex items-center gap-2">
-                          <label className="text-xs font-semibold text-stone-600">Standard Value:</label>
+                          <label className="text-xs font-semibold text-muted-foreground">Standard Value:</label>
                           <div className="relative w-32">
-                            <span className="absolute left-2.5 top-1.5 text-xs text-stone-500">₹</span>
+                            <span className="absolute left-2.5 top-1.5 text-xs text-muted-foreground">₹</span>
                             <input
                               type="number"
                               placeholder="e.g. 50000"
                               value={data.price === 0 ? '' : data.price}
                               onChange={e => handleUpdateServicePrice(id, e.target.value === '' ? 0 : Number(e.target.value))}
-                              className="w-full pl-6 pr-2 py-1 bg-white rounded-lg border border-stone-300 text-xs font-bold text-stone-900 focus:outline-none"
+                              className="w-full pl-6 pr-2 py-1 bg-white rounded-lg border border-border text-xs font-bold text-foreground focus:outline-none"
                             />
                           </div>
                         </div>
@@ -544,21 +544,21 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
 
                       {/* Inclusions Checklist */}
                       <div className="space-y-1.5">
-                        <span className="text-[11px] font-bold text-stone-700 block">
+                        <span className="text-[11px] font-bold text-foreground block">
                           Included Deliverables for this Service:
                         </span>
                         <div className="flex flex-wrap gap-1.5">
                           {data.inclusions.map((inc, i) => (
                             <span 
                               key={i} 
-                              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white border border-stone-200 text-xs text-stone-800"
+                              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white border border-border text-xs text-foreground"
                             >
                               <CheckCircle2 className="w-3 h-3 text-primary shrink-0" />
                               <span>{inc}</span>
                               <button
                                 type="button"
                                 onClick={() => handleRemoveInclusion(id, i)}
-                                className="ml-1 text-stone-400 hover:text-rose-600 cursor-pointer"
+                                className="ml-1 text-muted-foreground hover:text-destructive cursor-pointer"
                               >
                                 &times;
                               </button>
@@ -580,7 +580,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                                 input.value = '';
                               }
                             }}
-                            className="flex-1 px-3 py-1.5 bg-white rounded-lg border border-stone-300 text-xs focus:outline-none"
+                            className="flex-1 px-3 py-1.5 bg-white rounded-lg border border-border text-xs focus:outline-none"
                           />
                           <button
                             type="button"
@@ -591,7 +591,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                                 input.value = '';
                               }
                             }}
-                            className="px-3 py-1.5 bg-stone-200 hover:bg-stone-300 text-stone-800 rounded-lg text-xs font-semibold cursor-pointer"
+                            className="px-3 py-1.5 bg-muted hover:bg-border text-foreground rounded-lg text-xs font-semibold cursor-pointer"
                           >
                             Add
                           </button>
@@ -605,31 +605,31 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
           )}
 
           {/* SECTION 4: SMART PRICING & SAVINGS CALCULATION ENGINE */}
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-accent-subtle via-primary-subtle to-stone-50 border border-accent/40 space-y-4">
-            <h4 className="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
+          <div className="p-5 rounded-2xl bg-gradient-to-br from-accent-subtle via-primary-subtle to-muted/40 border border-accent/40 space-y-4">
+            <h4 className="font-serif font-bold text-base text-foreground flex items-center gap-2">
               <IndianRupee className="w-4 h-4 text-primary" />
               Smart Package Pricing & Discount Engine
             </h4>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Standalone Total Sum */}
-              <div className="p-3.5 bg-white rounded-xl border border-stone-200 space-y-1">
-                <span className="text-[10px] font-bold uppercase text-stone-500 block">
+              <div className="p-3.5 bg-white rounded-xl border border-border space-y-1">
+                <span className="text-[10px] font-bold uppercase text-muted-foreground block">
                   Combined Standard Value
                 </span>
-                <div className="font-serif font-bold text-lg sm:text-xl text-stone-600 line-through">
+                <div className="font-serif font-bold text-lg sm:text-xl text-muted-foreground line-through">
                   {formatIndianCurrency(totalOriginalPrice)}
                 </div>
-                <span className="text-[11px] text-stone-500">Sum of individual prices</span>
+                <span className="text-[11px] text-muted-foreground">Sum of individual prices</span>
               </div>
 
               {/* Combo Price Input */}
               <div className="p-3.5 bg-white rounded-xl border-2 border-primary space-y-1">
                 <label className="text-[10px] font-bold uppercase text-primary block">
-                  Special Combo Bundle Price <span className="text-rose-500">*</span>
+                  Special Combo Bundle Price <span className="text-destructive">*</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-2.5 top-2 text-sm font-bold text-stone-600">₹</span>
+                  <span className="absolute left-2.5 top-2 text-sm font-bold text-muted-foreground">₹</span>
                   <input
                     type="number"
                     placeholder="e.g. 150000"
@@ -645,8 +645,8 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
               {/* Instant Savings Badge */}
               <div className={`p-3.5 rounded-xl border space-y-1 ${
                 savingsAmount > 0 
-                  ? 'bg-emerald-100/70 border-emerald-300 text-emerald-950' 
-                  : 'bg-stone-100 border-stone-300 text-stone-600'
+                  ? 'bg-success-subtle/70 border-success/30 text-success' 
+                  : 'bg-muted border-border text-muted-foreground'
               }`}>
                 <span className="text-[10px] font-bold uppercase block tracking-wider">
                   Customer Instant Savings
@@ -662,32 +662,32 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
           </div>
 
           {/* SECTION 5: Capacity, Event Types & VIP Perks */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-stone-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-border">
             {/* Guest Capacity */}
             <div className="space-y-2">
-              <label className="text-xs font-bold text-stone-700 block flex items-center gap-1.5">
+              <label className="text-xs font-bold text-foreground block flex items-center gap-1.5">
                 <Users className="w-3.5 h-3.5 text-primary" />
                 Target Guest Capacity Range
               </label>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <span className="text-[11px] text-stone-500">Min Guests</span>
+                  <span className="text-[11px] text-muted-foreground">Min Guests</span>
                   <input
                     type="number"
                     placeholder="e.g. 200"
                     value={minGuestCapacity === 0 ? '' : minGuestCapacity}
                     onChange={e => setMinGuestCapacity(e.target.value === '' ? 0 : Number(e.target.value))}
-                    className="w-full px-3 py-1.5 rounded-xl border border-stone-200 text-xs font-bold"
+                    className="w-full px-3 py-1.5 rounded-xl border border-border text-xs font-bold"
                   />
                 </div>
                 <div>
-                  <span className="text-[11px] text-stone-500">Max Guests</span>
+                  <span className="text-[11px] text-muted-foreground">Max Guests</span>
                   <input
                     type="number"
                     placeholder="e.g. 1000"
                     value={maxGuestCapacity === 0 ? '' : maxGuestCapacity}
                     onChange={e => setMaxGuestCapacity(e.target.value === '' ? 0 : Number(e.target.value))}
-                    className="w-full px-3 py-1.5 rounded-xl border border-stone-200 text-xs font-bold"
+                    className="w-full px-3 py-1.5 rounded-xl border border-border text-xs font-bold"
                   />
                 </div>
               </div>
@@ -695,7 +695,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
 
             {/* Event Types */}
             <div className="space-y-2">
-              <label className="text-xs font-bold text-stone-700 block flex items-center gap-1.5">
+              <label className="text-xs font-bold text-foreground block flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5 text-primary" />
                 Suitable Event Types
               </label>
@@ -716,7 +716,7 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                       className={`px-2.5 py-1 rounded-lg text-xs font-medium border transition-colors cursor-pointer ${
                         isSelected 
                           ? 'bg-primary text-primary-foreground border-primary' 
-                          : 'bg-white text-stone-700 border-stone-200 hover:bg-stone-50'
+                          : 'bg-white text-foreground border-border hover:bg-muted/40'
                       }`}
                     >
                       {formatEventType(type)}
@@ -728,21 +728,21 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
           </div>
 
           {/* SECTION 6: Key Package Highlights & VIP Perks */}
-          <div className="space-y-2 pt-2 border-t border-stone-200">
-            <label className="text-xs font-bold text-stone-700 block">
+          <div className="space-y-2 pt-2 border-t border-border">
+            <label className="text-xs font-bold text-foreground block">
               🌟 Key All-in-One Package Highlights & Perks
             </label>
             <div className="space-y-1.5">
               {features.map((feat, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 rounded-xl bg-stone-50 border border-stone-200 text-xs">
-                  <span className="flex items-center gap-2 text-stone-800">
+                <div key={idx} className="flex items-center justify-between p-2 rounded-xl bg-muted/40 border border-border text-xs">
+                  <span className="flex items-center gap-2 text-foreground">
                     <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
                     <span>{feat}</span>
                   </span>
                   <button
                     type="button"
                     onClick={() => handleRemoveFeature(idx)}
-                    className="text-stone-400 hover:text-rose-600 p-1 cursor-pointer"
+                    className="text-muted-foreground hover:text-destructive p-1 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -762,12 +762,12 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
                     handleAddFeature();
                   }
                 }}
-                className="flex-1 px-3.5 py-2 rounded-xl border border-stone-200 text-xs focus:border-primary focus:outline-none"
+                className="flex-1 px-3.5 py-2 rounded-xl border border-border text-xs focus:border-primary focus:outline-none"
               />
               <button
                 type="button"
                 onClick={handleAddFeature}
-                className="px-4 py-2 bg-stone-800 text-white rounded-xl text-xs font-semibold hover:bg-stone-900 cursor-pointer"
+                className="px-4 py-2 bg-foreground text-white rounded-xl text-xs font-semibold hover:bg-primary-dark cursor-pointer"
               >
                 Add Highlight
               </button>
@@ -776,11 +776,11 @@ export const ComboBundleStudioModal: React.FC<ComboBundleStudioModalProps> = ({
         </form>
 
         {/* Modal Footer */}
-        <div className="px-6 py-4 border-t border-stone-200 bg-stone-50 flex items-center justify-between">
+        <div className="px-6 py-4 border-t border-border bg-muted/40 flex items-center justify-between">
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2.5 bg-white border border-stone-300 text-stone-700 rounded-xl text-xs font-semibold hover:bg-stone-100 transition-colors cursor-pointer"
+            className="px-5 py-2.5 bg-white border border-border text-foreground rounded-xl text-xs font-semibold hover:bg-muted transition-colors cursor-pointer"
           >
             Cancel
           </button>

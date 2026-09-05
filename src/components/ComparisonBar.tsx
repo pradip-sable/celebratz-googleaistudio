@@ -12,10 +12,10 @@ export const ComparisonBar: React.FC = () => {
   const comparedItems = listings.filter(l => comparisonList.includes(l.id));
 
   return (
-    <div className="fixed bottom-16 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 bg-stone-950 text-white rounded-2xl px-4 py-3 shadow-2xl border border-stone-800 flex items-center gap-3 sm:gap-6 max-w-xl w-[92%] sm:w-auto animate-in slide-in-from-bottom-5">
+    <div className="fixed bottom-16 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 bg-black text-white rounded-2xl px-4 py-3 shadow-2xl border border-border flex items-center gap-3 sm:gap-6 max-w-xl w-[92%] sm:w-auto animate-in slide-in-from-bottom-5">
       <div className="flex items-center gap-2">
         <Scale className="w-5 h-5 text-accent shrink-0" />
-        <span className="text-xs font-bold text-stone-100 hidden sm:inline">
+        <span className="text-xs font-bold text-muted-foreground hidden sm:inline">
           Compare ({comparisonList.length}/3):
         </span>
       </div>
@@ -27,12 +27,12 @@ export const ComparisonBar: React.FC = () => {
             <img
               src={item.coverImage}
               alt=""
-              className="w-9 h-9 rounded-lg object-cover border border-stone-700"
+              className="w-9 h-9 rounded-lg object-cover border border-border"
               referrerPolicy="no-referrer"
             />
             <button
               onClick={() => toggleComparison(item.id)}
-              className="absolute -top-1 -right-1 bg-stone-900 text-stone-400 hover:text-white rounded-full p-0.5"
+              className="absolute -top-1 -right-1 bg-primary-dark text-muted-foreground hover:text-white rounded-full p-0.5"
             >
               <X className="w-3 h-3" />
             </button>
@@ -40,7 +40,7 @@ export const ComparisonBar: React.FC = () => {
         ))}
 
         {comparisonList.length < 3 && (
-          <div className="text-[11px] text-stone-400 italic hidden md:block">
+          <div className="text-[11px] text-muted-foreground italic hidden md:block">
             + Select up to {3 - comparisonList.length} more
           </div>
         )}
@@ -49,7 +49,7 @@ export const ComparisonBar: React.FC = () => {
       <div className="flex items-center gap-2 ml-auto">
         <button
           onClick={clearComparison}
-          className="text-stone-400 hover:text-stone-200 text-xs px-2 py-1"
+          className="text-muted-foreground hover:text-muted-foreground text-xs px-2 py-1"
         >
           Clear
         </button>
@@ -73,11 +73,11 @@ export const ComparisonView: React.FC = () => {
   if (comparedItems.length === 0) {
     return (
       <div className="max-w-4xl mx-auto py-16 px-4 text-center space-y-4">
-        <div className="w-16 h-16 rounded-full bg-stone-100 text-stone-400 flex items-center justify-center mx-auto">
+        <div className="w-16 h-16 rounded-full bg-muted text-muted-foreground flex items-center justify-center mx-auto">
           <Scale className="w-8 h-8" />
         </div>
-        <h2 className="font-serif font-bold text-2xl text-stone-900">Your Comparison Tray is Empty</h2>
-        <p className="text-xs sm:text-sm text-stone-500 max-w-md mx-auto">
+        <h2 className="font-serif font-bold text-2xl text-foreground">Your Comparison Tray is Empty</h2>
+        <p className="text-xs sm:text-sm text-muted-foreground max-w-md mx-auto">
           Browse venues and services, then click the scale icon on any listing card to compare pricing, capacity, and features side-by-side.
         </p>
         <button
@@ -94,10 +94,10 @@ export const ComparisonView: React.FC = () => {
     <div className="max-w-6xl mx-auto space-y-6 pb-20">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-serif font-extrabold text-2xl sm:text-3xl text-stone-900">
+          <h1 className="font-serif font-extrabold text-2xl sm:text-3xl text-foreground">
             Side-by-Side Comparison
           </h1>
-          <p className="text-xs text-stone-500">
+          <p className="text-xs text-muted-foreground">
             Evaluating {comparedItems.length} shortlisted Pune vendors
           </p>
         </div>
@@ -112,7 +112,7 @@ export const ComparisonView: React.FC = () => {
       <div className="overflow-x-auto pb-4">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 min-w-[700px]">
           {comparedItems.map(item => (
-            <div key={item.id} className="bg-white rounded-2xl border border-stone-200 p-5 space-y-4 shadow-sm flex flex-col justify-between">
+            <div key={item.id} className="bg-white rounded-2xl border border-border p-5 space-y-4 shadow-sm flex flex-col justify-between">
               <div>
                 <div className="relative h-48 rounded-xl overflow-hidden mb-3">
                   <img
@@ -123,42 +123,42 @@ export const ComparisonView: React.FC = () => {
                   />
                   <button
                     onClick={() => toggleComparison(item.id)}
-                    className="absolute top-2 right-2 p-1.5 bg-stone-900/80 text-white rounded-full hover:bg-stone-900"
+                    className="absolute top-2 right-2 p-1.5 bg-primary-dark/80 text-white rounded-full hover:bg-primary-dark"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
-                  <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-stone-900/80 text-gold-light">
+                  <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-primary-dark/80 text-accent">
                     {item.locality}
                   </span>
                 </div>
 
-                <h3 className="font-serif font-bold text-base text-stone-900">{item.title}</h3>
-                <div className="flex items-center gap-1 text-xs text-stone-600 mt-1">
+                <h3 className="font-serif font-bold text-base text-foreground">{item.title}</h3>
+                <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
                   <Star className="w-3.5 h-3.5 fill-accent text-accent" />
-                  <span className="font-bold text-stone-900">{item.avgRating || '4.8'}</span>
+                  <span className="font-bold text-foreground">{item.avgRating || '4.8'}</span>
                   <span>({item.reviewCount} reviews)</span>
                 </div>
               </div>
 
               {/* Spec Comparison Matrix */}
-              <div className="space-y-3 pt-3 border-t border-stone-100 text-xs">
+              <div className="space-y-3 pt-3 border-t border-border-subtle text-xs">
                 <div>
-                  <span className="text-[10px] text-stone-500 font-bold uppercase block">Starting Rate</span>
+                  <span className="text-[10px] text-muted-foreground font-bold uppercase block">Starting Rate</span>
                   <span className="font-serif font-extrabold text-lg text-primary">
                     {formatIndianCurrency(item.startingPrice)}
                   </span>
-                  <span className="text-[10px] text-stone-500"> /{(item.pricingUnit || 'event').replace('per_', '')}</span>
+                  <span className="text-[10px] text-muted-foreground"> /{(item.pricingUnit || 'event').replace('per_', '')}</span>
                 </div>
 
                 <div>
-                  <span className="text-[10px] text-stone-500 font-bold uppercase block">Service Category</span>
-                  <span className="capitalize font-semibold text-stone-800">{item.category}</span>
+                  <span className="text-[10px] text-muted-foreground font-bold uppercase block">Service Category</span>
+                  <span className="capitalize font-semibold text-foreground">{item.category}</span>
                 </div>
 
                 {item.category === 'venues' && (
                   <div>
-                    <span className="text-[10px] text-stone-500 font-bold uppercase block">Guest Capacity</span>
-                    <span className="font-semibold text-stone-800">
+                    <span className="text-[10px] text-muted-foreground font-bold uppercase block">Guest Capacity</span>
+                    <span className="font-semibold text-foreground">
                       {item.categoryAttributes.capacityMin} - {item.categoryAttributes.capacityMax} Guests
                     </span>
                   </div>
@@ -166,16 +166,16 @@ export const ComparisonView: React.FC = () => {
 
                 {item.category === 'catering' && (
                   <div>
-                    <span className="text-[10px] text-stone-500 font-bold uppercase block">Dietary Options</span>
-                    <span className="font-semibold text-emerald-800">{item.categoryAttributes.vegType}</span>
+                    <span className="text-[10px] text-muted-foreground font-bold uppercase block">Dietary Options</span>
+                    <span className="font-semibold text-success">{item.categoryAttributes.vegType}</span>
                   </div>
                 )}
 
                 <div>
-                  <span className="text-[10px] text-stone-500 font-bold uppercase block">Suitable For</span>
+                  <span className="text-[10px] text-muted-foreground font-bold uppercase block">Suitable For</span>
                   <div className="flex flex-wrap gap-1 mt-1">
                     {item.eventTypes.map(t => (
-                      <span key={t} className="text-[10px] px-2 py-0.5 bg-stone-100 rounded-md font-medium text-stone-700">
+                      <span key={t} className="text-[10px] px-2 py-0.5 bg-muted rounded-md font-medium text-foreground">
                         {formatEventType(t)}
                       </span>
                     ))}
@@ -184,10 +184,10 @@ export const ComparisonView: React.FC = () => {
               </div>
 
               {/* Actions */}
-              <div className="pt-3 border-t border-stone-100 flex gap-2">
+              <div className="pt-3 border-t border-border-subtle flex gap-2">
                 <button
                   onClick={() => setSelectedListingId(item.id)}
-                  className="flex-1 py-2 text-xs font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl"
+                  className="flex-1 py-2 text-xs font-semibold bg-muted hover:bg-muted text-foreground rounded-xl"
                 >
                   View Details
                 </button>

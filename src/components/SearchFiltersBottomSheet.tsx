@@ -22,25 +22,25 @@ export const SearchFiltersBottomSheet: React.FC = () => {
   if (!isFiltersBottomSheetOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-stone-900/60 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white rounded-t-3xl sm:rounded-2xl max-w-lg w-full max-h-[85vh] flex flex-col shadow-2xl border border-stone-200 animate-in slide-in-from-bottom-8">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-primary-dark/60 backdrop-blur-xs animate-in fade-in">
+      <div className="bg-white rounded-t-3xl sm:rounded-2xl max-w-lg w-full max-h-[85vh] flex flex-col shadow-2xl border border-border animate-in slide-in-from-bottom-8">
         {/* Header */}
-        <div className="px-5 py-4 border-b border-stone-100 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-3xl sm:rounded-t-2xl">
+        <div className="px-5 py-4 border-b border-border-subtle flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-3xl sm:rounded-t-2xl">
           <div className="flex items-center gap-2">
             <SlidersHorizontal className="w-5 h-5 text-primary" />
-            <h3 className="font-serif font-bold text-base text-stone-900">Filters & Preferences</h3>
+            <h3 className="font-serif font-bold text-base text-foreground">Filters & Preferences</h3>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={resetFilters}
-              className="text-xs font-semibold text-stone-500 hover:text-stone-800 flex items-center gap-1 px-2 py-1 rounded-md hover:bg-stone-100 transition-colors"
+              className="text-xs font-semibold text-muted-foreground hover:text-foreground flex items-center gap-1 px-2 py-1 rounded-md hover:bg-muted transition-colors"
             >
               <RotateCcw className="w-3 h-3" />
               <span>Reset</span>
             </button>
             <button
               onClick={() => setIsFiltersBottomSheetOpen(false)}
-              className="text-stone-400 hover:text-stone-700 p-1 rounded-lg"
+              className="text-muted-foreground hover:text-foreground p-1 rounded-lg"
             >
               <X className="w-5 h-5" />
             </button>
@@ -50,12 +50,12 @@ export const SearchFiltersBottomSheet: React.FC = () => {
         {/* Scrollable Filters Body */}
         <div className="p-5 space-y-6 overflow-y-auto flex-1">
           {/* City Selection Bar */}
-          <div className="p-3 bg-stone-50 rounded-2xl border border-stone-200 flex items-center justify-between">
+          <div className="p-3 bg-muted/40 rounded-2xl border border-border flex items-center justify-between">
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-accent" />
               <div>
-                <span className="text-xs font-bold text-stone-900">{activeCity?.name || 'Pune'}</span>
-                <span className="text-[10px] text-stone-500 ml-1.5">({activeCity?.state || 'Maharashtra'})</span>
+                <span className="text-xs font-bold text-foreground">{activeCity?.name || 'Pune'}</span>
+                <span className="text-[10px] text-muted-foreground ml-1.5">({activeCity?.state || 'Maharashtra'})</span>
               </div>
             </div>
             <button
@@ -72,13 +72,13 @@ export const SearchFiltersBottomSheet: React.FC = () => {
 
           {/* 1. Locality / Area */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
               {activeCity?.name || 'Pune'} Locality / Area
             </label>
             <select
               value={filters.locality}
               onChange={(e) => setFilters(prev => ({ ...prev, locality: e.target.value as any }))}
-              className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs sm:text-sm text-stone-900 font-medium focus:border-primary outline-hidden"
+              className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs sm:text-sm text-foreground font-medium focus:border-primary outline-hidden"
             >
               <option value="all">All {activeCity?.name || 'Pune'} Neighborhoods</option>
               {(activeCity?.localities || PUNE_LOCALITIES).map(loc => (
@@ -89,7 +89,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
 
           {/* 2. Event Type */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
               Event Type
             </label>
             <div className="flex flex-wrap gap-1.5">
@@ -99,7 +99,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
                 className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   filters.eventType === 'all'
                     ? 'bg-accent text-accent-foreground'
-                    : 'bg-stone-100 hover:bg-stone-200 text-stone-800'
+                    : 'bg-muted hover:bg-muted text-foreground'
                 }`}
               >
                 All Events
@@ -112,7 +112,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                     filters.eventType === e
                       ? 'bg-accent text-accent-foreground'
-                      : 'bg-stone-100 hover:bg-stone-200 text-stone-800'
+                      : 'bg-muted hover:bg-muted text-foreground'
                   }`}
                 >
                   {formatEventType(e)}
@@ -123,7 +123,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
 
           {/* 3. Service Category */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
               Service Category
             </label>
             <div className="grid grid-cols-2 gap-1.5">
@@ -133,7 +133,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
                 className={`px-3 py-2 rounded-xl text-xs font-semibold text-left transition-all ${
                   filters.category === 'all'
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-stone-100 hover:bg-stone-200 text-stone-800'
+                    : 'bg-muted hover:bg-muted text-foreground'
                 }`}
               >
                 ✨ All Categories
@@ -146,7 +146,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
                   className={`px-3 py-2 rounded-xl text-xs font-semibold text-left transition-all ${
                     filters.category === c.id
                       ? 'bg-primary text-primary-foreground'
-                      : 'bg-stone-100 hover:bg-stone-200 text-stone-800'
+                      : 'bg-muted hover:bg-muted text-foreground'
                   }`}
                 >
                   {c.name}
@@ -157,23 +157,23 @@ export const SearchFiltersBottomSheet: React.FC = () => {
 
           {/* 4. Event Date */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
               Event Date (Check Availability)
             </label>
             <input
               type="date"
               value={filters.date}
               onChange={(e) => setFilters(prev => ({ ...prev, date: e.target.value }))}
-              className="w-full bg-stone-50 border border-stone-300 rounded-xl p-2.5 text-xs sm:text-sm text-stone-900 font-medium focus:border-primary outline-hidden"
+              className="w-full bg-muted/40 border border-border rounded-xl p-2.5 text-xs sm:text-sm text-foreground font-medium focus:border-primary outline-hidden"
             />
           </div>
 
           {/* 5. Guest Count (Optional) */}
-          <div className="p-3.5 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
+          <div className="p-3.5 bg-muted/40 rounded-2xl border border-border space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-primary" />
-                <label className="text-xs font-bold uppercase tracking-wider text-stone-700">
+                <label className="text-xs font-bold uppercase tracking-wider text-foreground">
                   Guest Count / Expected Pax
                 </label>
               </div>
@@ -186,12 +186,12 @@ export const SearchFiltersBottomSheet: React.FC = () => {
                   Clear ({filters.guestCount})
                 </button>
               ) : (
-                <span className="text-[10px] text-stone-400 font-medium">Optional</span>
+                <span className="text-[10px] text-muted-foreground font-medium">Optional</span>
               )}
             </div>
 
-            <p className="text-[11px] text-stone-500 leading-tight">
-              Filters <strong className="text-stone-700">Venues</strong> with adequate hall/lawn capacity and <strong className="text-stone-700">Catering</strong> packages matching your minimum guest scale.
+            <p className="text-[11px] text-muted-foreground leading-tight">
+              Filters <strong className="text-foreground">Venues</strong> with adequate hall/lawn capacity and <strong className="text-foreground">Catering</strong> packages matching your minimum guest scale.
             </p>
 
             {/* Quick Guest Count Preset Buttons */}
@@ -214,7 +214,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
                     className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       isSelected
                         ? 'bg-primary text-primary-foreground shadow-xs'
-                        : 'bg-white hover:bg-stone-200 border border-stone-200 text-stone-800'
+                        : 'bg-white hover:bg-muted border border-border text-foreground'
                     }`}
                   >
                     {preset.label}
@@ -225,7 +225,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
 
             {/* Custom Input */}
             <div className="flex items-center gap-2 pt-1">
-              <span className="text-xs text-stone-600 font-medium whitespace-nowrap">Custom Count:</span>
+              <span className="text-xs text-muted-foreground font-medium whitespace-nowrap">Custom Count:</span>
               <input
                 type="number"
                 min="0"
@@ -233,7 +233,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
                 placeholder="e.g. 350"
                 value={filters.guestCount ? filters.guestCount : ''}
                 onChange={(e) => setFilters(prev => ({ ...prev, guestCount: e.target.value ? Math.max(0, Number(e.target.value)) : 0 }))}
-                className="w-full bg-white border border-stone-300 rounded-xl px-3 py-1.5 text-xs text-stone-900 font-semibold focus:border-primary outline-hidden"
+                className="w-full bg-white border border-border rounded-xl px-3 py-1.5 text-xs text-foreground font-semibold focus:border-primary outline-hidden"
               />
             </div>
           </div>
@@ -241,7 +241,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
           {/* 6. Budget Cap Slider */}
           <div>
             <div className="flex justify-between items-center mb-1.5">
-              <label className="text-xs font-bold uppercase tracking-wider text-stone-600">
+              <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Max Budget Cap
               </label>
               <span className="text-xs font-bold text-primary">
@@ -257,7 +257,7 @@ export const SearchFiltersBottomSheet: React.FC = () => {
               onChange={(e) => setFilters(prev => ({ ...prev, budgetMax: Number(e.target.value) }))}
               className="w-full accent-primary cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-stone-600 mt-1">
+            <div className="flex justify-between text-[10px] text-muted-foreground mt-1">
               <span>₹5k</span>
               <span>₹1 Lakh</span>
               <span>₹3 Lakhs</span>
@@ -266,12 +266,12 @@ export const SearchFiltersBottomSheet: React.FC = () => {
           </div>
 
           {/* 7. Venue & Catering Specific Toggles */}
-          <div className="space-y-2 pt-2 border-t border-stone-200">
-            <label className="text-xs font-bold uppercase tracking-wider text-stone-600 block mb-1">
+          <div className="space-y-2 pt-2 border-t border-border">
+            <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mb-1">
               Specialized Preferences
             </label>
             
-            <label className="flex items-center gap-2.5 p-2 bg-stone-50 rounded-xl border border-stone-200 cursor-pointer">
+            <label className="flex items-center gap-2.5 p-2 bg-muted/40 rounded-xl border border-border cursor-pointer">
               <input
                 type="checkbox"
                 checked={filters.pureVegOnly}
@@ -279,12 +279,12 @@ export const SearchFiltersBottomSheet: React.FC = () => {
                 className="w-4 h-4 text-primary rounded-xs accent-primary"
               />
               <div className="text-xs">
-                <span className="font-semibold text-stone-900">Pure Veg Only (Catering)</span>
-                <p className="text-[10px] text-stone-500">Filters catering to 100% vegetarian & Jain kitchen facilities</p>
+                <span className="font-semibold text-foreground">Pure Veg Only (Catering)</span>
+                <p className="text-[10px] text-muted-foreground">Filters catering to 100% vegetarian & Jain kitchen facilities</p>
               </div>
             </label>
 
-            <label className="flex items-center gap-2.5 p-2 bg-stone-50 rounded-xl border border-stone-200 cursor-pointer">
+            <label className="flex items-center gap-2.5 p-2 bg-muted/40 rounded-xl border border-border cursor-pointer">
               <input
                 type="checkbox"
                 checked={filters.hasACOnly}
@@ -292,17 +292,17 @@ export const SearchFiltersBottomSheet: React.FC = () => {
                 className="w-4 h-4 text-primary rounded-xs accent-primary"
               />
               <div className="text-xs">
-                <span className="font-semibold text-stone-900">Air Conditioned Halls Only (Venues)</span>
-                <p className="text-[10px] text-stone-500">Requires central air conditioning in banquet spaces</p>
+                <span className="font-semibold text-foreground">Air Conditioned Halls Only (Venues)</span>
+                <p className="text-[10px] text-muted-foreground">Requires central air conditioning in banquet spaces</p>
               </div>
             </label>
           </div>
         </div>
 
         {/* Action Button Footer */}
-        <div className="p-4 bg-stone-50 border-t border-stone-200 flex items-center justify-between rounded-b-3xl sm:rounded-b-2xl">
-          <p className="text-xs text-stone-500">
-            Matching <span className="font-bold text-stone-900">{filteredListings.length}</span> listings in Pune
+        <div className="p-4 bg-muted/40 border-t border-border flex items-center justify-between rounded-b-3xl sm:rounded-b-2xl">
+          <p className="text-xs text-muted-foreground">
+            Matching <span className="font-bold text-foreground">{filteredListings.length}</span> listings in Pune
           </p>
           <button
             type="button"

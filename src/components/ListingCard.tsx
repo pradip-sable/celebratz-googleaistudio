@@ -56,7 +56,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
     return (
       <div 
         onClick={handleCardClick}
-        className="group bg-white rounded-2xl border border-stone-200 hover:border-accent hover:shadow-lg transition-all p-4 cursor-pointer flex flex-col sm:flex-row gap-4 relative select-none"
+        className="group bg-white rounded-2xl border border-border hover:border-accent hover:shadow-lg transition-all p-4 cursor-pointer flex flex-col sm:flex-row gap-4 relative select-none"
       >
         {/* Thumbnail Image */}
         <div className="sm:w-64 h-48 sm:h-auto rounded-xl overflow-hidden relative shrink-0">
@@ -67,7 +67,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute top-2 left-2 flex gap-1">
-            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-stone-900/80 text-accent backdrop-blur-xs">
+            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-primary-dark/80 text-accent backdrop-blur-xs">
               {categoryMeta?.name || listing.category}
             </span>
           </div>
@@ -77,9 +77,9 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
               e.stopPropagation();
               toggleWishlist(listing.id);
             }}
-            className="absolute top-2 right-2 p-1.5 rounded-full bg-white/90 text-stone-700 hover:text-rose-600 backdrop-blur-xs shadow-xs transition-colors"
+            className="absolute top-2 right-2 p-1.5 rounded-full bg-white/90 text-foreground hover:text-destructive backdrop-blur-xs shadow-xs transition-colors"
           >
-            <Heart className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
+            <Heart className={`w-4 h-4 ${isSaved ? 'fill-destructive text-destructive' : ''}`} />
           </button>
         </div>
 
@@ -88,7 +88,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
           <div>
             <div className="flex items-start justify-between gap-2">
               <div>
-                <div className="flex items-center gap-1.5 text-xs text-stone-500 font-medium mb-0.5">
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium mb-0.5">
                   {listing.googleMapsUrl && listing.googleMapsUrl.trim().length > 0 ? (
                     <a
                       href={getGoogleMapsDirectionsUrl(listing)}
@@ -98,17 +98,17 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
                       className="inline-flex items-center gap-1 hover:text-primary transition-colors group/loc cursor-pointer"
                       title="Open in Google Maps"
                     >
-                      <MapPin className="w-3.5 h-3.5 text-primary shrink-0 group-hover/loc:text-rose-600" />
+                      <MapPin className="w-3.5 h-3.5 text-primary shrink-0 group-hover/loc:text-destructive" />
                       <span className="group-hover/loc:underline">{listing.locality}, Pune</span>
                     </a>
                   ) : (
-                    <div className="inline-flex items-center gap-1 text-stone-500">
+                    <div className="inline-flex items-center gap-1 text-muted-foreground">
                       <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
                       <span>{listing.locality}, Pune</span>
                     </div>
                   )}
                 </div>
-                <h3 className="font-serif font-bold text-base sm:text-lg text-stone-900 group-hover:text-primary">
+                <h3 className="font-serif font-bold text-base sm:text-lg text-foreground group-hover:text-primary">
                   {listing.title}
                 </h3>
               </div>
@@ -116,19 +116,19 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
               {/* Rating */}
               <div className="flex items-center gap-1 bg-accent-subtle/40 px-2 py-1 rounded-lg border border-accent/30 shrink-0">
                 <Star className="w-3.5 h-3.5 fill-accent text-accent" />
-                <span className="text-xs font-bold text-stone-900">{listing.avgRating || '4.8'}</span>
-                <span className="text-[10px] text-stone-500">({listing.reviewCount})</span>
+                <span className="text-xs font-bold text-foreground">{listing.avgRating || '4.8'}</span>
+                <span className="text-[10px] text-muted-foreground">({listing.reviewCount})</span>
               </div>
             </div>
 
-            <p className="text-xs text-stone-600 line-clamp-2 mt-2 leading-relaxed">
+            <p className="text-xs text-muted-foreground line-clamp-2 mt-2 leading-relaxed">
               {listing.description}
             </p>
 
             {/* Tags */}
             <div className="flex flex-wrap items-center gap-1.5 mt-3">
               {listing.eventTypes.slice(0, 3).map(et => (
-                <span key={et} className="text-[10px] px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-medium">
+                <span key={et} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-foreground font-medium">
                   {formatEventType(et)}
                 </span>
               ))}
@@ -148,21 +148,21 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
           </div>
 
           {/* Footer with Staleness Badge & Pricing */}
-          <div className="pt-3 border-t border-stone-100 flex flex-wrap items-center justify-between gap-2">
+          <div className="pt-3 border-t border-border-subtle flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-3">
               <div>
-                <span className="text-[10px] text-stone-600 block uppercase font-semibold">Starting From</span>
+                <span className="text-[10px] text-muted-foreground block uppercase font-semibold">Starting From</span>
                 <div className="flex items-baseline gap-1">
-                  <span className="font-extrabold text-base text-stone-900 font-serif">
+                  <span className="font-extrabold text-base text-foreground font-serif">
                     {formatIndianCurrency(listing.startingPrice)}
                   </span>
-                  <span className="text-xs text-stone-500">/{(listing.pricingUnit || 'event').replace('per_', '')}</span>
+                  <span className="text-xs text-muted-foreground">/{(listing.pricingUnit || 'event').replace('per_', '')}</span>
                 </div>
               </div>
 
               {/* Staleness radar */}
-              <div className="hidden md:flex items-center gap-1 text-[11px] font-medium text-stone-500 bg-stone-50 px-2 py-1 rounded-md border border-stone-200">
-                <Clock className="w-3 h-3 text-stone-400" />
+              <div className="hidden md:flex items-center gap-1 text-[11px] font-medium text-muted-foreground bg-muted/40 px-2 py-1 rounded-md border border-border">
+                <Clock className="w-3 h-3 text-muted-foreground" />
                 <span>{daysAgoText}</span>
               </div>
             </div>
@@ -176,7 +176,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
                 className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold border flex items-center gap-1 transition-colors ${
                   isCompared 
                     ? 'bg-accent-subtle text-accent-dark border-accent' 
-                    : 'bg-white hover:bg-stone-50 text-stone-700 border-stone-200'
+                    : 'bg-white hover:bg-muted/40 text-foreground border-border'
                 }`}
               >
                 <Scale className="w-3.5 h-3.5" />
@@ -201,7 +201,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
     return (
       <div
         onClick={handleCardClick}
-        className="group bg-white rounded-xl border border-stone-200 hover:border-accent hover:shadow-md transition-all p-3 cursor-pointer flex flex-col justify-between space-y-2 select-none"
+        className="group bg-white rounded-xl border border-border hover:border-accent hover:shadow-md transition-all p-3 cursor-pointer flex flex-col justify-between space-y-2 select-none"
       >
         <div className="h-36 rounded-lg overflow-hidden relative">
           <img
@@ -210,7 +210,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
             referrerPolicy="no-referrer"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
-          <span className="absolute top-1.5 left-1.5 px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-stone-900/80 text-accent backdrop-blur-xs">
+          <span className="absolute top-1.5 left-1.5 px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-primary-dark/80 text-accent backdrop-blur-xs">
             {listing.locality}
           </span>
           <button
@@ -218,21 +218,21 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
               e.stopPropagation();
               toggleWishlist(listing.id);
             }}
-            className="absolute top-1.5 right-1.5 p-1 rounded-full bg-white/90 text-stone-700 hover:text-rose-600 shadow-xs"
+            className="absolute top-1.5 right-1.5 p-1 rounded-full bg-white/90 text-foreground hover:text-destructive shadow-xs"
           >
-            <Heart className={`w-3.5 h-3.5 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
+            <Heart className={`w-3.5 h-3.5 ${isSaved ? 'fill-destructive text-destructive' : ''}`} />
           </button>
         </div>
 
         <div>
-          <div className="flex items-center justify-between text-[11px] text-stone-500 mb-0.5">
+          <div className="flex items-center justify-between text-[11px] text-muted-foreground mb-0.5">
             <span className="capitalize">{categoryMeta?.name || listing.category}</span>
-            <div className="flex items-center gap-0.5 font-bold text-stone-800">
+            <div className="flex items-center gap-0.5 font-bold text-foreground">
               <Star className="w-3 h-3 fill-accent text-accent" />
               <span>{listing.avgRating || '4.8'}</span>
             </div>
           </div>
-          <h4 className="font-bold text-xs sm:text-sm text-stone-900 line-clamp-1 group-hover:text-primary">
+          <h4 className="font-bold text-xs sm:text-sm text-foreground line-clamp-1 group-hover:text-primary">
             {listing.title}
           </h4>
           
@@ -243,10 +243,10 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
           </div>
         </div>
 
-        <div className="pt-2 border-t border-stone-100 flex items-center justify-between">
+        <div className="pt-2 border-t border-border-subtle flex items-center justify-between">
           <div>
-            <span className="text-[9px] text-stone-600 block">From</span>
-            <span className="font-bold text-xs text-stone-900 font-serif">
+            <span className="text-[9px] text-muted-foreground block">From</span>
+            <span className="font-bold text-xs text-foreground font-serif">
               {formatIndianCurrency(listing.startingPrice)}
             </span>
           </div>
@@ -266,7 +266,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
   return (
     <div
       onClick={handleCardClick}
-      className="group bg-white rounded-2xl border border-stone-200 hover:border-accent/80 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between relative select-none"
+      className="group bg-white rounded-2xl border border-border hover:border-accent/80 hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between relative select-none"
     >
       {/* Top Media Banner */}
       <div className="h-56 relative overflow-hidden">
@@ -278,7 +278,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
         />
 
         {/* Gradient Shadow Overlay */}
-        <div className="absolute inset-0 bg-linear-to-t from-stone-950/70 via-transparent to-black/20" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-black/20" />
 
         {/* Top Badges */}
         <div className="absolute top-3 left-3 flex items-center gap-1.5">
@@ -298,9 +298,9 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
             e.stopPropagation();
             toggleWishlist(listing.id);
           }}
-          className="absolute top-3 right-3 p-2 rounded-full bg-white/90 hover:bg-white text-stone-700 hover:text-rose-600 backdrop-blur-xs shadow-md transition-transform active:scale-90"
+          className="absolute top-3 right-3 p-2 rounded-full bg-white/90 hover:bg-white text-foreground hover:text-destructive backdrop-blur-xs shadow-md transition-transform active:scale-90"
         >
-          <Heart className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
+          <Heart className={`w-4 h-4 ${isSaved ? 'fill-destructive text-destructive' : ''}`} />
         </button>
 
         {/* Bottom Locality & Staleness info over image */}
@@ -318,14 +318,14 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
               <span className="group-hover/pin:underline">{listing.locality}, Pune</span>
             </a>
           ) : (
-            <div className="flex items-center gap-1 drop-shadow-sm font-medium text-stone-200">
+            <div className="flex items-center gap-1 drop-shadow-sm font-medium text-muted-foreground">
               <MapPin className="w-3.5 h-3.5 text-accent" />
               <span>{listing.locality}, Pune</span>
             </div>
           )}
 
           <div className={`px-2 py-0.5 rounded-md text-[10px] font-semibold backdrop-blur-xs ${
-            isStale ? 'bg-primary-dark/80 text-accent border border-accent/40' : 'bg-black/50 text-stone-200'
+            isStale ? 'bg-primary-dark/80 text-accent border border-accent/40' : 'bg-black/50 text-muted-foreground'
           }`}>
             {daysAgoText}
           </div>
@@ -336,25 +336,25 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
         <div>
           <div className="flex items-start justify-between gap-2 mb-1.5">
-            <h3 className="font-serif font-bold text-base sm:text-lg text-stone-900 group-hover:text-primary transition-colors leading-snug">
+            <h3 className="font-serif font-bold text-base sm:text-lg text-foreground group-hover:text-primary transition-colors leading-snug">
               {listing.title}
             </h3>
             {/* Star Rating */}
             <div className="flex items-center gap-1 bg-accent-subtle/40 px-2 py-0.5 rounded-md border border-accent/30 shrink-0">
               <Star className="w-3.5 h-3.5 fill-accent text-accent" />
-              <span className="text-xs font-bold text-stone-900">{listing.avgRating || '4.8'}</span>
+              <span className="text-xs font-bold text-foreground">{listing.avgRating || '4.8'}</span>
             </div>
           </div>
 
-          <p className="text-xs text-stone-600 line-clamp-2 leading-relaxed font-light">
+          <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed font-light">
             {listing.description}
           </p>
 
           {/* Quick Specifications */}
           <div className="flex flex-wrap gap-1.5 mt-3">
             {listing.category === 'venues' && listing.categoryAttributes.capacityMax && (
-              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 flex items-center gap-1">
-                <Users className="w-3 h-3 text-stone-500" />
+              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-muted text-foreground flex items-center gap-1">
+                <Users className="w-3 h-3 text-muted-foreground" />
                 {listing.categoryAttributes.capacityMin}-{listing.categoryAttributes.capacityMax} Guests
               </span>
             )}
@@ -398,16 +398,16 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
         </div>
 
         {/* Card Footer: Pricing & Compare Button */}
-        <div className="pt-3.5 border-t border-stone-100 flex items-center justify-between gap-2">
+        <div className="pt-3.5 border-t border-border-subtle flex items-center justify-between gap-2">
           <div>
-            <span className="text-[10px] uppercase font-bold text-stone-600 block tracking-wider">
+            <span className="text-[10px] uppercase font-bold text-muted-foreground block tracking-wider">
               Starting Price
             </span>
             <div className="flex items-baseline gap-1">
-              <span className="font-extrabold text-base sm:text-lg text-stone-900 font-serif">
+              <span className="font-extrabold text-base sm:text-lg text-foreground font-serif">
                 {formatIndianCurrency(listing.startingPrice)}
               </span>
-              <span className="text-[11px] text-stone-500 font-medium">
+              <span className="text-[11px] text-muted-foreground font-medium">
                 /{(listing.pricingUnit || 'event').replace('per_', '')}
               </span>
             </div>
@@ -423,7 +423,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
               className={`p-2 rounded-xl text-xs border transition-colors ${
                 isCompared
                   ? 'bg-accent-subtle text-accent-dark border-accent font-bold'
-                  : 'bg-stone-50 hover:bg-stone-100 text-stone-700 border-stone-200'
+                  : 'bg-muted/40 hover:bg-muted text-foreground border-border'
               }`}
             >
               <Scale className="w-4 h-4" />
